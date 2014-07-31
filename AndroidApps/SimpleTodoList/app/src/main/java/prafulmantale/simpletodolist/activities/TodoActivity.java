@@ -125,7 +125,7 @@ public class TodoActivity extends Activity {
             }
         }
         else{
-            Toast.makeText(getBaseContext(), R.string.item_edit_failed, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), R.string.item_edit_not_done, Toast.LENGTH_SHORT).show();
         }
     }
 

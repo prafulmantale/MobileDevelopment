@@ -9,6 +9,7 @@
     <string name="item_edit_successful">Item updated successfully</string>
     <string name="item_delete_successful">Item deleted successfully</string>
     <string name="item_edit_failed">Item update failed</string>
+    <string name="item_edit_not_done">Item is not updated</string>
     <string name="item_invalid_input">Invalid item value</string>
     <string name="hello_world">Hello world!</string>
 
