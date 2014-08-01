@@ -175,12 +175,7 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.todo, menu);
-        return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -199,6 +194,9 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         updateEditedItem(item, position);
     }
 
+    /*
+     * Update the items list if the new item text is proper and show the success toast else show unsuccessful toast
+     */
     private void updateEditedItem(String item, int position){
         if(position != -1) {
             items.set(position, item);
@@ -208,5 +206,13 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         else{
             Toast.makeText(getBaseContext(), R.string.item_edit_not_done, Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.todo, menu);
+        return true;
     }
 }

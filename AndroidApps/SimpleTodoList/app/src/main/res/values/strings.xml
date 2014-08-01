@@ -14,4 +14,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="show_all_items">Show All</string>
+    <string name="hide_completed">Hide Completed</string>
+
 </resources>
