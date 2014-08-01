@@ -5,6 +5,7 @@ package prafulmantale.simpletodolist.models;
  */
 public class ToDoItem {
 
+    private long id;
     private String item;
     private boolean isCompleted;
     private boolean isSelected;
@@ -18,6 +19,14 @@ public class ToDoItem {
         this.item = item;
         isCompleted = false;
         isSelected = false;
+    }
+
+    public long getId(){
+        return id;
+    }
+
+    public void setId(long  id){
+        this.id = id;
     }
 
     public String getItem() {
@@ -42,5 +51,10 @@ public class ToDoItem {
 
     public void setSelected(boolean isSelected) {
         this.isSelected = isSelected;
+    }
+
+    @Override
+    public String toString(){
+        return "Item: " + item + " Completed: " + isCompleted;
     }
 }
