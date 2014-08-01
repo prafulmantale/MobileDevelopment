@@ -12,6 +12,7 @@
 		511FCB6D198ACCF100AA361B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 511FCB6B198ACCF100AA361B /* Main.storyboard */; };
 		511FCB6F198ACCF100AA361B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 511FCB6E198ACCF100AA361B /* Images.xcassets */; };
 		511FCB7B198ACCF100AA361B /* FirstSwiftProgramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511FCB7A198ACCF100AA361B /* FirstSwiftProgramTests.swift */; };
+		511FCB8B198AF96900AA361B /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511FCB8A198AF96900AA361B /* Vehicle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,8 @@
 		511FCB74198ACCF100AA361B /* FirstSwiftProgramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirstSwiftProgramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		511FCB79198ACCF100AA361B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		511FCB7A198ACCF100AA361B /* FirstSwiftProgramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSwiftProgramTests.swift; sourceTree = "<group>"; };
+		511FCB8A198AF96900AA361B /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		511FCB8C198AFA6E00AA361B /* FirstSwiftProgram-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirstSwiftProgram-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,11 +78,13 @@
 		511FCB64198ACCF100AA361B /* FirstSwiftProgram */ = {
 			isa = PBXGroup;
 			children = (
+				511FCB8C198AFA6E00AA361B /* FirstSwiftProgram-Bridging-Header.h */,
 				511FCB67198ACCF100AA361B /* AppDelegate.swift */,
 				511FCB69198ACCF100AA361B /* ViewController.swift */,
 				511FCB6B198ACCF100AA361B /* Main.storyboard */,
 				511FCB6E198ACCF100AA361B /* Images.xcassets */,
 				511FCB65198ACCF100AA361B /* Supporting Files */,
+				511FCB8A198AF96900AA361B /* Vehicle.swift */,
 			);
 			path = FirstSwiftProgram;
 			sourceTree = "<group>";
@@ -208,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				511FCB8B198AF96900AA361B /* Vehicle.swift in Sources */,
 				511FCB6A198ACCF100AA361B /* ViewController.swift in Sources */,
 				511FCB68198ACCF100AA361B /* AppDelegate.swift in Sources */,
 			);
@@ -325,9 +331,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FirstSwiftProgram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FirstSwiftProgram/FirstSwiftProgram-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -336,9 +345,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FirstSwiftProgram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FirstSwiftProgram/FirstSwiftProgram-Bridging-Header.h";
 			};
 			name = Release;
 		};
