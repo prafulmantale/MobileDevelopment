@@ -21,6 +21,7 @@ import java.util.List;
 
 import prafulmantale.simpletodolist.R;
 import prafulmantale.simpletodolist.adapters.ToDoItemAdapter;
+import prafulmantale.simpletodolist.daos.ToDoItemDAO;
 import prafulmantale.simpletodolist.dialogs.EditItemDialog;
 import prafulmantale.simpletodolist.models.ToDoItem;
 
@@ -39,6 +40,8 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
     private ToDoItemAdapter itemsAdapter;
     private ListView lvItems;
 
+    private ToDoItemDAO toDoItemDAO;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,10 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
 
     //Initialize
     private void initialize(){
+
+        toDoItemDAO = new ToDoItemDAO(this);
+        toDoItemDAO.openConnection();
+
         lvItems = (ListView)findViewById(R.id.lvItems);
 
         items = new ArrayList<ToDoItem>();
@@ -58,7 +65,8 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         filesDir = getFilesDir();
         todoFile = new File(filesDir, DATA_FILE);
 
-        readItems();
+        //readItems();
+        readItemsFromDB();
 
         //itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         itemsAdapter = new ToDoItemAdapter(this, items);
@@ -89,7 +97,8 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         }
 
         //items.add(newItem);
-        items.add(new ToDoItem(newItem));
+        //items.add(new ToDoItem(newItem));
+        items.add(toDoItemDAO.createToDoItem(newItem));
         editText.setText("");
 
         notifyDataChange();
@@ -99,6 +108,8 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long rowId) {
+
+                toDoItemDAO.deleteToDoItem(items.get(position));
                 items.remove(position);
 
                 notifyDataChange();
@@ -117,6 +128,7 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
                 showEditItemDialog(position);
             }
         });
+
     }
 
     private void startEditItemActivity(int position){
@@ -153,6 +165,9 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         }
     }
 
+    private void readItemsFromDB(){
+        items = toDoItemDAO.getAll();
+    }
     //Read items from file/data source
     private void readItems(){
 
@@ -193,7 +208,7 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
 
     private void notifyDataChange(){
         itemsAdapter.notifyDataSetChanged(); // notify UI
-        saveItems();//Notify to data source  i.e. todo.txt
+        //saveItems();//Notify to data source  i.e. todo.txt
     }
 
 
@@ -223,6 +238,7 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         if(position != -1) {
             //items.set(position, item);
             items.get(position).setItem(item);
+            toDoItemDAO.updateToDoItem(items.get(position));
             notifyDataChange();
             Toast.makeText(getBaseContext(), R.string.item_edit_successful, Toast.LENGTH_SHORT).show();
         }

@@ -62,6 +62,16 @@ public class ToDoItemDAO {
         Log.w(ToDoItemDAO.class.getName(), " To Do Item with id " + id + " deleted.");
     }
 
+    public void updateToDoItem(ToDoItem toDoItem){
+        long id = toDoItem.getId();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(dbHelper.getColumnItem(), toDoItem.getItem());
+
+        database.update(dbHelper.getTableName(),contentValues,  dbHelper.getColumnId() + " = " + id, null);
+
+        Log.w(ToDoItemDAO.class.getName(), " To Do Item with id " + id + " updated.");
+    }
+
     public List<ToDoItem> getAll(){
 
         List<ToDoItem> items = new ArrayList<ToDoItem>();
