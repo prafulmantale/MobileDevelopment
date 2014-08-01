@@ -20,6 +20,10 @@
             android:name=".activities.EditItemActivity"
             android:label="@string/title_activity_edit_item" >
         </activity>
+        <activity
+            android:name=".activities.ToDoItemRow"
+            android:label="@string/title_activity_to_do_item_row" >
+        </activity>
     </application>
 
 </manifest>

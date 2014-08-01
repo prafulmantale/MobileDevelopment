@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prafulmantale.simpletodolist.R;
+import prafulmantale.simpletodolist.adapters.ToDoItemAdapter;
 import prafulmantale.simpletodolist.dialogs.EditItemDialog;
+import prafulmantale.simpletodolist.models.ToDoItem;
 
 
 public class TodoActivity extends Activity implements EditItemDialog.EditItemDialogListener{
@@ -30,8 +32,11 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
     private File filesDir;
     private File todoFile;
 
-    private List<String> items;
-    private ArrayAdapter<String> itemsAdapter;
+    //private List<String> items;
+    private List<ToDoItem> items;
+
+    //private ArrayAdapter<String> itemsAdapter;
+    private ToDoItemAdapter itemsAdapter;
     private ListView lvItems;
 
 
@@ -48,14 +53,15 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
     private void initialize(){
         lvItems = (ListView)findViewById(R.id.lvItems);
 
-        //items = new ArrayList<String>();
+        items = new ArrayList<ToDoItem>();
         //Initialize data source
         filesDir = getFilesDir();
         todoFile = new File(filesDir, DATA_FILE);
 
         readItems();
 
-        itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        //itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        itemsAdapter = new ToDoItemAdapter(this, items);
         lvItems.setAdapter(itemsAdapter);
 
         setupListeners();
@@ -66,8 +72,10 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
     }
 
     private void addTestData(){
-        items.add("First item");
-        items.add("Second item");
+        //items.add("First item");
+        //items.add("Second item");
+        items.add(new ToDoItem("First item"));
+        items.add(new ToDoItem("Second item"));
     }
 
     public void addTodoItem(View view){
@@ -80,7 +88,8 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
             return;
         }
 
-        items.add(newItem);
+        //items.add(newItem);
+        items.add(new ToDoItem(newItem));
         editText.setText("");
 
         notifyDataChange();
@@ -112,7 +121,8 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
 
     private void startEditItemActivity(int position){
         Intent intent = new Intent(TodoActivity.this, EditItemActivity.class);
-        intent.putExtra("item", items.get(position));
+        //intent.putExtra("item", items.get(position));
+        intent.putExtra("item", items.get(position).getItem());
         intent.putExtra("position", position);
         startActivityForResult(intent, REQUEST_CODE);
     }
@@ -120,7 +130,8 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
     private void showEditItemDialog(int position){
         FragmentManager manager = getFragmentManager();
 
-        String item = items.get(position);
+        //String item = items.get(position);
+        String item = items.get(position).getItem();
         EditItemDialog dialog = EditItemDialog.newInstance("Edit Item Below:", item, position);
         dialog.show(manager, "fragment_edit_item");
     }
@@ -148,11 +159,16 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         try {
 
             if(todoFile != null) {
-                items = new ArrayList<String>(FileUtils.readLines(todoFile));
+                //items = new ArrayList<String>(FileUtils.readLines(todoFile));
+                List<String> listOfItems = new ArrayList<String>(FileUtils.readLines(todoFile));
+                for(String item : listOfItems){
+                    items.add(new ToDoItem(item));
+                }
             }
         }
         catch (IOException ex){
-            items = new ArrayList<String>();
+            //items = new ArrayList<String>();
+            items = new ArrayList<ToDoItem>();
             ex.printStackTrace();
         }
     }
@@ -162,7 +178,13 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
     private void saveItems(){
 
         try {
-            FileUtils.writeLines(todoFile, items);
+            //FileUtils.writeLines(todoFile, items);
+            List<String> listOfItems = new ArrayList<String>();
+            for(ToDoItem item : items){
+                listOfItems.add(item.getItem());
+            }
+
+            FileUtils.writeLines(todoFile, listOfItems);
         }
         catch (IOException ex){
             ex.printStackTrace();
@@ -199,7 +221,8 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
      */
     private void updateEditedItem(String item, int position){
         if(position != -1) {
-            items.set(position, item);
+            //items.set(position, item);
+            items.get(position).setItem(item);
             notifyDataChange();
             Toast.makeText(getBaseContext(), R.string.item_edit_successful, Toast.LENGTH_SHORT).show();
         }
