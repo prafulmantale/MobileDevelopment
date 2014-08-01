@@ -12,5 +12,6 @@
     <string name="item_edit_not_done">Item is not updated</string>
     <string name="item_invalid_input">Invalid item value</string>
     <string name="hello_world">Hello world!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

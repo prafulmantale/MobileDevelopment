@@ -1,6 +1,7 @@
 package prafulmantale.simpletodolist.activities;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,9 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prafulmantale.simpletodolist.R;
+import prafulmantale.simpletodolist.dialogs.EditItemDialog;
 
 
-public class TodoActivity extends Activity {
+public class TodoActivity extends Activity implements EditItemDialog.EditItemDialogListener{
 
     private final String DATA_FILE = "todo.txt";
     private final int REQUEST_CODE = 200;
@@ -101,12 +103,26 @@ public class TodoActivity extends Activity {
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long rowId) {
-                Intent intent = new Intent(TodoActivity.this, EditItemActivity.class);
-                intent.putExtra("item", items.get(position));
-                intent.putExtra("position", position);
-                startActivityForResult(intent, REQUEST_CODE);
+
+                //startEditItemActivity(position);
+                showEditItemDialog(position);
             }
         });
+    }
+
+    private void startEditItemActivity(int position){
+        Intent intent = new Intent(TodoActivity.this, EditItemActivity.class);
+        intent.putExtra("item", items.get(position));
+        intent.putExtra("position", position);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    private void showEditItemDialog(int position){
+        FragmentManager manager = getFragmentManager();
+
+        String item = items.get(position);
+        EditItemDialog dialog = EditItemDialog.newInstance("Edit Item Below:", item, position);
+        dialog.show(manager, "fragment_edit_item");
     }
 
 
@@ -117,11 +133,8 @@ public class TodoActivity extends Activity {
             if(data.hasExtra("item") && data.hasExtra("position")) {
                 String item = data.getStringExtra("item");
                 int position = data.getIntExtra("position",-1);
-                if(position != -1) {
-                    items.set(position, item);
-                    notifyDataChange();
-                    Toast.makeText(getBaseContext(), R.string.item_edit_successful, Toast.LENGTH_SHORT).show();
-                }
+
+                updateEditedItem(item, position);
             }
         }
         else{
@@ -179,5 +192,21 @@ public class TodoActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFinishEditDialog(String item, int position) {
+        updateEditedItem(item, position);
+    }
+
+    private void updateEditedItem(String item, int position){
+        if(position != -1) {
+            items.set(position, item);
+            notifyDataChange();
+            Toast.makeText(getBaseContext(), R.string.item_edit_successful, Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getBaseContext(), R.string.item_edit_not_done, Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -57,6 +57,10 @@ public class EditItemActivity extends Activity {
         finish();
     }
 
+    public void cancelSaveItem(View view){
+        finish();
+    }
+
 
     @Override
     public void finish(){
