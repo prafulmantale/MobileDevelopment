@@ -49,8 +49,8 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
 
-        initialize();
-        //addTestData();
+         initialize();
+         //addTestData();
     }
 
     //Initialize
@@ -126,21 +126,9 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long rowId) {
 
                 //startEditItemActivity(position);
-                showEditItemDialog(position);
+                //showEditItemDialog(position);
             }
         });
-
-//        //For inline editing
-//        lvItems.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View view, boolean hasFocus) {
-//
-//                if(!hasFocus){
-//                   Object obj = view.getTag();
-//                }
-//            }
-//        });
-
     }
 
     private void startEditItemActivity(int position){
@@ -265,5 +253,13 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.todo, menu);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        toDoItemDAO.closeConnection();
+
+        super.onDestroy();
     }
 }

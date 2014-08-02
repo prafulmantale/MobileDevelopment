@@ -20,7 +20,7 @@
         />
     <EditText
         android:id="@+id/itemLabel"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_toRightOf="@+id/itemCheck"
         style="@style/ListViewText"
@@ -32,7 +32,6 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_toRightOf="@+id/itemLabel"
         />
 

@@ -41,6 +41,7 @@ public class ToDoItemDAO {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(dbHelper.getColumnItem(), todoItem);
+        contentValues.put(dbHelper.getColumnCompleted(), 0);
 
         long insertId = database.insert(dbHelper.getTableName(), null, contentValues);
 
@@ -66,6 +67,7 @@ public class ToDoItemDAO {
         long id = toDoItem.getId();
         ContentValues contentValues = new ContentValues();
         contentValues.put(dbHelper.getColumnItem(), toDoItem.getItem());
+        contentValues.put(dbHelper.getColumnCompleted(), toDoItem.isCompleted() == true ? 1 : 0);
 
         database.update(dbHelper.getTableName(),contentValues,  dbHelper.getColumnId() + " = " + id, null);
 
@@ -94,6 +96,7 @@ public class ToDoItemDAO {
         ToDoItem toDoItem = new ToDoItem();
         toDoItem.setId(cursor.getInt(0));
         toDoItem.setItem(cursor.getString(1));
+        toDoItem.setCompleted(cursor.getInt(2) == 0 ? false : true);
 
         return toDoItem;
     }

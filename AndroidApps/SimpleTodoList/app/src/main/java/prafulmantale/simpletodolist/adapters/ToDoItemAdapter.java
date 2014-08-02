@@ -3,6 +3,7 @@ package prafulmantale.simpletodolist.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.AvoidXfermode;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +18,13 @@ import java.util.List;
 import java.util.zip.Inflater;
 
 import prafulmantale.simpletodolist.R;
+import prafulmantale.simpletodolist.dialogs.EditItemDialog;
 import prafulmantale.simpletodolist.models.ToDoItem;
 
 /**
  * Created by prafulmantale on 7/31/14.
  */
-public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> {
+public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> implements CheckBox.OnEditorActionListener{
 
     private final List<ToDoItem> list;
     private final Activity context;
@@ -34,6 +36,13 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> {
         this.context = context;
     }
 
+    @Override
+    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+        EditItemDialog.EditItemDialogListener listener = (EditItemDialog.EditItemDialogListener)context;
+        listener.onFinishEditDialog(textView.getText().toString(), i);
+        return false;
+    }
+
     static class ViewHolder{
         protected EditText textView;
         protected CheckBox checkBox;
@@ -41,7 +50,7 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = null;
 
         if(convertView == null){
@@ -58,13 +67,14 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> {
             viewHolder.checkBox.setTag(list.get(position));
             viewHolder.imageView.setTag(list.get(position));
 
-//            viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-//                    ToDoItem toDoItem = (ToDoItem)viewHolder.checkBox.getTag();
-//                    toDoItem.setSelected(compoundButton.isChecked());
-//                }
-//            });
+            viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                    ToDoItem toDoItem = (ToDoItem)viewHolder.checkBox.getTag();
+                    toDoItem.setCompleted(compoundButton.isChecked());
+                    onEditorAction(viewHolder.textView, position, null);
+                }
+            });
         }
         else{
             view = convertView;
