@@ -129,6 +129,17 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
             }
         });
 
+        //For inline editing
+        lvItems.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+
+                if(!hasFocus){
+
+                }
+            }
+        });
+
     }
 
     private void startEditItemActivity(int position){

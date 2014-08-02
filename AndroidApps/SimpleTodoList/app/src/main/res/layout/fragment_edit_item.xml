@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:orientation="vertical"
+    android:background="@drawable/dialog"
+    style="@style/CustomText"
     >
 
     <EditText
@@ -13,6 +15,8 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:imeOptions="actionDone"
+        style="@style/ListViewText"
+        android:background="#ffffff"
         />
 
     <LinearLayout
@@ -28,6 +32,7 @@
             android:layout_below="@+id/eEditedItem"
             android:layout_marginTop="25dp"
             android:layout_alignLeft="@id/editItemLabel"
+            style="@style/ButtonStyle"
             />
 
         <Button
@@ -38,6 +43,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginLeft="25dp"
             android:layout_toRightOf="@id/saveButton"
+            style="@style/ButtonStyle"
             />
 
         </LinearLayout>

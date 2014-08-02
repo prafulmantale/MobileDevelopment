@@ -12,6 +12,10 @@
 
     <style name="ListViewText" parent="@style/CustomText">
         <item name="android:textStyle">italic</item>
+        <item name="android:textColor">#ccaaaa</item>
+    </style>
+    
+    <style name="ButtonStyle" parent="CustomText">
     </style>
 
 </resources>
