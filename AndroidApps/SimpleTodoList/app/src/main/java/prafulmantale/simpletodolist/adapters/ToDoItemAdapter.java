@@ -74,7 +74,7 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> {
 
         ViewHolder holder = (ViewHolder)view.getTag();
         holder.textView.setText(list.get(position).getItem());
-        holder.checkBox.setChecked(list.get(position).isSelected());
+        holder.checkBox.setChecked(list.get(position).isCompleted());
 
         return view;
     }

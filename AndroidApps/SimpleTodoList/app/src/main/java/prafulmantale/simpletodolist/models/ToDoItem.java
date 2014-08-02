@@ -8,17 +8,14 @@ public class ToDoItem {
     private long id;
     private String item;
     private boolean isCompleted;
-    private boolean isSelected;
 
     public ToDoItem(){
         item = null;
         isCompleted = false;
-        isSelected = false;
     }
     public ToDoItem(String item) {
         this.item = item;
         isCompleted = false;
-        isSelected = false;
     }
 
     public long getId(){
@@ -43,14 +40,6 @@ public class ToDoItem {
 
     public void setCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
-    }
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean isSelected) {
-        this.isSelected = isSelected;
     }
 
     @Override

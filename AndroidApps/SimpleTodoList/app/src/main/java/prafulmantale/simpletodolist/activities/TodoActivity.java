@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import prafulmantale.simpletodolist.R;
 import prafulmantale.simpletodolist.adapters.ToDoItemAdapter;
@@ -129,16 +130,16 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
             }
         });
 
-        //For inline editing
-        lvItems.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-
-                if(!hasFocus){
-
-                }
-            }
-        });
+//        //For inline editing
+//        lvItems.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View view, boolean hasFocus) {
+//
+//                if(!hasFocus){
+//                   Object obj = view.getTag();
+//                }
+//            }
+//        });
 
     }
 
