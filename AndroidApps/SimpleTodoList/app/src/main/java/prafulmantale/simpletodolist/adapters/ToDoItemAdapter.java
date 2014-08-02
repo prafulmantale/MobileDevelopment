@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,8 +35,9 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> {
     }
 
     static class ViewHolder{
-        protected TextView textView;
+        protected EditText textView;
         protected CheckBox checkBox;
+        protected ImageView imageView;
     }
 
     @Override
@@ -46,11 +49,14 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> {
             view = inflater.inflate(R.layout.activity_to_do_item_row, null);
 
             final ViewHolder viewHolder = new ViewHolder();
-            viewHolder.textView = (TextView)view.findViewById(R.id.itemLabel);
-            //viewHolder.checkBox = (CheckBox)view.findViewById(R.id.itemCheck);
+            viewHolder.textView = (EditText)view.findViewById(R.id.itemLabel);
+            viewHolder.checkBox = (CheckBox)view.findViewById(R.id.itemCheck);
+            viewHolder.imageView = (ImageView)view.findViewById(R.id.imageView);
+
 
             view.setTag(viewHolder);
-            //viewHolder.checkBox.setTag(list.get(position));
+            viewHolder.checkBox.setTag(list.get(position));
+            viewHolder.imageView.setTag(list.get(position));
 
 //            viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                @Override
@@ -63,12 +69,12 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> {
         else{
             view = convertView;
 
-           // ((ViewHolder)view.getTag()).checkBox.setTag(list.get(position));
+            ((ViewHolder)view.getTag()).checkBox.setTag(list.get(position));
         }
 
         ViewHolder holder = (ViewHolder)view.getTag();
         holder.textView.setText(list.get(position).getItem());
-        //holder.checkBox.setChecked(list.get(position).isSelected());
+        holder.checkBox.setChecked(list.get(position).isSelected());
 
         return view;
     }
