@@ -23,3 +23,5 @@ Notes:
 		Version 2: Save to do list to SQLite database.
 
 Additional tried differrent styling, selcetors, color changes etc. 
+
+![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/AndroidApps/ToDoList.gif)
