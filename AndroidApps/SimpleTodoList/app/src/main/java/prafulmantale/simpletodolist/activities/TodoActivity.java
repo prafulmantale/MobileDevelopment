@@ -27,7 +27,7 @@ import prafulmantale.simpletodolist.dialogs.EditItemDialog;
 import prafulmantale.simpletodolist.models.ToDoItem;
 
 
-public class TodoActivity extends Activity implements EditItemDialog.EditItemDialogListener{
+public class TodoActivity extends Activity implements EditItemDialog.EditItemDialogListener, ToDoItemAdapter.ItemDetailsListener{
 
     private final String DATA_FILE = "todo.txt";
     private final int REQUEST_CODE = 200;
@@ -131,6 +131,10 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         });
     }
 
+    private void startItemDetailsActivity(int position){
+        Intent intent = new Intent(TodoActivity.this, ItemDetails.class);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
     private void startEditItemActivity(int position){
         Intent intent = new Intent(TodoActivity.this, EditItemActivity.class);
         //intent.putExtra("item", items.get(position));
@@ -138,6 +142,7 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         intent.putExtra("position", position);
         startActivityForResult(intent, REQUEST_CODE);
     }
+
 
     private void showEditItemDialog(int position){
         FragmentManager manager = getFragmentManager();
@@ -261,5 +266,10 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         toDoItemDAO.closeConnection();
 
         super.onDestroy();
+    }
+
+    @Override
+    public void OnItemDetailsRequested(int position) {
+        startItemDetailsActivity(position);
     }
 }

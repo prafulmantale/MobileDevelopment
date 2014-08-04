@@ -94,6 +94,14 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> implements CheckBox.
                     }
                 }
             });
+
+            viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ItemDetailsListener listener = (ItemDetailsListener)context;
+                    listener.OnItemDetailsRequested(position);
+                }
+            });
         }
         else{
             view = convertView;
@@ -106,5 +114,9 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> implements CheckBox.
         holder.checkBox.setChecked(list.get(position).isCompleted());
 
         return view;
+    }
+
+    public interface ItemDetailsListener{
+        public void OnItemDetailsRequested(int position);
     }
 }

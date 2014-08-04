@@ -11,28 +11,51 @@
     <EditText
         android:id="@+id/itemLabel"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:textSize="30dp"
+        android:layout_height="40dp"
+        android:textSize="25dp"
         android:hint="Item text"/>
 
     <CheckBox
         android:id="@+id/itemCheck"
         android:layout_below="@+id/itemLabel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="1dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:textSize="30dp"/>
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"/>
     <TextView
+        android:id="@+id/itemText"
         android:layout_below="@+id/itemLabel"
         android:layout_toRightOf="@+id/itemCheck"
         android:layout_width="280dp"
-        android:layout_height="40dp"
-        android:textSize="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="30dp"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:text="@string/item_due_date_label"/>
+
+    <DatePicker
+        android:layout_marginTop="1dp"
+        android:id="@+id/datePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:scaleY="0.7"
+        android:layout_below="@id/itemText"
+        android:visibility="invisible"
+        />
+
+    <TimePicker
+        android:layout_marginTop="1dp"
+        android:id="@+id/timepicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:scaleY="0.7"
+        android:layout_below="@+id/datePicker"
+        android:visibility="invisible"
+        />
 
 </RelativeLayout>

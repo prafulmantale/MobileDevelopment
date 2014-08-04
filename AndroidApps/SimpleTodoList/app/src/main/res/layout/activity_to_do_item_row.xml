@@ -34,6 +34,10 @@
         android:layout_height="10dp"
         android:layout_toRightOf="@+id/itemLabel"
         android:visibility="invisible"
+        android:src="@drawable/ic_drawer"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"
         />
 
 </RelativeLayout>
