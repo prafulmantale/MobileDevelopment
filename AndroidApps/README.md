@@ -11,6 +11,23 @@ Required: User can edit to do items.
 
 Required: Items are saved and later retrieved.
 
+Optional:
+
+        Mark items as completed by clicking checkbox
+        
+        Save items to SQLite database
+        
+        Styling items and backgroud
+        
+        Dialog fragment for editign items (Commented out the code path and added inline editing)
+
+Work in Progress:
+
+        Support for completion due dates for items
+        
+        Priority for items
+
+
 Notes:
 
 	1. Editing of items
