@@ -79,8 +79,9 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> implements CheckBox.
             viewHolder.textView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean hasFocus) {
-                    
+
                     if(!hasFocus){
+                        viewHolder.imageView.setVisibility(View.INVISIBLE);
                         ToDoItem toDoItem = (ToDoItem)viewHolder.checkBox.getTag();
                         String newVal = viewHolder.textView.getText().toString();
                          if(newVal.equals(toDoItem.getItem()) == false) {
@@ -88,10 +89,11 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> implements CheckBox.
                              onEditorAction(viewHolder.textView, position, null);
                          }
                     }
+                    else{
+                        viewHolder.imageView.setVisibility(View.VISIBLE);
+                    }
                 }
             });
-
-
         }
         else{
             view = convertView;

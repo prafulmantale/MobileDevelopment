@@ -240,7 +240,7 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
             items.get(position).setItem(item);
             toDoItemDAO.updateToDoItem(items.get(position));
             notifyDataChange();
-            Toast.makeText(getBaseContext(), R.string.item_edit_successful, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getBaseContext(), R.string.item_edit_successful, Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(getBaseContext(), R.string.item_edit_not_done, Toast.LENGTH_SHORT).show();

@@ -24,6 +24,10 @@
             android:name=".activities.ToDoItemRow"
             android:label="@string/title_activity_to_do_item_row" >
         </activity>
+        <activity
+            android:name=".activities.ItemDetails"
+            android:label="@string/title_activity_item_details" >
+        </activity>
     </application>
 
 </manifest>
