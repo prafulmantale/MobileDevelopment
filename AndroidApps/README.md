@@ -4,9 +4,13 @@ Time spent: 40 hours spent in total
 Completed user stories:
 
 Required: User can add items to do list.
+
 Required: User can delete items from to do list
+
 Required: User can edit to do items.
+
 Required: Items are saved and later retrieved.
+
 Notes:
 
 	1. Editing of items
