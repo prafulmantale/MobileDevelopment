@@ -16,6 +16,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -133,6 +134,8 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
 
     private void startItemDetailsActivity(int position){
         Intent intent = new Intent(TodoActivity.this, ItemDetails.class);
+        intent.putExtra("item", items.get(position));
+        intent.putExtra("position", position);
         startActivityForResult(intent, REQUEST_CODE);
     }
     private void startEditItemActivity(int position){
@@ -163,6 +166,11 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
                 int position = data.getIntExtra("position",-1);
 
                 updateEditedItem(item, position);
+            }
+            else if(data.hasExtra("itemd") && data.hasExtra("position")){
+                ToDoItem toDoItem = (ToDoItem)data.getSerializableExtra("itemd");
+                int position = data.getIntExtra("position",-1);
+                updateEditedItem(toDoItem, position);
             }
         }
         else{
@@ -244,6 +252,18 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
             //items.set(position, item);
             items.get(position).setItem(item);
             toDoItemDAO.updateToDoItem(items.get(position));
+            notifyDataChange();
+            //Toast.makeText(getBaseContext(), R.string.item_edit_successful, Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getBaseContext(), R.string.item_edit_not_done, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void updateEditedItem(ToDoItem item, int position){
+        if(position != -1) {
+            items.set(position, item);
+            toDoItemDAO.updateToDoItem(item);
             notifyDataChange();
             //Toast.makeText(getBaseContext(), R.string.item_edit_successful, Toast.LENGTH_SHORT).show();
         }

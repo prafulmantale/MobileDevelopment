@@ -42,6 +42,9 @@ public class ToDoItemDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put(dbHelper.getColumnItem(), todoItem);
         contentValues.put(dbHelper.getColumnCompleted(), 0);
+        contentValues.put(dbHelper.getColumnPriority(), 0);
+        contentValues.put(dbHelper.getColumnDueDateConfigured(), 0);
+        contentValues.put(dbHelper.getColumnDueDate(), "");
 
         long insertId = database.insert(dbHelper.getTableName(), null, contentValues);
 
@@ -68,6 +71,9 @@ public class ToDoItemDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put(dbHelper.getColumnItem(), toDoItem.getItem());
         contentValues.put(dbHelper.getColumnCompleted(), toDoItem.isCompleted() == true ? 1 : 0);
+        contentValues.put(dbHelper.getColumnPriority(), toDoItem.getPriority().getValue());
+        contentValues.put(dbHelper.getColumnDueDateConfigured(), toDoItem.isDueDateConfigured() ? 1 : 0);
+        contentValues.put(dbHelper.getColumnDueDate(), toDoItem.getDateTime());
 
         database.update(dbHelper.getTableName(),contentValues,  dbHelper.getColumnId() + " = " + id, null);
 
@@ -97,6 +103,9 @@ public class ToDoItemDAO {
         toDoItem.setId(cursor.getInt(0));
         toDoItem.setItem(cursor.getString(1));
         toDoItem.setCompleted(cursor.getInt(2) == 0 ? false : true);
+        toDoItem.setPriority(cursor.getInt(3));
+        toDoItem.setDueDateConfigured(cursor.getInt(4) == 0 ? false : true);
+        toDoItem.setDateTime(cursor.getString(5));
 
         return toDoItem;
     }

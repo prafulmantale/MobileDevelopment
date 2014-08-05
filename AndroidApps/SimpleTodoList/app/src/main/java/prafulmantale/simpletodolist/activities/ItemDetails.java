@@ -1,6 +1,7 @@
 package prafulmantale.simpletodolist.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
 
@@ -23,6 +25,8 @@ public class ItemDetails extends Activity {
     private DatePicker datePicker;
     private TimePicker timePicker;
     private ToDoItem toDoItem;
+    private int position;
+    private EditText editText;
 
 
     @Override
@@ -30,10 +34,34 @@ public class ItemDetails extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
 
+        initialize();
+
+    }
+
+
+    private void initialize(){
+        Intent intent = getIntent();
+        if(intent.hasExtra("item") && intent.hasExtra("position")) {
+            toDoItem = (ToDoItem)intent.getSerializableExtra("item");
+            position = intent.getIntExtra("position", -1);
+        }
+        else{
+            finish();
+            return;
+        }
+
         scheduleCheckbox = (CheckBox)findViewById(R.id.itemCheck);
         datePicker = (DatePicker)findViewById(R.id.datePicker);
         timePicker = (TimePicker)findViewById(R.id.timepicker);
+        editText = (EditText)findViewById(R.id.itemLabel);
 
+        scheduleCheckbox.setChecked(toDoItem.isDueDateConfigured());
+        editText.setText(toDoItem.getItem());
+
+        setupListeners();
+    }
+
+    private void setupListeners(){
         scheduleCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -52,7 +80,28 @@ public class ItemDetails extends Activity {
                 }
             }
         });
+    }
 
+    public void saveItem(View view){
+
+        String newItemValue = editText.getText().toString();
+        if(newItemValue == null || newItemValue.isEmpty()){
+            //No Op
+        }
+        else{
+            Intent data = new Intent();
+            toDoItem.setItem(newItemValue);
+            toDoItem.setDueDateConfigured(scheduleCheckbox.isChecked());
+            data.putExtra("itemd", toDoItem);
+            data.putExtra("position", position);
+            setResult(RESULT_OK, data);
+        }
+
+        finish();
+    }
+
+    public void cancelSaveItem(View view){
+        finish();
     }
 
 

@@ -13,12 +13,18 @@ public class ToDoListSQLLiteHelper  extends SQLiteOpenHelper{
     private static final String TABLE_NAME = "todoitemslist";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_ITEM = "item";
-    private static final String COLUMN_COMPLETED = "COMPLETED";
+    private static final String COLUMN_COMPLETED = "completed";
+    private static final String COLUMN_DUE_DATE_CONFIGURED = "duedateconfigured";
+    private static final String COLUMN_DUE_DATE = "duedate";
+    private static final String COLUMN_PRIORITY = "priority";
+
     private static final String DB_NAME = "itemslist.db";
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 4;
 
     private static final String DB_CREATE_SQL ="create table " + TABLE_NAME + "(" + COLUMN_ID + " integer primary key autoincrement, "
-            + COLUMN_ITEM + " text not null, " + COLUMN_COMPLETED + " integer );";
+            + COLUMN_ITEM + " text not null, " + COLUMN_COMPLETED + " integer, " + COLUMN_PRIORITY + " integer DEFAULT 0, "
+            + COLUMN_DUE_DATE_CONFIGURED + " integer, " + COLUMN_DUE_DATE + " text "
+            + ");";
 
 
     public ToDoListSQLLiteHelper(Context context) {
@@ -43,7 +49,7 @@ public class ToDoListSQLLiteHelper  extends SQLiteOpenHelper{
     }
 
     public String [] getColumns(){
-        return new String[]{COLUMN_ID, COLUMN_ITEM, COLUMN_COMPLETED};
+        return new String[]{COLUMN_ID, COLUMN_ITEM, COLUMN_COMPLETED, COLUMN_PRIORITY, COLUMN_DUE_DATE_CONFIGURED, COLUMN_DUE_DATE};
     }
 
     public String getColumnItem(){
@@ -60,6 +66,18 @@ public class ToDoListSQLLiteHelper  extends SQLiteOpenHelper{
 
     public String getColumnCompleted(){
         return COLUMN_COMPLETED;
+    }
+
+    public String getColumnDueDateConfigured(){
+        return COLUMN_DUE_DATE_CONFIGURED;
+    }
+
+    public String getColumnDueDate(){
+        return COLUMN_DUE_DATE;
+    }
+
+    public String getColumnPriority(){
+        return COLUMN_PRIORITY;
     }
 
 }
