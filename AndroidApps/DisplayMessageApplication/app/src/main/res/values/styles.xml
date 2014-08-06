@@ -12,7 +12,7 @@
 
     <style name="MyActionBar"
         parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        
+
     </style>
 
 </resources>
