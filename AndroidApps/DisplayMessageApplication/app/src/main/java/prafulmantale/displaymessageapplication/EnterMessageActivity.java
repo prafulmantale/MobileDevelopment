@@ -49,4 +49,35 @@ public class EnterMessageActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_search:
+                opensearch();
+                return true;
+
+            case R.id.action_settings:
+                opensettings();
+                return true;
+
+            default:
+                return super.onMenuItemSelected(featureId, item);
+        }
+    }
+
+    private void opensearch() {
+
+
+    }
+
+    private void opensettings(){
+
+    }
 }
