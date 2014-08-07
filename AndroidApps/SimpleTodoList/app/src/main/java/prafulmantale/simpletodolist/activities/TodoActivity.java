@@ -2,16 +2,23 @@ package prafulmantale.simpletodolist.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import org.apache.commons.io.FileUtils;
 
@@ -29,7 +36,8 @@ import prafulmantale.simpletodolist.dialogs.EditItemDialog;
 import prafulmantale.simpletodolist.models.ToDoItem;
 
 
-public class TodoActivity extends Activity implements EditItemDialog.EditItemDialogListener, ToDoItemAdapter.ItemDetailsListener{
+public class TodoActivity extends FragmentActivity implements EditItemDialog.EditItemDialogListener, ToDoItemAdapter.ItemDetailsListener
+, ActionBar.TabListener{
 
     private final String DATA_FILE = "todo.txt";
     private final int REQUEST_CODE = 200;
@@ -50,7 +58,7 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
-
+        addTabs();
          initialize();
          //addTestData();
     }
@@ -76,6 +84,8 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         lvItems.setAdapter(itemsAdapter);
 
         setupListeners();
+
+
     }
 
     private void addTabs(){
@@ -83,9 +93,14 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         ActionBar.Tab tab = actionBar.newTab().setText(R.string.tab_showall);
+        tab.setTabListener(this);
         actionBar.addTab(tab);
+       // tab.setTabListener(new FragmentTabListener<ShowAllFragment>(R.id.showallfragment, this, "ShowAll", ShowAllFragment.class));
 
         tab = actionBar.newTab().setText(R.string.tab_hidecompleted);
+        tab.setTabListener(this);
+        //tab.setTabListener(new FragmentTabListener<HideCompletedFragment>(R.id.hidecompletedfragment, this, "HideCompleted", HideCompletedFragment.class));
+
         actionBar.addTab(tab);
     }
 
@@ -303,5 +318,41 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
     @Override
     public void OnItemDetailsRequested(int position) {
         startItemDetailsActivity(position);
+    }
+
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+            // When the given tab is selected, show the tab contents in the
+            // container view.
+            Fragment fragment = new DummySectionFragment();
+            Bundle args = new Bundle();
+            args.putInt(DummySectionFragment.ARG_SECTION_NUMBER,
+                    tab.getPosition() + 1);
+            fragment.setArguments(args);
+            getFragmentManager().beginTransaction();
+                    //.replace(R.id.container, fragment).commit();
+    }
+
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
+
+    public static class DummySectionFragment extends Fragment {
+        public static final String ARG_SECTION_NUMBER = "placeholder_text";
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            TextView textView = new TextView(getActivity());
+            textView.setGravity(Gravity.CENTER);
+            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            return textView;
+        }
     }
 }
