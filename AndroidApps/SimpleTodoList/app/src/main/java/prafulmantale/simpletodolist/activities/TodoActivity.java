@@ -1,5 +1,6 @@
 package prafulmantale.simpletodolist.activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -75,6 +76,17 @@ public class TodoActivity extends Activity implements EditItemDialog.EditItemDia
         lvItems.setAdapter(itemsAdapter);
 
         setupListeners();
+    }
+
+    private void addTabs(){
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        ActionBar.Tab tab = actionBar.newTab().setText(R.string.tab_showall);
+        actionBar.addTab(tab);
+
+        tab = actionBar.newTab().setText(R.string.tab_hidecompleted);
+        actionBar.addTab(tab);
     }
 
     private void setupListeners(){
