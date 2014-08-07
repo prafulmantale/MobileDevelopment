@@ -26,7 +26,8 @@
         </activity>
         <activity
             android:name=".activities.ItemDetails"
-            android:label="@string/title_activity_item_details" >
+            android:label="@string/title_activity_item_details"
+            android:parentActivityName=".activities.TodoActivity">
         </activity>
     </application>
 
