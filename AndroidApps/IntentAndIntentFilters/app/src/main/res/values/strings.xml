@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">IntentAndIntentFilters</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_target">TargetActivity</string>
+    <string name="target_activity">I am the target</string>
+    <string name="title_activity_call_intents">CallIntentsActivity</string>
+    <string name="title_activity_browser">BrowserActivity</string>
+
+</resources>
