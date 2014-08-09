@@ -1,11 +1,14 @@
 package prafulmantale.simpletodolist.activities;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
@@ -58,7 +61,7 @@ public class TodoActivity extends FragmentActivity implements EditItemDialog.Edi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
-        addTabs();
+        //addTabs();
          initialize();
          //addTestData();
     }
@@ -138,12 +141,40 @@ public class TodoActivity extends FragmentActivity implements EditItemDialog.Edi
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long rowId) {
 
-                toDoItemDAO.deleteToDoItem(items.get(position));
-                items.remove(position);
+                final int pos = position;
+                final View v = view;
 
-                notifyDataChange();
+                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    view.animate().setDuration(1000).alpha(0).setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            //super.onAnimationEnd(animation);
 
-                Toast.makeText(getBaseContext(), R.string.item_delete_successful, Toast.LENGTH_SHORT).show();
+                            //???? move to a helper method
+                            toDoItemDAO.deleteToDoItem(items.get(pos));
+                            items.remove(pos);
+
+                            notifyDataChange();
+                            v.setAlpha(1);
+                            Toast.makeText(getBaseContext(), R.string.item_delete_successful, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else {
+
+                    view.animate().setDuration(1000).alpha(0).withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            toDoItemDAO.deleteToDoItem(items.get(pos));
+                            items.remove(pos);
+
+                            notifyDataChange();
+                            v.setAlpha(1);
+                            Toast.makeText(getBaseContext(), R.string.item_delete_successful, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
 
                 return true;//Check why does it return true or false
             }
