@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="10dp"
+    android:layout_height="?android:attr/listPreferredItemHeight"
     android:paddingRight="5dp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
@@ -21,12 +21,17 @@
     <EditText
         android:id="@+id/itemLabel"
         android:layout_width="180dp"
-        android:layout_height="match_parent"
+        android:layout_height="26dp"
         android:layout_toRightOf="@+id/itemCheck"
         style="@style/ListViewText"
         android:background="@drawable/itemselector"
-
-
+        />
+    <TextView
+        android:id="@+id/duedate"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/itemLabel"
+        android:layout_toRightOf="@+id/itemCheck"
         />
     <ImageView
         android:id="@+id/imageView"

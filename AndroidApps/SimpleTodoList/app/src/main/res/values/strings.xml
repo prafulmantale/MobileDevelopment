@@ -20,5 +20,6 @@
     <string name="item_due_date_label">Due date for item</string>
     <string name="tab_showall">Show All</string>
     <string name="tab_hidecompleted">Hide Completed</string>
+    <string name="no_due_date_configured">No due date</string>
 
 </resources>

@@ -47,6 +47,7 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> implements CheckBox.
         protected EditText textView;
         protected CheckBox checkBox;
         protected ImageView imageView;
+        protected TextView duedate;
     }
 
     @Override
@@ -61,6 +62,7 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> implements CheckBox.
             viewHolder.textView = (EditText)view.findViewById(R.id.itemLabel);
             viewHolder.checkBox = (CheckBox)view.findViewById(R.id.itemCheck);
             viewHolder.imageView = (ImageView)view.findViewById(R.id.imageView);
+            viewHolder.duedate = (TextView)view.findViewById(R.id.duedate);
 
 
             view.setTag(viewHolder);
@@ -116,6 +118,7 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> implements CheckBox.
         ViewHolder holder = (ViewHolder)view.getTag();
         holder.textView.setText(list.get(position).getItem());
         holder.checkBox.setChecked(list.get(position).isCompleted());
+        holder.duedate.setText(R.string.no_due_date_configured);
 
         return view;
     }
