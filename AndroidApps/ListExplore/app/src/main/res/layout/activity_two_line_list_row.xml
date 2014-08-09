@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+
+    tools:context="prafulmantale.listexplore.activities.TwoLineListRow">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="6dp"
+        android:contentDescription="TODO"
+        android:id="@+id/imageView"
+        android:src="@drawable/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/secondline"
+        android:layout_width="fill_parent"
+        android:layout_height="26dp"
+        android:singleLine="true"
+        android:text="Description"
+        android:textSize="16sp"
+        android:ellipsize="marquee"
+        android:layout_toRightOf="@+id/imageView"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        />
+
+    <TextView
+        android:id="@+id/firstline"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/secondline"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_alignWithParentIfMissing="true"
+        android:gravity="center_horizontal"
+        android:textSize="16sp"
+        android:text="Sample row"
+        android:layout_alignParentTop="true" />
+
+
+</RelativeLayout>
