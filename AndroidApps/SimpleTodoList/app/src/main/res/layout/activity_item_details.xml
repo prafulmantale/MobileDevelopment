@@ -19,7 +19,7 @@
         android:id="@+id/itemCheck"
         android:layout_below="@+id/itemLabel"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="1dp"
         android:layout_marginRight="10dp"
@@ -41,22 +41,20 @@
         android:layout_marginTop="1dp"
         android:id="@+id/datePicker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="140dp"
         android:calendarViewShown="false"
-        android:scaleY="0.7"
         android:layout_below="@id/itemText"
-        android:visibility="invisible"
+        android:visibility="visible"
         />
 
     <TimePicker
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/timepicker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="140dp"
         android:calendarViewShown="false"
-        android:scaleY="0.7"
         android:layout_below="@+id/datePicker"
-        android:visibility="invisible"
+        android:visibility="visible"
         />
     <Button
         android:id="@+id/saveButton"
@@ -64,7 +62,8 @@
         android:layout_height="wrap_content"
         android:text="Save"
         android:layout_below="@id/timepicker"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="65dp"
         android:layout_alignLeft="@id/editItemLabel"
         android:onClick="saveItem"/>
 
@@ -73,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="25dp"
         android:layout_toRightOf="@id/saveButton"
         android:layout_below="@id/timepicker"
