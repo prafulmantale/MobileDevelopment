@@ -55,10 +55,10 @@ public class ItemDetails extends Activity {
         timePicker = (TimePicker)findViewById(R.id.timepicker);
         editText = (EditText)findViewById(R.id.itemLabel);
 
-        scheduleCheckbox.setChecked(toDoItem.isDueDateConfigured());
         editText.setText(toDoItem.getItem());
 
         setupListeners();
+        scheduleCheckbox.setChecked(toDoItem.isDueDateConfigured());
     }
 
     private void setupListeners(){

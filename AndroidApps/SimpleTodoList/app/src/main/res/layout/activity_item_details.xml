@@ -44,7 +44,7 @@
         android:layout_height="140dp"
         android:calendarViewShown="false"
         android:layout_below="@id/itemText"
-        android:visibility="visible"
+        android:visibility="invisible"
         />
 
     <TimePicker
@@ -54,7 +54,7 @@
         android:layout_height="140dp"
         android:calendarViewShown="false"
         android:layout_below="@+id/datePicker"
-        android:visibility="visible"
+        android:visibility="invisible"
         />
     <Button
         android:id="@+id/saveButton"
