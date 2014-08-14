@@ -116,9 +116,15 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> implements CheckBox.
         }
 
         ViewHolder holder = (ViewHolder)view.getTag();
-        holder.textView.setText(list.get(position).getItem());
-        holder.checkBox.setChecked(list.get(position).isCompleted());
-        holder.duedate.setText(R.string.no_due_date_configured);
+        ToDoItem toDoItem = list.get(position);
+        holder.textView.setText(toDoItem.getItem());
+        holder.checkBox.setChecked(toDoItem.isCompleted());
+        if(toDoItem.isDueDateConfigured() == false) {
+            holder.duedate.setText(R.string.no_due_date_configured);
+        }
+        else{
+            holder.duedate.setText(toDoItem.getDateTime());
+        }
 
         return view;
     }

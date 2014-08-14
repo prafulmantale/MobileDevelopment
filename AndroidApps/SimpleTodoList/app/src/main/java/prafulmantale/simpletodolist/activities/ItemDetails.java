@@ -3,6 +3,7 @@ package prafulmantale.simpletodolist.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -73,6 +74,10 @@ public class ItemDetails extends Activity {
                     int month = c.get(Calendar.MONTH);
                     int day = c.get(Calendar.DAY_OF_MONTH);
                     datePicker.updateDate(year, month, day);
+
+                    timePicker.setCurrentHour(Calendar.HOUR_OF_DAY);
+                    timePicker.setCurrentMinute(Calendar.MINUTE);
+
                 }
                 else{
                     datePicker.setVisibility(View.INVISIBLE);
@@ -80,6 +85,7 @@ public class ItemDetails extends Activity {
                 }
             }
         });
+
     }
 
     public void saveItem(View view){
@@ -92,6 +98,10 @@ public class ItemDetails extends Activity {
             Intent data = new Intent();
             toDoItem.setItem(newItemValue);
             toDoItem.setDueDateConfigured(scheduleCheckbox.isChecked());
+            //yyyy-MM-dd HH:mm:ss
+            toDoItem.setDateTime(new String(datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-"  + datePicker.getDayOfMonth() + " " +
+            timePicker.getCurrentHour() + ":" + timePicker.getCurrentMinute() + ":" + "00"));
+
             data.putExtra("itemd", toDoItem);
             data.putExtra("position", position);
             setResult(RESULT_OK, data);
