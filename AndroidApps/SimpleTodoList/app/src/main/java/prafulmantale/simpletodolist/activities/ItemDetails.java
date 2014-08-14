@@ -3,6 +3,7 @@ package prafulmantale.simpletodolist.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,33 +59,48 @@ public class ItemDetails extends Activity {
 
         editText.setText(toDoItem.getItem());
 
-        setupListeners();
         scheduleCheckbox.setChecked(toDoItem.isDueDateConfigured());
+        updateDateTimePickers(toDoItem.isDueDateConfigured());
+        setupListeners();
     }
 
     private void setupListeners(){
         scheduleCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(compoundButton.isChecked()){
-                    datePicker.setVisibility(View.VISIBLE);
-                    timePicker.setVisibility(View.VISIBLE);
-                    final Calendar c = Calendar.getInstance();
-                    int year = c.get(Calendar.YEAR);
-                    int month = c.get(Calendar.MONTH);
-                    int day = c.get(Calendar.DAY_OF_MONTH);
-                    datePicker.updateDate(year, month, day);
-
-                    timePicker.setCurrentHour(Calendar.HOUR_OF_DAY);
-                    timePicker.setCurrentMinute(Calendar.MINUTE);
-
-                }
-                else{
-                    datePicker.setVisibility(View.INVISIBLE);
-                    timePicker.setVisibility(View.INVISIBLE);
-                }
+                updateDateTimePickers(compoundButton.isChecked());
             }
         });
+
+    }
+
+    private void updateDateTimePickers(boolean show) {
+
+        if(show){
+            datePicker.setVisibility(View.VISIBLE);
+            timePicker.setVisibility(View.VISIBLE);
+            
+            final Calendar c = Calendar.getInstance();
+
+            if(toDoItem.isDueDateConfigured()) {
+                c.setTime(toDoItem.getDueDate());
+            }
+
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            int hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+
+            datePicker.updateDate(year, month, day);
+            timePicker.setCurrentHour(hour);
+            timePicker.setCurrentMinute(minute);
+        }
+        else{
+            datePicker.setVisibility(View.INVISIBLE);
+            timePicker.setVisibility(View.INVISIBLE);
+        }
+
 
     }
 
