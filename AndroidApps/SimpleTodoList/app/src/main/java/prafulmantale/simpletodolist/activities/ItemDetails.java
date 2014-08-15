@@ -79,7 +79,7 @@ public class ItemDetails extends Activity {
         if(show){
             datePicker.setVisibility(View.VISIBLE);
             timePicker.setVisibility(View.VISIBLE);
-            
+
             final Calendar c = Calendar.getInstance();
 
             if(toDoItem.isDueDateConfigured()) {

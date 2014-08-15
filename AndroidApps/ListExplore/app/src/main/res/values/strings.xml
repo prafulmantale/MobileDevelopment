@@ -6,5 +6,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_two_line_list_row">TwoLineListRow</string>
     <string name="title_activity_my_list">MyListActivity</string>
+    <string name="title_activity_undo_action">UndoActionActivity</string>
 
 </resources>
