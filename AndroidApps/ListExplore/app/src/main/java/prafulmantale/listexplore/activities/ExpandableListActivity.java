@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
 
 import prafulmantale.listexplore.R;
@@ -26,6 +27,11 @@ public class ExpandableListActivity extends Activity {
         ExpandableListView listView = (ExpandableListView)findViewById(R.id.expandableListView);
 
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups);
+
+        View header = getLayoutInflater().inflate(R.layout.header, null);
+        View footer = getLayoutInflater().inflate(R.layout.footer, null);
+        listView.addHeaderView(header);
+        listView.addFooterView(footer);
 
         listView.setAdapter(adapter);
     }
