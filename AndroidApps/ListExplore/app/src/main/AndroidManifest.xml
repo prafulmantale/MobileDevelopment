@@ -25,6 +25,17 @@
         <activity
             android:name=".activities.MyListActivity"
             android:label="@string/title_activity_my_list" >
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".activities.UndoActionActivity"
+            android:label="@string/title_activity_undo_action" >
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -32,8 +43,8 @@
             <!--</intent-filter>-->
         </activity>
         <activity
-            android:name=".activities.UndoActionActivity"
-            android:label="@string/title_activity_undo_action" >
+            android:name=".activities.ExpandableListActivity"
+            android:label="@string/title_activity_expandable_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
