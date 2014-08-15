@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="prafulmantale.listexplore" >
 
+    <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -36,6 +38,17 @@
         <activity
             android:name=".activities.UndoActionActivity"
             android:label="@string/title_activity_undo_action" >
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".activities.ExpandableListActivity"
+            android:label="@string/title_activity_expandable_list" >
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -43,8 +56,8 @@
             <!--</intent-filter>-->
         </activity>
         <activity
-            android:name=".activities.ExpandableListActivity"
-            android:label="@string/title_activity_expandable_list" >
+            android:name=".activities.CursorAdapterActivity"
+            android:label="@string/title_activity_cursor_adapter" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

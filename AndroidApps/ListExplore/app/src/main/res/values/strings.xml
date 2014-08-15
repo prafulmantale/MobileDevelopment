@@ -8,5 +8,6 @@
     <string name="title_activity_my_list">MyListActivity</string>
     <string name="title_activity_undo_action">UndoActionActivity</string>
     <string name="title_activity_expandable_list">ExpandableListActivity</string>
+    <string name="title_activity_cursor_adapter">CursorAdapterActivity</string>
 
 </resources>
