@@ -76,6 +76,7 @@
         android:layout_marginLeft="25dp"
         android:layout_toRightOf="@id/saveButton"
         android:layout_below="@id/timepicker"
+        style="?android:attr/borderlessButtonStyle"
         android:onClick="cancelSaveItem"/>
 
 </RelativeLayout>

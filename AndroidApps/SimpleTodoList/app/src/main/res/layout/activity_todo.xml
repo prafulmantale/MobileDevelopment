@@ -42,6 +42,7 @@
         android:layout_alignRight="@id/lvItems"
         android:layout_alignTop="@+id/eNewItem"
         android:onClick="addTodoItem"
+        android:background="@drawable/add_button"
         style="@style/ButtonStyle"
         />
 

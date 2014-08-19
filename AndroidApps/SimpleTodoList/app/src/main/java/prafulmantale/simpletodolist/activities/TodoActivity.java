@@ -341,7 +341,7 @@ public class TodoActivity extends FragmentActivity implements EditItemDialog.Edi
     @Override
     protected void onDestroy() {
 
-        toDoItemDAO.closeConnection();
+        //toDoItemDAO.closeConnection();
 
         super.onDestroy();
     }
