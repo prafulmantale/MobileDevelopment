@@ -11,7 +11,7 @@
     <EditText
         android:id="@+id/itemLabel"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:textSize="25dp"
         android:hint="Item text"/>
 
@@ -63,8 +63,10 @@
         android:text="Save"
         android:layout_below="@id/timepicker"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="65dp"
+        android:layout_marginLeft="45dp"
         android:layout_alignLeft="@id/editItemLabel"
+        android:background="@drawable/add_button"
+        style="@style/SaveButtonStyle"
         android:onClick="saveItem"/>
 
     <Button
@@ -73,10 +75,11 @@
         android:layout_height="wrap_content"
         android:text="Cancel"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="35dp"
         android:layout_toRightOf="@id/saveButton"
         android:layout_below="@id/timepicker"
-        style="?android:attr/borderlessButtonStyle"
+        android:background="@drawable/cancel_button"
+        style="@style/CancelButtonStyle"
         android:onClick="cancelSaveItem"/>
 
 </RelativeLayout>

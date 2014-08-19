@@ -34,6 +34,7 @@
         style="@style/CustomText"/>
 
     <Button
+        android:background="@drawable/add_button"
         android:id="@+id/btnAddItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +43,6 @@
         android:layout_alignRight="@id/lvItems"
         android:layout_alignTop="@+id/eNewItem"
         android:onClick="addTodoItem"
-        android:background="@drawable/add_button"
         style="@style/ButtonStyle"
         />
 
