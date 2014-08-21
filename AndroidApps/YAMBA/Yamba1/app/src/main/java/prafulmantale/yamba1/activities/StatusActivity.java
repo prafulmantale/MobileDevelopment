@@ -8,12 +8,12 @@ import android.view.MenuItem;
 import prafulmantale.yamba1.R;
 
 
-public class StatusActivty extends Activity {
+public class StatusActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_status_activty);
+        setContentView(R.layout.activity_status_activity);
     }
 
 
