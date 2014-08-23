@@ -3,6 +3,8 @@
 
     <string name="app_name">Yamba1</string>
     <string name="hello_world">Hello world Status activity!</string>
+    <string name="update_status_title">Update Status</string>
+    <string name="update_button">Update</string>
     <string name="action_settings">Settings</string>
 
 </resources>
