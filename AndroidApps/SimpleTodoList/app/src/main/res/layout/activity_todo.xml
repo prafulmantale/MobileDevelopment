@@ -38,7 +38,7 @@
         android:id="@+id/btnAddItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:text="@string/add_item"
         android:layout_alignBottom="@id/eNewItem"
         android:layout_alignRight="@id/lvItems"
         android:layout_alignTop="@+id/eNewItem"

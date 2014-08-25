@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:textSize="25dp"
-        android:hint="Item text"/>
+        android:hint="@string/item_details_item_text_hint"/>
 
     <CheckBox
         android:id="@+id/itemCheck"
@@ -60,7 +60,7 @@
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save_button"
         android:layout_below="@id/timepicker"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="45dp"
@@ -73,7 +73,7 @@
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
+        android:text="@string/cancel_button"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="35dp"
         android:layout_toRightOf="@id/saveButton"

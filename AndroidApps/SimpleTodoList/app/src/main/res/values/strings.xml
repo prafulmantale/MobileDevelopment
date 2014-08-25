@@ -21,5 +21,9 @@
     <string name="tab_showall">Show All</string>
     <string name="tab_hidecompleted">Hide Completed</string>
     <string name="no_due_date_configured">No due date</string>
+    <string name="add_item">Add Item</string>
+    <string name="save_button">Save</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="item_details_item_text_hint">Item Text</string>
 
 </resources>
