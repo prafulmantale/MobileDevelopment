@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -29,6 +30,7 @@ public class ItemDetails extends Activity {
     private ToDoItem toDoItem;
     private int position;
     private EditText editText;
+    private Spinner prioritySpinner;
 
 
     @Override
@@ -56,10 +58,12 @@ public class ItemDetails extends Activity {
         datePicker = (DatePicker)findViewById(R.id.datePicker);
         timePicker = (TimePicker)findViewById(R.id.timepicker);
         editText = (EditText)findViewById(R.id.itemLabel);
+        prioritySpinner = (Spinner)findViewById(R.id.priority_spinner);
 
         editText.setText(toDoItem.getItem());
 
         scheduleCheckbox.setChecked(toDoItem.isDueDateConfigured());
+        prioritySpinner.setSelection(toDoItem.getPriority().getValue());
         updateDateTimePickers(toDoItem.isDueDateConfigured());
         setupListeners();
     }
@@ -114,6 +118,7 @@ public class ItemDetails extends Activity {
             Intent data = new Intent();
             toDoItem.setItem(newItemValue);
             toDoItem.setDueDateConfigured(scheduleCheckbox.isChecked());
+            toDoItem.setPriority(prioritySpinner.getSelectedItemPosition());
             //yyyy-MM-dd HH:mm:ss
             toDoItem.setDateTime(new String(datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-"  + datePicker.getDayOfMonth() + " " +
             timePicker.getCurrentHour() + ":" + timePicker.getCurrentMinute() + ":" + "00"));

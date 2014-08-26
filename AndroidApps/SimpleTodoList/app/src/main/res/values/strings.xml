@@ -25,5 +25,13 @@
     <string name="save_button">Save</string>
     <string name="cancel_button">Cancel</string>
     <string name="item_details_item_text_hint">Item Text</string>
+    <string name="priority_text">Priority:</string>
+
+    <array name="priority">
+        <item>None</item>
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+    </array>
 
 </resources>
