@@ -1,8 +1,10 @@
 package prafulmantale.simpletodolist.adapters;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
 import android.graphics.AvoidXfermode;
+import android.graphics.Color;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -124,6 +126,24 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> implements CheckBox.
         }
         else{
             holder.duedate.setText(toDoItem.getDateTime());
+        }
+
+        holder.textView.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
+        if(toDoItem.getPriority() == ToDoItem.ItemPriority.First){
+
+            view.setBackgroundColor( context.getResources().getColor(android.R.color.holo_blue_light));
+        }
+
+        if(toDoItem.getPriority() == ToDoItem.ItemPriority.Second){
+            view.setBackgroundColor(context.getResources().getColor(android.R.color.holo_green_light));
+        }
+
+        if(toDoItem.getPriority() == ToDoItem.ItemPriority.Third){
+            view.setBackgroundColor(context.getResources().getColor(android.R.color.holo_orange_light));
+        }
+
+        if(toDoItem.getPriority() == ToDoItem.ItemPriority.None){
+            view.setBackgroundColor(context.getResources().getColor(android.R.color.white));
         }
 
         return view;
