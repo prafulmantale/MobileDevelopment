@@ -32,6 +32,10 @@ public class ItemDetails extends Activity {
     private EditText editText;
     private Spinner prioritySpinner;
 
+    public static final String EXTRA_ITEMD = "itemd";
+    public static final String EXTRA_POSITION = "position";
+    public static final String EXTRA_ITEM = "item";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +49,9 @@ public class ItemDetails extends Activity {
 
     private void initialize(){
         Intent intent = getIntent();
-        if(intent.hasExtra("item") && intent.hasExtra("position")) {
-            toDoItem = (ToDoItem)intent.getSerializableExtra("item");
-            position = intent.getIntExtra("position", -1);
+        if(intent.hasExtra(EXTRA_ITEM) && intent.hasExtra(EXTRA_POSITION)) {
+            toDoItem = (ToDoItem)intent.getSerializableExtra(EXTRA_ITEM);
+            position = intent.getIntExtra(EXTRA_POSITION, -1);
         }
         else{
             finish();
@@ -123,8 +127,8 @@ public class ItemDetails extends Activity {
             toDoItem.setDateTime(new String(datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-"  + datePicker.getDayOfMonth() + " " +
             timePicker.getCurrentHour() + ":" + timePicker.getCurrentMinute() + ":" + "00"));
 
-            data.putExtra("itemd", toDoItem);
-            data.putExtra("position", position);
+            data.putExtra(EXTRA_ITEMD, toDoItem);
+            data.putExtra(EXTRA_POSITION, position);
             setResult(RESULT_OK, data);
         }
 

@@ -6,5 +6,6 @@
     <string name="update_status_title">Update Status</string>
     <string name="update_button">Update</string>
     <string name="action_settings">Settings</string>
+    <string name="status_hint">Please enter status here...</string>
 
 </resources>

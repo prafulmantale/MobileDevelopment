@@ -192,15 +192,15 @@ public class TodoActivity extends FragmentActivity implements EditItemDialog.Edi
 
     private void startItemDetailsActivity(int position){
         Intent intent = new Intent(TodoActivity.this, ItemDetails.class);
-        intent.putExtra("item", items.get(position));
-        intent.putExtra("position", position);
+        intent.putExtra(ItemDetails.EXTRA_ITEM, items.get(position));
+        intent.putExtra(ItemDetails.EXTRA_POSITION, position);
         startActivityForResult(intent, REQUEST_CODE);
     }
     private void startEditItemActivity(int position){
         Intent intent = new Intent(TodoActivity.this, EditItemActivity.class);
         //intent.putExtra("item", items.get(position));
-        intent.putExtra("item", items.get(position).getItem());
-        intent.putExtra("position", position);
+        intent.putExtra(ItemDetails.EXTRA_ITEM, items.get(position).getItem());
+        intent.putExtra(ItemDetails.EXTRA_POSITION, position);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
@@ -219,15 +219,15 @@ public class TodoActivity extends FragmentActivity implements EditItemDialog.Edi
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
 
         if(resultCode == RESULT_OK && requestCode == REQUEST_CODE){
-            if(data.hasExtra("item") && data.hasExtra("position")) {
-                String item = data.getStringExtra("item");
-                int position = data.getIntExtra("position",-1);
+            if(data.hasExtra(ItemDetails.EXTRA_ITEM) && data.hasExtra(ItemDetails.EXTRA_POSITION)) {
+                String item = data.getStringExtra(ItemDetails.EXTRA_ITEM);
+                int position = data.getIntExtra(ItemDetails.EXTRA_POSITION,-1);
 
                 updateEditedItem(item, position);
             }
-            else if(data.hasExtra("itemd") && data.hasExtra("position")){
-                ToDoItem toDoItem = (ToDoItem)data.getSerializableExtra("itemd");
-                int position = data.getIntExtra("position",-1);
+            else if(data.hasExtra(ItemDetails.EXTRA_ITEMD) && data.hasExtra(ItemDetails.EXTRA_POSITION)){
+                ToDoItem toDoItem = (ToDoItem)data.getSerializableExtra(ItemDetails.EXTRA_ITEMD);
+                int position = data.getIntExtra(ItemDetails.EXTRA_POSITION,-1);
                 updateEditedItem(toDoItem, position);
             }
         }

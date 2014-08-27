@@ -9,12 +9,13 @@
         android:id="@+id/tvStatus"
         android:text="@string/update_status_title"
         style="@style/title_style"
-         />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+    />
 
     <EditText
         android:id="@+id/statusMessage"
-
-        style="@style/status_message" />
+        style="@style/status_message"
+        android:hint="@string/status_hint"/>
 
     <Button
         android:text="@string/update_button"

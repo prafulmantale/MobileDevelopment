@@ -29,9 +29,9 @@ public class EditItemActivity extends Activity {
 
     private void initialize(){
         Intent intent = getIntent();
-        if(intent.hasExtra("item") && intent.hasExtra("position")) {
-            item = getIntent().getStringExtra("item");
-            position = getIntent().getIntExtra("position", -1);
+        if(intent.hasExtra(ItemDetails.EXTRA_ITEM) && intent.hasExtra(ItemDetails.EXTRA_POSITION)) {
+            item = getIntent().getStringExtra(ItemDetails.EXTRA_ITEM);
+            position = getIntent().getIntExtra(ItemDetails.EXTRA_POSITION, -1);
 
             editText = (EditText)findViewById(R.id.eEditedItem);
             editText.setText(item);
@@ -49,8 +49,8 @@ public class EditItemActivity extends Activity {
         }
         else{
             Intent data = new Intent();
-            data.putExtra("item", newItemValue);
-            data.putExtra("position", position);
+            data.putExtra(ItemDetails.EXTRA_ITEM, newItemValue);
+            data.putExtra(ItemDetails.EXTRA_POSITION, position);
             setResult(RESULT_OK, data);
         }
 
