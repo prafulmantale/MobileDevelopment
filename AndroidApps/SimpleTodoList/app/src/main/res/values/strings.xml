@@ -34,4 +34,6 @@
         <item>Three</item>
     </array>
 
+    <string name="title_activity_notification_result">NotificationResult</string>
+
 </resources>
