@@ -141,6 +141,21 @@ public class ToDoItem implements Serializable{
 
     @Override
     public String toString(){
-        return "Item: " + item + " Completed: " + isCompleted;
+        StringBuilder sb = new StringBuilder(100);
+
+        sb.append("Item: ").append(item).append("  ").append("Completed").append(isCompleted);
+        if(!isCompleted()){
+            if(isDueDateConfigured) {
+                sb.append("   Due date: ").append(getDateTime());
+            }
+            else{
+                sb.append("   No Due date configured").append(getDateTime());
+            }
+
+            sb.append("  Priority: ").append(getPriority());
+        }
+
+
+        return sb.toString();
     }
 }
