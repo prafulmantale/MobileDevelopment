@@ -15,7 +15,9 @@
     <EditText
         android:id="@+id/statusMessage"
         style="@style/status_message"
-        android:hint="@string/status_hint"/>
+        android:hint="@string/status_hint"
+        android:background="@color/myblue"
+        />
 
     <Button
         android:text="@string/update_button"
