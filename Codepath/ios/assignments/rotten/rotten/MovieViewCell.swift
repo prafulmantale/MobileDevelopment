@@ -10,9 +10,9 @@ import UIKit
 
 class MovieViewCell: UITableViewCell {
 
-    @IBOutlet weak var movieTitleLabel: UIView!
-    @IBOutlet weak var synopsisLabel: UIView!
-    @IBOutlet weak var posterView: UIView!
+    @IBOutlet weak var movieTitleLabel: UILabel!
+    @IBOutlet weak var synopsisLabel: UILabel!
+    @IBOutlet weak var posterView: UIImageView!
     
     init(style: UITableViewCellStyle, reuseIdentifier: String) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

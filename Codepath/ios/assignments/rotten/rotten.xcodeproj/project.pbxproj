@@ -13,6 +13,7 @@
 		51DFB9C819C2665500089C9D /* rottenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DFB9C719C2665500089C9D /* rottenTests.swift */; };
 		51DFB9D219C268A900089C9D /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DFB9D119C268A900089C9D /* MoviesViewController.swift */; };
 		51DFB9D419C26D7000089C9D /* MovieViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DFB9D319C26D7000089C9D /* MovieViewCell.swift */; };
+		BA438F21AB7E4B108F1D9921 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E30B268385F410C93D9B7D0 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2E30B268385F410C93D9B7D0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		51DFB9AF19C2665500089C9D /* rotten.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rotten.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51DFB9B319C2665500089C9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51DFB9B419C2665500089C9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +38,8 @@
 		51DFB9C719C2665500089C9D /* rottenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rottenTests.swift; sourceTree = "<group>"; };
 		51DFB9D119C268A900089C9D /* MoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		51DFB9D319C26D7000089C9D /* MovieViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewCell.swift; sourceTree = "<group>"; };
+		51DFB9D519C2DC2D00089C9D /* rotten-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rotten-Bridging-Header.h"; sourceTree = "<group>"; };
+		A703472212654675B85FBA3C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA438F21AB7E4B108F1D9921 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +61,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		355A67498D7B438CBB5D760E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2E30B268385F410C93D9B7D0 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		51DFB9A619C2665500089C9D = {
 			isa = PBXGroup;
 			children = (
 				51DFB9B119C2665500089C9D /* rotten */,
 				51DFB9C419C2665500089C9D /* rottenTests */,
 				51DFB9B019C2665500089C9D /* Products */,
+				A703472212654675B85FBA3C /* Pods.xcconfig */,
+				355A67498D7B438CBB5D760E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,6 +98,7 @@
 				51DFB9B819C2665500089C9D /* Main.storyboard */,
 				51DFB9BB19C2665500089C9D /* Images.xcassets */,
 				51DFB9B219C2665500089C9D /* Supporting Files */,
+				51DFB9D519C2DC2D00089C9D /* rotten-Bridging-Header.h */,
 			);
 			path = rotten;
 			sourceTree = "<group>";
@@ -119,9 +135,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 51DFB9CB19C2665500089C9D /* Build configuration list for PBXNativeTarget "rotten" */;
 			buildPhases = (
+				6AF3AB00FCB745E595D9250D /* Check Pods Manifest.lock */,
 				51DFB9AB19C2665500089C9D /* Sources */,
 				51DFB9AC19C2665500089C9D /* Frameworks */,
 				51DFB9AD19C2665500089C9D /* Resources */,
+				EC25F36CA8CC40E2A8C33754 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -205,6 +223,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6AF3AB00FCB745E595D9250D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EC25F36CA8CC40E2A8C33754 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		51DFB9AB19C2665500089C9D /* Sources */ = {
@@ -326,25 +377,32 @@
 		};
 		51DFB9CC19C2665500089C9D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A703472212654675B85FBA3C /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = rotten/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "rotten/rotten-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		51DFB9CD19C2665500089C9D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A703472212654675B85FBA3C /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = rotten/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "rotten/rotten-Bridging-Header.h";
 			};
 			name = Release;
 		};

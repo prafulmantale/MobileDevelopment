@@ -31,7 +31,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synopsis" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dB5-Fr-FGo">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synopsis" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dB5-Fr-FGo">
                                                     <rect key="frame" x="95" y="47" width="220" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -45,9 +45,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="movieTitleLabel" destination="KeO-Yf-vga" id="H2U-SN-jRI"/>
-                                            <outlet property="posterView" destination="PFz-ck-7Iy" id="727-AQ-uKQ"/>
-                                            <outlet property="synopsisLabel" destination="PFz-ck-7Iy" id="WIN-hD-cpj"/>
+                                            <outlet property="movieTitleLabel" destination="KeO-Yf-vga" id="zqK-71-Upc"/>
+                                            <outlet property="posterView" destination="VUi-8e-Sr2" id="upN-nB-PgA"/>
+                                            <outlet property="synopsisLabel" destination="dB5-Fr-FGo" id="yJk-rg-JAj"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
