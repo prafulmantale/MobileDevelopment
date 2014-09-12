@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".PhotoViewerActivity"
     android:orientation="vertical"
     android:weightSum="1">
@@ -100,43 +100,24 @@
             android:layout_marginLeft="1dp"
             android:id="@+id/tvLikesCount"
             android:layout_alignParentTop="true"
-            android:textSize="12sp"
-            />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#0a4c0d13"
-            android:id="@+id/commentssection"
-            android:layout_below="@+id/tvLikesCount"
-            >
+            android:textSize="12sp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="USerName"
+            android:text="UserName"
             android:hint="username "
-            android:id="@+id/tvCaptionUserName"
+            android:id="@+id/tvCaption"
             android:layout_marginTop="2dp"
             android:layout_marginLeft="1dp"
             android:paddingBottom="1dp"
             android:textSize="12sp"
             android:layout_alignParentTop="true"
             android:textStyle="bold"
-            android:textColor="#ff206199" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Comment"
-            android:hint="username "
-            android:id="@+id/tvCaption"
-            android:layout_marginLeft="1dp"
-            android:paddingBottom="1dp"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:layout_below="@+id/tvCaptionUserName"
-            android:layout_alignParentBottom="true" />
-        </RelativeLayout>
+
+            android:maxLines="2"
+            android:maxLength="200"
+            android:typeface="serif" />
     </LinearLayout>
 
     <LinearLayout

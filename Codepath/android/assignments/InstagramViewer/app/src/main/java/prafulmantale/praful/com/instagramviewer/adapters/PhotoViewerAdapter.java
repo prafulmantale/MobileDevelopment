@@ -1,6 +1,7 @@
 package prafulmantale.praful.com.instagramviewer.adapters;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,8 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         tvUserName.setText(mediaDetails.getUsername());
         //tvLocation.setText(mediaDetails.getLocation());
         tvLocation.setText("Some Nice Place");
-        tvCaption.setText(mediaDetails.getUsername() + " " + mediaDetails.getCaption());
 
+        tvCaption.setText(Html.fromHtml("<small><font color=\"#206199\">" + mediaDetails.getUsername() + "  " + "</font></small>" + "<small><font color=\"#000000\">" + mediaDetails.getCaption() + "</font></small>"));
         Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).into(ivProfilePic);
         Picasso.with(getContext()).load(mediaDetails.getStandardResolutionUrl()).into(ivMedia);
 

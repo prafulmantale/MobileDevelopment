@@ -179,8 +179,8 @@ public class MediaDetails implements Serializable{
             mediaDetails.lowResolutionUrl = imagesObject.getJSONObject("low_resolution").getString("url");
             mediaDetails.standardResolutionUrl = imagesObject.getJSONObject("standard_resolution").getString("url");
 
-            if((mediaDetails.thumbnailUrl == null || mediaDetails.thumbnailUrl.isEmpty()) &&
-                    mediaDetails.lowResolutionUrl == null || mediaDetails.lowResolutionUrl.isEmpty() &&
+            if((mediaDetails.thumbnailUrl == null || mediaDetails.thumbnailUrl.isEmpty()) ||
+                    mediaDetails.lowResolutionUrl == null || mediaDetails.lowResolutionUrl.isEmpty() ||
                     mediaDetails.standardResolutionUrl == null || mediaDetails.standardResolutionUrl.isEmpty()){
                 return null;
             }
