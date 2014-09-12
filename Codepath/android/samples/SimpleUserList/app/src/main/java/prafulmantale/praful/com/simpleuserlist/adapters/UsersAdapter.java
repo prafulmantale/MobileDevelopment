@@ -35,23 +35,23 @@ public class UsersAdapter extends ArrayAdapter<User> {
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_user, parent, false);
-            viewHolder = new ViewHolder();
-
-            viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvName);
-            viewHolder.tvHome = (TextView) convertView.findViewById(R.id.tvHome);
-
-            convertView.setTag(viewHolder);
+//            viewHolder = new ViewHolder();
+//
+//            viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvName);
+//            viewHolder.tvHome = (TextView) convertView.findViewById(R.id.tvHome);
+//
+//            convertView.setTag(viewHolder);
         }
         else {
-            viewHolder = (ViewHolder)convertView.getTag();
+//            viewHolder = (ViewHolder)convertView.getTag();
         }
 
         // Lookup view for data population
 //        TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
 //        TextView tvHome = (TextView) convertView.findViewById(R.id.tvHome);
         // Populate the data into the template view using the data object
-        viewHolder.tvName.setText(user.getName());
-        viewHolder.tvHome.setText(user.getHome());
+//        viewHolder.tvName.setText(user.getName());
+//        viewHolder.tvHome.setText(user.getHome());
         // Return the completed view to render on screen
         return convertView;
     }

@@ -22,7 +22,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
         
-        var url = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=zgee42ss9jen5rggamzsaum3&limit=20&country=us"
+//        var url = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=zgee42ss9jen5rggamzsaum3&limit=20&country=us"
+        
+        var url = "https://api.instagram.com/v1/media/search?lat=48.858844&lng=2.294351&access_token=1494410638.1fb234f.fa70833370b9413a855979b011090de8"
         
         var request = NSURLRequest(URL: NSURL(string: url))
         

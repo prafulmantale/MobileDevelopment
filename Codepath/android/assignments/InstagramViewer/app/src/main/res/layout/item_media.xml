@@ -1,0 +1,171 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PhotoViewerActivity"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#0a4c0d13"
+        android:id="@+id/headerRow"
+        >
+
+        <ImageView
+            android:background="@null"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivProfilePicture"
+            android:maxHeight="40dp"
+            android:scaleType="fitStart"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:src="@drawable/ic_launcher"/>
+
+        <TextView
+            android:typeface="serif"
+            android:textColor="#ff206199"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user name"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/tvUserName"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/ivProfilePicture"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/tvCreatedTime"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Some Nice Place"
+            android:hint="Location"
+            android:id="@+id/tvLocation"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="1dp"
+            android:textSize="12sp"
+            android:layout_below="@+id/tvUserName"
+            android:layout_toRightOf="@+id/ivProfilePicture"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:textColor="#ff52d7ef"
+            android:layout_toLeftOf="@+id/tvCreatedTime" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="     2w"
+            android:id="@+id/tvCreatedTime"
+            android:textSize="12sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center|right"
+            android:paddingRight="5dp"
+            android:layout_marginRight="5dp"
+            android:textAlignment="textEnd"/>
+
+    </RelativeLayout>
+
+    <ImageView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivMedia"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_launcher"
+        android:adjustViewBounds="true"
+        android:maxHeight="250dp"
+        android:minHeight="100dp"
+        android:scaleType="fitXY"/>
+
+    <LinearLayout
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:color/white"
+        android:id="@+id/footerRow"
+        android:orientation="vertical"
+        android:layout_weight="0.03">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11 likes"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp"
+            android:id="@+id/tvLikesCount"
+            android:layout_alignParentTop="true"
+            android:textSize="12sp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0a4c0d13"
+            android:id="@+id/commentssection"
+            android:layout_below="@+id/tvLikesCount"
+            >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="USerName"
+            android:hint="username "
+            android:id="@+id/tvCaptionUserName"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="1dp"
+            android:paddingBottom="1dp"
+            android:textSize="12sp"
+            android:layout_alignParentTop="true"
+            android:textStyle="bold"
+            android:textColor="#ff206199" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comment"
+            android:hint="username "
+            android:id="@+id/tvCaption"
+            android:layout_marginLeft="1dp"
+            android:paddingBottom="1dp"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/tvCaptionUserName"
+            android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@android:color/white"
+        android:id="@+id/userActionsRow">
+
+        <ImageButton
+            android:layout_marginLeft="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivLike"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_launcher"
+            android:background="@null"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivComment"
+            android:layout_toRightOf="@+id/ivLike"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_launcher"
+            android:layout_marginLeft="25dp"
+            android:background="@null"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
