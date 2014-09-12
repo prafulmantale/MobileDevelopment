@@ -23,7 +23,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="false"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_launcher"
+            />
 
         <TextView
             android:typeface="serif"
@@ -46,7 +47,7 @@
             android:hint="Location"
             android:id="@+id/tvLocation"
             android:layout_marginTop="1dp"
-            android:layout_marginLeft="5dp"
+
             android:layout_marginBottom="1dp"
             android:textSize="12sp"
             android:layout_below="@+id/tvUserName"
@@ -54,7 +55,9 @@
             android:layout_alignParentBottom="true"
             android:gravity="center_vertical"
             android:textColor="#ff52d7ef"
-            android:layout_toLeftOf="@+id/tvCreatedTime" />
+            android:layout_toLeftOf="@+id/tvCreatedTime"
+            android:drawableLeft="@drawable/ic_action_place"
+            />
 
         <TextView
             android:layout_width="60dp"
@@ -100,7 +103,9 @@
             android:layout_marginLeft="1dp"
             android:id="@+id/tvLikesCount"
             android:layout_alignParentTop="true"
-            android:textSize="12sp"/>
+            android:textColor="#ff206199"
+            android:typeface="serif"
+            android:textSize="10sp"/>
 
         <TextView
             android:layout_width="match_parent"

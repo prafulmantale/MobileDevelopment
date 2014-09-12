@@ -41,15 +41,18 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         TextView tvUserName = (TextView)convertView.findViewById(R.id.tvUserName);
         TextView tvLocation = (TextView)convertView.findViewById(R.id.tvLocation);
         TextView tvCaption = (TextView)convertView.findViewById(R.id.tvCaption);
+        TextView tvLike = (TextView)convertView.findViewById(R.id.tvLikesCount);
 
         tvUserName.setText(mediaDetails.getUsername());
         //tvLocation.setText(mediaDetails.getLocation());
         tvLocation.setText("Some Nice Place");
 
+
         tvCaption.setText(Html.fromHtml("<small><font color=\"#206199\">" + mediaDetails.getUsername() + "  " + "</font></small>" + "<small><font color=\"#000000\">" + mediaDetails.getCaption() + "</font></small>"));
         Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).into(ivProfilePic);
         Picasso.with(getContext()).load(mediaDetails.getStandardResolutionUrl()).into(ivMedia);
 
+        tvLike.setText(Html.fromHtml("&#x1f499;")  + "    " + mediaDetails.getLikes().getCount() + "  likes");
         return convertView;
     }
 }

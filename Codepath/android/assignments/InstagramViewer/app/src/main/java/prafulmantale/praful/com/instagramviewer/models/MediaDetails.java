@@ -30,7 +30,7 @@ public class MediaDetails implements Serializable{
 
         mediaUrl = "";
 
-//        likes = new Likes();
+        likes = new Likes();
 //        comments = new Comments();
     }
 
@@ -48,7 +48,7 @@ public class MediaDetails implements Serializable{
     private String standardResolutionUrl;
 
 
-//    private Likes likes;
+    private Likes likes;
 //    private Comments comments;
 
 
@@ -132,14 +132,14 @@ public class MediaDetails implements Serializable{
         this.standardResolutionUrl = standardResolutionUrl;
     }
 
-    //    public Likes getLikes() {
-//        return likes;
-//    }
-//
-//    public void setLikes(Likes likes) {
-//        this.likes = likes;
-//    }
-//
+    public Likes getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Likes likes) {
+        this.likes = likes;
+    }
+
 //    public Comments getComments() {
 //        return comments;
 //    }
@@ -178,6 +178,9 @@ public class MediaDetails implements Serializable{
             mediaDetails.thumbnailUrl = imagesObject.getJSONObject("thumbnail").getString("url");
             mediaDetails.lowResolutionUrl = imagesObject.getJSONObject("low_resolution").getString("url");
             mediaDetails.standardResolutionUrl = imagesObject.getJSONObject("standard_resolution").getString("url");
+
+            JSONObject likesObject = jsonObject.getJSONObject("likes");
+            mediaDetails.likes.setCount(likesObject.getLong("count"));
 
             if((mediaDetails.thumbnailUrl == null || mediaDetails.thumbnailUrl.isEmpty()) ||
                     mediaDetails.lowResolutionUrl == null || mediaDetails.lowResolutionUrl.isEmpty() ||
