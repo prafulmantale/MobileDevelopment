@@ -1,16 +1,32 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".PhotoViewerActivity"
-    android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    >
+
+    <ImageView
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivMedia"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_launcher"
+        android:adjustViewBounds="true"
+        android:maxHeight="250dp"
+        android:minHeight="100dp"
+        android:scaleType="fitXY"/>
 
     <RelativeLayout
+
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#0a4c0d13"
+        android:background="@null"
         android:id="@+id/headerRow"
+        android:layout_gravity="top"
+
         >
 
         <ImageView
@@ -74,26 +90,17 @@
 
     </RelativeLayout>
 
-    <ImageView
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ivMedia"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_launcher"
-        android:adjustViewBounds="true"
-        android:maxHeight="250dp"
-        android:minHeight="100dp"
-        android:scaleType="fitXY"/>
 
     <LinearLayout
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:id="@+id/footerRow"
         android:orientation="vertical"
-        android:layout_weight="0.03">
+        android:layout_below="@id/ivMedia"
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -118,7 +125,7 @@
             android:paddingBottom="1dp"
             android:textSize="12sp"
             android:layout_alignParentTop="true"
-            android:textStyle="bold"
+            android:textStyle="normal"
 
             android:maxLines="2"
             android:maxLength="200"
@@ -127,9 +134,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:id="@+id/userActionsRow">
+        android:id="@+id/userActionsRow"
+        android:layout_below="@id/footerRow"
+        android:visibility="visible">
 
         <ImageButton
             android:layout_marginLeft="1dp"
@@ -149,9 +158,10 @@
             android:layout_centerVertical="true"
             android:src="@drawable/ic_launcher"
             android:layout_marginLeft="25dp"
-            android:background="@null"/>
+            android:background="@null"
+            />
 
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class MediaDetails implements Serializable{
         mediaUrl = "";
 
         likes = new Likes();
-//        comments = new Comments();
+        comments = new Comments();
     }
 
     private MediaType mediaType;
@@ -49,7 +50,7 @@ public class MediaDetails implements Serializable{
 
 
     private Likes likes;
-//    private Comments comments;
+    private Comments comments;
 
 
     public MediaType getMediaType() {
@@ -140,13 +141,14 @@ public class MediaDetails implements Serializable{
         this.likes = likes;
     }
 
-//    public Comments getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(Comments comments) {
-//        this.comments = comments;
-//    }
+
+    public Comments getComments() {
+        return comments;
+    }
+
+    public void setComments(Comments comments) {
+        this.comments = comments;
+    }
 
     private static MediaDetails fromJSON(JSONObject jsonObject){
 
@@ -181,6 +183,10 @@ public class MediaDetails implements Serializable{
 
             JSONObject likesObject = jsonObject.getJSONObject("likes");
             mediaDetails.likes.setCount(likesObject.getLong("count"));
+
+            JSONObject commentsObject = jsonObject.getJSONObject("comments");
+            mediaDetails.comments.setCount(commentsObject.getLong("count"));
+
 
             if((mediaDetails.thumbnailUrl == null || mediaDetails.thumbnailUrl.isEmpty()) ||
                     mediaDetails.lowResolutionUrl == null || mediaDetails.lowResolutionUrl.isEmpty() ||
@@ -226,6 +232,7 @@ public class MediaDetails implements Serializable{
 
         return mediaDetailsList;
     }
+
 
     @Override
     public String toString() {

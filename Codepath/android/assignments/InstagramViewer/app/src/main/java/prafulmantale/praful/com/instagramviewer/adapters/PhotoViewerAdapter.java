@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import prafulmantale.praful.com.instagramviewer.R;
@@ -42,17 +44,22 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         TextView tvLocation = (TextView)convertView.findViewById(R.id.tvLocation);
         TextView tvCaption = (TextView)convertView.findViewById(R.id.tvCaption);
         TextView tvLike = (TextView)convertView.findViewById(R.id.tvLikesCount);
+        TextView tvCreatedTime = (TextView)convertView.findViewById(R.id.tvCreatedTime);
 
         tvUserName.setText(mediaDetails.getUsername());
         //tvLocation.setText(mediaDetails.getLocation());
         tvLocation.setText("Some Nice Place");
 
 
-        tvCaption.setText(Html.fromHtml("<small><font color=\"#206199\">" + mediaDetails.getUsername() + "  " + "</font></small>" + "<small><font color=\"#000000\">" + mediaDetails.getCaption() + "</font></small>"));
+        tvCaption.setText(Html.fromHtml("<small><font color=\"#206199\"><b>" + mediaDetails.getUsername() + "  " + "</b></font></small>" + "<small><font color=\"#000000\">" + mediaDetails.getCaption() + "</font></small>"));
         Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).into(ivProfilePic);
         Picasso.with(getContext()).load(mediaDetails.getStandardResolutionUrl()).into(ivMedia);
 
-        tvLike.setText(Html.fromHtml("&#x1f499;")  + "    " + mediaDetails.getLikes().getCount() + "  likes");
+        tvLike.setText(Html.fromHtml("&#x1f499;")  + "    " + mediaDetails.getLikes().getCount() + "  likes" +
+                "        " + mediaDetails.getComments().getCount() + "  comments");
+
+        tvCreatedTime.setText("??");
+
         return convertView;
     }
 }
