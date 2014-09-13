@@ -27,12 +27,9 @@ public class MediaDetails implements Serializable{
         profilePictureUrl = "";
         location = "";
         createdTime = 0;
-        caption = "";
+        caption = null;
 
         mediaUrl = "";
-
-        likes = new Likes();
-        comments = new Comments();
     }
 
     private MediaType mediaType;
@@ -40,7 +37,7 @@ public class MediaDetails implements Serializable{
     private String profilePictureUrl;
     private String location;
     private long createdTime;
-    private String caption;
+    private Caption caption;
 
     private String mediaUrl;
 
@@ -93,11 +90,11 @@ public class MediaDetails implements Serializable{
         this.createdTime = createdTime;
     }
 
-    public String getCaption() {
+    public Caption getCaption() {
         return caption;
     }
 
-    public void setCaption(String caption) {
+    public void setCaption(Caption caption) {
         this.caption = caption;
     }
 
@@ -179,19 +176,19 @@ public class MediaDetails implements Serializable{
 
             mediaDetails.createdTime = jsonObject.getLong("created_time");
 
-            JSONObject captionObject = jsonObject.getJSONObject("caption");
-            mediaDetails.caption = captionObject.getString("text");
+
+
 
             JSONObject imagesObject = jsonObject.getJSONObject("images");
             mediaDetails.thumbnailUrl = imagesObject.getJSONObject("thumbnail").getString("url");
             mediaDetails.lowResolutionUrl = imagesObject.getJSONObject("low_resolution").getString("url");
             mediaDetails.standardResolutionUrl = imagesObject.getJSONObject("standard_resolution").getString("url");
 
-            JSONObject likesObject = jsonObject.getJSONObject("likes");
-            mediaDetails.likes.setCount(likesObject.getLong("count"));
+            mediaDetails.likes = Likes.fromJSON(jsonObject);
+            mediaDetails.caption = Caption.fromJSON(jsonObject);
+            mediaDetails.comments = Comments.fromJSON(jsonObject);
 
-            JSONObject commentsObject = jsonObject.getJSONObject("comments");
-            mediaDetails.comments.setCount(commentsObject.getLong("count"));
+
 
 
             if((mediaDetails.thumbnailUrl == null || mediaDetails.thumbnailUrl.isEmpty()) ||

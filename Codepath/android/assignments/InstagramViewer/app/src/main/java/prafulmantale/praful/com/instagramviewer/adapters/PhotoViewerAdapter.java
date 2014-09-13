@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -16,6 +17,7 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 import prafulmantale.praful.com.instagramviewer.R;
+import prafulmantale.praful.com.instagramviewer.models.Comment;
 import prafulmantale.praful.com.instagramviewer.models.MediaDetails;
 
 /**
@@ -52,27 +54,41 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         TextView tvCreatedTime = (TextView)convertView.findViewById(R.id.tvCreatedTime);
         TextView tvComments = (TextView)convertView.findViewById(R.id.tvCommentsCount);
 
+        Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).into(ivProfilePic);
         tvUserName.setText(mediaDetails.getUsername());
 
         if(mediaDetails.getLocation() == null || mediaDetails.getLocation().isEmpty()){
             tvLocation.setVisibility(View.INVISIBLE);
+//            ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
+//            tvUserName.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         }
         else {
             tvLocation.setVisibility(View.VISIBLE);
             tvLocation.setText(mediaDetails.getLocation());
+//            ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
+//            tvUserName.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
         }
 
+        tvCreatedTime.setText(mediaDetails.getDateTime());
 
-        Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).into(ivProfilePic);
         Picasso.with(getContext()).load(mediaDetails.getStandardResolutionUrl()).into(ivMedia);
 
         if(mediaDetails.getLikes().getCount() == 0){
             tvLike.setVisibility(View.INVISIBLE);
-
         }
         else {
             tvLike.setVisibility(View.VISIBLE);
             tvLike.setText(Html.fromHtml("&#x1f499;") + "    " + mediaDetails.getLikes().getCount() + "  likes");
+        }
+
+
+        if(!mediaDetails.getCaption().isValid()){
+            tvCaption.setVisibility(View.INVISIBLE);
+        }
+        else {
+            tvCaption.setVisibility(View.VISIBLE);
+            tvCaption.setText(Html.fromHtml("<font color=\"#206199\"><b>" + mediaDetails.getCaption().getUserDetails().getUsername()
+                    + "  " + "</b></font>" + "<font color=\"#000000\">" + mediaDetails.getCaption().getText() + "</font>"));
         }
 
         if(mediaDetails.getComments().getCount() == 0){
@@ -81,16 +97,20 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         else {
             tvComments.setVisibility(View.VISIBLE);
             tvComments.setText("view all " + mediaDetails.getComments().getCount() + "  comments");
+
+            for(int i = 0; i < mediaDetails.getComments().getCount(); i ++){
+
+                if(i >= 5){
+                    break;
+                }
+
+                Comment comment = mediaDetails.getComments().getCommentsList().get(i);
+
+                tvComments.append(Html.fromHtml("<br><font color=\"#206199\"><b>" + comment.getUserDetails().getUsername()
+                        + "  " + "</b></font>" + "<font color=\"#000000\">" + comment.getText() + "</font>"));
+            }
         }
 
-        if(mediaDetails.getCaption() == null || mediaDetails.getCaption().isEmpty()){
-            tvCaption.setVisibility(View.INVISIBLE);
-        }
-        else {
-            tvCaption.setVisibility(View.VISIBLE);
-            tvCaption.setText(Html.fromHtml("<small><font color=\"#206199\"><b>" + mediaDetails.getUsername() + "  " + "</b></font></small>" + "<small><font color=\"#000000\">" + mediaDetails.getCaption() + "</font></small>"));
-        }
-       tvCreatedTime.setText(mediaDetails.getDateTime());
 
         return convertView;
     }

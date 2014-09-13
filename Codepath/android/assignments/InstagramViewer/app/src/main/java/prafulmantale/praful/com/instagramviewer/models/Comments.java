@@ -1,5 +1,9 @@
 package prafulmantale.praful.com.instagramviewer.models;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +13,13 @@ import java.util.List;
  */
 public class Comments implements Serializable{
 
-    public Comments() {
+    private Comments() {
         this.count = 0;
-        this.commentsList = new ArrayList<String>();
+        this.commentsList = new ArrayList<Comment>();
     }
 
     private long count;
-    private List<String> commentsList;
+    private List<Comment> commentsList;
 
     //To do -- add user details along with comments
 
@@ -23,15 +27,53 @@ public class Comments implements Serializable{
         return count;
     }
 
-    public void setCount(long count) {
+    private void setCount(long count) {
         this.count = count;
     }
 
-    public List<String> getCommentsList() {
+    public List<Comment> getCommentsList() {
         return commentsList;
     }
 
-    public void setCommentsList(List<String> commentsList) {
+    private void setCommentsList(List<Comment> commentsList) {
         this.commentsList = commentsList;
+    }
+
+    public static Comments fromJSON(JSONObject jsonObject){
+
+        Comments comments = new Comments();
+
+        try {
+            JSONObject commentsObject = jsonObject.getJSONObject("comments");
+            comments.setCount(commentsObject.getLong("count"));
+
+            JSONArray commentsArray = commentsObject.getJSONArray("data");
+
+            for(int i = 0; i < commentsArray.length(); i++) {
+                JSONObject obj = null;
+
+                try {
+                    obj = commentsArray.getJSONObject(i);
+                }
+                catch (JSONException ex){
+
+                }
+
+                if(obj == null){
+                    continue;
+                }
+
+                Comment comment = Comment.fromJSON(obj);
+
+                if(comment != null){
+                    comments.commentsList.add(comment);
+                }
+            }
+        }
+        catch (Exception ex){
+
+        }
+
+        return comments;
     }
 }
