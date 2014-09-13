@@ -5,6 +5,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="1dp"
+    android:paddingTop="2dp"
     tools:context=".PhotoViewerActivity">
 
     <ListView
