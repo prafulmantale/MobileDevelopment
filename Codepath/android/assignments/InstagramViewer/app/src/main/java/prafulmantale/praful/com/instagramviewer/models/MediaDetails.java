@@ -169,7 +169,13 @@ public class MediaDetails implements Serializable{
 
             mediaDetails.profilePictureUrl = userObject.getString("profile_picture");
 
-            mediaDetails.location = jsonObject.getString("location");
+
+            try {
+                mediaDetails.location = jsonObject.getJSONObject("location").getString("name");
+            }
+            catch (JSONException je){
+
+            }
 
             mediaDetails.createdTime = jsonObject.getLong("created_time");
 
@@ -234,6 +240,10 @@ public class MediaDetails implements Serializable{
     }
 
 
+    public String getDateTime(){
+        Date date = new Date(createdTime * 1000);
+        return date.getHours() + ": " + date.getMinutes();
+    }
     @Override
     public String toString() {
         return "MediaDetails{" +

@@ -2,6 +2,7 @@ package prafulmantale.praful.com.instagramviewer.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -75,7 +76,7 @@ public class PhotoViewerActivity extends Activity {
 //                    // Load model objects into the adapter
                     for (MediaDetails mediaDetails : mediaDetailsList) {
                         adapter.add(mediaDetails);
-                        //System.out.println("mediaDetails:" + mediaDetails);
+
                     }
                 }
                 catch (JSONException ex){
@@ -87,7 +88,14 @@ public class PhotoViewerActivity extends Activity {
                 }
 
             }
+
+            @Override
+            public void onFailure(Throwable e, JSONObject errorResponse) {
+                Log.d("body", errorResponse.toString());
+            }
         });
+
+
     }
 
 

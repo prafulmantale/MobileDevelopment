@@ -27,6 +27,11 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         super(context, R.layout.item_media, mediaDetailsList);
     }
 
+    //To do
+    private static class ViewHolder{
+
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -45,20 +50,47 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         TextView tvCaption = (TextView)convertView.findViewById(R.id.tvCaption);
         TextView tvLike = (TextView)convertView.findViewById(R.id.tvLikesCount);
         TextView tvCreatedTime = (TextView)convertView.findViewById(R.id.tvCreatedTime);
+        TextView tvComments = (TextView)convertView.findViewById(R.id.tvCommentsCount);
 
         tvUserName.setText(mediaDetails.getUsername());
-        //tvLocation.setText(mediaDetails.getLocation());
-        tvLocation.setText("Some Nice Place");
+
+        if(mediaDetails.getLocation() == null || mediaDetails.getLocation().isEmpty()){
+            tvLocation.setVisibility(View.INVISIBLE);
+        }
+        else {
+            tvLocation.setVisibility(View.VISIBLE);
+            tvLocation.setText(mediaDetails.getLocation());
+        }
 
 
-        tvCaption.setText(Html.fromHtml("<small><font color=\"#206199\"><b>" + mediaDetails.getUsername() + "  " + "</b></font></small>" + "<small><font color=\"#000000\">" + mediaDetails.getCaption() + "</font></small>"));
         Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).into(ivProfilePic);
         Picasso.with(getContext()).load(mediaDetails.getStandardResolutionUrl()).into(ivMedia);
 
-        tvLike.setText(Html.fromHtml("&#x1f499;")  + "    " + mediaDetails.getLikes().getCount() + "  likes" +
-                "        " + mediaDetails.getComments().getCount() + "  comments");
+        if(mediaDetails.getLikes().getCount() == 0){
+            tvLike.setVisibility(View.INVISIBLE);
 
-        tvCreatedTime.setText("??");
+        }
+        else {
+            tvLike.setVisibility(View.VISIBLE);
+            tvLike.setText(Html.fromHtml("&#x1f499;") + "    " + mediaDetails.getLikes().getCount() + "  likes");
+        }
+
+        if(mediaDetails.getComments().getCount() == 0){
+            tvComments.setVisibility(View.INVISIBLE);
+        }
+        else {
+            tvComments.setVisibility(View.VISIBLE);
+            tvComments.setText("view all " + mediaDetails.getComments().getCount() + "  comments");
+        }
+
+        if(mediaDetails.getCaption() == null || mediaDetails.getCaption().isEmpty()){
+            tvCaption.setVisibility(View.INVISIBLE);
+        }
+        else {
+            tvCaption.setVisibility(View.VISIBLE);
+            tvCaption.setText(Html.fromHtml("<small><font color=\"#206199\"><b>" + mediaDetails.getUsername() + "  " + "</b></font></small>" + "<small><font color=\"#000000\">" + mediaDetails.getCaption() + "</font></small>"));
+        }
+       tvCreatedTime.setText(mediaDetails.getDateTime());
 
         return convertView;
     }

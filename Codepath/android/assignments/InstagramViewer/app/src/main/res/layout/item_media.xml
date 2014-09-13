@@ -1,22 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".PhotoViewerActivity"
+    android:orientation="vertical"
     android:weightSum="1"
     >
-
-    <ImageView
-        android:layout_alignParentTop="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ivMedia"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_launcher"
-        android:adjustViewBounds="true"
-        android:maxHeight="250dp"
-        android:minHeight="100dp"
-        android:scaleType="fitXY"/>
 
     <RelativeLayout
 
@@ -91,7 +80,17 @@
             android:textColor="#ff1d0506" />
 
     </RelativeLayout>
-
+    <ImageView
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivMedia"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_launcher"
+        android:adjustViewBounds="true"
+        android:maxHeight="250dp"
+        android:minHeight="100dp"
+        android:scaleType="fitXY"/>
 
 
     <LinearLayout
@@ -114,13 +113,13 @@
             android:layout_alignParentTop="true"
             android:textColor="#ff206199"
             android:typeface="serif"
-            android:textSize="10sp"/>
+            android:textSize="10sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="UserName"
-            android:hint="username "
+            android:text="Caption"
             android:id="@+id/tvCaption"
             android:layout_marginTop="2dp"
             android:layout_marginLeft="1dp"
@@ -128,10 +127,24 @@
             android:textSize="12sp"
             android:layout_alignParentTop="true"
             android:textStyle="normal"
-
             android:maxLines="2"
             android:maxLength="200"
-            android:typeface="serif" />
+            android:typeface="serif"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="view all 1 comments"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp"
+            android:id="@+id/tvCommentsCount"
+            android:layout_alignParentTop="true"
+            android:textColor="#2d030a10"
+            android:typeface="serif"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -166,4 +179,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
