@@ -38,7 +38,7 @@ public class Caption implements Serializable{
 
     public boolean isValid(){
 
-        return !(userDetails == null || !userDetails.isValid() || text == null || text.isEmpty());
+        return !(userDetails == null || !userDetails.isValid() || text == null || text.isEmpty() || text.trim().isEmpty());
     }
 
     public static Caption fromJSON(JSONObject jsonObject){

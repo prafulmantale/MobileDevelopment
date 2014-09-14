@@ -58,7 +58,7 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         tvUserName.setText(mediaDetails.getUsername());
 
         if(mediaDetails.getLocation() == null || mediaDetails.getLocation().isEmpty()){
-            tvLocation.setVisibility(View.INVISIBLE);
+            tvLocation.setVisibility(View.GONE);
 //            ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
 //            tvUserName.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         }
@@ -74,7 +74,7 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         Picasso.with(getContext()).load(mediaDetails.getStandardResolutionUrl()).into(ivMedia);
 
         if(mediaDetails.getLikes().getCount() == 0){
-            tvLike.setVisibility(View.INVISIBLE);
+            tvLike.setVisibility(View.GONE);
         }
         else {
             tvLike.setVisibility(View.VISIBLE);
@@ -83,7 +83,7 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
 
 
         if(!mediaDetails.getCaption().isValid()){
-            tvCaption.setVisibility(View.INVISIBLE);
+            tvCaption.setVisibility(View.GONE);
         }
         else {
             tvCaption.setVisibility(View.VISIBLE);
@@ -92,7 +92,7 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         }
 
         if(mediaDetails.getComments().getCount() == 0){
-            tvComments.setVisibility(View.INVISIBLE);
+            tvComments.setVisibility(View.GONE);
         }
         else {
             tvComments.setVisibility(View.VISIBLE);
@@ -110,7 +110,6 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
                         + "  " + "</b></font>" + "<font color=\"#000000\">" + comment.getText() + "</font>"));
             }
         }
-
 
         return convertView;
     }
