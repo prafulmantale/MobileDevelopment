@@ -69,6 +69,12 @@ public class PhotoViewerActivity extends Activity {
         startActivity(intent);
     }
 
+    public void showAllLikes(View view){
+        Intent intent = new Intent(this, LikesViewerActivity.class);
+        intent.putExtra("MEDIA", (MediaDetails)view.getTag());
+        startActivity(intent);
+    }
+
     private void getPopularMedia(){
 
         InstagramClient client = new InstagramClient();

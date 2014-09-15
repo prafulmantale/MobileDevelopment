@@ -115,7 +115,9 @@
             android:textColor="#ff206199"
             android:typeface="serif"
             android:textSize="8sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:clickable="true"
+            android:onClick="showAllLikes"/>
 
         <TextView
             android:layout_width="wrap_content"

@@ -19,9 +19,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:parentActivityName=".activities.PhotoViewerActivity"
             android:name=".activities.CommentsViewerActivity"
-            android:label="@string/title_activity_comments" >
+            android:label="@string/title_activity_comments"
+            android:parentActivityName=".activities.PhotoViewerActivity" >
+        </activity>
+        <activity
+            android:parentActivityName=".activities.PhotoViewerActivity"
+            android:name=".activities.LikesViewerActivity"
+            android:label="@string/title_activity_likes_viewer" >
         </activity>
     </application>
 
