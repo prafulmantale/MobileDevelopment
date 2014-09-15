@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by prafulmantale on 9/12/14.
@@ -55,6 +56,10 @@ public class Comment implements Serializable {
         this.id = id;
     }
 
+    public String getDateTime(){
+        Date date = new Date(createdTime * 1000);
+        return date.getHours() + ": " + date.getMinutes();
+    }
 
     public static Comment fromJSON(JSONObject jsonObject){
 

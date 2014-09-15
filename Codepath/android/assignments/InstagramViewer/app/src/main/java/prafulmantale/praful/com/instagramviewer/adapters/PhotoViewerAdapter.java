@@ -54,7 +54,8 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         TextView tvCaption = (TextView)convertView.findViewById(R.id.tvCaption);
         TextView tvLike = (TextView)convertView.findViewById(R.id.tvLikesCount);
         TextView tvCreatedTime = (TextView)convertView.findViewById(R.id.tvCreatedTime);
-        TextView tvComments = (TextView)convertView.findViewById(R.id.tvCommentsCount);
+        TextView tvCommentCount = (TextView)convertView.findViewById(R.id.tvCommentsCount);
+        TextView tvComments = (TextView)convertView.findViewById(R.id.tvCommentsList);
 
         //Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).into(ivProfilePic);
         Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(ivProfilePic);
@@ -95,12 +96,14 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         }
 
         if(mediaDetails.getComments().getCount() == 0){
+            tvCommentCount.setVisibility(View.GONE);
             tvComments.setVisibility(View.GONE);
         }
         else {
+            tvCommentCount.setTag(mediaDetails);
+            tvCommentCount.setVisibility(View.VISIBLE);
             tvComments.setVisibility(View.VISIBLE);
-            tvComments.setText("view all " + mediaDetails.getComments().getCount() + "  comments");
-
+            tvCommentCount.setText("view all " + mediaDetails.getComments().getCount() + "  comments");
             for(int i = 0; i < mediaDetails.getComments().getCount(); i ++){
 
                 if(i >= 5){
@@ -109,8 +112,15 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
 
                 Comment comment = mediaDetails.getComments().getCommentsList().get(i);
 
-                tvComments.append(Html.fromHtml("<br><font color=\"#206199\"><b>" + comment.getUserDetails().getUsername()
-                        + "  " + "</b></font>" + "<font color=\"#000000\">" + comment.getText() + "</font>"));
+
+                if(i == 0){
+                    tvComments.setText(Html.fromHtml("<font color=\"#206199\"><b>" + comment.getUserDetails().getUsername()
+                            + "  " + "</b></font>" + "<font color=\"#000000\">" + comment.getText() + "</font>"));
+                }
+                else {
+                    tvComments.append(Html.fromHtml("<br><font color=\"#206199\"><b>" + comment.getUserDetails().getUsername()
+                            + "  " + "</b></font>" + "<font color=\"#000000\">" + comment.getText() + "</font>"));
+                }
             }
         }
 

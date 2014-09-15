@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,6 +39,8 @@ public class Comments implements Serializable{
     private void setCommentsList(List<Comment> commentsList) {
         this.commentsList = commentsList;
     }
+
+
 
     public static Comments fromJSON(JSONObject jsonObject){
 

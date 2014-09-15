@@ -1,10 +1,12 @@
 package prafulmantale.praful.com.instagramviewer.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -58,6 +60,13 @@ public class PhotoViewerActivity extends Activity {
 
         adapter = new PhotoViewerAdapter(this, mediaDetailsList);
         listView.setAdapter(adapter);
+    }
+
+
+    public void showAllComments(View view){
+        Intent intent = new Intent(this, CommentsViewerActivity.class);
+        intent.putExtra("MEDIA", (MediaDetails)view.getTag());
+        startActivity(intent);
     }
 
     private void getPopularMedia(){

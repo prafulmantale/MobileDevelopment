@@ -141,6 +141,19 @@
             android:textColor="#2d030a10"
             android:typeface="serif"
             android:textSize="8sp"
+            android:textStyle="normal"
+            android:clickable="true"
+            android:onClick="showAllComments"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp"
+            android:id="@+id/tvCommentsList"
+            android:layout_alignParentTop="true"
+            android:textColor="#2d030a10"
+            android:typeface="serif"
+            android:textSize="8sp"
             android:textStyle="normal" />
 
     </LinearLayout>
