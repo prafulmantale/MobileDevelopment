@@ -18,6 +18,7 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 import prafulmantale.praful.com.instagramviewer.R;
+import prafulmantale.praful.com.instagramviewer.Utils.RoundedTransformation;
 import prafulmantale.praful.com.instagramviewer.models.Comment;
 import prafulmantale.praful.com.instagramviewer.models.MediaDetails;
 
@@ -55,22 +56,21 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         TextView tvCreatedTime = (TextView)convertView.findViewById(R.id.tvCreatedTime);
         TextView tvComments = (TextView)convertView.findViewById(R.id.tvCommentsCount);
 
-        Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).into(ivProfilePic);
+        //Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).into(ivProfilePic);
+        Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(ivProfilePic);
+
         tvUserName.setText(mediaDetails.getUsername());
 
         if(mediaDetails.getLocation() == null || mediaDetails.getLocation().isEmpty()){
             tvLocation.setVisibility(View.GONE);
-           ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
+            ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
             layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
-//            tvUserName.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         }
         else {
             tvLocation.setVisibility(View.VISIBLE);
             tvLocation.setText(mediaDetails.getLocation());
             ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
             layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-//            ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
-//            tvUserName.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
         }
 
         tvCreatedTime.setText(mediaDetails.getDateTime());
@@ -84,7 +84,6 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
             tvLike.setVisibility(View.VISIBLE);
             tvLike.setText(Html.fromHtml("&#x1f499;") + "    " + mediaDetails.getLikes().getCount() + "  likes");
         }
-
 
         if(!mediaDetails.getCaption().isValid()){
             tvCaption.setVisibility(View.GONE);
