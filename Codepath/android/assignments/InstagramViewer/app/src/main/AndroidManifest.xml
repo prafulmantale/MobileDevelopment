@@ -26,7 +26,7 @@
         <activity
             android:parentActivityName=".activities.PhotoViewerActivity"
             android:name=".activities.LikesViewerActivity"
-            android:label="@string/title_activity_likes_viewer" >
+            android:label="@string/title_activity_likes_viewer">
         </activity>
     </application>
 
