@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/ivProfilePicture"
             android:maxHeight="40dp"
-            android:scaleType="fitStart"
+            android:scaleType="centerCrop"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="false"
@@ -86,13 +86,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ivMedia"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_launcher"
         android:adjustViewBounds="true"
         android:maxHeight="250dp"
         android:minHeight="100dp"
-        android:scaleType="centerCrop"
-        />
+        android:scaleType="fitXY"/>
 
 
     <LinearLayout
