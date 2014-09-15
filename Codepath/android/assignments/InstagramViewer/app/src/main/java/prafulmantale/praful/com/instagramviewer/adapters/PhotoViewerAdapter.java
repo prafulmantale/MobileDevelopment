@@ -5,6 +5,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -59,12 +60,15 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
 
         if(mediaDetails.getLocation() == null || mediaDetails.getLocation().isEmpty()){
             tvLocation.setVisibility(View.GONE);
-//            ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
+           ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
+            layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
 //            tvUserName.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         }
         else {
             tvLocation.setVisibility(View.VISIBLE);
             tvLocation.setText(mediaDetails.getLocation());
+            ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
+            layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 //            ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
 //            tvUserName.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
         }
