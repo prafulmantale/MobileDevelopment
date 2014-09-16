@@ -14,5 +14,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/lvComments"
         android:layout_alignParentTop="true"
+        android:divider="@android:color/transparent"
          />
 </RelativeLayout>
