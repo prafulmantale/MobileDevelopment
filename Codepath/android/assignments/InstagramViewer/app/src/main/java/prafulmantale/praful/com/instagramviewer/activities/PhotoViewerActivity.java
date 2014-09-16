@@ -3,6 +3,7 @@ package prafulmantale.praful.com.instagramviewer.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +25,9 @@ import prafulmantale.praful.com.instagramviewer.R;
 import prafulmantale.praful.com.instagramviewer.adapters.PhotoViewerAdapter;
 import prafulmantale.praful.com.instagramviewer.models.MediaDetails;
 import prafulmantale.praful.com.instagramviewer.restclient.InstagramClient;
+
+
+
 
 
 public class PhotoViewerActivity extends Activity {
@@ -38,6 +43,9 @@ public class PhotoViewerActivity extends Activity {
     private ListView listView;
     private List<MediaDetails> mediaDetailsList;
     private PhotoViewerAdapter adapter;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,18 +54,25 @@ public class PhotoViewerActivity extends Activity {
         initialize();
 
         getPopularMedia();
-
     }
 
     private void initialize(){
 
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeContainer);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getPopularMedia();
+            }
+        });
+
+        swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         listView = (ListView)findViewById(R.id.lvMedia);
         mediaDetailsList = new ArrayList<MediaDetails>();
-
-        //?? Test
-//        mediaDetailsList.add(new MediaDetails());
-//        mediaDetailsList.add(new MediaDetails());
-
         adapter = new PhotoViewerAdapter(this, mediaDetailsList);
         listView.setAdapter(adapter);
     }
@@ -87,6 +102,7 @@ public class PhotoViewerActivity extends Activity {
                 try {
                     data = body.getJSONArray("data");
                     mediaDetailsList = MediaDetails.fromJSON(data);
+                    adapter.clear();
 
 //                    // Load model objects into the adapter
                     for (MediaDetails mediaDetails : mediaDetailsList) {
@@ -98,10 +114,9 @@ public class PhotoViewerActivity extends Activity {
                     ex.printStackTrace();
                 }
                 finally {
+                    swipeRefreshLayout.setRefreshing(false);
                     adapter.notifyDataSetChanged();
-
                 }
-
             }
 
             @Override
@@ -109,8 +124,6 @@ public class PhotoViewerActivity extends Activity {
                 Log.d("body", errorResponse.toString());
             }
         });
-
-
     }
 
 

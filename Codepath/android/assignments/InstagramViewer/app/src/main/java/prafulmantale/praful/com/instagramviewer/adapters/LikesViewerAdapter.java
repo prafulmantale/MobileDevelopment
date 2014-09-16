@@ -27,25 +27,34 @@ public class LikesViewerAdapter extends ArrayAdapter<Like> {
         super(context, R.layout.item_like, likesList);
     }
 
-    //To do
-    private static class ViewHolder{
 
+    private static class ViewHolder{
+        ImageView ivProfilePicture;
+        TextView tvUserName;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         Like like = getItem(position);
+        ViewHolder viewHolder;
 
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_like, parent, false);
+
+            viewHolder = new ViewHolder();
+
+            viewHolder.ivProfilePicture = (ImageView)convertView.findViewById(R.id.ivProfilePicture);
+            viewHolder.tvUserName = (TextView)convertView.findViewById(R.id.tvUserName);
+
+            convertView.setTag(viewHolder);
+        }
+        else{
+            viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        ImageView ivProfilePic = (ImageView)convertView.findViewById(R.id.ivProfilePicture);
-        TextView tvUserName = (TextView)convertView.findViewById(R.id.tvUserName);
-
-        Picasso.with(getContext()).load(like.getUserDetails().getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(ivProfilePic);
-        tvUserName.setText(like.getUserDetails().getUsername());
+        Picasso.with(getContext()).load(like.getUserDetails().getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(viewHolder.ivProfilePicture);
+        viewHolder.tvUserName.setText(like.getUserDetails().getUsername());
 
         return convertView;
     }
