@@ -57,7 +57,6 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         TextView tvCommentCount = (TextView)convertView.findViewById(R.id.tvCommentsCount);
         TextView tvComments = (TextView)convertView.findViewById(R.id.tvCommentsList);
 
-        //Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).into(ivProfilePic);
         Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(ivProfilePic);
 
         tvUserName.setText(mediaDetails.getUsername());
