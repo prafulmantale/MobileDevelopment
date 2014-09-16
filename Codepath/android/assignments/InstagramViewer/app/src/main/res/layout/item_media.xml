@@ -118,6 +118,8 @@
             android:textSize="8sp"
             android:textStyle="bold"
             android:clickable="true"
+            android:drawableLeft="@drawable/ic_likes_total"
+            android:gravity="center"
             android:onClick="showAllLikes"/>
 
         <TextView
