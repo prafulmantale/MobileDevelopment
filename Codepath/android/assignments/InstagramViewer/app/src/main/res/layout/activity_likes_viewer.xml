@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/lvLikes"
         android:layout_alignParentTop="true"
-        android:dividerHeight="1sp"></ListView>
+        android:divider="@android:color/transparent"
+        />
 
 </RelativeLayout>

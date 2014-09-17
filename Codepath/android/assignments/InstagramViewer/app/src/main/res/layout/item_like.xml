@@ -4,7 +4,7 @@
     android:layout_height="40dp"
     tools:context=".PhotoViewerActivity"
     android:weightSum="1"
-    android:background="@drawable/border"
+    android:background="@drawable/border_no_corner"
     >
 
         <ImageView

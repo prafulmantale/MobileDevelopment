@@ -17,6 +17,7 @@
         android:id="@+id/headerRow"
         android:layout_gravity="top"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
         >
 
         <ImageView
@@ -84,6 +85,7 @@
             />
 
     </RelativeLayout>
+
     <ImageView
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
@@ -96,7 +98,6 @@
         android:minHeight="100dp"
         android:scaleType="fitXY"
         android:layout_marginLeft="5dp"/>
-
 
     <LinearLayout
         android:layout_marginTop="1dp"
@@ -121,7 +122,7 @@
             android:textSize="8sp"
             android:textStyle="bold"
             android:clickable="true"
-            android:drawableLeft="@drawable/ic_likes_total"
+            android:drawableLeft="@drawable/ic_action_liked"
             android:gravity="center"
             android:onClick="showAllLikes"/>
 
@@ -152,6 +153,7 @@
             android:textStyle="normal"
             android:clickable="true"
             android:onClick="showAllComments"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -202,8 +204,6 @@
             android:layout_marginLeft="1dp"
             android:maxHeight="20dp"
             />
-
-
 
     </LinearLayout>
 
