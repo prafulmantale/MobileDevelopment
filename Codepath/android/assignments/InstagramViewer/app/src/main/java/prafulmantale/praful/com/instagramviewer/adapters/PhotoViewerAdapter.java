@@ -39,7 +39,7 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        MediaDetails mediaDetails = getItem(position);
+        final MediaDetails mediaDetails = getItem(position);
 
 
         if(convertView == null){
@@ -52,10 +52,11 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         TextView tvUserName = (TextView)convertView.findViewById(R.id.tvUserName);
         TextView tvLocation = (TextView)convertView.findViewById(R.id.tvLocation);
         TextView tvCaption = (TextView)convertView.findViewById(R.id.tvCaption);
-        TextView tvLike = (TextView)convertView.findViewById(R.id.tvLikesCount);
+        final TextView tvLike = (TextView)convertView.findViewById(R.id.tvLikesCount);
         TextView tvCreatedTime = (TextView)convertView.findViewById(R.id.tvCreatedTime);
         TextView tvCommentCount = (TextView)convertView.findViewById(R.id.tvCommentsCount);
         TextView tvComments = (TextView)convertView.findViewById(R.id.tvCommentsList);
+        final ImageView likeView = (ImageView)convertView.findViewById(R.id.ivLikeButton);
 
         Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(ivProfilePic);
 
@@ -77,14 +78,7 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
 
         Picasso.with(getContext()).load(mediaDetails.getStandardResolutionUrl()).into(ivMedia);
 
-        if(mediaDetails.getLikes().getCount() == 0){
-            tvLike.setVisibility(View.GONE);
-        }
-        else {
-            tvLike.setTag(mediaDetails);
-            tvLike.setVisibility(View.VISIBLE);
-            tvLike.setText(mediaDetails.getLikes().getCount() + "  likes");
-        }
+        updateLikesCount(tvLike, mediaDetails);
 
         if(!mediaDetails.getCaption().isValid()){
             tvCaption.setVisibility(View.GONE);
@@ -124,6 +118,48 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
             }
         }
 
+
+        likeView.setTag(mediaDetails);
+
+        updateLikeView(likeView, mediaDetails);
+
+        likeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaDetails mediaDetails1 = (MediaDetails)likeView.getTag();
+                mediaDetails1.setiLiked(!mediaDetails1.isiLiked());
+
+                updateLikeView(likeView, mediaDetails1);
+                likeView.setImageResource(mediaDetails1.isiLiked() ? R.drawable.ic_action_liked : R.drawable.ic_action_favorite);
+                long newCount = mediaDetails1.getLikes().getCount() + (mediaDetails1.isiLiked() ?  + 1 : -1) ;
+                mediaDetails1.getLikes().setCount(newCount);
+
+                updateLikesCount(tvLike, mediaDetails1);
+
+            }
+        });
+
         return convertView;
+    }
+
+    private void updateLikeView(ImageView likeView, MediaDetails mediaDetails){
+        if(mediaDetails.isiLiked()){
+            likeView.setImageResource(R.drawable.ic_action_liked);
+        }
+        else{
+            likeView.setImageResource(R.drawable.ic_action_favorite);
+        }
+
+    }
+
+    private void updateLikesCount(TextView tvLike, MediaDetails mediaDetails){
+        if(mediaDetails.getLikes().getCount() == 0){
+            tvLike.setVisibility(View.GONE);
+        }
+        else {
+            tvLike.setTag(mediaDetails);
+            tvLike.setVisibility(View.VISIBLE);
+            tvLike.setText(mediaDetails.getLikes().getCount() + "");
+        }
     }
 }

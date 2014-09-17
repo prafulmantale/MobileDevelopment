@@ -21,13 +21,11 @@ public class Likes implements Serializable{
     private long count;
     private List<Like> likeList;
 
-    //To Do add user details - user who did likes
-
     public long getCount() {
         return count;
     }
 
-    private void setCount(long count) {
+    public void setCount(long count) {
         this.count = count;
     }
 

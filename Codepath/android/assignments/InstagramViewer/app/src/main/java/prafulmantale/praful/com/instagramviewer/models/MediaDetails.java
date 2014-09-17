@@ -7,9 +7,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by prafulmantale on 9/12/14.
@@ -48,6 +51,8 @@ public class MediaDetails implements Serializable{
 
     private Likes likes;
     private Comments comments;
+
+    private boolean iLiked;
 
 
     public MediaType getMediaType() {
@@ -147,6 +152,14 @@ public class MediaDetails implements Serializable{
         this.comments = comments;
     }
 
+    public boolean isiLiked() {
+        return iLiked;
+    }
+
+    public void setiLiked(boolean iLiked) {
+        this.iLiked = iLiked;
+    }
+
     private static MediaDetails fromJSON(JSONObject jsonObject){
 
         MediaDetails mediaDetails = new MediaDetails();
@@ -239,7 +252,19 @@ public class MediaDetails implements Serializable{
 
     public String getDateTime(){
         Date date = new Date(createdTime * 1000);
-        return date.getHours() + ": " + date.getMinutes();
+
+        Date date1 = new Date();
+        TimeUnit timeUnit = TimeUnit.MINUTES;
+
+        long diff = timeUnit.convert(date1.getTime() - date.getTime(), TimeUnit.MILLISECONDS);
+        Date dt = new Date(diff);
+
+        System.out.println("From:" + DateFormat.getDateTimeInstance().format(date));
+        System.out.println("Now:" + DateFormat.getDateTimeInstance().format(date1));
+        System.out.println("Diff:" + DateFormat.getDateTimeInstance().format(diff));
+
+
+        return DateFormat.getDateTimeInstance().format(date);
     }
     @Override
     public String toString() {
