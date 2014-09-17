@@ -28,35 +28,39 @@ public class CommentsViewerAdapter extends ArrayAdapter<Comment> {
         super(context, R.layout.item_comment, commentList);
     }
 
-    //To do
     private static class ViewHolder{
-
+        ImageView ivProfilePic;
+        TextView tvUserName;
+        TextView tvComments;
+        TextView tvCreatedTime;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         Comment comment = getItem(position);
+        ViewHolder viewHolder;
 
 
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_comment, parent, false);
+
+            viewHolder = new ViewHolder();
+            viewHolder.ivProfilePic = (ImageView)convertView.findViewById(R.id.ivProfilePicture);
+            viewHolder.tvUserName = (TextView)convertView.findViewById(R.id.tvUserName);
+            viewHolder.tvComments = (TextView)convertView.findViewById(R.id.tvComment);
+            viewHolder.tvCreatedTime = (TextView)convertView.findViewById(R.id.tvCreatedTime);
+
+            convertView.setTag(viewHolder);
+        }
+        else{
+            viewHolder = (ViewHolder)convertView.getTag();
         }
 
-
-        ImageView ivProfilePic = (ImageView)convertView.findViewById(R.id.ivProfilePicture);
-        TextView tvUserName = (TextView)convertView.findViewById(R.id.tvUserName);
-        TextView tvComments = (TextView)convertView.findViewById(R.id.tvComment);
-        TextView tvCreatedTime = (TextView)convertView.findViewById(R.id.tvCreatedTime);
-
-        Picasso.with(getContext()).load(comment.getUserDetails().getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(ivProfilePic);
-
-        tvUserName.setText(comment.getUserDetails().getUsername());
-
-        tvComments.setText(comment.getText());
-
-        tvCreatedTime.setText(comment.getDateTime());
-
+        Picasso.with(getContext()).load(comment.getUserDetails().getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(viewHolder.ivProfilePic);
+        viewHolder.tvUserName.setText(comment.getUserDetails().getUsername());
+        viewHolder.tvComments.setText(comment.getText());
+        viewHolder.tvCreatedTime.setText(comment.getDateTime());
 
         return convertView;
     }

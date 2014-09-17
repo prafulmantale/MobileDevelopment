@@ -27,115 +27,108 @@ import prafulmantale.praful.com.instagramviewer.models.MediaDetails;
  */
 public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
 
+    private static final int MAX_COMMENTS = 5;
+
     public PhotoViewerAdapter(Context context, List<MediaDetails> mediaDetailsList) {
         super(context, R.layout.item_media, mediaDetailsList);
     }
 
-    //To do
+
     private static class ViewHolder{
 
+        ImageView ivProfilePic;
+        TextView tvUserName;
+        TextView tvLocation;
+        TextView tvCreatedTime;
+        ImageView ivMedia;
+        TextView tvLike;
+        TextView tvCaption;
+        TextView tvCommentCount;
+        TextView tvComments;
+        ImageView likeView;
+        ImageView commentsView;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         final MediaDetails mediaDetails = getItem(position);
+        final ViewHolder viewHolder;
 
 
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_media, parent, false);
+
+            viewHolder = new ViewHolder();
+
+            viewHolder.ivProfilePic = (ImageView)convertView.findViewById(R.id.ivProfilePicture);
+            viewHolder.tvUserName = (TextView)convertView.findViewById(R.id.tvUserName);
+            viewHolder.tvLocation = (TextView)convertView.findViewById(R.id.tvLocation);
+            viewHolder.tvCreatedTime = (TextView)convertView.findViewById(R.id.tvCreatedTime);
+            viewHolder.ivMedia = (ImageView)convertView.findViewById(R.id.ivMedia);
+            viewHolder.tvLike =  (TextView)convertView.findViewById(R.id.tvLikesCount);
+            viewHolder.tvCaption = (TextView)convertView.findViewById(R.id.tvCaption);
+            viewHolder.tvCommentCount = (TextView)convertView.findViewById(R.id.tvCommentsCount);
+            viewHolder.tvComments = (TextView)convertView.findViewById(R.id.tvCommentsList);
+            viewHolder.likeView = (ImageView)convertView.findViewById(R.id.ivLikeButton);
+            viewHolder.commentsView = (ImageView)convertView.findViewById(R.id.ivCommentsButton);
+
+            convertView.setTag(viewHolder);
+        }
+        else{
+            viewHolder = (ViewHolder)convertView.getTag();
         }
 
+        Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(viewHolder.ivProfilePic);
 
-        ImageView ivProfilePic = (ImageView)convertView.findViewById(R.id.ivProfilePicture);
-        ImageView ivMedia = (ImageView)convertView.findViewById(R.id.ivMedia);
-        TextView tvUserName = (TextView)convertView.findViewById(R.id.tvUserName);
-        TextView tvLocation = (TextView)convertView.findViewById(R.id.tvLocation);
-        TextView tvCaption = (TextView)convertView.findViewById(R.id.tvCaption);
-        final TextView tvLike = (TextView)convertView.findViewById(R.id.tvLikesCount);
-        TextView tvCreatedTime = (TextView)convertView.findViewById(R.id.tvCreatedTime);
-        TextView tvCommentCount = (TextView)convertView.findViewById(R.id.tvCommentsCount);
-        TextView tvComments = (TextView)convertView.findViewById(R.id.tvCommentsList);
-        final ImageView likeView = (ImageView)convertView.findViewById(R.id.ivLikeButton);
-
-        Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(ivProfilePic);
-
-        tvUserName.setText(mediaDetails.getUsername());
+        viewHolder.tvUserName.setText(mediaDetails.getUsername());
 
         if(mediaDetails.getLocation() == null || mediaDetails.getLocation().isEmpty()){
-            tvLocation.setVisibility(View.GONE);
-            ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
+            viewHolder.tvLocation.setVisibility(View.GONE);
+            ViewGroup.LayoutParams layoutParams = viewHolder.tvUserName.getLayoutParams();
             layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
         }
         else {
-            tvLocation.setVisibility(View.VISIBLE);
-            tvLocation.setText(mediaDetails.getLocation());
-            ViewGroup.LayoutParams layoutParams = tvUserName.getLayoutParams();
+            viewHolder.tvLocation.setVisibility(View.VISIBLE);
+            viewHolder.tvLocation.setText(mediaDetails.getLocation());
+            ViewGroup.LayoutParams layoutParams = viewHolder.tvUserName.getLayoutParams();
             layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         }
 
-        tvCreatedTime.setText(mediaDetails.getDateTime());
+        viewHolder.tvCreatedTime.setText(mediaDetails.getDateTime());
 
-        Picasso.with(getContext()).load(mediaDetails.getStandardResolutionUrl()).into(ivMedia);
+        Picasso.with(getContext()).load(mediaDetails.getStandardResolutionUrl()).into(viewHolder.ivMedia);
 
-        updateLikesCount(tvLike, mediaDetails);
+        updateLikesCount(viewHolder.tvLike, mediaDetails);
 
         if(!mediaDetails.getCaption().isValid()){
-            tvCaption.setVisibility(View.GONE);
+            viewHolder.tvCaption.setVisibility(View.GONE);
         }
         else {
-            tvCaption.setVisibility(View.VISIBLE);
-            tvCaption.setText(Html.fromHtml("<font color=\"#206199\"><b>" + mediaDetails.getCaption().getUserDetails().getUsername()
+            viewHolder.tvCaption.setVisibility(View.VISIBLE);
+            viewHolder.tvCaption.setText(Html.fromHtml("<font color=\"#206199\"><b>" + mediaDetails.getCaption().getUserDetails().getUsername()
                     + "  " + "</b></font>" + "<font color=\"#000000\">" + mediaDetails.getCaption().getText() + "</font>"));
         }
 
-        if(mediaDetails.getComments().getCount() == 0){
-            tvCommentCount.setVisibility(View.GONE);
-            tvComments.setVisibility(View.GONE);
-        }
-        else {
-            tvCommentCount.setTag(mediaDetails);
-            tvCommentCount.setVisibility(View.VISIBLE);
-            tvComments.setVisibility(View.VISIBLE);
-            tvCommentCount.setText("view all " + mediaDetails.getComments().getCount() + "  comments");
-            for(int i = 0; i < mediaDetails.getComments().getCount(); i ++){
-
-                if(i >= 5){
-                    break;
-                }
-
-                Comment comment = mediaDetails.getComments().getCommentsList().get(i);
+        updateCommentsView(viewHolder, mediaDetails);
 
 
-                if(i == 0){
-                    tvComments.setText(Html.fromHtml("<font color=\"#206199\"><b>" + comment.getUserDetails().getUsername()
-                            + "  " + "</b></font>" + "<font color=\"#000000\">" + comment.getText() + "</font>"));
-                }
-                else {
-                    tvComments.append(Html.fromHtml("<br><font color=\"#206199\"><b>" + comment.getUserDetails().getUsername()
-                            + "  " + "</b></font>" + "<font color=\"#000000\">" + comment.getText() + "</font>"));
-                }
-            }
-        }
+        viewHolder.likeView.setTag(mediaDetails);
 
+        updateLikeView(viewHolder.likeView, mediaDetails);
 
-        likeView.setTag(mediaDetails);
-
-        updateLikeView(likeView, mediaDetails);
-
-        likeView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.likeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaDetails mediaDetails1 = (MediaDetails)likeView.getTag();
+                MediaDetails mediaDetails1 = (MediaDetails)viewHolder.likeView.getTag();
                 mediaDetails1.setiLiked(!mediaDetails1.isiLiked());
 
-                updateLikeView(likeView, mediaDetails1);
-                likeView.setImageResource(mediaDetails1.isiLiked() ? R.drawable.ic_action_liked : R.drawable.ic_action_favorite);
+                updateLikeView(viewHolder.likeView, mediaDetails1);
+                viewHolder.likeView.setImageResource(mediaDetails1.isiLiked() ? R.drawable.ic_action_liked : R.drawable.ic_action_favorite);
                 long newCount = mediaDetails1.getLikes().getCount() + (mediaDetails1.isiLiked() ?  + 1 : -1) ;
                 mediaDetails1.getLikes().setCount(newCount);
 
-                updateLikesCount(tvLike, mediaDetails1);
-
+                updateLikesCount(viewHolder.tvLike, mediaDetails1);
             }
         });
 
@@ -161,5 +154,43 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
             tvLike.setVisibility(View.VISIBLE);
             tvLike.setText(mediaDetails.getLikes().getCount() + "");
         }
+    }
+
+    private void updateCommentsView(ViewHolder viewHolder, MediaDetails mediaDetails){
+        if(mediaDetails.getComments().getCount() == 0){
+            viewHolder.tvCommentCount.setVisibility(View.GONE);
+            viewHolder.tvComments.setVisibility(View.GONE);
+        }
+        else {
+            viewHolder.tvCommentCount.setTag(mediaDetails);
+            viewHolder.tvCommentCount.setVisibility(View.VISIBLE);
+            viewHolder.tvComments.setVisibility(View.VISIBLE);
+            viewHolder.tvCommentCount.setText("view all " + mediaDetails.getComments().getCount() + "  comments");
+
+            updateCommentsList(viewHolder.tvComments, mediaDetails);
+        }
+    }
+
+    private void updateCommentsList(TextView tvComments, MediaDetails mediaDetails){
+
+        StringBuilder sb = new StringBuilder(100);
+        for(int i = 0; i < mediaDetails.getComments().getCount(); i ++){
+
+            if(i >= 5){
+                break;
+            }
+
+            Comment comment = mediaDetails.getComments().getCommentsList().get(i);
+
+            if(i > 0){
+                sb.append("<br>");
+            }
+
+            sb.append("<font color=\"#206199\"><b>" + comment.getUserDetails().getUsername()
+                    + "  " + "</b></font>" + "<font color=\"#000000\">" + comment.getText() + "</font>");
+
+        }
+
+       tvComments.setText(Html.fromHtml(sb.toString()));
     }
 }

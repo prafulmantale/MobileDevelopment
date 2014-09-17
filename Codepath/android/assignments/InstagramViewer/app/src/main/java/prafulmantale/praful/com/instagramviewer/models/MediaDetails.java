@@ -10,8 +10,11 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -251,18 +254,9 @@ public class MediaDetails implements Serializable{
 
 
     public String getDateTime(){
-        Date date = new Date(createdTime * 1000);
 
-        Date date1 = new Date();
-        TimeUnit timeUnit = TimeUnit.MINUTES;
-
-        long diff = timeUnit.convert(date1.getTime() - date.getTime(), TimeUnit.MILLISECONDS);
-        Date dt = new Date(diff);
-
-        System.out.println("From:" + DateFormat.getDateTimeInstance().format(date));
-        System.out.println("Now:" + DateFormat.getDateTimeInstance().format(date1));
-        System.out.println("Diff:" + DateFormat.getDateTimeInstance().format(diff));
-
+        Date date = new Date();
+        date.setTime(createdTime * 1000);
 
         return DateFormat.getDateTimeInstance().format(date);
     }
