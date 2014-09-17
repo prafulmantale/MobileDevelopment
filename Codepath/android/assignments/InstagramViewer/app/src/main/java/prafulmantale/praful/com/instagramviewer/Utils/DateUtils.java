@@ -35,6 +35,10 @@ public class DateUtils {
             display = String.format("%dh", hrDiff);
         }
         else{
+            if(minDiff < 0){
+                minDiff = 0;
+            }
+
             display = String.format("%dm", minDiff);
         }
 

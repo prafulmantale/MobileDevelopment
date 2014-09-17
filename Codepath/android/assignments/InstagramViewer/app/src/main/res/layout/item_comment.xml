@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:com.custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".PhotoViewerActivity"
@@ -20,49 +21,48 @@
             android:src="@drawable/ic_launcher"
             />
 
-        <TextView
+        <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="user name"
             android:layout_marginLeft="5dp"
             android:id="@+id/tvUserName"
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:layout_toRightOf="@+id/ivProfilePicture"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/tvCreatedTime"
             android:gravity="center_vertical"
-            android:textStyle="bold"
-            android:typeface="serif"
-            android:textColor="#ff206199"/>
+            android:textColor="#ff206199"
+            com.custom:typeface="fonts/Roboto-Medium.ttf"
+            />
 
-        <TextView
+        <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Comment"
             android:layout_marginLeft="5dp"
             android:id="@+id/tvComment"
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:layout_toRightOf="@+id/ivProfilePicture"
            android:layout_below="@id/tvUserName"
             android:layout_toLeftOf="@+id/tvCreatedTime"
             android:gravity="bottom"
-            android:textStyle="normal"
-            android:typeface="serif"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            com.custom:typeface="fonts/Roboto-Light.ttf"/>
 
-        <TextView
-            android:layout_centerVertical="true"
+        <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2w"
             android:id="@+id/tvCreatedTime"
-            android:textSize="10sp"
+            android:textSize="8sp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:gravity="center"
             android:layout_marginRight="5dp"
-            android:drawableLeft="@drawable/ic_action_time"
-            android:textColor="#ff1d0506"
+            android:textColor="@android:color/darker_gray"
+            com.custom:typeface="fonts/Roboto-Medium.ttf"
             />
 
 </RelativeLayout>

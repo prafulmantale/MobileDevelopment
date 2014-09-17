@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:com.custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".PhotoViewerActivity"
@@ -33,22 +34,23 @@
             android:src="@drawable/ic_launcher"
             />
 
-        <TextView
+        <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="user name"
             android:layout_marginLeft="5dp"
             android:id="@+id/tvUserName"
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:layout_toRightOf="@+id/ivProfilePicture"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/tvCreatedTime"
             android:gravity="center_vertical"
-            android:textStyle="bold"
-            android:typeface="serif"
-            android:textColor="#ff206199"/>
+            com.custom:typeface="fonts/Roboto-Medium.ttf"
+            android:textColor="#ff206199"
+            android:background="@android:color/transparent"
+            />
 
-        <TextView
+        <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Some Nice Place"
@@ -64,9 +66,10 @@
             android:textColor="#ff52d7ef"
             android:layout_toLeftOf="@+id/tvCreatedTime"
             android:drawableLeft="@drawable/ic_action_place"
+            com.custom:typeface="fonts/Roboto-Regular.ttf"
             />
 
-        <TextView
+        <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="2w"
@@ -81,7 +84,8 @@
             android:layout_marginRight="5dp"
             android:textAlignment="textEnd"
             android:drawableLeft="@drawable/ic_action_time"
-            android:textColor="#ff1d0506"
+            android:textColor="@android:color/darker_gray"
+            com.custom:typeface="fonts/Roboto-Regular.ttf"
             />
 
     </RelativeLayout>
@@ -110,7 +114,7 @@
         android:layout_marginLeft="5dp"
         >
 
-        <TextView
+        <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="11 likes"
@@ -118,15 +122,14 @@
             android:id="@+id/tvLikesCount"
             android:layout_alignParentTop="true"
             android:textColor="#ff206199"
-            android:typeface="serif"
             android:textSize="8sp"
-            android:textStyle="bold"
             android:clickable="true"
             android:drawableLeft="@drawable/ic_action_liked"
             android:gravity="center"
-            android:onClick="showAllLikes"/>
+            android:onClick="showAllLikes"
+            com.custom:typeface="fonts/Roboto-Medium.ttf"/>
 
-        <TextView
+        <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Caption"
@@ -135,11 +138,10 @@
             android:layout_marginLeft="1dp"
             android:textSize="8sp"
             android:layout_alignParentTop="true"
-            android:textStyle="normal"
-            android:typeface="serif"
+            com.custom:typeface="fonts/Roboto-Regular.ttf"
             />
 
-        <TextView
+        <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="view all 1 comments"
@@ -148,13 +150,12 @@
             android:id="@+id/tvCommentsCount"
             android:layout_alignParentTop="true"
             android:textColor="#2d030a10"
-            android:typeface="serif"
-            android:textSize="8sp"
-            android:textStyle="normal"
+            android:textSize="10sp"
             android:clickable="true"
-            android:onClick="showAllComments"/>
+            android:onClick="showAllComments"
+            com.custom:typeface="fonts/Roboto-Medium.ttf"/>
 
-        <TextView
+        <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -162,9 +163,9 @@
             android:id="@+id/tvCommentsList"
             android:layout_alignParentTop="true"
             android:textColor="#2d030a10"
-            android:typeface="serif"
             android:textSize="8sp"
-            android:textStyle="normal" />
+            com.custom:typeface="fonts/Roboto-Regular.ttf"
+             />
 
     </LinearLayout>
 

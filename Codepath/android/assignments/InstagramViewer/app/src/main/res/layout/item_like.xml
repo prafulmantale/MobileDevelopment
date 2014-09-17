@@ -21,19 +21,18 @@
             android:src="@drawable/ic_launcher"
             />
 
-        <TextView
+        <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="user name"
             android:layout_marginLeft="5dp"
             android:id="@+id/tvUserName"
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:layout_toRightOf="@+id/ivProfilePicture"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/tvCreatedTime"
             android:gravity="center_vertical"
-            android:textStyle="bold"
-            android:typeface="serif"
-            android:textColor="#ff206199"/>
+            android:textColor="#ff206199"
+            com.custom:typeface="fonts/Roboto-Medium.ttf"/>
 
 </RelativeLayout>
