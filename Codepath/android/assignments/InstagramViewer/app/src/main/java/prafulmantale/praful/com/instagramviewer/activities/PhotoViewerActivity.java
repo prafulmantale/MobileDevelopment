@@ -69,7 +69,7 @@ public class PhotoViewerActivity extends Activity {
                 ActionBar.LayoutParams.WRAP_CONTENT,
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
-        
+
         TextView textView = (TextView) viewActionBar.findViewById(R.id.tvActionBarTitle);
         textView.setText(R.string.app_title);
         actionBar.setCustomView(viewActionBar, params);
