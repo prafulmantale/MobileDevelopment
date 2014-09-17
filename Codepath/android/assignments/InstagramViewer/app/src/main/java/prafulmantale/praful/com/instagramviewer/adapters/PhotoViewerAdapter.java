@@ -27,7 +27,7 @@ import prafulmantale.praful.com.instagramviewer.models.MediaDetails;
  */
 public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
 
-    private static final int MAX_COMMENTS = 5;
+    private static final int MAX_COMMENTS = 3;
 
     public PhotoViewerAdapter(Context context, List<MediaDetails> mediaDetailsList) {
         super(context, R.layout.item_media, mediaDetailsList);
@@ -142,7 +142,6 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         else{
             likeView.setImageResource(R.drawable.ic_action_favorite);
         }
-
     }
 
     private void updateLikesCount(TextView tvLike, MediaDetails mediaDetails){
@@ -176,7 +175,7 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         StringBuilder sb = new StringBuilder(100);
         for(int i = 0; i < mediaDetails.getComments().getCount(); i ++){
 
-            if(i >= 5){
+            if(i >= MAX_COMMENTS){
                 break;
             }
 

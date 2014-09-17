@@ -13,9 +13,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,9 +26,6 @@ import prafulmantale.praful.com.instagramviewer.R;
 import prafulmantale.praful.com.instagramviewer.adapters.PhotoViewerAdapter;
 import prafulmantale.praful.com.instagramviewer.models.MediaDetails;
 import prafulmantale.praful.com.instagramviewer.restclient.InstagramClient;
-
-
-
 
 
 public class PhotoViewerActivity extends Activity {
@@ -125,7 +120,7 @@ public class PhotoViewerActivity extends Activity {
                     mediaDetailsList = MediaDetails.fromJSON(data);
                     adapter.clear();
 
-//                    // Load model objects into the adapter
+                    // Load model objects into the adapter
                     for (MediaDetails mediaDetails : mediaDetailsList) {
                         adapter.add(mediaDetails);
 
