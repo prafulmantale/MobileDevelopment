@@ -95,7 +95,7 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
             layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         }
 
-        viewHolder.tvCreatedTime.setText(mediaDetails.getDateTime());
+        viewHolder.tvCreatedTime.setText(mediaDetails.getElapsedTime());
 
         Picasso.with(getContext()).load(mediaDetails.getStandardResolutionUrl()).into(viewHolder.ivMedia);
 

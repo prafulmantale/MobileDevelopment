@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import prafulmantale.praful.com.instagramviewer.Utils.DateUtils;
+
 /**
  * Created by prafulmantale on 9/12/14.
  */
@@ -253,13 +255,10 @@ public class MediaDetails implements Serializable{
     }
 
 
-    public String getDateTime(){
-
-        Date date = new Date();
-        date.setTime(createdTime * 1000);
-
-        return DateFormat.getDateTimeInstance().format(date);
+    public String getElapsedTime(){
+        return DateUtils.getElapsedDisplayTime(createdTime);
     }
+
     @Override
     public String toString() {
         return "MediaDetails{" +

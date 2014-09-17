@@ -60,7 +60,7 @@ public class CommentsViewerAdapter extends ArrayAdapter<Comment> {
         Picasso.with(getContext()).load(comment.getUserDetails().getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(viewHolder.ivProfilePic);
         viewHolder.tvUserName.setText(comment.getUserDetails().getUsername());
         viewHolder.tvComments.setText(comment.getText());
-        viewHolder.tvCreatedTime.setText(comment.getDateTime());
+        viewHolder.tvCreatedTime.setText(comment.getElapsedTime());
 
         return convertView;
     }
