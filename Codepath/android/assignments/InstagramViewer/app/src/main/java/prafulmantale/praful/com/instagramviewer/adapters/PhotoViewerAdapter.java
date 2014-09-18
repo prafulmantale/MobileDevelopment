@@ -84,9 +84,17 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        Picasso.with(getContext()).load(mediaDetails.getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(viewHolder.ivProfilePic);
+        Picasso.with(getContext()).load(mediaDetails.getUserDetails().getProfilePictureUrl()).transform(new RoundedTransformation(100, 3)).into(viewHolder.ivProfilePic);
 
-        viewHolder.tvUserName.setText(mediaDetails.getUsername());
+        viewHolder.tvUserName.setText(mediaDetails.getUserDetails().getUsername());
+
+        viewHolder.tvUserName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RowActionsListener listener = (RowActionsListener)context;
+                listener.OnUserDetailsRequested(mediaDetails);
+            }
+        });
 
         if(mediaDetails.getLocation() == null || mediaDetails.getLocation().isEmpty()){
             viewHolder.tvLocation.setVisibility(View.GONE);

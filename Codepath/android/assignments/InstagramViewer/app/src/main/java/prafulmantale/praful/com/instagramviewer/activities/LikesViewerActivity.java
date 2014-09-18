@@ -32,7 +32,6 @@ public class LikesViewerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_likes_viewer);
 
-
         initializeActionBar();
 
         MediaDetails mediaDetails = (MediaDetails)getIntent().getSerializableExtra(AppConstants.MEDIA_KEY);

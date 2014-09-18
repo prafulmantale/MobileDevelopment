@@ -16,10 +16,13 @@ public class UserDetails implements Serializable {
     private String profilePictureUrl;
     private String website;
     private String bio;
+    private SocialDetails socialDetails;
 
     public UserDetails() {
         website = "";
         bio = "";
+
+        socialDetails = null;
     }
 
 
@@ -71,6 +74,14 @@ public class UserDetails implements Serializable {
         this.bio = bio;
     }
 
+    public SocialDetails getSocialDetails() {
+        return socialDetails;
+    }
+
+    public void setSocialDetails(SocialDetails socialDetails) {
+        this.socialDetails = socialDetails;
+    }
+
     public boolean isValid(){
 
         if(username == null || username.isEmpty() || id == null || id.isEmpty()){
@@ -99,6 +110,13 @@ public class UserDetails implements Serializable {
             finally {
                 //Optional fields
             }
+
+            try{
+                userDetails.socialDetails = SocialDetails.fromJSON(userObject.getJSONObject("counts"));
+            }
+            finally {
+
+            }
         }
         catch (JSONException ex){
 
@@ -115,6 +133,7 @@ public class UserDetails implements Serializable {
                 ", profilePictureUrl='" + profilePictureUrl + '\'' +
                 ", website='" + website + '\'' +
                 ", bio='" + bio + '\'' +
+                ", Social Details='" + socialDetails + '\'' +
                 '}';
     }
 }

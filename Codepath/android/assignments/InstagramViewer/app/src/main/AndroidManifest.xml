@@ -24,9 +24,12 @@
             android:parentActivityName=".activities.PhotoViewerActivity" >
         </activity>
         <activity
-            android:parentActivityName=".activities.PhotoViewerActivity"
             android:name=".activities.LikesViewerActivity"
-            >
+            android:parentActivityName=".activities.PhotoViewerActivity" >
+        </activity>
+        <activity
+            android:name=".activities.UserDetailsActivity"
+            android:parentActivityName=".activities.PhotoViewerActivity" >
         </activity>
     </application>
 

@@ -31,8 +31,8 @@ public class MediaDetails implements Serializable{
 
     public MediaDetails() {
         mediaType = MediaType.Image;
-        username = "";
-        profilePictureUrl = "";
+
+        userDetails = new UserDetails();
         location = "";
         createdTime = 0;
         caption = null;
@@ -41,8 +41,8 @@ public class MediaDetails implements Serializable{
     }
 
     private MediaType mediaType;
-    private String username;
-    private String profilePictureUrl;
+    private UserDetails userDetails;
+
     private String location;
     private long createdTime;
     private Caption caption;
@@ -68,20 +68,12 @@ public class MediaDetails implements Serializable{
         this.mediaType = mediaType;
     }
 
-    public String getUsername() {
-        return username;
+    public UserDetails getUserDetails() {
+        return userDetails;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getProfilePictureUrl() {
-        return profilePictureUrl;
-    }
-
-    public void setProfilePictureUrl(String profilePictureUrl) {
-        this.profilePictureUrl = profilePictureUrl;
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     public String getLocation() {
@@ -180,11 +172,7 @@ public class MediaDetails implements Serializable{
 
             JSONObject userObject = jsonObject.getJSONObject("user");
 
-            mediaDetails.username = userObject.getString("username");
-
-            mediaDetails.profilePictureUrl = userObject.getString("profile_picture");
-
-
+            mediaDetails.userDetails = UserDetails.fromJSON(jsonObject, "user");
             try {
                 mediaDetails.location = jsonObject.getJSONObject("location").getString("name");
             }
@@ -263,8 +251,8 @@ public class MediaDetails implements Serializable{
     public String toString() {
         return "MediaDetails{" +
                 "mediaType=" + mediaType +
-                ", username='" + username + '\'' +
-                ", profilePictureUrl='" + profilePictureUrl + '\'' +
+                ", username='" + userDetails.getUsername() + '\'' +
+                ", profilePictureUrl='" + userDetails.getProfilePictureUrl() + '\'' +
                 ", location='" + location + '\'' +
                 ", createdTime=" + createdTime +
                 ", caption='" + caption + '\'' +

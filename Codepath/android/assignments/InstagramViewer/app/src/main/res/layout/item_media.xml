@@ -48,6 +48,7 @@
             com.custom:typeface="fonts/Roboto-Medium.ttf"
             android:textColor="#ff206199"
             android:background="@android:color/transparent"
+            android:clickable="true"
             />
 
         <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView

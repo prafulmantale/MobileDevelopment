@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -29,6 +30,7 @@ import prafulmantale.praful.com.instagramviewer.adapters.PhotoViewerAdapter;
 import prafulmantale.praful.com.instagramviewer.enums.RequesterTypes;
 import prafulmantale.praful.com.instagramviewer.interfaces.RowActionsListener;
 import prafulmantale.praful.com.instagramviewer.models.MediaDetails;
+import prafulmantale.praful.com.instagramviewer.models.UserDetails;
 import prafulmantale.praful.com.instagramviewer.restclient.InstagramClient;
 
 
@@ -176,5 +178,55 @@ public class PhotoViewerActivity extends Activity  implements RowActionsListener
         view.setTag(mediaDetails);
 
         showAllComments(view, requesterTypes);
+    }
+
+    @Override
+    public void OnUserDetailsRequested(MediaDetails mediaDetails) {
+
+        if(mediaDetails == null || mediaDetails.getUserDetails() == null || !mediaDetails.getUserDetails().isValid()){
+            Log.d("PVA", "User id is not available to fetch user details");
+            return;
+        }
+        getUserDetails(mediaDetails.getUserDetails());
+    }
+
+    private void showUserDetails(UserDetails userDetails){
+
+        Intent intent = new Intent(this, UserDetailsActivity.class);
+
+        intent.putExtra(AppConstants.USER_DETAILS_KEY, userDetails);
+
+        startActivity(intent);
+    }
+
+    private void getUserDetails(UserDetails userDetails){
+
+        InstagramClient client = new InstagramClient();
+        client.getUserDetails(new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int code, JSONObject body) {
+                try {
+
+                    UserDetails userDetails1 = UserDetails.fromJSON(body, "data");
+
+                    showUserDetails(userDetails1);
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    Toast.makeText(getBaseContext(), "Could not fetch user details. Please try again later", Toast.LENGTH_SHORT).show();
+                } finally {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable e, JSONObject errorResponse) {
+                Log.d("body", errorResponse.toString());
+
+                Toast.makeText(getBaseContext(), "Could not fetch user details. Please try again later", Toast.LENGTH_SHORT).show();
+            }
+        }, userDetails.getId());
+
     }
 }

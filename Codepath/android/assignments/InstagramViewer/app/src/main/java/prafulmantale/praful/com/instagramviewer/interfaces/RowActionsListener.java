@@ -10,4 +10,6 @@ public interface RowActionsListener {
 
   public void OnCommentsListRequested(MediaDetails mediaDetails, RequesterTypes requesterTypes);
 
+  public void OnUserDetailsRequested(MediaDetails mediaDetails);
+
 }
