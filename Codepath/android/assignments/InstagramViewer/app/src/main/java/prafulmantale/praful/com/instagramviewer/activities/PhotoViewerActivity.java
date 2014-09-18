@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,11 +25,13 @@ import java.util.List;
 
 import prafulmantale.praful.com.instagramviewer.R;
 import prafulmantale.praful.com.instagramviewer.adapters.PhotoViewerAdapter;
+import prafulmantale.praful.com.instagramviewer.enums.RequesterTypes;
+import prafulmantale.praful.com.instagramviewer.interfaces.RowActionsListener;
 import prafulmantale.praful.com.instagramviewer.models.MediaDetails;
 import prafulmantale.praful.com.instagramviewer.restclient.InstagramClient;
 
 
-public class PhotoViewerActivity extends Activity {
+public class PhotoViewerActivity extends Activity  implements RowActionsListener{
 
 //    CLIENT ID	62babaf98b5c4bfe99f041c9adc30d21
 //    CLIENT SECRET	2e3e0bb4d92e443daa5072375bf87c8b
@@ -160,5 +163,13 @@ public class PhotoViewerActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void OnCommentsListRequested(MediaDetails mediaDetails, RequesterTypes requesterTypes) {
+        View view = new View(this);
+        view.setTag(mediaDetails);
+
+        showAllComments(view);
     }
 }

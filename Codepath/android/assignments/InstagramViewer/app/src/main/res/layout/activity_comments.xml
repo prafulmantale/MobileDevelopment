@@ -15,5 +15,25 @@
         android:id="@+id/lvComments"
         android:layout_alignParentTop="true"
         android:divider="@android:color/transparent"
-         />
+        android:layout_above="@+id/evWriteComment"
+        android:layout_marginBottom="5dp"/>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/evWriteComment"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="@string/input_comment_hint"
+        android:layout_toLeftOf="@+id/ivCommentSend"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivCommentSend"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_social_send_disabled"
+        android:layout_alignParentBottom="true" />
+
 </RelativeLayout>

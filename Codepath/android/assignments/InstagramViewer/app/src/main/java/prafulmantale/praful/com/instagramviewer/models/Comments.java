@@ -28,7 +28,7 @@ public class Comments implements Serializable{
         return count;
     }
 
-    private void setCount(long count) {
+    public void setCount(long count) {
         this.count = count;
     }
 
@@ -36,7 +36,7 @@ public class Comments implements Serializable{
         return commentsList;
     }
 
-    private void setCommentsList(List<Comment> commentsList) {
+    public void setCommentsList(List<Comment> commentsList) {
         this.commentsList = commentsList;
     }
 

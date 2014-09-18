@@ -1,5 +1,6 @@
 package prafulmantale.praful.com.instagramviewer.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import java.util.List;
 
 import prafulmantale.praful.com.instagramviewer.R;
 import prafulmantale.praful.com.instagramviewer.Utils.RoundedTransformation;
+import prafulmantale.praful.com.instagramviewer.enums.RequesterTypes;
+import prafulmantale.praful.com.instagramviewer.interfaces.RowActionsListener;
 import prafulmantale.praful.com.instagramviewer.models.Comment;
 import prafulmantale.praful.com.instagramviewer.models.MediaDetails;
 
@@ -28,9 +31,11 @@ import prafulmantale.praful.com.instagramviewer.models.MediaDetails;
 public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
 
     private static final int MAX_COMMENTS = 3;
+    private final Activity context;
 
-    public PhotoViewerAdapter(Context context, List<MediaDetails> mediaDetailsList) {
+    public PhotoViewerAdapter(Activity context, List<MediaDetails> mediaDetailsList) {
         super(context, R.layout.item_media, mediaDetailsList);
+        this.context = context;
     }
 
 
@@ -129,6 +134,14 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
                 mediaDetails1.getLikes().setCount(newCount);
 
                 updateLikesCount(viewHolder.tvLike, mediaDetails1);
+            }
+        });
+
+        viewHolder.commentsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RowActionsListener listener = (RowActionsListener)context;
+                listener.OnCommentsListRequested(mediaDetails, RequesterTypes.ADD_COMMENT);
             }
         });
 

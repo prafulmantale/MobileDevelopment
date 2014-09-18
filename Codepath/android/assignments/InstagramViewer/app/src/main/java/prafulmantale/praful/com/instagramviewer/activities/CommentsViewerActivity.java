@@ -2,11 +2,16 @@ package prafulmantale.praful.com.instagramviewer.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.media.Image;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,6 +29,9 @@ public class CommentsViewerActivity extends Activity {
     private CommentsViewerAdapter adapter;
     private List<Comment> commentList;
 
+    private EditText evWriteComment;
+    private ImageView ivSendComment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +44,47 @@ public class CommentsViewerActivity extends Activity {
         initialize(mediaDetails);
     }
 
-    private void initialize(MediaDetails mediaDetails){
+    private void initialize(final MediaDetails mediaDetails){
         listView = (ListView)findViewById(R.id.lvComments);
+        evWriteComment = (EditText)findViewById(R.id.evWriteComment);
+        ivSendComment = (ImageView)findViewById(R.id.ivCommentSend);
+
+        evWriteComment.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(s.toString().isEmpty()){
+                    ivSendComment.setImageResource(R.drawable.ic_social_send_disabled);
+                }
+                else{
+                    ivSendComment.setImageResource(R.drawable.ic_social_send_now);
+                }
+            }
+        });
+
+        ivSendComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(evWriteComment.getText().toString().trim().isEmpty()){
+                    return;
+                }
+
+                mediaDetails.getComments().setCount(mediaDetails.getComments().getCount() + 1);
+
+                evWriteComment.setText("");
+            }
+        });
+
         if(mediaDetails.getComments().getCount() == 0) {
             commentList = new ArrayList<Comment>();
         }
