@@ -164,7 +164,7 @@ public class PhotoViewerAdapter extends ArrayAdapter<MediaDetails> {
         else {
             tvLike.setTag(mediaDetails);
             tvLike.setVisibility(View.VISIBLE);
-            tvLike.setText(mediaDetails.getLikes().getCount() + "");
+            tvLike.setText(mediaDetails.getLikes().getCount() + " likes");
         }
     }
 

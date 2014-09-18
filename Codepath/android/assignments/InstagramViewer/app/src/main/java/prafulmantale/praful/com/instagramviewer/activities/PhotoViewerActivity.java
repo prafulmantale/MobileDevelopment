@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prafulmantale.praful.com.instagramviewer.R;
+import prafulmantale.praful.com.instagramviewer.Utils.AppConstants;
 import prafulmantale.praful.com.instagramviewer.adapters.PhotoViewerAdapter;
 import prafulmantale.praful.com.instagramviewer.enums.RequesterTypes;
 import prafulmantale.praful.com.instagramviewer.interfaces.RowActionsListener;
@@ -96,16 +97,20 @@ public class PhotoViewerActivity extends Activity  implements RowActionsListener
         listView.setAdapter(adapter);
     }
 
-
     public void showAllComments(View view){
+        showAllComments(view, RequesterTypes.VIEW_ALL_COMMENTS);
+    }
+
+    public void showAllComments(View view, RequesterTypes requesterType){
         Intent intent = new Intent(this, CommentsViewerActivity.class);
-        intent.putExtra("MEDIA", (MediaDetails)view.getTag());
+        intent.putExtra(AppConstants.MEDIA_KEY, (MediaDetails)view.getTag());
+        intent.putExtra(AppConstants.REQ_TYPE_KEY, requesterType.getValue());
         startActivity(intent);
     }
 
     public void showAllLikes(View view){
         Intent intent = new Intent(this, LikesViewerActivity.class);
-        intent.putExtra("MEDIA", (MediaDetails)view.getTag());
+        intent.putExtra(AppConstants.MEDIA_KEY, (MediaDetails)view.getTag());
         startActivity(intent);
     }
 
@@ -170,6 +175,6 @@ public class PhotoViewerActivity extends Activity  implements RowActionsListener
         View view = new View(this);
         view.setTag(mediaDetails);
 
-        showAllComments(view);
+        showAllComments(view, requesterTypes);
     }
 }

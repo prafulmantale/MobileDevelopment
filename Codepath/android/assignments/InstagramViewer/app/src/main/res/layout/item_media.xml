@@ -127,7 +127,7 @@
             android:drawableLeft="@drawable/ic_action_liked"
             android:gravity="center"
             android:onClick="showAllLikes"
-            com.custom:typeface="fonts/Roboto-Medium.ttf"/>
+            com.custom:typeface="fonts/Roboto-Bold.ttf"/>
 
         <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
             android:layout_width="wrap_content"

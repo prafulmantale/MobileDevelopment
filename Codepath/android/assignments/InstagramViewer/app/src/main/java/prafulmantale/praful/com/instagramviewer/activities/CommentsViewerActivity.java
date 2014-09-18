@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prafulmantale.praful.com.instagramviewer.R;
+import prafulmantale.praful.com.instagramviewer.Utils.AppConstants;
 import prafulmantale.praful.com.instagramviewer.adapters.CommentsViewerAdapter;
+import prafulmantale.praful.com.instagramviewer.enums.RequesterTypes;
 import prafulmantale.praful.com.instagramviewer.models.Comment;
 import prafulmantale.praful.com.instagramviewer.models.MediaDetails;
 
@@ -31,6 +33,7 @@ public class CommentsViewerActivity extends Activity {
 
     private EditText evWriteComment;
     private ImageView ivSendComment;
+    private RequesterTypes requesterType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,9 @@ public class CommentsViewerActivity extends Activity {
 
         initializeActionBar();
 
-        MediaDetails mediaDetails = (MediaDetails)getIntent().getSerializableExtra("MEDIA");
+        MediaDetails mediaDetails = (MediaDetails)getIntent().getSerializableExtra(AppConstants.MEDIA_KEY);
+        int reqType = getIntent().getIntExtra(AppConstants.REQ_TYPE_KEY, 0);
+        requesterType = (reqType == 0) ? RequesterTypes.VIEW_ALL_COMMENTS : RequesterTypes.ADD_COMMENT;
 
         initialize(mediaDetails);
     }
@@ -93,6 +98,10 @@ public class CommentsViewerActivity extends Activity {
         }
         adapter = new CommentsViewerAdapter(this, commentList);
         listView.setAdapter(adapter);
+
+        if(requesterType == RequesterTypes.ADD_COMMENT){
+            evWriteComment.requestFocus();
+        }
     }
 
     private void initializeActionBar(){

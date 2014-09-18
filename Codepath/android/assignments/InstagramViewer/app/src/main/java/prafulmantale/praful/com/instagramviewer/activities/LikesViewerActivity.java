@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prafulmantale.praful.com.instagramviewer.R;
+import prafulmantale.praful.com.instagramviewer.Utils.AppConstants;
 import prafulmantale.praful.com.instagramviewer.adapters.CommentsViewerAdapter;
 import prafulmantale.praful.com.instagramviewer.adapters.LikesViewerAdapter;
 import prafulmantale.praful.com.instagramviewer.models.Comment;
@@ -34,7 +35,7 @@ public class LikesViewerActivity extends Activity {
 
         initializeActionBar();
 
-        MediaDetails mediaDetails = (MediaDetails)getIntent().getSerializableExtra("MEDIA");
+        MediaDetails mediaDetails = (MediaDetails)getIntent().getSerializableExtra(AppConstants.MEDIA_KEY);
 
         initialize(mediaDetails);
     }
