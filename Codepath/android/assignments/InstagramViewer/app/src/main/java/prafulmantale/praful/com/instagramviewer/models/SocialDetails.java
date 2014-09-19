@@ -57,9 +57,11 @@ public class SocialDetails implements Serializable{
         }
 
         try{
+
             socialDetails.posts = jsonObject.getLong("media");
             socialDetails.follows = jsonObject.getLong("follows");
             socialDetails.followedBy = jsonObject.getLong("followed_by");
+
         }
         catch (JSONException ex){
             Log.d(TAG, "Exception while extracting social details");

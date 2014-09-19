@@ -67,10 +67,12 @@ public class Comment implements Serializable {
         Comment comment = new Comment();
 
         try {
+
             comment.createdTime = jsonObject.getLong("created_time");
             comment.id = jsonObject.getString("id");
             comment.text = jsonObject.getString("text");
             comment.userDetails = UserDetails.fromJSON(jsonObject, "from");
+
         }
         catch (JSONException ex){
             return null;

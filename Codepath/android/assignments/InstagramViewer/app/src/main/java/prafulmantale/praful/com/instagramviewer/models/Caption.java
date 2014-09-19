@@ -45,9 +45,11 @@ public class Caption implements Serializable{
         Caption caption = new Caption();
 
         try {
+
             JSONObject captionObject = jsonObject.getJSONObject("caption");
             caption.setText(captionObject.getString("text"));
             caption.userDetails = UserDetails.fromJSON(captionObject, "from");
+
         }
         catch (JSONException ex){
 

@@ -47,6 +47,7 @@ public class Comments implements Serializable{
         Comments comments = new Comments();
 
         try {
+            
             JSONObject commentsObject = jsonObject.getJSONObject("comments");
             comments.setCount(commentsObject.getLong("count"));
 

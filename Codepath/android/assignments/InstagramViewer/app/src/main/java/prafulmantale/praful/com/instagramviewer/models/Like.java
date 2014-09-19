@@ -35,8 +35,8 @@ public class Like implements Serializable {
             like.userDetails.setFullname(jsonObject.getString("full_name"));
             like.userDetails.setId(jsonObject.getString("id"));
             like.userDetails.setProfilePictureUrl(jsonObject.getString("profile_picture"));
-            }
 
+        }
         catch (Exception ex){
 
         }

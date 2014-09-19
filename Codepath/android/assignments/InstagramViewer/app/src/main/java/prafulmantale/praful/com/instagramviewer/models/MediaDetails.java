@@ -170,8 +170,6 @@ public class MediaDetails implements Serializable{
             }
             mediaDetails.mediaUrl = jsonObject.getString("link");
 
-            JSONObject userObject = jsonObject.getJSONObject("user");
-
             mediaDetails.userDetails = UserDetails.fromJSON(jsonObject, "user");
             try {
                 mediaDetails.location = jsonObject.getJSONObject("location").getString("name");
@@ -182,9 +180,6 @@ public class MediaDetails implements Serializable{
 
             mediaDetails.createdTime = jsonObject.getLong("created_time");
 
-
-
-
             JSONObject imagesObject = jsonObject.getJSONObject("images");
             mediaDetails.thumbnailUrl = imagesObject.getJSONObject("thumbnail").getString("url");
             mediaDetails.lowResolutionUrl = imagesObject.getJSONObject("low_resolution").getString("url");
@@ -193,8 +188,6 @@ public class MediaDetails implements Serializable{
             mediaDetails.likes = Likes.fromJSON(jsonObject);
             mediaDetails.caption = Caption.fromJSON(jsonObject);
             mediaDetails.comments = Comments.fromJSON(jsonObject);
-
-
 
 
             if((mediaDetails.thumbnailUrl == null || mediaDetails.thumbnailUrl.isEmpty()) ||
@@ -213,6 +206,7 @@ public class MediaDetails implements Serializable{
 
         return mediaDetails;
     }
+
     public static List<MediaDetails> fromJSON(JSONArray jsonArray){
 
         List<MediaDetails> mediaDetailsList = new ArrayList<MediaDetails>();
