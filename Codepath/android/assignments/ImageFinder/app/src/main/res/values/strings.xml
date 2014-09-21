@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ImageFinder</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_image_finder">Image Finder</string>
+
+
+    <string name="action_bar_search">Search</string>
+    <string name="action_bar_options">Options</string>
+
+    <string name="hint_search_text">Enter search query</string>
+
+</resources>

@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="prafulmantale.praful.com.expensereport.activities.CreateExpenseActivity">
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etMemo"
+        android:inputType="textShortMessage"
+        android:layout_centerVertical="true"
+        android:hint="memo"
+        android:layout_alignLeft="@+id/etExpense"
+        android:layout_alignStart="@+id/etExpense"
+        android:layout_alignRight="@+id/etExpense"
+        android:layout_alignEnd="@+id/etExpense" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="$50.00"
+        android:id="@+id/etExpense"
+        android:layout_above="@+id/etMemo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="26dp"
+        android:ems="10"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Category"
+        android:inputType="textShortMessage"
+        android:id="@+id/etCategory"
+        android:layout_below="@+id/etMemo"
+        android:layout_marginTop="26dp"
+        android:layout_alignLeft="@+id/etMemo"
+        android:layout_alignStart="@+id/etMemo"
+        android:layout_alignRight="@+id/etMemo"
+        android:layout_alignEnd="@+id/etMemo" />
+</RelativeLayout>

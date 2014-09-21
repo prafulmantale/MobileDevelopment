@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ImageSearchActivity" >
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/miSearch"
+        android:title="@string/action_bar_search"
+        android:icon="@drawable/ic_action_search"
+        android:showAsAction="ifRoom"
+        >
+
+    </item>
+
+    <item
+        android:id="@+id/miOptions"
+        android:title="@string/action_bar_search"
+        android:icon="@drawable/ic_action_options"
+        android:showAsAction="ifRoom"
+        >
+     </item>
+</menu>
