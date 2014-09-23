@@ -1,14 +1,18 @@
 package prafulmantale.praful.com.imagefinder.models;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by prafulmantale on 9/19/14.
  */
 
-public class SearchResultClass implements Serializable{
+public class SearchResult implements Serializable{
 
     private String title;
     private String tbUrl;
@@ -25,7 +29,7 @@ public class SearchResultClass implements Serializable{
     private String content;
     private String contentNoFormatting;
 
-    public SearchResultClass() {
+    public SearchResult() {
     }
 
     public String getTitle() {
@@ -140,11 +144,75 @@ public class SearchResultClass implements Serializable{
         this.contentNoFormatting = contentNoFormatting;
     }
 
-    public static SearchResultClass fromJSON(JSONObject jsonObject){
+    private static SearchResult fromJSONObject(JSONObject jsonObject){
 
-        SearchResultClass searchResultClass = new SearchResultClass();
+        SearchResult searchResult = new SearchResult();
 
+        try {
 
-        return searchResultClass;
+            searchResult.tbUrl = jsonObject.getString("tbUrl");
+            searchResult.url = jsonObject.getString("url");
+            searchResult.title = jsonObject.getString("title");
+
+        }
+        catch (JSONException ex){
+            return null;
+        }
+
+        return searchResult;
+    }
+
+    public static List<SearchResult> fromJSON(JSONObject jsonObject){
+
+        List<SearchResult> list = new ArrayList<SearchResult>();
+        try {
+            JSONObject responseData = jsonObject.getJSONObject("responseData");
+            JSONArray resultsArray = responseData.getJSONArray("results");
+
+            for(int i = 0; i < resultsArray.length(); i ++){
+
+                SearchResult searchResult = null;
+
+                try {
+                    JSONObject obj = resultsArray.getJSONObject(i);
+
+                    if (obj == null) {
+                        continue;
+                    }
+
+                    searchResult = fromJSONObject(obj);
+                }
+                catch (JSONException e1){
+                    continue;
+                }
+
+                list.add(searchResult);
+            }
+        }
+        catch (JSONException ex){
+
+        }
+
+        return list;
+    }
+
+    @Override
+    public String toString() {
+        return "SearchResult{" +
+                "title='" + title + '\'' +
+                ", tbUrl='" + tbUrl + '\'' +
+                ", width=" + width +
+                ", height=" + height +
+                ", imageId='" + imageId + '\'' +
+                ", tbWidth=" + tbWidth +
+                ", tbHeight=" + tbHeight +
+                ", unEscapedUrl='" + unEscapedUrl + '\'' +
+                ", url='" + url + '\'' +
+                ", visibleUrl='" + visibleUrl + '\'' +
+                ", titleNoFormatting='" + titleNoFormatting + '\'' +
+                ", originalContextUrl='" + originalContextUrl + '\'' +
+                ", content='" + content + '\'' +
+                ", contentNoFormatting='" + contentNoFormatting + '\'' +
+                '}';
     }
 }
