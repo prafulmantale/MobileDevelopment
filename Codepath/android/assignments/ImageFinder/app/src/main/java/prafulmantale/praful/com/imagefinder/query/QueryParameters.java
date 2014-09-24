@@ -23,6 +23,7 @@ public class QueryParameters {
         version = "1.0";
         queryText = "";
         resultsPerPage = 8;
+        startIndex = 0;
 
         queryFilters = new QueryFilters();
     }
@@ -30,6 +31,10 @@ public class QueryParameters {
     public static QueryParameters getInstance(){
 
         return INSTANCE;
+    }
+
+    public void reset(){
+        INSTANCE = new QueryParameters();
     }
 
     public String getVersion() {

@@ -31,8 +31,6 @@ public class SearchResultsHandler extends JsonHttpResponseHandler {
     @Override
     public void onSuccess(int statusCode, JSONObject response) {
 
-        Log.d(TAG, response.toString());
-
         if(response == null){
             return;
         }

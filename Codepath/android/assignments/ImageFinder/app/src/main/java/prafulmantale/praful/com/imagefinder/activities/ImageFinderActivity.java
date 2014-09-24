@@ -46,6 +46,7 @@ public class ImageFinderActivity extends Activity {
         setContentView(R.layout.activity_image_finder);
 
         queryParameters = QueryParameters.getInstance();
+        queryParameters.reset();
 
         initializeViews();
 
@@ -63,6 +64,7 @@ public class ImageFinderActivity extends Activity {
         etSearchQuery = (EditText)findViewById(R.id.etSearchQuery);
         gvImageResult = (GridView)findViewById(R.id.gvImageResult);
         btnSearch = (Button)findViewById(R.id.btnSearch);
+        btnSearch.setEnabled(false);
 
         etSearchQuery.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,10 +76,10 @@ public class ImageFinderActivity extends Activity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if(etSearchQuery.getText().toString().trim().length() == 0){
-                    //Disable search button
+                    btnSearch.setEnabled(false);
                 }
                 else{
-                    //Enable search button
+                    btnSearch.setEnabled(true);
                 }
             }
 
@@ -97,7 +99,15 @@ public class ImageFinderActivity extends Activity {
         gvImageResult.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public void onLoadMore(int page, int totalCount) {
-                queryParameters.setStartIndex(page);
+                if(queryParameters.getQueryText().trim().isEmpty()){
+                    return;
+                }
+                if(queryParameters.getStartIndex() == totalCount){
+                    return;
+                }
+
+                queryParameters.setStartIndex(totalCount);
+
                 getImages();
             }
         });
@@ -120,6 +130,7 @@ public class ImageFinderActivity extends Activity {
             return;
         }
 
+        adapter.clear();
         searchResults.clear();
         queryParameters.setQueryText(queryString);
         getImages();

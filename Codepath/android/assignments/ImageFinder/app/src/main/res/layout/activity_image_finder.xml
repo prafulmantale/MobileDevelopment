@@ -30,9 +30,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/gvImageResult"
-        android:numColumns="3"
+        android:numColumns="auto_fit"
         android:layout_below="@+id/etSearchQuery"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:columnWidth="100dp"
+        />
 
 </RelativeLayout>

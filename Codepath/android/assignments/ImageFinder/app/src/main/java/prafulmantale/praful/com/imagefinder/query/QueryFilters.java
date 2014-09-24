@@ -24,9 +24,9 @@ public class QueryFilters {
     private String domain;
 
     public QueryFilters() {
-        color = ImageColor.black;
-        type = ImageType.face;
-        size = ImageSize.icon;
+        color = ImageColor.none;
+        type = ImageType.none;
+        size = ImageSize.none;
         domain = "";
     }
 

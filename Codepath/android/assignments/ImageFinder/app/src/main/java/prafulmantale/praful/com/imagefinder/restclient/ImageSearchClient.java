@@ -35,6 +35,7 @@ public class ImageSearchClient{
         requestParams.put(KEY_START_INDEX, queryParameters.getPageIndex());
         queryParameters.populateRequestParameters(requestParams);
 
+        System.out.println("Sending..: " + requestParams.toString());
 
         httpClient.get(API_URL, requestParams, jsonHttpResponseHandler);
 
