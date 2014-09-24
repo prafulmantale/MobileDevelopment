@@ -10,5 +10,39 @@
     <string name="button_serach_text">Search</string>
     <string name="title_activity_image_display">Full Image</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_options">OptionsActivity</string>
+    <string name="title_options_header">Advanced Search Options</string>
+
+    <string name="option_image_size">Image Size</string>
+    <string name="option_color_filter">Color Filter</string>
+    <string name="option_image_type">Image Type</string>
+    <string name="option_site_filter">Site Filter</string>
+
+    <string name="button_save">Save</string>
+    <string name="button_cancel">Cancel</string>
+
+    <string-array name="image_sizes">
+        <item>none</item>
+        <item>icon</item>
+        <item>small</item>
+        <item>xxlarge</item>
+        <item>huge</item>
+    </string-array>
+
+    <string-array name="color_filters">
+        <item>none</item>
+        <item>black</item>
+        <item>blue</item>
+        <item>brown</item>
+        <item>gray</item>
+    </string-array>
+
+    <string-array name="image_types">
+        <item>none</item>
+        <item>face</item>
+        <item>photo</item>
+        <item>clipart</item>
+        <item>lineart</item>
+    </string-array>
 
 </resources>

@@ -19,6 +19,7 @@ import java.util.List;
 import prafulmantale.praful.com.imagefinder.R;
 import prafulmantale.praful.com.imagefinder.adapters.SearchResultsAdapter;
 import prafulmantale.praful.com.imagefinder.handlers.SearchResultsHandler;
+import prafulmantale.praful.com.imagefinder.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.imagefinder.models.SearchResult;
 import prafulmantale.praful.com.imagefinder.query.QueryParameters;
 import prafulmantale.praful.com.imagefinder.restclient.ImageSearchClient;
@@ -34,11 +35,17 @@ public class ImageFinderActivity extends Activity {
     private SearchResultsHandler searchResultsHandler;
 
     private SearchResultsAdapter adapter;
+
+    private QueryParameters queryParameters;
+    private ImageSearchClient client = new ImageSearchClient();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_finder);
+
+        queryParameters = QueryParameters.getInstance();
 
         initializeViews();
 
@@ -86,6 +93,14 @@ public class ImageFinderActivity extends Activity {
                 showImageDisplay(searchResults.get(position));
             }
         });
+
+        gvImageResult.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalCount) {
+                queryParameters.setStartIndex(page);
+                getImages();
+            }
+        });
     }
 
     private void showImageDisplay(SearchResult searchResult){
@@ -106,16 +121,13 @@ public class ImageFinderActivity extends Activity {
         }
 
         searchResults.clear();
-        getImages(queryString);
+        queryParameters.setQueryText(queryString);
+        getImages();
 
     }
 
-    private void getImages(String queryText){
+    private void getImages(){
 
-        QueryParameters queryParameters = new QueryParameters();
-        queryParameters.setQueryText(queryText);
-
-        ImageSearchClient client = new ImageSearchClient();
         client.getImages(searchResultsHandler, queryParameters);
     }
 
@@ -137,7 +149,7 @@ public class ImageFinderActivity extends Activity {
                 return true;
 
             case R.id.miOptions:
-                //Do something
+                showOptions();
                 return true;
 
             case R.id.action_settings:
@@ -146,5 +158,12 @@ public class ImageFinderActivity extends Activity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showOptions() {
+
+        Intent intent = new Intent(this, OptionsActivity.class);
+
+        startActivity(intent);
     }
 }

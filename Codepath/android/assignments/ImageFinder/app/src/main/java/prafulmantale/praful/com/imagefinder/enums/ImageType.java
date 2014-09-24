@@ -7,8 +7,19 @@ package prafulmantale.praful.com.imagefinder.enums;
  */
 public enum ImageType {
 
-    face,
-    photo,
-    clipart,
-    lineart
+    none(0),
+    face(1),
+    photo(2),
+    clipart(3),
+    lineart(4);
+
+    private int value;
+
+    ImageType(int val){
+        this.value = val;
+    }
+
+    public int getValue(){
+        return value;
+    }
 }

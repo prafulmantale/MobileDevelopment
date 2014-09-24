@@ -1,11 +1,15 @@
 package prafulmantale.praful.com.imagefinder.query;
 
+import com.loopj.android.http.RequestParams;
+
 /**
  * Created by prafulmantale on 9/22/14.
  *
  * Container class for query parameters and filters
  */
 public class QueryParameters {
+
+    private static QueryParameters INSTANCE = new QueryParameters();
 
     private String version;
     private String queryText;
@@ -15,12 +19,17 @@ public class QueryParameters {
 
     private QueryFilters queryFilters;
 
-    public QueryParameters() {
+    private QueryParameters() {
         version = "1.0";
         queryText = "";
         resultsPerPage = 8;
 
         queryFilters = new QueryFilters();
+    }
+
+    public static QueryParameters getInstance(){
+
+        return INSTANCE;
     }
 
     public String getVersion() {
@@ -49,6 +58,10 @@ public class QueryParameters {
 
     public int getStartIndex() {
         return startIndex;
+    }
+
+    public String getPageIndex() {
+        return String.valueOf(startIndex);
     }
 
     public void setStartIndex(int startIndex) {
@@ -82,6 +95,9 @@ public class QueryParameters {
         return isValid;
     }
 
+    public void populateRequestParameters(RequestParams requestParams) {
+        getQueryFilters().populateRequestParameters(requestParams);
+    }
 
     @Override
     public String toString() {

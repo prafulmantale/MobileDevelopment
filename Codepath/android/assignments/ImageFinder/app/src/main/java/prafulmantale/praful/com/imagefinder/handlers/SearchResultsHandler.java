@@ -40,10 +40,6 @@ public class SearchResultsHandler extends JsonHttpResponseHandler {
         List<SearchResult> results = SearchResult.fromJSON(response);
 
         adapter.addAll(results);
-
-        for(SearchResult res : resultList){
-            System.out.println(res);
-        }
     }
 
     @Override

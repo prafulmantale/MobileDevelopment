@@ -4,6 +4,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import prafulmantale.praful.com.imagefinder.enums.ImageColor;
 import prafulmantale.praful.com.imagefinder.query.QueryParameters;
 
 /**
@@ -15,6 +16,7 @@ public class ImageSearchClient{
     private static final String KEY_VERSION = "v";
     private static final String KEY_QUERY = "q";
     private static final String KEY_RESULTS_PER_PAGE = "rsz";
+    private static final String KEY_START_INDEX = "start";
 
 
     private AsyncHttpClient httpClient;
@@ -30,6 +32,9 @@ public class ImageSearchClient{
         requestParams.put(KEY_VERSION, queryParameters.getVersion());
         requestParams.put(KEY_QUERY, queryParameters.getQueryText());
         requestParams.put(KEY_RESULTS_PER_PAGE, queryParameters.getRSZ());
+        requestParams.put(KEY_START_INDEX, queryParameters.getPageIndex());
+        queryParameters.populateRequestParameters(requestParams);
+
 
         httpClient.get(API_URL, requestParams, jsonHttpResponseHandler);
 

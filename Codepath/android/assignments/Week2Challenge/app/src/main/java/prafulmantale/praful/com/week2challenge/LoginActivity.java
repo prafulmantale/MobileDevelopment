@@ -1,42 +1,24 @@
-package prafulmantale.praful.com.imagefinder.activities;
+package prafulmantale.praful.com.week2challenge;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
 
-import prafulmantale.praful.com.imagefinder.R;
-import prafulmantale.praful.com.imagefinder.models.SearchResult;
-
-public class ImageDisplayActivity extends Activity {
-
-    private ImageView ivImageFull;
+public class LoginActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_display);
-
-        getActionBar().hide();
-        initializeViews();
-
-        SearchResult searchResult = (SearchResult)getIntent().getSerializableExtra("SR");
-
-        Picasso.with(this).load(searchResult.getUrl()).into(ivImageFull);
+        setContentView(R.layout.activity_login);
     }
 
-    private void initializeViews(){
-
-        ivImageFull = (ImageView)findViewById(R.id.ivImageFull);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.image_display, menu);
+        getMenuInflater().inflate(R.menu.login, menu);
         return true;
     }
 

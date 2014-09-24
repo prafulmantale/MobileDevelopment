@@ -1,5 +1,7 @@
 package prafulmantale.praful.com.imagefinder.query;
 
+import com.loopj.android.http.RequestParams;
+
 import prafulmantale.praful.com.imagefinder.enums.ImageColor;
 import prafulmantale.praful.com.imagefinder.enums.ImageSize;
 import prafulmantale.praful.com.imagefinder.enums.ImageType;
@@ -11,12 +13,21 @@ import prafulmantale.praful.com.imagefinder.enums.ImageType;
  */
 public class QueryFilters {
 
+    private static final String KEY_IMAGE_COLOR = "imgcolor";
+    private static final String KEY_IMAGE_SIZE = "imgsz";
+    private static final String KEY_IMAGE_TYPE = "imgtype";
+    private static final String KEY_DOMAIN = "as_sitesearch";
+
     private ImageColor color;
     private ImageType type;
     private ImageSize size;
     private String domain;
 
     public QueryFilters() {
+        color = ImageColor.black;
+        type = ImageType.face;
+        size = ImageSize.icon;
+        domain = "";
     }
 
 
@@ -50,6 +61,31 @@ public class QueryFilters {
 
     public void setDomain(String domain) {
         this.domain = domain;
+    }
+
+    protected void populateRequestParameters(RequestParams requestParams){
+
+        if(requestParams == null){
+            requestParams = new RequestParams();
+        }
+
+        if(color != ImageColor.none){
+            requestParams.put(KEY_IMAGE_COLOR, color.name());
+        }
+
+        if(size != ImageSize.none){
+            requestParams.put(KEY_IMAGE_SIZE, size.name());
+        }
+
+        if(type != ImageType.none){
+            requestParams.put(KEY_IMAGE_TYPE, type.name());
+        }
+
+        if(color != ImageColor.none){
+            if(domain!= null && domain.trim().isEmpty() == false){
+                requestParams.put(KEY_DOMAIN, domain.trim());
+            }
+        }
     }
 
     @Override

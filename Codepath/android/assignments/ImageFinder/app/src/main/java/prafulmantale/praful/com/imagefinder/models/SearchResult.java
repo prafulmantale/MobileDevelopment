@@ -1,5 +1,7 @@
 package prafulmantale.praful.com.imagefinder.models;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +15,8 @@ import java.util.List;
  */
 
 public class SearchResult implements Serializable{
+
+    private static final String TAG = "SearchResult";
 
     private String title;
     private String tbUrl;
@@ -167,6 +171,10 @@ public class SearchResult implements Serializable{
         List<SearchResult> list = new ArrayList<SearchResult>();
         try {
             JSONObject responseData = jsonObject.getJSONObject("responseData");
+            if(responseData == null || responseData.isNull("results")){
+                Log.d(TAG, "responsedata is null or does not have results");
+            }
+
             JSONArray resultsArray = responseData.getJSONArray("results");
 
             for(int i = 0; i < resultsArray.length(); i ++){

@@ -7,8 +7,20 @@ package prafulmantale.praful.com.imagefinder.enums;
  */
 public enum  ImageSize {
 
-    icon,
-    small,
-    xxlarge,
-    huge
+    none(0),
+    icon(1),
+    small(2),
+    xxlarge(3),
+    huge(4);
+
+
+    private int value;
+
+    ImageSize(int val){
+        this.value = val;
+    }
+
+    public int getValue(){
+        return value;
+    }
 }

@@ -26,6 +26,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="prafulmantale.praful.com.imagefinder.activities.ImageFinderActivity" />
         </activity>
+        <activity
+            android:name=".activities.OptionsActivity"
+            android:label="@string/title_activity_options"
+            android:parentActivityName=".activities.ImageFinderActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="prafulmantale.praful.com.imagefinder.activities.ImageFinderActivity" />
+        </activity>
     </application>
 
 </manifest>
