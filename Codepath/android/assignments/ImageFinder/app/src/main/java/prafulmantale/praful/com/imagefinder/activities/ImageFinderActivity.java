@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,15 +17,18 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import prafulmantale.praful.com.imagefinder.R;
 import prafulmantale.praful.com.imagefinder.adapters.SearchResultsAdapter;
 import prafulmantale.praful.com.imagefinder.handlers.SearchResultsHandler;
+import prafulmantale.praful.com.imagefinder.helpers.Utility;
 import prafulmantale.praful.com.imagefinder.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.imagefinder.models.SearchResult;
 import prafulmantale.praful.com.imagefinder.query.QueryParameters;
@@ -30,6 +36,8 @@ import prafulmantale.praful.com.imagefinder.restclient.ImageSearchClient;
 
 
 public class ImageFinderActivity extends Activity {
+
+    private static final String TAG = "ImageFinderActivity";
 
     private EditText etSearchQuery;
     private GridView gvImageResult;
@@ -97,7 +105,10 @@ public class ImageFinderActivity extends Activity {
         gvImageResult.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showImageDisplay(searchResults.get(position));
+                //showImageDisplay(searchResults.get(position));
+                //sendHTML();
+                //sendLocalImages();
+                sendRemoteImage((ImageView)view.findViewById(R.id.ivImage));
             }
         });
 
@@ -231,5 +242,46 @@ public class ImageFinderActivity extends Activity {
         }
 
         return false;
+    }
+
+    private void sendHTML(){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+
+        intent.setType("text/html");
+
+        intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml("<p>HTML text shared"));
+
+        startActivity(Intent.createChooser(intent, "Share HTML using"));
+    }
+
+    private void sendLocalImages(){
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+
+        intent.setType("image/jpg");
+
+        Uri uri = Uri.fromFile(new File(getFilesDir(), "app.jpg"));
+
+        intent.putExtra(Intent.EXTRA_STREAM, uri.toString());
+
+        startActivity(Intent.createChooser(intent, "Share Image using"));
+    }
+
+    private void sendRemoteImage(ImageView imageView){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/*");
+
+        Uri uri = Utility.getLocalBitmapUri(imageView);
+
+        if(uri != null) {
+            intent.putExtra(Intent.EXTRA_STREAM, uri);
+
+            startActivity(Intent.createChooser(intent, "Share Remote Image Using"));
+        }
+        else{
+            Log.d(TAG, "Remote Image sharing failed");
+
+            Toast.makeText(this, R.string.error_remote_image_share, Toast.LENGTH_SHORT).show();
+        }
     }
 }

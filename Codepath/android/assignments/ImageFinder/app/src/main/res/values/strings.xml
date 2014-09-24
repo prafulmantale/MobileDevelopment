@@ -23,6 +23,7 @@
 
 
     <string name="error_network_not_available">Network is not available. Please try again later..</string>
+    <string name="error_remote_image_share">Remote Image sharing failed</string>
 
     <string-array name="image_sizes">
         <item>none</item>
