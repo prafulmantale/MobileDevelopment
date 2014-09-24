@@ -10,7 +10,8 @@
         android:id="@+id/miSearch"
         android:title="@string/action_bar_search"
         android:icon="@drawable/ic_action_search"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:actionViewClass="android.widget.SearchView"
         >
 
     </item>

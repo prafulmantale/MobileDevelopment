@@ -74,6 +74,8 @@ public class OptionsActivity extends Activity {
             queryFilters.setColor(ImageColor.values()[spColorFilters.getSelectedItemPosition()]);
             queryFilters.setDomain(etSiteFilter.getText().toString());
 
+            queryParameters.setQueryFilters(queryFilters);
+
            finish();
         }
     }

@@ -2,6 +2,8 @@ package prafulmantale.praful.com.imagefinder.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,8 @@ public class ImageFinderActivity extends Activity {
     private QueryParameters queryParameters;
     private ImageSearchClient client = new ImageSearchClient();
 
+    private SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,7 +52,6 @@ public class ImageFinderActivity extends Activity {
         setContentView(R.layout.activity_image_finder);
 
         queryParameters = QueryParameters.getInstance();
-        queryParameters.reset();
 
         initializeViews();
 
@@ -123,22 +128,35 @@ public class ImageFinderActivity extends Activity {
 
     public void onSearchClick(View view){
 
-        //To do -- If query string has not changes then do not fire query
         String queryString = etSearchQuery.getText().toString();
 
         if(queryString.isEmpty()){
             return;
         }
 
-        adapter.clear();
-        searchResults.clear();
+//        //If query string has not changes then do not fire query
+//        if(queryParameters.getQueryText().trim().equalsIgnoreCase(queryString)){
+//            return;
+//        }
+
+        resetForNewQuery();
         queryParameters.setQueryText(queryString);
         getImages();
 
     }
 
+    private void resetForNewQuery(){
+        queryParameters.setStartIndex(0);
+        adapter.clear();
+        searchResults.clear();
+    }
+
     private void getImages(){
 
+        if(isNetworkAvailable() == false){
+            Toast.makeText(this, R.string.error_network_not_available, Toast.LENGTH_SHORT).show();
+            return;
+        }
         client.getImages(searchResultsHandler, queryParameters);
     }
 
@@ -147,7 +165,29 @@ public class ImageFinderActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.image_search, menu);
-        return true;
+
+        MenuItem searchMenuItem = menu.findItem(R.id.miSearch);
+
+        searchView = (SearchView)searchMenuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                resetForNewQuery();
+                queryParameters.setQueryText(query);
+                getImages();
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -176,5 +216,20 @@ public class ImageFinderActivity extends Activity {
         Intent intent = new Intent(this, OptionsActivity.class);
 
         startActivity(intent);
+    }
+
+
+    private  boolean isNetworkAvailable(){
+        boolean available = true;
+
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting()){
+            return true;
+        }
+
+        return false;
     }
 }

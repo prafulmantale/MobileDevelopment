@@ -33,10 +33,6 @@ public class QueryParameters {
         return INSTANCE;
     }
 
-    public void reset(){
-        INSTANCE = new QueryParameters();
-    }
-
     public String getVersion() {
         return version;
     }

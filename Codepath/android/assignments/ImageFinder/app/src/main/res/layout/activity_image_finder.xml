@@ -14,7 +14,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/btnSearch"
-        android:layout_alignBottom="@+id/btnSearch" />
+        android:layout_alignBottom="@+id/btnSearch"
+        android:visibility="gone"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -24,7 +25,8 @@
         android:onClick="onSearchClick"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"/>
 
     <GridView
         android:layout_width="wrap_content"
