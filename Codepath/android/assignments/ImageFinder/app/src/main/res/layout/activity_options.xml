@@ -105,11 +105,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etSiteFilter"
-        android:layout_alignLeft="@+id/btnSave"
-        android:layout_alignStart="@+id/btnSave"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/etImageType" />
+        android:layout_below="@+id/etImageType"
+        android:layout_alignLeft="@+id/etImageType"
+        android:layout_alignStart="@+id/etImageType" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

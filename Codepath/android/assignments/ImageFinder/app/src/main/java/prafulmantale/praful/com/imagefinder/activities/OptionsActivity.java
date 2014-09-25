@@ -28,6 +28,10 @@ public class OptionsActivity extends Activity {
     private QueryParameters queryParameters;
     private QueryFilters queryFilters;
 
+    private ArrayAdapter<CharSequence> spAdapterImageSizes;
+    private ArrayAdapter<CharSequence> spAdapterImageTypes;
+    private ArrayAdapter<CharSequence> spAdapterColorFilters;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,18 @@ public class OptionsActivity extends Activity {
         spImageTypes = (Spinner)findViewById(R.id.etImageType);
         spColorFilters = (Spinner)findViewById(R.id.etColorFilter);
         etSiteFilter = (EditText)findViewById(R.id.etSiteFilter);
+
+        spAdapterImageSizes = ArrayAdapter.createFromResource(this, R.array.image_sizes, R.layout.item_spinner_dropdown);
+        spAdapterImageSizes.setDropDownViewResource(R.layout.item_spinner_dropdown);
+        spImageSizes.setAdapter(spAdapterImageSizes);
+
+        spAdapterImageTypes = ArrayAdapter.createFromResource(this, R.array.image_types, R.layout.item_spinner_dropdown);
+        spAdapterImageTypes.setDropDownViewResource(R.layout.item_spinner_dropdown);
+        spImageTypes.setAdapter(spAdapterImageTypes);
+
+        spAdapterColorFilters = ArrayAdapter.createFromResource(this, R.array.color_filters, R.layout.item_spinner_dropdown);
+        spAdapterColorFilters.setDropDownViewResource(R.layout.item_spinner_dropdown);
+        spColorFilters.setAdapter(spAdapterColorFilters);
 
         btnSave = (Button)findViewById(R.id.btnSave);
         btnCancel = (Button)findViewById(R.id.btnCancel);

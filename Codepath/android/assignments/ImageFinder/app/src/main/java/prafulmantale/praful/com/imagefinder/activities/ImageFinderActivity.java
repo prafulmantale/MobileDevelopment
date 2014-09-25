@@ -2,10 +2,14 @@ package prafulmantale.praful.com.imagefinder.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -19,6 +23,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import java.io.File;
@@ -52,6 +57,7 @@ public class ImageFinderActivity extends Activity {
     private ImageSearchClient client = new ImageSearchClient();
 
     private SearchView searchView;
+    private ShareActionProvider shareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +114,8 @@ public class ImageFinderActivity extends Activity {
                 //showImageDisplay(searchResults.get(position));
                 //sendHTML();
                 //sendLocalImages();
-                sendRemoteImage((ImageView)view.findViewById(R.id.ivImage));
+                //sendRemoteImage((ImageView)view.findViewById(R.id.ivImage));
+                sendImageWithoutIO((ImageView)view.findViewById(R.id.ivImage));
             }
         });
 
@@ -198,6 +205,9 @@ public class ImageFinderActivity extends Activity {
             }
         });
 
+        MenuItem shareMenuItem = menu.findItem(R.id.menu_item_share);
+        shareActionProvider = (ShareActionProvider)shareMenuItem.getActionProvider();
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -283,5 +293,25 @@ public class ImageFinderActivity extends Activity {
 
             Toast.makeText(this, R.string.error_remote_image_share, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void sendImageWithoutIO(ImageView imageView){
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/*");
+
+        Uri uri = Utility.getBitmapURI(imageView, getBaseContext());
+
+        if(uri != null) {
+            intent.putExtra(Intent.EXTRA_STREAM, uri);
+
+            startActivity(Intent.createChooser(intent, "Share Remote Image Using"));
+        }
+        else{
+            Log.d(TAG, "Remote Image sharing failed");
+
+            Toast.makeText(this, R.string.error_remote_image_share, Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

@@ -1,11 +1,13 @@
 package prafulmantale.praful.com.imagefinder.helpers;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -25,6 +27,9 @@ public class Utility {
     }
 
 
+    /*
+        Not working
+     */
     public static Uri getLocalBitmapUri(ImageView imageView){
 
         Drawable drawable = imageView.getDrawable();
@@ -75,6 +80,30 @@ public class Utility {
         }
 
         return uri;
+    }
+
+    /*
+        //Not working
+     */
+    public static Uri getBitmapURI(ImageView imageView, Context context){
+
+        try {
+            Drawable drawable = imageView.getDrawable();
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+
+            String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Resolver title", "Image Description");
+
+            Uri uri = Uri.parse(path);
+
+            return uri;
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+
+            Log.d(TAG, ex.getMessage());
+        }
+
+        return null;
     }
 
 }
