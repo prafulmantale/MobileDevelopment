@@ -111,11 +111,11 @@ public class ImageFinderActivity extends Activity {
         gvImageResult.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //showImageDisplay(searchResults.get(position));
+                showImageDisplay(searchResults.get(position));
                 //sendHTML();
                 //sendLocalImages();
                 //sendRemoteImage((ImageView)view.findViewById(R.id.ivImage));
-                sendImageWithoutIO((ImageView)view.findViewById(R.id.ivImage));
+                //sendImageWithoutIO((ImageView)view.findViewById(R.id.ivImage));
             }
         });
 
