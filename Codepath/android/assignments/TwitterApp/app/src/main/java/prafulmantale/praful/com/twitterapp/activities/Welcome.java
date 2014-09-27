@@ -12,12 +12,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.codepath.oauth.OAuthBaseClient;
+import com.codepath.oauth.OAuthLoginActivity;
+
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.enums.AnimationType;
 import prafulmantale.praful.com.twitterapp.listeners.AppAnimationListener;
+import prafulmantale.praful.com.twitterapp.networking.TwitterClient;
 
 
-public class Welcome extends Activity {
+public class Welcome extends OAuthLoginActivity<TwitterClient> {
 
     //Animations
     private Animation slideOutAnimation;
@@ -94,7 +98,7 @@ public class Welcome extends Activity {
         }
 
         if(view.getId() == R.id.btnLogin){
-            showHomeActivity();
+
         }
 
     }
@@ -124,4 +128,26 @@ public class Welcome extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public Welcome() {
+        super();
+    }
+
+    @Override
+    public void onLoginSuccess() {
+        showHomeActivity();
+    }
+
+    @Override
+    public void onLoginFailure(Exception e) {
+        e.printStackTrace();
+        //Show error message
+    }
+
+
+    public void onLoginRequested(View view){
+        getClient().connect();
+        System.out.println("Here");
+    }
+
 }

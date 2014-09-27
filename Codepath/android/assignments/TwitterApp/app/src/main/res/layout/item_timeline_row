@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="userid"
-            android:id="@+id/tvUserId_timeline"
+            android:id="@+id/tvUserHandle_timeline"
             android:layout_toRightOf="@+id/tvUserName_timeline"
             android:layout_marginLeft="3dp"
             android:textAlignment="center"
@@ -58,7 +58,7 @@
             android:layout_alignParentRight="true"
             android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
-            android:textSize="8sp"/>
+            android:textSize="10sp"/>
 
         <TextView
             android:layout_width="wrap_content"
