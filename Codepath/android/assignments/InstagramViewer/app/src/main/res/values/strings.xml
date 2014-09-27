@@ -9,5 +9,6 @@
     <string name="title_activity_likes_viewer">Likers</string>
     <string name="input_comment_hint">Write a comment</string>
     <string name="title_activity_user_details">User Details</string>
+    <string name="title_activity_welcome">Welcome</string>
 
 </resources>

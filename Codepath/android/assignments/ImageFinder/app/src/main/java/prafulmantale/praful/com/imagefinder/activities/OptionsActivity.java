@@ -10,7 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 import prafulmantale.praful.com.imagefinder.R;
+import prafulmantale.praful.com.imagefinder.adapters.SpinnerColorAdapter;
 import prafulmantale.praful.com.imagefinder.enums.ImageColor;
 import prafulmantale.praful.com.imagefinder.enums.ImageSize;
 import prafulmantale.praful.com.imagefinder.enums.ImageType;
@@ -30,7 +34,7 @@ public class OptionsActivity extends Activity {
 
     private ArrayAdapter<CharSequence> spAdapterImageSizes;
     private ArrayAdapter<CharSequence> spAdapterImageTypes;
-    private ArrayAdapter<CharSequence> spAdapterColorFilters;
+    private SpinnerColorAdapter spAdapterColorFilters;
 
 
     @Override
@@ -69,8 +73,10 @@ public class OptionsActivity extends Activity {
         spAdapterImageTypes.setDropDownViewResource(R.layout.item_spinner_dropdown);
         spImageTypes.setAdapter(spAdapterImageTypes);
 
-        spAdapterColorFilters = ArrayAdapter.createFromResource(this, R.array.color_filters, R.layout.item_spinner_dropdown);
-        spAdapterColorFilters.setDropDownViewResource(R.layout.item_spinner_dropdown);
+        //spAdapterColorFilters = ArrayAdapter.createFromResource(this, R.array.color_filters, R.layout.item_spinner_dropdown);
+
+        spAdapterColorFilters = new SpinnerColorAdapter(this, Arrays.asList(new String[]{"a","b"}) /*Arrays.asList(this.getResources().getStringArray(R.array.color_filters))*/);
+        //spAdapterColorFilters.setDropDownViewResource(R.layout.item_spinner_dropdown);
         spColorFilters.setAdapter(spAdapterColorFilters);
 
         btnSave = (Button)findViewById(R.id.btnSave);

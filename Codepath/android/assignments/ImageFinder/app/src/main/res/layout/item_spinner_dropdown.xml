@@ -7,6 +7,5 @@
     android:singleLine="true"
     android:ellipsize="marquee"
     android:gravity="right"
-    android:padding="2dp"
-     />
-
+    android:text="@string/title_activity_image_display"
+    />

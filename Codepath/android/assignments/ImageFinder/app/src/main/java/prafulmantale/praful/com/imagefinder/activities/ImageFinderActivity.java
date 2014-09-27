@@ -2,14 +2,12 @@ package prafulmantale.praful.com.imagefinder.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -30,6 +28,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import prafulmantale.praful.com.imagefinder.OptionsDialog;
 import prafulmantale.praful.com.imagefinder.R;
 import prafulmantale.praful.com.imagefinder.adapters.SearchResultsAdapter;
 import prafulmantale.praful.com.imagefinder.handlers.SearchResultsHandler;
@@ -40,7 +39,7 @@ import prafulmantale.praful.com.imagefinder.query.QueryParameters;
 import prafulmantale.praful.com.imagefinder.restclient.ImageSearchClient;
 
 
-public class ImageFinderActivity extends Activity {
+public class ImageFinderActivity extends FragmentActivity {
 
     private static final String TAG = "ImageFinderActivity";
 
@@ -222,6 +221,7 @@ public class ImageFinderActivity extends Activity {
 
             case R.id.miOptions:
                 showOptions();
+                //showOptionsDialog();
                 return true;
 
             case R.id.action_settings:
@@ -312,6 +312,13 @@ public class ImageFinderActivity extends Activity {
 
             Toast.makeText(this, R.string.error_remote_image_share, Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    private void showOptionsDialog(){
+        FragmentManager manager = getSupportFragmentManager();
+        OptionsDialog dialog = OptionsDialog.newInstance("Advanced Filters");
+        dialog.show(manager, "mytag");
 
     }
 }
