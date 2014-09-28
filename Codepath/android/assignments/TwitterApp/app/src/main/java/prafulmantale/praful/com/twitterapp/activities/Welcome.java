@@ -141,13 +141,11 @@ public class Welcome extends OAuthLoginActivity<TwitterClient> {
     @Override
     public void onLoginFailure(Exception e) {
         e.printStackTrace();
-        //Show error message
     }
 
 
     public void onLoginRequested(View view){
         getClient().connect();
-        System.out.println("Here");
     }
 
 }

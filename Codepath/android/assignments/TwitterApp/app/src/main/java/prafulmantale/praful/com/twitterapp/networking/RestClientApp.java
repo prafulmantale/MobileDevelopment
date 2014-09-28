@@ -22,16 +22,16 @@ public class RestClientApp extends com.activeandroid.app.Application{
         super.onCreate();
         RestClientApp.context = this;
 
-//        DisplayImageOptions displayImageOptions = new DisplayImageOptions.Builder()
-//                .cacheInMemory()
-//                .cacheOnDisc()
-//                .build();
-//
-//        ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(getApplicationContext())
-//                .defaultDisplayImageOptions(displayImageOptions)
-//                .build();
-//
-//        ImageLoader.getInstance().init(configuration);
+        DisplayImageOptions displayImageOptions = new DisplayImageOptions.Builder()
+                .cacheInMemory()
+                .cacheOnDisc()
+                .build();
+
+        ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(getApplicationContext())
+                .defaultDisplayImageOptions(displayImageOptions)
+                .build();
+
+        ImageLoader.getInstance().init(configuration);
     }
 
     public static TwitterClient getTwitterClient(){

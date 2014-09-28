@@ -146,7 +146,7 @@
             android:layout_marginLeft="40dp"
             style="@style/SignButtons"
             android:background="@drawable/signin_button_style"
-            android:onClick="onSignButtonClick"
+            android:onClick="onLoginRequested"
             />
     </LinearLayout>
 </RelativeLayout>

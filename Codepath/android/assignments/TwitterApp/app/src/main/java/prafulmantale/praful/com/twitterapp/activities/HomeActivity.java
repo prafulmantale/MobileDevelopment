@@ -15,13 +15,17 @@ import java.util.List;
 
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.adapters.TimelineAdapter;
+import prafulmantale.praful.com.twitterapp.enums.APIRequest;
+import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
+import prafulmantale.praful.com.twitterapp.models.Tweet;
+import prafulmantale.praful.com.twitterapp.networking.RestClientApp;
 
 public class HomeActivity extends Activity {
 
 
     private ListView lvTimeline;
     private TimelineAdapter adapter;
-    private List<String> tweetList;
+    private List<Tweet> tweetList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +33,13 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
 
         initialize();
+        RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter), APIRequest.HOME_TIMELINE);
     }
 
     private void initialize(){
         initializeActionBar();
-
-        tweetList = new ArrayList<String>();
-        tweetList.add("Praful");
-        tweetList.add("Kumar");
-        tweetList.add("mantale");
         lvTimeline = (ListView)findViewById(R.id.lvTimeline);
+        tweetList = new ArrayList<Tweet>();
         adapter = new TimelineAdapter(this, tweetList);
         lvTimeline.setAdapter(adapter);
     }

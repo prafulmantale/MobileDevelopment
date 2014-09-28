@@ -52,7 +52,7 @@ public class TwitterClient  extends OAuthBaseClient{
     private static final String API_CONSUMER_KEY = "NcaM1a5ErkPhLFjtYndwI4JkW"; //API key
     private static final String API_CONSUMER_SECRET = "ReCGYvs5MJpPRLPj1oLeRXwapDYeNasnwbUP7MTYYeYuQ4LPtx"; //API secret
 
-    private static final String API_BASE_URL = "https://api.twitter.com/1.1/";
+    private static final String API_BASE_URL = "https://api.twitter.com/1.1";
 
     private static final String API_CALLBACK = "oauth://prafulmantale";
 
@@ -80,6 +80,7 @@ public class TwitterClient  extends OAuthBaseClient{
         RequestParams params = new RequestParams();
         params.put("since_id", "1");
 
+        System.out.println("Url:" + url + " params: " + params);
         client.get(url, params, responseHandler);
     }
 
