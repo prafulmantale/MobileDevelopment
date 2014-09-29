@@ -39,8 +39,8 @@
             android:label="@string/title_activity_home" >
         </activity>
         <activity
-            android:name=".CreateTweetActivity"
-            android:label="@string/title_activity_create_tweet" >
+            android:name=".activities.CreateTweetActivity"
+            android:parentActivityName=".activities.HomeActivity">
         </activity>
     </application>
 

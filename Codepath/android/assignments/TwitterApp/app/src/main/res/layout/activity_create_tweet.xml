@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="prafulmantale.praful.com.twitterapp.CreateTweetActivity">
+    tools:context="prafulmantale.praful.com.twitterapp.activities.CreateTweetActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,6 +16,7 @@
         android:maxHeight="40dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
+        android:layout_marginLeft="7dp"
         />
 
     <TextView
@@ -28,6 +29,7 @@
         android:textAlignment="center"
         android:textSize="12sp"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:gravity="top"
         />
 
@@ -38,7 +40,7 @@
         android:id="@+id/tvUserHandle_timeline"
         android:layout_below="@+id/tvUserName_createtweet"
         android:layout_toRightOf="@id/ivProfilePicture_createtweet"
-        android:layout_marginLeft="3dp"
+        android:layout_marginLeft="5dp"
         android:textAlignment="center"
         android:textColor="@android:color/darker_gray"
         android:textSize="10sp"
@@ -49,8 +51,8 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
+        android:layout_height="match_parent"
+        android:inputType="textAutoComplete"
         android:ems="12"
         android:id="@+id/etTweetText_createtweet"
         android:layout_below="@+id/relativeLayout"
@@ -58,10 +60,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:maxLength="200"
+        android:maxLength="140"
         android:hint="@string/create_tweet_text_hint"
         android:gravity="top"
         android:textSize="16sp"
-        android:layout_alignParentBottom="true" />
+        />
 
 </RelativeLayout>

@@ -1,13 +1,14 @@
 package prafulmantale.praful.com.twitterapp.activities;
 
-import android.animation.TimeAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class HomeActivity extends Activity {
     private ListView lvTimeline;
     private TimelineAdapter adapter;
     private List<Tweet> tweetList;
+    private ImageView ivComposeTweet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
 
         initialize();
+        setupListeners();
         RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter), APIRequest.HOME_TIMELINE);
     }
 
@@ -50,6 +53,7 @@ public class HomeActivity extends Activity {
         final ActionBar actionBar = getActionBar();
 
         View view = getLayoutInflater().inflate(R.layout.action_bar_home_title, null);
+        ivComposeTweet = (ImageView)view.findViewById(R.id.ivCreateTweet_actionbar);
 
 
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(
@@ -63,6 +67,16 @@ public class HomeActivity extends Activity {
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setHomeButtonEnabled(false);
 
+    }
+
+    private void setupListeners(){
+        ivComposeTweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, CreateTweetActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
