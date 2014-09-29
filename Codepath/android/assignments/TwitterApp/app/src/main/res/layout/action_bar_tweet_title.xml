@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:layout_gravity="center"
-    android:background="#ff55acee"
+    android:background="@android:color/white"
     android:gravity="right"
     android:padding="10dp"
     >
@@ -22,7 +22,7 @@
         android:layout_centerVertical="true"
         android:gravity="center"
         style="@style/SignButtons"
-        android:background="@drawable/signup_button_style"
+        android:background="@drawable/tweet_button_disabled_style"
         />
 
     <TextView

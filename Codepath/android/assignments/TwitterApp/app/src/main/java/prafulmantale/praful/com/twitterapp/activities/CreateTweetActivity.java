@@ -2,6 +2,7 @@ package prafulmantale.praful.com.twitterapp.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -78,11 +79,23 @@ public class CreateTweetActivity extends Activity {
 
                 if(etTweetBody.getText().toString().length() == 0){
                     btnTweet.setEnabled(false);
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        btnTweet.setBackground(getResources().getDrawable(R.drawable.tweet_button_disabled_style));
+                    }
+                    else{
+                        btnTweet.setBackgroundResource(R.drawable.tweet_button_disabled_style);
+                    }
                     tvCharCount.setText("140");
                 }
                 else{
                     btnTweet.setEnabled(true);
-                    tvCharCount.setText(String.valueOf((140 - etTweetBody.getText().length()) ));
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        btnTweet.setBackground(getResources().getDrawable(R.drawable.tweet_button_enabled_style));
+                    }
+                    else{
+                        btnTweet.setBackgroundResource(R.drawable.signup_button_style);
+                    }
+                    tvCharCount.setText(String.valueOf((140 - etTweetBody.getText().length())));
                 }
             }
 
