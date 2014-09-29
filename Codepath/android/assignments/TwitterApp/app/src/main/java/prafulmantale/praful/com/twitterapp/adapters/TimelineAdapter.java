@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -72,6 +74,11 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
         viewHolder.tvUserName.setText(tweet.getUser().getName());
         viewHolder.tvScreenName.setText("@" + tweet.getUser().getScreenName());
         viewHolder.tvTweet.setText(tweet.getBody());
+        viewHolder.tvCreatedTime.setText(tweet.getRelativeTimeAgo());
+        viewHolder.tvRetweetsCount.setText(tweet.getRetweet_count());
+        viewHolder.tvFavoritesCount.setText(tweet.getFavorite_count());
+
+        ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(), viewHolder.ivProfileImage);
 
         return convertView;
     }

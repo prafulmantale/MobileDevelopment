@@ -39,7 +39,7 @@ public class Utils {
         String display = "";
 
         Date date = new Date();
-        date.setTime(createdTime * 1000);
+        date.setTime(createdTime);
 
         Calendar calendar1 = Calendar.getInstance();
         calendar1.setTimeZone(TimeZone.getTimeZone("UTC"));

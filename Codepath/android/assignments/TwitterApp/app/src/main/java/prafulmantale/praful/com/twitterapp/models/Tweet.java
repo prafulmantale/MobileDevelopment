@@ -10,24 +10,35 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import prafulmantale.praful.com.twitterapp.helpers.Utils;
 
 /**
  * Created by prafulmantale on 9/26/14.
  */
-@Table(name = "Tweets")
+//@Table(name = "Tweets")
 public class Tweet extends Model{
 
     private static final String TAG = "TWEET";
 
-    @Column(name="text")
+    //@Column(name="text")
     private String body;
-    @Column(name="uid")
+    //@Column(name="uid")
     private long uid;
 
-    @Column(name = "createdAt")
+    //@Column(name = "createdAt")
     private String createdAt;
+
+    //@Column(name = "retweet_count")
+    private String retweet_count;
+
+    //@Column(name="favorite_count")
+    private String favorite_count;
 
     private User user;
 
@@ -36,6 +47,8 @@ public class Tweet extends Model{
         body = "";
         uid = 0;
         createdAt = "";
+        retweet_count = "";
+        favorite_count = "";
         user = new User();
     }
 
@@ -51,8 +64,40 @@ public class Tweet extends Model{
         return createdAt;
     }
 
+    public String getRetweet_count() {
+        return retweet_count;
+    }
+
+    public void setRetweet_count(String retweet_count) {
+        this.retweet_count = retweet_count;
+    }
+
+    public String getFavorite_count() {
+        return favorite_count;
+    }
+
+    public void setFavorite_count(String favorite_count) {
+        this.favorite_count = favorite_count;
+    }
+
     public User getUser() {
         return user;
+    }
+
+    public String getRelativeTimeAgo() {
+        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+        sf.setLenient(true);
+
+        String relativeDate = "";
+        try {
+            long dateMillis = sf.parse(createdAt).getTime();
+            relativeDate = Utils.getElapsedDisplayTime(dateMillis);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return relativeDate;
     }
 
     public static Tweet fromJSON(JSONObject jsonObject){
@@ -64,7 +109,17 @@ public class Tweet extends Model{
             tweet.body = jsonObject.getString("text");
             tweet.uid = jsonObject.getLong("id");
             tweet.createdAt = jsonObject.getString("created_at");
+            try {
+                tweet.retweet_count = jsonObject.getString("retweet_count");
+                tweet.favorite_count = jsonObject.getString("favorite_count");
+            }
+            catch (Exception e){
+
+                System.out.println("Something wrong");
+
+            }
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+
 
         }
         catch (JSONException ex){
@@ -95,7 +150,7 @@ public class Tweet extends Model{
                     continue;
                 }
 
-                tweet.save();
+                //tweet.save();
                 list.add(tweet);
             }
             catch (JSONException ex){

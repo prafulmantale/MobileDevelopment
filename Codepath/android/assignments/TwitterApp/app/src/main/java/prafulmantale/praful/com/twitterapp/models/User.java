@@ -7,22 +7,24 @@ import com.activeandroid.annotation.Table;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import prafulmantale.praful.com.twitterapp.helpers.Utils;
+
 /**
  * Created by prafulmantale on 9/27/14.
  */
-@Table(name="users")
-public class User extends Model{
+//@Table(name="users")
+public class User/* extends Model*/{
 
-    @Column(name="uname")
+    //@Column(name="uname")
     private String name;
 
-    @Column(name="uid")
+    //@Column(name="uid")
     private long uid;
 
-    @Column(name="screenname")
+    //@Column(name="screenname")
     private String screenName;
 
-    @Column(name = "profileurl")
+    //@Column(name = "profileurl")
     private String profileImageUrl;
 
 
