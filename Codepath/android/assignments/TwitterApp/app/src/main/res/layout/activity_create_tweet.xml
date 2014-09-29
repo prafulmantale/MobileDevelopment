@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="prafulmantale.praful.com.twitterapp.CreateTweetActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/relativeLayout">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/ivProfilePicture_createtweet"
+        android:src="@drawable/ic_launcher"
+        android:maxHeight="40dp"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        android:id="@+id/tvUserName_createtweet"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/ivProfilePicture_createtweet"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:gravity="top"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="userid"
+        android:id="@+id/tvUserHandle_timeline"
+        android:layout_below="@+id/tvUserName_createtweet"
+        android:layout_toRightOf="@id/ivProfilePicture_createtweet"
+        android:layout_marginLeft="3dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="10sp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        />
+</RelativeLayout>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="12"
+        android:id="@+id/etTweetText_createtweet"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:maxLength="200"
+        android:hint="@string/create_tweet_text_hint"
+        android:gravity="top"
+        android:textSize="16sp"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
