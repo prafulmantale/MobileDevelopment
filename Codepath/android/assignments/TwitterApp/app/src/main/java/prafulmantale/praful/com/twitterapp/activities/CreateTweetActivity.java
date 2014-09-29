@@ -52,7 +52,7 @@ public class CreateTweetActivity extends Activity {
         btnTweet.setEnabled(false);
         tvCharCount.setText("140");
 
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
 
