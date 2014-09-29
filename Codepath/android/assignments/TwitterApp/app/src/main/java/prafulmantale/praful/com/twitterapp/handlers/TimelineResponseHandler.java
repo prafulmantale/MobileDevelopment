@@ -1,10 +1,12 @@
 package prafulmantale.praful.com.twitterapp.handlers;
 
+import android.os.Message;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -27,6 +29,13 @@ public class TimelineResponseHandler extends JsonHttpResponseHandler {
     }
 
     @Override
+    public void onSuccess(JSONObject response) {
+        super.onSuccess(response);
+    }
+
+
+
+    @Override
     public void onSuccess(JSONArray response) {
 
         Log.d("DEBUG: Response Body: \r\n" , response.toString());
@@ -43,6 +52,21 @@ public class TimelineResponseHandler extends JsonHttpResponseHandler {
 
     @Override
     public void onFailure(Throwable e, JSONObject errorResponse) {
-        Log.d("DEBUG: Failure \r\n", errorResponse.toString());
+        Log.d("DEBUG: Failure \r\n", e.getMessage());
+    }
+
+    @Override
+    protected void handleFailureMessage(Throwable e, String responseBody) {
+        super.handleFailureMessage(e, responseBody);
+    }
+
+    @Override
+    protected void handleSuccessJsonMessage(int statusCode, Object jsonResponse) {
+        super.handleSuccessJsonMessage(statusCode, jsonResponse);
+    }
+
+    @Override
+    protected void handleSuccessMessage(int statusCode, String responseBody) {
+        super.handleSuccessMessage(statusCode, responseBody);
     }
 }

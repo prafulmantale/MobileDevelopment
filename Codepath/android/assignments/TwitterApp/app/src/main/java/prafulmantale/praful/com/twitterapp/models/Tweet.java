@@ -3,6 +3,8 @@ package prafulmantale.praful.com.twitterapp.models;
 import android.util.Log;
 
 import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,16 +16,23 @@ import java.util.List;
 /**
  * Created by prafulmantale on 9/26/14.
  */
-public class Tweet{
+@Table(name = "Tweets")
+public class Tweet extends Model{
 
     private static final String TAG = "TWEET";
 
+    @Column(name="text")
     private String body;
+    @Column(name="uid")
     private long uid;
+
+    @Column(name = "createdAt")
     private String createdAt;
+
     private User user;
 
     public Tweet() {
+        super();
         body = "";
         uid = 0;
         createdAt = "";
@@ -86,6 +95,7 @@ public class Tweet{
                     continue;
                 }
 
+                tweet.save();
                 list.add(tweet);
             }
             catch (JSONException ex){

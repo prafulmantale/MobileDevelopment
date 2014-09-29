@@ -8,6 +8,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
@@ -49,8 +50,8 @@ public class TwitterClient  extends OAuthBaseClient{
     }
 
 
-    private static final String API_CONSUMER_KEY = "NcaM1a5ErkPhLFjtYndwI4JkW"; //API key
-    private static final String API_CONSUMER_SECRET = "ReCGYvs5MJpPRLPj1oLeRXwapDYeNasnwbUP7MTYYeYuQ4LPtx"; //API secret
+    private static final String API_CONSUMER_KEY = "v8nOFys30AJS0D4iSlOFUN6sQ"; //API key
+    private static final String API_CONSUMER_SECRET = "Ha8WYGznXDvBcXX3ImXpgyKJ3tJW9yW5B18sUsfny7cfQwvC83"; //API secret
 
     private static final String API_BASE_URL = "https://api.twitter.com/1.1";
 
@@ -58,30 +59,25 @@ public class TwitterClient  extends OAuthBaseClient{
 
     private static final Class<? extends Api> API_CLASS = TwitterApi.class;
 
-
-    private AsyncHttpClient client = new AsyncHttpClient();
-
-
     public TwitterClient(Context context){
 
         super(context, API_CLASS, API_BASE_URL, API_CONSUMER_KEY, API_CONSUMER_SECRET, API_CALLBACK);
     }
 
-    public void sendRequest(AsyncHttpResponseHandler responseHandler, APIRequest apiRequest){
+    public void sendRequest(JsonHttpResponseHandler responseHandler, APIRequest apiRequest){
 
         if(apiRequest == APIRequest.HOME_TIMELINE){
             getHomeTimeline(responseHandler);
         }
     }
 
-    private void getHomeTimeline(AsyncHttpResponseHandler responseHandler){
+    private void getHomeTimeline(JsonHttpResponseHandler responseHandler){
 
         String url = getApiUrl(requestMap.get(APIRequest.HOME_TIMELINE).url);
         RequestParams params = new RequestParams();
         params.put("since_id", "1");
 
-        System.out.println("Url:" + url + " params: " + params);
-        client.get(url, params, responseHandler);
+        getClient().get(url, null, responseHandler);
     }
 
 }

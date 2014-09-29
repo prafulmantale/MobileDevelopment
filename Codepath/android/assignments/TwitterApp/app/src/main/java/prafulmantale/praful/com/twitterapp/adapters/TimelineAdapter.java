@@ -70,7 +70,7 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
         }
 
         viewHolder.tvUserName.setText(tweet.getUser().getName());
-        viewHolder.tvScreenName.setText(tweet.getUser().getScreenName());
+        viewHolder.tvScreenName.setText("@" + tweet.getUser().getScreenName());
         viewHolder.tvTweet.setText(tweet.getBody());
 
         return convertView;

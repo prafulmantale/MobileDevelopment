@@ -1,6 +1,8 @@
 package prafulmantale.praful.com.twitterapp.models;
 
 import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,15 +10,24 @@ import org.json.JSONObject;
 /**
  * Created by prafulmantale on 9/27/14.
  */
-public class User{
+@Table(name="users")
+public class User extends Model{
 
+    @Column(name="uname")
     private String name;
+
+    @Column(name="uid")
     private long uid;
+
+    @Column(name="screenname")
     private String screenName;
+
+    @Column(name = "profileurl")
     private String profileImageUrl;
 
 
     public User() {
+        super();
         name = "";
         profileImageUrl = "";
         screenName = "";
