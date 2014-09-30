@@ -2,6 +2,8 @@ package prafulmantale.praful.com.twitterapp.adapters;
 
 import android.content.Context;
 import android.media.Image;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +75,8 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
 
         viewHolder.tvUserName.setText(tweet.getUser().getName());
         viewHolder.tvScreenName.setText("@" + tweet.getUser().getScreenName());
-        viewHolder.tvTweet.setText(tweet.getBody());
+        viewHolder.tvTweet.setText(Html.fromHtml(tweet.getFormattedBody()));
+        viewHolder.tvTweet.setMovementMethod(LinkMovementMethod.getInstance());
         viewHolder.tvCreatedTime.setText(tweet.getRelativeTimeAgo());
         viewHolder.tvRetweetsCount.setText(tweet.getRetweet_count());
         viewHolder.tvFavoritesCount.setText(tweet.getFavorite_count());

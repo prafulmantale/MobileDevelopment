@@ -42,6 +42,10 @@ public class Tweet extends Model{
 
     private User user;
 
+    private TweetEmbeddedUrl tweetEmbeddedUrl;
+
+    private String formattedBody;
+
     public Tweet() {
         super();
         body = "";
@@ -50,6 +54,8 @@ public class Tweet extends Model{
         retweet_count = "";
         favorite_count = "";
         user = new User();
+
+        formattedBody = null;
     }
 
     public String getBody() {
@@ -84,6 +90,36 @@ public class Tweet extends Model{
         return user;
     }
 
+    public TweetEmbeddedUrl getTweetEmbeddedUrl() {
+        return tweetEmbeddedUrl;
+    }
+
+    public void setTweetEmbeddedUrl(TweetEmbeddedUrl tweetEmbeddedUrl) {
+        this.tweetEmbeddedUrl = tweetEmbeddedUrl;
+    }
+
+    public String getFormattedBody(){
+        if(formattedBody != null){
+            return formattedBody;
+        }
+
+        formattedBody = body;
+
+        if(getTweetEmbeddedUrl() == null){
+            return formattedBody;
+        }
+        try {
+            formattedBody = formattedBody.substring(0, tweetEmbeddedUrl.getStartIndex()) +
+                    "<a href=\"" + getTweetEmbeddedUrl().getExpandedUrl() + "\">" + getTweetEmbeddedUrl().getDisplayUrl() + "</a> " +
+                    formattedBody.substring(getTweetEmbeddedUrl().getEndIndex());
+        }
+        catch (Exception ex){
+            formattedBody = body;
+        }
+
+        return formattedBody;
+    }
+
     public String getRelativeTimeAgo() {
         String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
         SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
@@ -114,13 +150,23 @@ public class Tweet extends Model{
                 tweet.favorite_count = jsonObject.getString("favorite_count");
             }
             catch (Exception e){
-
                 System.out.println("Something wrong");
-
             }
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
 
+            try {
+                JSONObject entities = jsonObject.getJSONObject("entities");
+                JSONArray urls = entities.getJSONArray("urls");
 
+                for (int i = 0; i < urls.length(); i++) {
+                    JSONObject obj = urls.getJSONObject(0);
+                    tweet.tweetEmbeddedUrl = TweetEmbeddedUrl.fromJSON(obj);
+                    break;
+                }
+            }
+            catch (Exception eh){
+
+            }
         }
         catch (JSONException ex){
             Log.d(TAG, "Exception while creating Tweet: \r\n" + ex.getMessage());
