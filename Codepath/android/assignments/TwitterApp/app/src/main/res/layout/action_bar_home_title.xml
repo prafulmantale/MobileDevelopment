@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/ivBackbutton"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_backbutton"
+        android:src="@drawable/ic_action_backbutton_white"
         android:layout_centerVertical="true"
         android:visibility="gone"
         />
