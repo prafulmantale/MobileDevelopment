@@ -38,6 +38,29 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
         private TextView tvFavoritesCount;
         private ImageView ivFollow;
 
+        void init(View convertView){
+            ivProfileImage = (ImageView)convertView.findViewById(R.id.ivProfilePicture_timeline);
+            tvUserName = (TextView)convertView.findViewById(R.id.tvUserName_timeline);
+            tvScreenName = (TextView)convertView.findViewById(R.id.tvUserHandle_timeline);
+            tvCreatedTime = (TextView)convertView.findViewById(R.id.tvElapsedTime_timeline);
+            tvTweet = (TextView)convertView.findViewById(R.id.tvTweet_timeline);
+            ivReply = (ImageView)convertView.findViewById(R.id.ivReply_timeline);
+            tvRetweetsCount = (TextView)convertView.findViewById(R.id.tvRetweets_timeline);
+            tvFavoritesCount = (TextView)convertView.findViewById(R.id.tvFavorites_timeline);
+            ivFollow = (ImageView)convertView.findViewById(R.id.ivFollow_timeline);
+        }
+
+        void populateViews(Tweet tweet){
+            tvUserName.setText(tweet.getUser().getName());
+            tvScreenName.setText("@" + tweet.getUser().getScreenName());
+            tvTweet.setText(Html.fromHtml(tweet.getFormattedBody()));
+            tvTweet.setMovementMethod(LinkMovementMethod.getInstance());
+            tvCreatedTime.setText(tweet.getRelativeTimeAgo());
+            tvRetweetsCount.setText(tweet.getRetweet_count());
+            tvFavoritesCount.setText(tweet.getFavorite_count());
+
+            ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(),ivProfileImage);
+        }
     }
 
     public TimelineAdapter(Context context, List<Tweet> objects) {
@@ -56,16 +79,7 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
 
             viewHolder = new ViewHolder();
 
-            viewHolder.ivProfileImage = (ImageView)convertView.findViewById(R.id.ivProfilePicture_timeline);
-            viewHolder.tvUserName = (TextView)convertView.findViewById(R.id.tvUserName_timeline);
-            viewHolder.tvScreenName = (TextView)convertView.findViewById(R.id.tvUserHandle_timeline);
-            viewHolder.tvCreatedTime = (TextView)convertView.findViewById(R.id.tvElapsedTime_timeline);
-            viewHolder.tvTweet = (TextView)convertView.findViewById(R.id.tvTweet_timeline);
-            viewHolder.ivReply = (ImageView)convertView.findViewById(R.id.ivReply_timeline);
-            viewHolder.tvRetweetsCount = (TextView)convertView.findViewById(R.id.tvRetweets_timeline);
-            viewHolder.tvFavoritesCount = (TextView)convertView.findViewById(R.id.tvFavorites_timeline);
-            viewHolder.ivFollow = (ImageView)convertView.findViewById(R.id.ivFollow_timeline);
-
+            viewHolder.init(convertView);
 
             convertView.setTag(viewHolder);
         }
@@ -73,15 +87,7 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        viewHolder.tvUserName.setText(tweet.getUser().getName());
-        viewHolder.tvScreenName.setText("@" + tweet.getUser().getScreenName());
-        viewHolder.tvTweet.setText(Html.fromHtml(tweet.getFormattedBody()));
-        viewHolder.tvTweet.setMovementMethod(LinkMovementMethod.getInstance());
-        viewHolder.tvCreatedTime.setText(tweet.getRelativeTimeAgo());
-        viewHolder.tvRetweetsCount.setText(tweet.getRetweet_count());
-        viewHolder.tvFavoritesCount.setText(tweet.getFavorite_count());
-
-        ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(), viewHolder.ivProfileImage);
+        viewHolder.populateViews(tweet);
 
         return convertView;
     }
