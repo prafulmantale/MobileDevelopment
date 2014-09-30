@@ -1,6 +1,7 @@
 package prafulmantale.praful.com.twitterapp.handlers;
 
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -22,10 +23,12 @@ public class TimelineResponseHandler extends JsonHttpResponseHandler {
 
     private static final String TAG = "TimelineResponseHandler";
     private TimelineAdapter adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
-    public TimelineResponseHandler(TimelineAdapter adapter){
+    public TimelineResponseHandler(TimelineAdapter adapter, SwipeRefreshLayout swipeRefreshLayout){
         this.adapter = adapter;
+        this.swipeRefreshLayout = swipeRefreshLayout;
     }
 
     @Override
@@ -38,16 +41,21 @@ public class TimelineResponseHandler extends JsonHttpResponseHandler {
     @Override
     public void onSuccess(JSONArray response) {
 
-        Log.d("DEBUG: Response Body: \r\n" , response.toString());
+        try {
+            Log.d("DEBUG: Response Body:" + response.length() +  " \r\n", response.toString());
 
-        if(response == null){
-            Log.d(TAG, "Null response for successful request");
-            return;
+            if (response == null) {
+                Log.d(TAG, "Null response for successful request");
+                return;
+            }
+
+            List<Tweet> list = Tweet.fromJSON(response);
+
+            adapter.addAll(list);
         }
-
-        List<Tweet> list = Tweet.fromJSON(response);
-
-        adapter.addAll(list);
+        finally {
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     @Override

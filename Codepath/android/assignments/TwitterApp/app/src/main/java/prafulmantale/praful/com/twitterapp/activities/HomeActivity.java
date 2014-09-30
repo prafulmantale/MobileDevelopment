@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,8 +19,10 @@ import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.adapters.TimelineAdapter;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
+import prafulmantale.praful.com.twitterapp.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
 import prafulmantale.praful.com.twitterapp.networking.RestClientApp;
+import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 public class HomeActivity extends Activity {
 
@@ -28,6 +31,8 @@ public class HomeActivity extends Activity {
     private TimelineAdapter adapter;
     private List<Tweet> tweetList;
     private ImageView ivComposeTweet;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private String preMaxId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +41,30 @@ public class HomeActivity extends Activity {
 
         initialize();
         setupListeners();
-        RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter), APIRequest.HOME_TIMELINE);
+        RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.HOME_TIMELINE, new QueryParameters(null, null));
     }
 
     private void initialize(){
+
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                String since_id = null;
+                if(adapter.getCount() != 0){
+                    Tweet tweet = adapter.getItem(0);
+                    since_id = String.valueOf(tweet.getUid());
+                }
+
+                RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.HOME_TIMELINE, new QueryParameters(null, since_id));
+            }
+        });
+
+        swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         initializeActionBar();
         lvTimeline = (ListView)findViewById(R.id.lvTimeline);
         tweetList = new ArrayList<Tweet>();
@@ -75,6 +100,32 @@ public class HomeActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, CreateTweetActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        lvTimeline.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalCount) {
+
+                if(totalCount == 0){
+                    return;
+                }
+
+                String max_id = null;
+                if(adapter.getCount() != 0){
+                    Tweet tweet = adapter.getItem(adapter.getCount() - 1);
+                    max_id = String.valueOf(tweet.getUid());
+
+                    if(preMaxId != null && preMaxId.equalsIgnoreCase(max_id)){
+                        return;
+                    }
+
+                    preMaxId = max_id;
+                }
+
+
+
+                RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.HOME_TIMELINE, new QueryParameters(max_id, null));
             }
         });
     }

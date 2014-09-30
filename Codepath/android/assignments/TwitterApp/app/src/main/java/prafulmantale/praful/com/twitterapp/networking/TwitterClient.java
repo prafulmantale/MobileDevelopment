@@ -17,6 +17,7 @@ import java.util.Map;
 
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.enums.HttpMethod;
+import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 /**
  * Created by prafulmantale on 9/25/14.
@@ -64,20 +65,32 @@ public class TwitterClient  extends OAuthBaseClient{
         super(context, API_CLASS, API_BASE_URL, API_CONSUMER_KEY, API_CONSUMER_SECRET, API_CALLBACK);
     }
 
-    public void sendRequest(JsonHttpResponseHandler responseHandler, APIRequest apiRequest){
+    public void sendRequest(JsonHttpResponseHandler responseHandler, APIRequest apiRequest, QueryParameters queryParameters){
 
         if(apiRequest == APIRequest.HOME_TIMELINE){
-            getHomeTimeline(responseHandler);
+            getHomeTimeline(responseHandler, queryParameters);
         }
     }
 
-    private void getHomeTimeline(JsonHttpResponseHandler responseHandler){
+    private void getHomeTimeline(JsonHttpResponseHandler responseHandler, QueryParameters queryParameters){
 
         String url = getApiUrl(requestMap.get(APIRequest.HOME_TIMELINE).url);
-        RequestParams params = new RequestParams();
-        params.put("since_id", "1");
 
-        getClient().get(url, null, responseHandler);
+        RequestParams params = null;
+        if(queryParameters.getMax_id() != null || queryParameters.getSince_id() != null) {
+            params = new RequestParams();
+
+            if(queryParameters.getMax_id() != null){
+                params.put("max_id", queryParameters.getMax_id());
+            }
+
+            if (queryParameters.getSince_id() != null){
+                params.put("since_id", queryParameters.getSince_id());
+            }
+        }
+
+        System.out.println("Request: " + url + params);
+        getClient().get(url, params, responseHandler);
     }
 
 }
