@@ -131,11 +131,16 @@ public class HomeActivity extends Activity {
         lvTimeline.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("Position: " + position);
+                showTweetDetails(adapter.getItem(position));
             }
         });
     }
 
+
+    private void showTweetDetails(Tweet tweet){
+        Intent intent = new Intent(this, TweetDetailsActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

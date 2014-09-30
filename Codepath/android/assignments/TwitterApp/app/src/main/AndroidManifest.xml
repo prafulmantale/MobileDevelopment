@@ -11,9 +11,12 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
-        <meta-data android:name="AA_DB_NAME" android:value="TwitterApp.db" />
-        <meta-data android:name="AA_DB_VERSION" android:value="1" />
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="TwitterApp.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
 
         <activity
             android:name=".activities.Welcome"
@@ -40,7 +43,11 @@
         </activity>
         <activity
             android:name=".activities.CreateTweetActivity"
-            android:parentActivityName=".activities.HomeActivity">
+            android:parentActivityName=".activities.HomeActivity" >
+        </activity>
+        <activity
+            android:name=".activities.TweetDetailsActivity"
+            android:parentActivityName=".activities.HomeActivity" >
         </activity>
     </application>
 

@@ -26,5 +26,6 @@
     <!-- Create Tweet -->
     <string name="create_tweet_text_hint">What\'s happening\?</string>
     <string name="button_tweet_text">Tweet</string>
+    <string name="title_activity_tweet_details">TweetDetailsActivity</string>
 
 </resources>

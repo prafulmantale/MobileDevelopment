@@ -17,6 +17,16 @@
         android:src="@drawable/ic_action_home"
         />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivBackbutton"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_backbutton"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
