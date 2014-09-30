@@ -124,7 +124,6 @@ public class HomeActivity extends Activity {
                     preMaxId = max_id;
                 }
 
-
                 RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.HOME_TIMELINE, new QueryParameters(max_id, null));
             }
         });
