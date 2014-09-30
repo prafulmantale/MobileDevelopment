@@ -48,19 +48,24 @@ public class Utils {
 
         long diff = nowDate.getTime() - date.getTime();
 
-        long hrDiff = TimeUnit.MILLISECONDS.toHours(diff);
-        long minDiff = TimeUnit.MILLISECONDS.toMinutes(diff) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(diff));
-        if(hrDiff > 0){
-            display = String.format("%dh", hrDiff);
+        long dayDiff = TimeUnit.MILLISECONDS.toDays(diff);
+
+        if(dayDiff > 0){
+            display = String.format("%dd", dayDiff);
         }
-        else{
-            if(minDiff < 0){
-                minDiff = 0;
+        else {
+            long hrDiff = TimeUnit.MILLISECONDS.toHours(diff);
+            long minDiff = TimeUnit.MILLISECONDS.toMinutes(diff) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(diff));
+            if (hrDiff > 0) {
+                display = String.format("%dh", hrDiff);
+            } else {
+                if (minDiff < 0) {
+                    minDiff = 0;
+                }
+
+                display = String.format("%dm", minDiff);
             }
-
-            display = String.format("%dm", minDiff);
         }
-
 
         return display;
     }
