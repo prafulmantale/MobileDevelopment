@@ -2,6 +2,7 @@ package prafulmantale.praful.com.twitterapp.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,6 +21,8 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import prafulmantale.praful.com.twitterapp.R;
+import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
+import prafulmantale.praful.com.twitterapp.models.TweetRequest;
 
 public class CreateTweetActivity extends Activity {
 
@@ -117,6 +120,24 @@ public class CreateTweetActivity extends Activity {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        btnTweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String status = etTweetBody.getText().toString();
+                if(status.length() == 0){
+                    setResult(RESULT_CANCELED);
+                }
+                else{
+                    Intent intent = new Intent();
+                    TweetRequest tweetReq = new TweetRequest();
+                    tweetReq.setBody(status);
+                    intent.putExtra(AppConstants.KEY_TWEET_REQUEST, tweetReq);
+                    setResult(RESULT_OK, intent);
+                }
+                finish();
             }
         });
     }

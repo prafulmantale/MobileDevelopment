@@ -6,5 +6,6 @@ package prafulmantale.praful.com.twitterapp.enums;
 public enum APIRequest {
 
     HOME_TIMELINE,
-    LOGGEDIN_USER_INFO
+    LOGGEDIN_USER_INFO,
+    TWEET
 }

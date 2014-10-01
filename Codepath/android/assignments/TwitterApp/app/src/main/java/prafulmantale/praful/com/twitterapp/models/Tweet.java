@@ -261,4 +261,18 @@ public class Tweet extends Model implements Parcelable{
     public int describeContents() {
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return "Tweet{" +
+                "body='" + body + '\'' +
+                ", uid=" + uid +
+                ", createdAt='" + createdAt + '\'' +
+                ", retweet_count='" + retweet_count + '\'' +
+                ", favorite_count='" + favorite_count + '\'' +
+                ", user=" + user +
+                ", tweetEmbeddedUrl=" + tweetEmbeddedUrl +
+                ", formattedBody='" + formattedBody + '\'' +
+                '}';
+    }
 }

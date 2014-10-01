@@ -21,8 +21,11 @@ import prafulmantale.praful.com.twitterapp.adapters.TimelineAdapter;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.handlers.LoggedInUserResponseHandler;
 import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
+import prafulmantale.praful.com.twitterapp.handlers.TweetResponseHandler;
+import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
+import prafulmantale.praful.com.twitterapp.models.TweetRequest;
 import prafulmantale.praful.com.twitterapp.models.User;
 import prafulmantale.praful.com.twitterapp.networking.RestClientApp;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
@@ -108,7 +111,7 @@ public class HomeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, CreateTweetActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, AppConstants.RequestCodes.COMPOSE_FROM_HOME);
             }
         });
 
@@ -144,6 +147,16 @@ public class HomeActivity extends Activity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(requestCode == AppConstants.RequestCodes.COMPOSE_FROM_HOME){
+            if(resultCode == RESULT_OK){
+                TweetRequest request = data.getParcelableExtra(AppConstants.KEY_TWEET_REQUEST);
+                RestClientApp.getTwitterClient().postTweet(new TweetResponseHandler(adapter), request);
+            }
+        }
+    }
 
     private void showTweetDetails(Tweet tweet){
         Intent intent = new Intent(this, TweetDetailsActivity.class);

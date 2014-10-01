@@ -17,6 +17,7 @@ import java.util.Map;
 
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.enums.HttpMethod;
+import prafulmantale.praful.com.twitterapp.models.TweetRequest;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 /**
@@ -49,6 +50,7 @@ public class TwitterClient  extends OAuthBaseClient{
     static {
         requestMap.put(APIRequest.HOME_TIMELINE, new Request("statuses/home_timeline.json", HttpMethod.Get));
         requestMap.put(APIRequest.LOGGEDIN_USER_INFO, new Request("account/verify_credentials.json", HttpMethod.Get));
+        requestMap.put(APIRequest.TWEET, new Request("statuses/update.json", HttpMethod.Post));
     }
 
 
@@ -75,6 +77,8 @@ public class TwitterClient  extends OAuthBaseClient{
         if(apiRequest == APIRequest.LOGGEDIN_USER_INFO){
             getLoggedInUserDetails(responseHandler);
         }
+
+
     }
 
     private void getHomeTimeline(JsonHttpResponseHandler responseHandler, QueryParameters queryParameters){
@@ -101,6 +105,15 @@ public class TwitterClient  extends OAuthBaseClient{
     private void getLoggedInUserDetails(JsonHttpResponseHandler responseHandler){
         String url = getApiUrl(requestMap.get(APIRequest.LOGGEDIN_USER_INFO).url);
         getClient().get(url, null, responseHandler);
+    }
+
+    public void postTweet(JsonHttpResponseHandler responseHandler, TweetRequest request){
+
+        String url = getApiUrl(requestMap.get(APIRequest.TWEET).url);
+        RequestParams params = new RequestParams();
+        params.put("status", request.getBody());
+
+        getClient().post(url, params, responseHandler);
     }
 
 }
