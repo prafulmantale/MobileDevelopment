@@ -3,29 +3,56 @@ package prafulmantale.praful.com.twitterapp.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import prafulmantale.praful.com.twitterapp.R;
+import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
 
 public class TweetDetailsActivity extends Activity {
 
     private Tweet tweet;
     private ImageView ivBack;
+
+    private ImageView ivProfileImage;
+    private TextView tvUserName;
+    private TextView tvScreenName;
+    private TextView tvBody;
+    private EditText etTweetReply;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_details);
 
+        tweet = (Tweet)getIntent().getParcelableExtra(AppConstants.KEY_TWEET);
+        Log.d("TDA", tweet.toString());
         initialize();
     }
 
     private void initialize(){
+
+        ivProfileImage = (ImageView)findViewById(R.id.ivProfilePicture_tweetdetails);
+        tvUserName = (TextView)findViewById(R.id.tvUserName_tweetdetails);
+        tvScreenName = (TextView)findViewById(R.id.tvUserHandle_tweetdetails);
+        tvBody = (TextView)findViewById(R.id.tvTweet_tweetdetails);
+        etTweetReply = (EditText)findViewById(R.id.etTweetText_tweetdetails);
+        etTweetReply.setHint("Reply to " + tweet.getUser().getName());
+
+        ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(), ivProfileImage);
+        tvUserName.setText(tweet.getUser().getName());
+        tvScreenName.setText(tweet.getUser().getScreenName());
+        tvBody.setText(tweet.getBody());
 
         initializeActionBar();
         setUpListeners();

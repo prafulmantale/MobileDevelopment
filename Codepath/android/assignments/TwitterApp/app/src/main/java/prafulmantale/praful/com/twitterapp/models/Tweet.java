@@ -220,14 +220,14 @@ public class Tweet extends Model implements Parcelable{
             user = null;
         }
         else{
-            user = in.readParcelable(null);
+            user = in.readParcelable(User.class.getClassLoader());
         }
 
         if(in.readInt() == -1){
             tweetEmbeddedUrl = null;
         }
         else{
-            tweetEmbeddedUrl = in.readParcelable(null);
+            tweetEmbeddedUrl = in.readParcelable(TweetEmbeddedUrl.class.getClassLoader());
         }
 
     }
@@ -256,6 +256,19 @@ public class Tweet extends Model implements Parcelable{
             dest.writeParcelable(tweetEmbeddedUrl, flags);
         }
     }
+
+    public static final Creator<Tweet> CREATOR = new Creator<Tweet>() {
+        @Override
+        public Tweet createFromParcel(Parcel source) {
+            return new Tweet(source);
+        }
+
+        @Override
+        public Tweet[] newArray(int size) {
+            return new Tweet[size];
+        }
+    };
+
 
     @Override
     public int describeContents() {

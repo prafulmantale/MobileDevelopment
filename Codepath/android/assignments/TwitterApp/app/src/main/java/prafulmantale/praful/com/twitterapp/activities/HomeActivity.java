@@ -160,6 +160,7 @@ public class HomeActivity extends Activity {
 
     private void showTweetDetails(Tweet tweet){
         Intent intent = new Intent(this, TweetDetailsActivity.class);
+        intent.putExtra(AppConstants.KEY_TWEET, tweet);
         startActivity(intent);
     }
 

@@ -105,4 +105,24 @@ public class TweetEmbeddedUrl extends Model implements Parcelable{
     public int describeContents() {
         return 0;
     }
+
+    public static final Creator<TweetEmbeddedUrl> CREATOR = new Creator<TweetEmbeddedUrl>() {
+        @Override
+        public TweetEmbeddedUrl createFromParcel(Parcel source) {
+            return new TweetEmbeddedUrl(source);
+        }
+
+        @Override
+        public TweetEmbeddedUrl[] newArray(int size) {
+            return new TweetEmbeddedUrl[size];
+        }
+    };
+
+    private TweetEmbeddedUrl(Parcel in) {
+        startIndex = in.readInt();
+        endIndex = in.readInt();
+        url = in.readString();
+        displayUrl = in.readString();
+        expandedUrl = in.readString();
+    }
 }

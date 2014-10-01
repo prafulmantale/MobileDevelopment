@@ -12,7 +12,6 @@
         android:maxHeight="60dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
-
         />
 
     <RelativeLayout

@@ -78,6 +78,25 @@ public class User extends Model implements Parcelable{
         dest.writeString(profileImageUrl);
     }
 
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    private User(Parcel in) {
+        name = in.readString();
+        uid = in.readLong();
+        screenName = in.readString();
+        profileImageUrl = in.readString();
+    }
+
     @Override
     public int describeContents() {
         return 0;
