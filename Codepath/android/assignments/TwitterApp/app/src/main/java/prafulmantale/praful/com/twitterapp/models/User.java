@@ -15,19 +15,19 @@ import prafulmantale.praful.com.twitterapp.helpers.Utils;
 /**
  * Created by prafulmantale on 9/27/14.
  */
-//@Table(name="users")
+@Table(name="users")
 public class User extends Model implements Parcelable{
 
-    //@Column(name="uname")
-    private String name;
-
-    //@Column(name="uid")
+    @Column(name="uid")
     private long uid;
 
-    //@Column(name="screenname")
+    @Column(name="uname")
+    private String name;
+
+    @Column(name="screenname")
     private String screenName;
 
-    //@Column(name = "profileurl")
+    @Column(name = "profileurl")
     private String profileImageUrl;
 
 

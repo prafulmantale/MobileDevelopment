@@ -23,49 +23,64 @@ import prafulmantale.praful.com.twitterapp.helpers.Utils;
 /**
  * Created by prafulmantale on 9/26/14.
  */
-//@Table(name = "Tweets")
+@Table(name = "Tweets")
 public class Tweet extends Model implements Parcelable{
 
-    private static final String TAG = "TWEET";
+    private static final String TAG = Tweet.class.getName();
 
-    //@Column(name="text")
-    private String body;
-    //@Column(name="uid")
-    private long uid;
+    @Column(name="tweetid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    private long tweetID;
 
-    //@Column(name = "createdAt")
+    @Column(name="tweet")
+    private String text;
+
+
+    @Column(name = "createdat")
     private String createdAt;
 
-    //@Column(name = "retweet_count")
+    @Column(name = "retweet_count")
     private String retweet_count;
 
-    //@Column(name="favorite_count")
+    @Column(name="favorite_count")
     private String favorite_count;
 
+    @Column(name = "User" , onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     private User user;
 
+    @Column(name = "TweetEmbeddedUrl", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     private TweetEmbeddedUrl tweetEmbeddedUrl;
+
 
     private String formattedBody;
 
     public Tweet() {
         super();
-        body = "";
-        uid = 0;
+
+        tweetID = -1;
+        text = "";
+
         createdAt = "";
         retweet_count = "";
         favorite_count = "";
         user = new User();
-
+        tweetEmbeddedUrl = new TweetEmbeddedUrl();
         formattedBody = null;
     }
 
-    public String getBody() {
-        return body;
+    public long getTweetID() {
+        return tweetID;
     }
 
-    public long getUid() {
-        return uid;
+    public void setTweetID(long tweetID) {
+        this.tweetID = tweetID;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getCreatedAt() {
@@ -105,18 +120,19 @@ public class Tweet extends Model implements Parcelable{
             return formattedBody;
         }
 
-        formattedBody = body;
+        formattedBody = text;
 
-        if(getTweetEmbeddedUrl() == null){
+        if(getTweetEmbeddedUrl() == null || getTweetEmbeddedUrl().isValid() == false){
             return formattedBody;
         }
+        
         try {
             formattedBody = formattedBody.substring(0, tweetEmbeddedUrl.getStartIndex()) +
                     "<a href=\"" + getTweetEmbeddedUrl().getExpandedUrl() + "\">" + getTweetEmbeddedUrl().getDisplayUrl() + "</a> " +
                     formattedBody.substring(getTweetEmbeddedUrl().getEndIndex());
         }
         catch (Exception ex){
-            formattedBody = body;
+            formattedBody = text;
         }
 
         return formattedBody;
@@ -143,9 +159,9 @@ public class Tweet extends Model implements Parcelable{
         Tweet tweet = new Tweet();
 
         try{
+            tweet.tweetID = jsonObject.getLong("id");
+            tweet.text = jsonObject.getString("text");
 
-            tweet.body = jsonObject.getString("text");
-            tweet.uid = jsonObject.getLong("id");
             tweet.createdAt = jsonObject.getString("created_at");
             try {
                 tweet.retweet_count = jsonObject.getString("retweet_count");
@@ -211,8 +227,9 @@ public class Tweet extends Model implements Parcelable{
 
     protected Tweet(Parcel in){
 
-        body = in.readString();
-        uid = in.readLong();
+        tweetID = in.readLong();
+        text = in.readString();
+
         createdAt = in.readString();
         retweet_count = in.readString();
         favorite_count = in.readString();
@@ -235,8 +252,9 @@ public class Tweet extends Model implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
-        dest.writeString(body);
-        dest.writeLong(uid);
+        dest.writeLong(tweetID);
+        dest.writeString(text);
+
         dest.writeString(createdAt);
         dest.writeString(retweet_count);
         dest.writeString(favorite_count);
@@ -275,17 +293,5 @@ public class Tweet extends Model implements Parcelable{
         return 0;
     }
 
-    @Override
-    public String toString() {
-        return "Tweet{" +
-                "body='" + body + '\'' +
-                ", uid=" + uid +
-                ", createdAt='" + createdAt + '\'' +
-                ", retweet_count='" + retweet_count + '\'' +
-                ", favorite_count='" + favorite_count + '\'' +
-                ", user=" + user +
-                ", tweetEmbeddedUrl=" + tweetEmbeddedUrl +
-                ", formattedBody='" + formattedBody + '\'' +
-                '}';
-    }
+
 }

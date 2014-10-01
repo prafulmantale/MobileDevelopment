@@ -65,7 +65,7 @@ public class HomeActivity extends Activity {
                 String since_id = null;
                 if(adapter.getCount() != 0){
                     Tweet tweet = adapter.getItem(0);
-                    since_id = String.valueOf(tweet.getUid());
+                    since_id = String.valueOf(tweet.getTweetID());
                 }
 
                 RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.HOME_TIMELINE, new QueryParameters(null, since_id));
@@ -126,7 +126,7 @@ public class HomeActivity extends Activity {
                 String max_id = null;
                 if(adapter.getCount() != 0){
                     Tweet tweet = adapter.getItem(adapter.getCount() - 1);
-                    max_id = String.valueOf(tweet.getUid());
+                    max_id = String.valueOf(tweet.getTweetID());
 
                     if(preMaxId != null && preMaxId.equalsIgnoreCase(max_id)){
                         return;

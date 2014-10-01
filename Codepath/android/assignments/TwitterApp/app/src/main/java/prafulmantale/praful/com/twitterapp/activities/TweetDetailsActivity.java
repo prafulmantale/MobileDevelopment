@@ -52,7 +52,7 @@ public class TweetDetailsActivity extends Activity {
         ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(), ivProfileImage);
         tvUserName.setText(tweet.getUser().getName());
         tvScreenName.setText(tweet.getUser().getScreenName());
-        tvBody.setText(tweet.getBody());
+        tvBody.setText(tweet.getText());
 
         initializeActionBar();
         setUpListeners();

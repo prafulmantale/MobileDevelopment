@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,8 +14,11 @@ import org.json.JSONObject;
 /**
  * Created by prafulmantale on 9/30/14.
  */
+@Table(name = "TweetEmbeddedUrl")
 public class TweetEmbeddedUrl extends Model implements Parcelable{
 
+    @Column(name = "uid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    private long uid;
     private int startIndex;
     private int endIndex;
     private String url;
@@ -21,6 +26,8 @@ public class TweetEmbeddedUrl extends Model implements Parcelable{
     private String expandedUrl;
 
     public TweetEmbeddedUrl() {
+        startIndex = -1;
+        endIndex = -1;
     }
 
     public int getStartIndex() {
@@ -124,5 +131,16 @@ public class TweetEmbeddedUrl extends Model implements Parcelable{
         url = in.readString();
         displayUrl = in.readString();
         expandedUrl = in.readString();
+    }
+
+    public boolean isValid(){
+        if(startIndex == -1 || endIndex == -1 ||
+                url == null || url.isEmpty() ||
+                displayUrl == null || displayUrl.isEmpty() ||
+                expandedUrl == null || expandedUrl.isEmpty()){
+            return false;
+        }
+
+        return true;
     }
 }
