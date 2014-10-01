@@ -31,12 +31,6 @@ public class TimelineResponseHandler extends JsonHttpResponseHandler {
         this.swipeRefreshLayout = swipeRefreshLayout;
     }
 
-    @Override
-    public void onSuccess(JSONObject response) {
-        super.onSuccess(response);
-    }
-
-
 
     @Override
     public void onSuccess(JSONArray response) {
@@ -66,15 +60,5 @@ public class TimelineResponseHandler extends JsonHttpResponseHandler {
     @Override
     protected void handleFailureMessage(Throwable e, String responseBody) {
         super.handleFailureMessage(e, responseBody);
-    }
-
-    @Override
-    protected void handleSuccessJsonMessage(int statusCode, Object jsonResponse) {
-        super.handleSuccessJsonMessage(statusCode, jsonResponse);
-    }
-
-    @Override
-    protected void handleSuccessMessage(int statusCode, String responseBody) {
-        super.handleSuccessMessage(statusCode, responseBody);
     }
 }

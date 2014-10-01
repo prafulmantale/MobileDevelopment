@@ -82,4 +82,14 @@ public class User extends Model implements Parcelable{
     public int describeContents() {
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", uid=" + uid +
+                ", screenName='" + screenName + '\'' +
+                ", profileImageUrl='" + profileImageUrl + '\'' +
+                '}';
+    }
 }

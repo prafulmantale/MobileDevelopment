@@ -19,9 +19,11 @@ import java.util.List;
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.adapters.TimelineAdapter;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
+import prafulmantale.praful.com.twitterapp.handlers.LoggedInUserResponseHandler;
 import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
 import prafulmantale.praful.com.twitterapp.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
+import prafulmantale.praful.com.twitterapp.models.User;
 import prafulmantale.praful.com.twitterapp.networking.RestClientApp;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
@@ -34,6 +36,7 @@ public class HomeActivity extends Activity {
     private ImageView ivComposeTweet;
     private SwipeRefreshLayout swipeRefreshLayout;
     private String preMaxId = null;
+    public static User loggedInUser = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,11 @@ public class HomeActivity extends Activity {
 
         initialize();
         setupListeners();
+
+        if(loggedInUser == null){
+            RestClientApp.getTwitterClient().sendRequest(new LoggedInUserResponseHandler(), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
+        }
+
         RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.HOME_TIMELINE, new QueryParameters(null, null));
     }
 

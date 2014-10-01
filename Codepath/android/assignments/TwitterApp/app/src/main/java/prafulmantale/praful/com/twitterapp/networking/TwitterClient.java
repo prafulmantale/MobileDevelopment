@@ -48,6 +48,7 @@ public class TwitterClient  extends OAuthBaseClient{
 
     static {
         requestMap.put(APIRequest.HOME_TIMELINE, new Request("statuses/home_timeline.json", HttpMethod.Get));
+        requestMap.put(APIRequest.LOGGEDIN_USER_INFO, new Request("account/verify_credentials.json", HttpMethod.Get));
     }
 
 
@@ -70,6 +71,10 @@ public class TwitterClient  extends OAuthBaseClient{
         if(apiRequest == APIRequest.HOME_TIMELINE){
             getHomeTimeline(responseHandler, queryParameters);
         }
+
+        if(apiRequest == APIRequest.LOGGEDIN_USER_INFO){
+            getLoggedInUserDetails(responseHandler);
+        }
     }
 
     private void getHomeTimeline(JsonHttpResponseHandler responseHandler, QueryParameters queryParameters){
@@ -91,6 +96,11 @@ public class TwitterClient  extends OAuthBaseClient{
 
         System.out.println("Request: " + url + params);
         getClient().get(url, params, responseHandler);
+    }
+
+    private void getLoggedInUserDetails(JsonHttpResponseHandler responseHandler){
+        String url = getApiUrl(requestMap.get(APIRequest.LOGGEDIN_USER_INFO).url);
+        getClient().get(url, null, responseHandler);
     }
 
 }

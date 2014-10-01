@@ -14,7 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import prafulmantale.praful.com.twitterapp.R;
 
@@ -23,6 +26,10 @@ public class CreateTweetActivity extends Activity {
     private TextView tvCharCount;
     private EditText etTweetBody;
     private Button btnTweet;
+
+    private ImageView ivProfileImage;
+    private TextView tvUserName;
+    private TextView tvScreenName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,14 @@ public class CreateTweetActivity extends Activity {
 
         etTweetBody = (EditText)findViewById(R.id.etTweetText_createtweet);
         etTweetBody.requestFocus();
+
+        ivProfileImage = (ImageView)findViewById(R.id.ivProfilePicture_createtweet);
+        tvUserName = (TextView)findViewById(R.id.tvUserName_createtweet);
+        tvScreenName = (TextView)findViewById(R.id.tvUserHandle_createtweet);
+
+        ImageLoader.getInstance().displayImage(HomeActivity.loggedInUser.getProfileImageUrl(), ivProfileImage);
+        tvUserName.setText(HomeActivity.loggedInUser.getName());
+        tvScreenName.setText("@" + HomeActivity.loggedInUser.getScreenName());
 
         initializeActionBar();
         setupListeners();
