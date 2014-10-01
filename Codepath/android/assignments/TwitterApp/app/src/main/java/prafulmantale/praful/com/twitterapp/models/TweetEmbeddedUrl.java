@@ -1,5 +1,10 @@
 package prafulmantale.praful.com.twitterapp.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.activeandroid.Model;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,7 +12,7 @@ import org.json.JSONObject;
 /**
  * Created by prafulmantale on 9/30/14.
  */
-public class TweetEmbeddedUrl{
+public class TweetEmbeddedUrl extends Model implements Parcelable{
 
     private int startIndex;
     private int endIndex;
@@ -85,5 +90,19 @@ public class TweetEmbeddedUrl{
                 ", endIndex=" + endIndex +
                 ", url='" + url + '\'' +
                 '}';
+    }
+
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeInt(startIndex);
+        dest.writeInt(endIndex);
+        dest.writeString(url);
+        dest.writeString(displayUrl);
+        dest.writeString(expandedUrl);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }

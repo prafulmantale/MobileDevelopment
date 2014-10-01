@@ -1,5 +1,7 @@
 package prafulmantale.praful.com.twitterapp.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.activeandroid.Model;
@@ -22,7 +24,7 @@ import prafulmantale.praful.com.twitterapp.helpers.Utils;
  * Created by prafulmantale on 9/26/14.
  */
 //@Table(name = "Tweets")
-public class Tweet extends Model{
+public class Tweet extends Model implements Parcelable{
 
     private static final String TAG = "TWEET";
 
@@ -205,5 +207,58 @@ public class Tweet extends Model{
         }
 
         return list;
+    }
+
+    protected Tweet(Parcel in){
+
+        body = in.readString();
+        uid = in.readLong();
+        createdAt = in.readString();
+        retweet_count = in.readString();
+        favorite_count = in.readString();
+        if(in.readInt() == -1){
+            user = null;
+        }
+        else{
+            user = in.readParcelable(null);
+        }
+
+        if(in.readInt() == -1){
+            tweetEmbeddedUrl = null;
+        }
+        else{
+            tweetEmbeddedUrl = in.readParcelable(null);
+        }
+
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(body);
+        dest.writeLong(uid);
+        dest.writeString(createdAt);
+        dest.writeString(retweet_count);
+        dest.writeString(favorite_count);
+        if(user == null){
+            dest.writeInt(-1);
+        }
+        else {
+            dest.writeInt(1);
+            dest.writeParcelable(user, flags);
+        }
+
+        if(tweetEmbeddedUrl == null){
+            dest.writeInt(-1);
+        }
+        else {
+            dest.writeInt(1);
+            dest.writeParcelable(tweetEmbeddedUrl, flags);
+        }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }

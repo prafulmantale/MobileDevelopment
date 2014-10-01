@@ -1,5 +1,8 @@
 package prafulmantale.praful.com.twitterapp.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -13,7 +16,7 @@ import prafulmantale.praful.com.twitterapp.helpers.Utils;
  * Created by prafulmantale on 9/27/14.
  */
 //@Table(name="users")
-public class User/* extends Model*/{
+public class User extends Model implements Parcelable{
 
     //@Column(name="uname")
     private String name;
@@ -68,4 +71,15 @@ public class User/* extends Model*/{
         return user;
     }
 
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeLong(uid);
+        dest.writeString(screenName);
+        dest.writeString(profileImageUrl);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 }
