@@ -1,5 +1,6 @@
 package prafulmantale.praful.com.twitterapp.handlers;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -14,11 +15,17 @@ import prafulmantale.praful.com.twitterapp.models.User;
  */
 public class LoggedInUserResponseHandler extends JsonHttpResponseHandler {
 
+    private Context context;
+
+    public LoggedInUserResponseHandler(Context context){
+        this.context = context;
+    }
     @Override
     public void onSuccess(JSONObject response) {
 
         User user = User.fromJSON(response);
         HomeActivity.loggedInUser = user;//NOT a good practice
+        User.saveLoggedInUserDetails(context, user);
         Log.d("USER" , user.toString());
     }
 

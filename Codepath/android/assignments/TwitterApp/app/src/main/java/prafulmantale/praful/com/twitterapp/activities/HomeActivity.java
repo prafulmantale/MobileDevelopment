@@ -3,6 +3,7 @@ package prafulmantale.praful.com.twitterapp.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
@@ -32,6 +33,8 @@ import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 public class HomeActivity extends Activity {
 
+    private static final String TAG = HomeActivity.class.getName();
+
 
     private ListView lvTimeline;
     private TimelineAdapter adapter;
@@ -49,12 +52,16 @@ public class HomeActivity extends Activity {
         initialize();
         setupListeners();
 
+        loggedInUser = User.getLoggedInUserDetails(this);
+
         if(loggedInUser == null){
-            RestClientApp.getTwitterClient().sendRequest(new LoggedInUserResponseHandler(), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
+            RestClientApp.getTwitterClient().sendRequest(new LoggedInUserResponseHandler(this), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
         }
 
         RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.HOME_TIMELINE, new QueryParameters(null, null));
     }
+
+
 
     private void initialize(){
 

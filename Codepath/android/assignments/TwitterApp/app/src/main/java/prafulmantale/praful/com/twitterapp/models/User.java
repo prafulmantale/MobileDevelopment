@@ -1,7 +1,10 @@
 package prafulmantale.praful.com.twitterapp.models;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
@@ -12,6 +15,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.helpers.Utils;
 
 /**
@@ -112,6 +116,69 @@ public class User extends Model implements Parcelable{
         name = in.readString();
         screenName = in.readString();
         profileImageUrl = in.readString();
+    }
+
+
+    public static User getLoggedInUserDetails(Context context){
+
+        User loggedInUser = null;
+        try {
+            SharedPreferences settings = context.getSharedPreferences(AppConstants.PREFS_FILE, 0);
+
+            String uname = settings.getString(AppConstants.KEY_SHARED_PREF_USER_NAME, null);
+
+            if (uname == null || uname.isEmpty()) {
+                return loggedInUser;
+            }
+
+            String screenname = settings.getString(AppConstants.KEY_SHARED_PREF_SCREEN_NAME, null);
+
+            if (screenname == null || screenname.isEmpty()) {
+                return loggedInUser;
+            }
+
+            long uid = settings.getLong(AppConstants.KEY_SHARED_PREF_USER_ID, -1);
+            if (uid == -1) {
+                return loggedInUser;
+            }
+
+            String url = settings.getString(AppConstants.KEY_SHARED_PREF_PROFILE_IMG_URL, null);
+
+            if (url == null || url.isEmpty()) {
+                return loggedInUser;
+            }
+
+            loggedInUser = new User();
+
+            loggedInUser.userID = uid;
+            loggedInUser.name = uname;
+            loggedInUser.screenName = screenname;
+            loggedInUser.profileImageUrl = url;
+        }
+        catch (Exception ex){
+            Log.d(TAG, "Exception while extracting logged in user from shared preferences");
+            loggedInUser = null;
+        }
+
+        return loggedInUser;
+    }
+
+    public static void saveLoggedInUserDetails(Context context, User user){
+
+        try {
+            SharedPreferences settings = context.getSharedPreferences(AppConstants.PREFS_FILE, 0);
+            SharedPreferences.Editor editor = settings.edit();
+
+            editor.putString(AppConstants.KEY_SHARED_PREF_USER_NAME, user.getName());
+            editor.putString(AppConstants.KEY_SHARED_PREF_SCREEN_NAME, user.getScreenName());
+            editor.putLong(AppConstants.KEY_SHARED_PREF_USER_ID, user.getUserID());
+            editor.putString(AppConstants.KEY_SHARED_PREF_PROFILE_IMG_URL, user.getProfileImageUrl());
+
+            editor.commit();
+        }
+        catch (Exception ex){
+            Log.d(TAG, "Exception while saving logged in user to shared preferences");
+        }
     }
 
     @Override

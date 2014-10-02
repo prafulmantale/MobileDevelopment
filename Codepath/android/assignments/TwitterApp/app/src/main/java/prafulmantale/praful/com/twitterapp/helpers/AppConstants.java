@@ -14,6 +14,13 @@ public class AppConstants {
     public static final String KEY_TWEET_REQUEST = "KTR";
     public static final String KEY_TWEET = "KT";
 
+    public static final String PREFS_FILE = "TwitterAppPrefs";
+    public static final String KEY_SHARED_PREF_USER_NAME = "USERNAME";
+    public static final String KEY_SHARED_PREF_SCREEN_NAME = "SCREENNAME";
+    public static final String KEY_SHARED_PREF_PROFILE_IMG_URL = "IMGURL";
+    public static final String KEY_SHARED_PREF_USER_ID = "USERID";
+
+
 
     public static class RequestCodes {
 
