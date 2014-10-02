@@ -57,8 +57,6 @@ public class CreateTweetActivity extends Activity {
 
         etTweetBody = (EditText)findViewById(R.id.etTweetText_createtweet);
 
-
-
         ivProfileImage = (ImageView)findViewById(R.id.ivProfilePicture_createtweet);
         tvUserName = (TextView)findViewById(R.id.tvUserName_createtweet);
         tvScreenName = (TextView)findViewById(R.id.tvUserHandle_createtweet);
