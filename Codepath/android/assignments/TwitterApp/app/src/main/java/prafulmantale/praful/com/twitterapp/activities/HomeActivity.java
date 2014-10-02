@@ -24,6 +24,7 @@ import prafulmantale.praful.com.twitterapp.handlers.LoggedInUserResponseHandler;
 import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
 import prafulmantale.praful.com.twitterapp.handlers.TweetResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
+import prafulmantale.praful.com.twitterapp.interfaces.ViewsClickListener;
 import prafulmantale.praful.com.twitterapp.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
 import prafulmantale.praful.com.twitterapp.models.TweetRequest;
@@ -31,7 +32,7 @@ import prafulmantale.praful.com.twitterapp.models.User;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends Activity implements ViewsClickListener {
 
     private static final String TAG = HomeActivity.class.getName();
 
@@ -54,7 +55,7 @@ public class HomeActivity extends Activity {
 
         loggedInUser = User.getLoggedInUserDetails(this);
 
-        if(loggedInUser == null){
+        if (loggedInUser == null) {
             RestClientApp.getTwitterClient().sendRequest(new LoggedInUserResponseHandler(this), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
         }
 
@@ -62,15 +63,14 @@ public class HomeActivity extends Activity {
     }
 
 
+    private void initialize() {
 
-    private void initialize(){
-
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 String since_id = null;
-                if(adapter.getCount() != 0){
+                if (adapter.getCount() != 0) {
                     Tweet tweet = adapter.getItem(0);
                     since_id = String.valueOf(tweet.getTweetID());
                 }
@@ -85,19 +85,19 @@ public class HomeActivity extends Activity {
                 android.R.color.holo_red_light);
 
         initializeActionBar();
-        lvTimeline = (ListView)findViewById(R.id.lvTimeline);
+        lvTimeline = (ListView) findViewById(R.id.lvTimeline);
         tweetList = new ArrayList<Tweet>();
         adapter = new TimelineAdapter(this, tweetList);
         lvTimeline.setAdapter(adapter);
     }
 
 
-    private void initializeActionBar(){
+    private void initializeActionBar() {
 
         final ActionBar actionBar = getActionBar();
 
         View view = getLayoutInflater().inflate(R.layout.action_bar_home_title, null);
-        ivComposeTweet = (ImageView)view.findViewById(R.id.ivCreateTweet_actionbar);
+        ivComposeTweet = (ImageView) view.findViewById(R.id.ivCreateTweet_actionbar);
 
 
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(
@@ -113,7 +113,7 @@ public class HomeActivity extends Activity {
 
     }
 
-    private void setupListeners(){
+    private void setupListeners() {
         ivComposeTweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,16 +126,16 @@ public class HomeActivity extends Activity {
             @Override
             public void onLoadMore(int page, int totalCount) {
 
-                if(totalCount == 0){
+                if (totalCount == 0) {
                     return;
                 }
 
                 String max_id = null;
-                if(adapter.getCount() != 0){
+                if (adapter.getCount() != 0) {
                     Tweet tweet = adapter.getItem(adapter.getCount() - 1);
                     max_id = String.valueOf(tweet.getTweetID());
 
-                    if(preMaxId != null && preMaxId.equalsIgnoreCase(max_id)){
+                    if (preMaxId != null && preMaxId.equalsIgnoreCase(max_id)) {
                         return;
                     }
 
@@ -157,15 +157,23 @@ public class HomeActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode == AppConstants.RequestCodes.COMPOSE_FROM_HOME){
-            if(resultCode == RESULT_OK){
+        if (requestCode == AppConstants.RequestCodes.COMPOSE_FROM_HOME) {
+            if (resultCode == RESULT_OK) {
                 TweetRequest request = data.getParcelableExtra(AppConstants.KEY_TWEET_REQUEST);
+                RestClientApp.getTwitterClient().postTweet(new TweetResponseHandler(adapter), request);
+            }
+        }
+
+        if (requestCode == AppConstants.RequestCodes.TWEET_REPLY_FROM_HOME) {
+            if (resultCode == RESULT_OK) {
+                TweetRequest request = data.getParcelableExtra(AppConstants.KEY_TWEET_REQUEST);
+
                 RestClientApp.getTwitterClient().postTweet(new TweetResponseHandler(adapter), request);
             }
         }
     }
 
-    private void showTweetDetails(Tweet tweet){
+    private void showTweetDetails(Tweet tweet) {
         Intent intent = new Intent(this, TweetDetailsActivity.class);
         intent.putExtra(AppConstants.KEY_TWEET, tweet);
         startActivity(intent);
@@ -188,5 +196,20 @@ public class HomeActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void OnReplyToTweetRequested(Tweet tweet) {
+
+        startComposeForReply(tweet);
+    }
+
+    private void startComposeForReply(Tweet tweet) {
+
+        Intent intent = new Intent(HomeActivity.this, CreateTweetActivity.class);
+        intent.putExtra(AppConstants.KEY_TWEET_ID, tweet.getTweetID());
+        intent.putExtra(AppConstants.KEY_USER_HANDLE, tweet.getUser().getScreenName());
+
+        startActivityForResult(intent, AppConstants.RequestCodes.TWEET_REPLY_FROM_HOME);
     }
 }

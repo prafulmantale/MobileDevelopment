@@ -14,6 +14,9 @@ public class AppConstants {
     public static final String KEY_TWEET_REQUEST = "KTR";
     public static final String KEY_TWEET = "KT";
 
+    public static final String KEY_TWEET_ID = "KTI";
+    public static final String KEY_USER_HANDLE = "KUH";
+
     public static final String PREFS_FILE = "TwitterAppPrefs";
     public static final String KEY_SHARED_PREF_USER_NAME = "USERNAME";
     public static final String KEY_SHARED_PREF_SCREEN_NAME = "SCREENNAME";
@@ -29,5 +32,6 @@ public class AppConstants {
 
         public static final int COMPOSE_FROM_HOME = 101;
         public static final int TWEET_DETAILS_FROM_HOME = 102;
+        public static final int TWEET_REPLY_FROM_HOME= 103;
     }
 }

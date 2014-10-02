@@ -9,12 +9,14 @@ import android.os.Parcelable;
 public class TweetRequest implements Parcelable {
 
     private String body;
+    private long tweetID;
 
     //Add other details like in response to etc
 
 
     public TweetRequest() {
         this.body = "";
+        tweetID = -1;
     }
 
     public String getBody() {
@@ -23,6 +25,14 @@ public class TweetRequest implements Parcelable {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public long getTweetID() {
+        return tweetID;
+    }
+
+    public void setTweetID(long tweetID) {
+        this.tweetID = tweetID;
     }
 
     @Override
@@ -34,6 +44,7 @@ public class TweetRequest implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
 
         dest.writeString(body);
+        dest.writeLong(tweetID);
     }
 
     public static final Creator<TweetRequest> CREATOR = new Creator<TweetRequest>() {
@@ -50,5 +61,6 @@ public class TweetRequest implements Parcelable {
 
     private TweetRequest(Parcel in) {
         body = in.readString();
+        tweetID = in.readLong();
     }
 }

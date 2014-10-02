@@ -34,10 +34,20 @@ public class CreateTweetActivity extends Activity {
     private TextView tvUserName;
     private TextView tvScreenName;
 
+    private long tweetID = -1;
+    private String userHandle = null;
+    private boolean isReplyMessage = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_tweet);
+
+        if(getIntent().hasExtra(AppConstants.KEY_TWEET_ID) && getIntent().hasExtra(AppConstants.KEY_USER_HANDLE)){
+            tweetID = (long)getIntent().getLongExtra(AppConstants.KEY_TWEET_ID, -1);
+            userHandle = (String)getIntent().getStringExtra(AppConstants.KEY_USER_HANDLE);
+            isReplyMessage = true;
+        }
 
         initialize();
     }
@@ -46,7 +56,8 @@ public class CreateTweetActivity extends Activity {
     private void initialize(){
 
         etTweetBody = (EditText)findViewById(R.id.etTweetText_createtweet);
-        etTweetBody.requestFocus();
+
+
 
         ivProfileImage = (ImageView)findViewById(R.id.ivProfilePicture_createtweet);
         tvUserName = (TextView)findViewById(R.id.tvUserName_createtweet);
@@ -58,6 +69,12 @@ public class CreateTweetActivity extends Activity {
 
         initializeActionBar();
         setupListeners();
+
+        if(userHandle != null && !userHandle.isEmpty()){
+            etTweetBody.setText("@" + userHandle + " ");
+        }
+
+        etTweetBody.requestFocus();
     }
 
     private void initializeActionBar(){
@@ -134,7 +151,13 @@ public class CreateTweetActivity extends Activity {
                     Intent intent = new Intent();
                     TweetRequest tweetReq = new TweetRequest();
                     tweetReq.setBody(status);
+
+                    if(isReplyMessage){
+                        tweetReq.setTweetID(tweetID);
+                    }
+
                     intent.putExtra(AppConstants.KEY_TWEET_REQUEST, tweetReq);
+
                     setResult(RESULT_OK, intent);
                 }
                 finish();

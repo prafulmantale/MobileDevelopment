@@ -18,6 +18,7 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 import prafulmantale.praful.com.twitterapp.R;
+import prafulmantale.praful.com.twitterapp.interfaces.ViewsClickListener;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
 
 /**
@@ -25,6 +26,7 @@ import prafulmantale.praful.com.twitterapp.models.Tweet;
  */
 public class TimelineAdapter extends ArrayAdapter<Tweet> {
 
+    private Context context;
 
     private class ViewHolder{
 
@@ -37,6 +39,7 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
         private TextView tvRetweetsCount;
         private TextView tvFavoritesCount;
         private ImageView ivFollow;
+
 
         void init(View convertView){
             ivProfileImage = (ImageView)convertView.findViewById(R.id.ivProfilePicture_timeline);
@@ -66,13 +69,15 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
     public TimelineAdapter(Context context, List<Tweet> objects) {
 
         super(context, R.layout.item_timeline_row, objects);
+
+        this.context = context;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
 
         ViewHolder viewHolder = null;
-        Tweet tweet = getItem(position);
+        final Tweet tweet = getItem(position);
 
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_timeline_row, parent, false);
@@ -88,6 +93,14 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
         }
 
         viewHolder.populateViews(tweet);
+
+        viewHolder.tvReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewsClickListener listener = (ViewsClickListener)context;
+                listener.OnReplyToTweetRequested(tweet);
+            }
+        });
 
         return convertView;
     }
