@@ -1,12 +1,13 @@
-package prafulmantale.praful.com.twitterapp.networking;
+package prafulmantale.praful.com.twitterapp.application;
 
 
-import android.app.Application;
 import android.content.Context;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import prafulmantale.praful.com.twitterapp.networking.TwitterClient;
 
 /**
  * Created by prafulmantale on 9/25/14.

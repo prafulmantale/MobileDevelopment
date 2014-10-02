@@ -29,6 +29,10 @@ public class TweetDetailsActivity extends Activity {
     private TextView tvBody;
     private EditText etTweetReply;
 
+    private TextView tvReply;
+    private TextView tvRetweets;
+    private TextView tvFavorites;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +51,20 @@ public class TweetDetailsActivity extends Activity {
         tvScreenName = (TextView)findViewById(R.id.tvUserHandle_tweetdetails);
         tvBody = (TextView)findViewById(R.id.tvTweet_tweetdetails);
         etTweetReply = (EditText)findViewById(R.id.etTweetText_tweetdetails);
+        tvReply = (TextView)findViewById(R.id.ivReply_tweetdetails);
+        tvRetweets = (TextView)findViewById(R.id.tvRetweets_tweetdetails);
+        tvFavorites = (TextView)findViewById(R.id.tvFavorites_tweetdetails);
+
+
         etTweetReply.setHint("Reply to " + tweet.getUser().getName());
 
         ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(), ivProfileImage);
         tvUserName.setText(tweet.getUser().getName());
         tvScreenName.setText(tweet.getUser().getScreenName());
         tvBody.setText(tweet.getText());
+
+        tvRetweets.setText(tweet.getRetweet_count());
+        tvFavorites.setText(tweet.getFavorite_count());
 
         initializeActionBar();
         setUpListeners();

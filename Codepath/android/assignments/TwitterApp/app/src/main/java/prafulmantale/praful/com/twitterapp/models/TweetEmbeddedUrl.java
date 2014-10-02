@@ -17,8 +17,8 @@ import org.json.JSONObject;
 @Table(name = "TweetEmbeddedUrl")
 public class TweetEmbeddedUrl extends Model implements Parcelable{
 
-    @Column(name = "uid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
-    private long uid;
+    @Column(name = "tweetid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    private long tweetID;
     private int startIndex;
     private int endIndex;
     private String url;
@@ -26,8 +26,17 @@ public class TweetEmbeddedUrl extends Model implements Parcelable{
     private String expandedUrl;
 
     public TweetEmbeddedUrl() {
+        super();
         startIndex = -1;
         endIndex = -1;
+    }
+
+    public long getTweetID() {
+        return tweetID;
+    }
+
+    public void setTweetID(long tweetID) {
+        this.tweetID = tweetID;
     }
 
     public int getStartIndex() {
@@ -70,12 +79,13 @@ public class TweetEmbeddedUrl extends Model implements Parcelable{
         this.expandedUrl = expandedUrl;
     }
 
-    public static  TweetEmbeddedUrl fromJSON(JSONObject jsonObject){
+    public static  TweetEmbeddedUrl fromJSON(JSONObject jsonObject, long tweetID){
 
         TweetEmbeddedUrl tweetEmbeddedUrl = new TweetEmbeddedUrl();
 
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("indices");
+            tweetEmbeddedUrl.tweetID = tweetID;
 
             tweetEmbeddedUrl.startIndex = jsonArray.getInt(0);
             tweetEmbeddedUrl.endIndex = jsonArray.getInt(1);
@@ -83,20 +93,13 @@ public class TweetEmbeddedUrl extends Model implements Parcelable{
             tweetEmbeddedUrl.url = jsonObject.getString("url");
             tweetEmbeddedUrl.displayUrl = jsonObject.getString("display_url");
             tweetEmbeddedUrl.expandedUrl = jsonObject.getString("expanded_url");
+
+            tweetEmbeddedUrl.save();
         }
         catch (JSONException e){
             tweetEmbeddedUrl = null;
         }
         return tweetEmbeddedUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "TweetEmbeddedUrl{" +
-                "startIndex=" + startIndex +
-                ", endIndex=" + endIndex +
-                ", url='" + url + '\'' +
-                '}';
     }
 
     public void writeToParcel(Parcel dest, int flags) {
@@ -142,5 +145,18 @@ public class TweetEmbeddedUrl extends Model implements Parcelable{
         }
 
         return true;
+    }
+
+
+    @Override
+    public String toString() {
+        return "TweetEmbeddedUrl{" +
+                "tweetID=" + tweetID +
+                ", startIndex=" + startIndex +
+                ", endIndex=" + endIndex +
+                ", url='" + url + '\'' +
+                ", displayUrl='" + displayUrl + '\'' +
+                ", expandedUrl='" + expandedUrl + '\'' +
+                '}';
     }
 }

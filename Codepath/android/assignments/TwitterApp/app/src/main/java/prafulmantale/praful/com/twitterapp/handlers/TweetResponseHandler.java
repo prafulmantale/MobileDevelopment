@@ -14,6 +14,8 @@ import prafulmantale.praful.com.twitterapp.models.Tweet;
  */
 public class TweetResponseHandler extends JsonHttpResponseHandler {
 
+    private static String TAG = TweetResponseHandler.class.getName();
+
     private TimelineAdapter adapter;
 
     public TweetResponseHandler(TimelineAdapter adapter) {
@@ -24,8 +26,22 @@ public class TweetResponseHandler extends JsonHttpResponseHandler {
     public void onSuccess(JSONObject response) {
 
         Tweet tweet = Tweet.fromJSON(response);
-        Log.d("TWEET", tweet.toString());
+        if(tweet == null){
+            Log.d(TAG, tweet.toString());
+            return;
+        }
+
         adapter.insert(tweet, 0);
 
+    }
+
+    @Override
+    protected void handleFailureMessage(Throwable e, String responseBody) {
+        Log.d(TAG, "handleFailureMessage()");
+    }
+
+    @Override
+    public void onFailure(Throwable e, JSONObject errorResponse) {
+        Log.d(TAG, "onFailure()");
     }
 }

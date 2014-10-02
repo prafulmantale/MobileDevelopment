@@ -10,6 +10,8 @@ import com.activeandroid.annotation.Table;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import prafulmantale.praful.com.twitterapp.helpers.Utils;
 
 /**
@@ -18,8 +20,10 @@ import prafulmantale.praful.com.twitterapp.helpers.Utils;
 @Table(name="users")
 public class User extends Model implements Parcelable{
 
-    @Column(name="uid")
-    private long uid;
+    private static String TAG = User.class.getName();
+
+    @Column(name="userid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    private long userID;
 
     @Column(name="uname")
     private String name;
@@ -30,6 +34,9 @@ public class User extends Model implements Parcelable{
     @Column(name = "profileurl")
     private String profileImageUrl;
 
+    public List<Tweet> tweets() {
+        return getMany(Tweet.class, "User");
+    }
 
     public User() {
         super();
@@ -38,12 +45,16 @@ public class User extends Model implements Parcelable{
         screenName = "";
     }
 
-    public String getName() {
-        return name;
+    public long getUserID() {
+        return userID;
     }
 
-    public long getUid() {
-        return uid;
+    public void setUserID(long userID) {
+        this.userID = userID;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getScreenName() {
@@ -54,17 +65,23 @@ public class User extends Model implements Parcelable{
         return profileImageUrl;
     }
 
+
     public static User fromJSON(JSONObject jsonObject){
-        User user = new User();
+        User user = null;
 
         try{
-            user.name = jsonObject.getString("name");
-            user.uid = jsonObject.getLong("id");
-            user.screenName = jsonObject.getString("screen_name");
-            user.profileImageUrl = jsonObject.getString("profile_image_url");
+            long uid = jsonObject.getLong("id");
+            user = User.load(User.class, uid);
+            if(user == null) {
+                user = new User();
+                user.userID = jsonObject.getLong("id");
+                user.name = jsonObject.getString("name");
+                user.screenName = jsonObject.getString("screen_name");
+                user.profileImageUrl = jsonObject.getString("profile_image_url");
+                user.save();
+            }
         }
         catch (JSONException ex){
-
             user = null;
         }
 
@@ -72,8 +89,8 @@ public class User extends Model implements Parcelable{
     }
 
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(userID);
         dest.writeString(name);
-        dest.writeLong(uid);
         dest.writeString(screenName);
         dest.writeString(profileImageUrl);
     }
@@ -91,8 +108,8 @@ public class User extends Model implements Parcelable{
     };
 
     private User(Parcel in) {
+        userID = in.readLong();
         name = in.readString();
-        uid = in.readLong();
         screenName = in.readString();
         profileImageUrl = in.readString();
     }
@@ -105,8 +122,8 @@ public class User extends Model implements Parcelable{
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
-                ", uid=" + uid +
+                "userID=" + userID +
+                ", name='" + name + '\'' +
                 ", screenName='" + screenName + '\'' +
                 ", profileImageUrl='" + profileImageUrl + '\'' +
                 '}';

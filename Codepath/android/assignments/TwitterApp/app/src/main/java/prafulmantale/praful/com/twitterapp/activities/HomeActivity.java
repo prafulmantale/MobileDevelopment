@@ -27,7 +27,7 @@ import prafulmantale.praful.com.twitterapp.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
 import prafulmantale.praful.com.twitterapp.models.TweetRequest;
 import prafulmantale.praful.com.twitterapp.models.User;
-import prafulmantale.praful.com.twitterapp.networking.RestClientApp;
+import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 public class HomeActivity extends Activity {

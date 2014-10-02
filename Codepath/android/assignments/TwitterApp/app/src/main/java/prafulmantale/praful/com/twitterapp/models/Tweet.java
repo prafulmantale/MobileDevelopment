@@ -44,14 +44,14 @@ public class Tweet extends Model implements Parcelable{
     @Column(name="favorite_count")
     private String favorite_count;
 
-    @Column(name = "User" , onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
+    @Column(name = "user" , onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     private User user;
 
-    @Column(name = "TweetEmbeddedUrl", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
+    @Column(name = "tweetEmbeddedUrl", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     private TweetEmbeddedUrl tweetEmbeddedUrl;
 
-
     private String formattedBody;
+    private String relativeTimestamp;
 
     public Tweet() {
         super();
@@ -60,11 +60,12 @@ public class Tweet extends Model implements Parcelable{
         text = "";
 
         createdAt = "";
-        retweet_count = "";
-        favorite_count = "";
+        retweet_count = " ";
+        favorite_count = " ";
         user = new User();
         tweetEmbeddedUrl = new TweetEmbeddedUrl();
         formattedBody = null;
+        relativeTimestamp = null;
     }
 
     public long getTweetID() {
@@ -125,7 +126,7 @@ public class Tweet extends Model implements Parcelable{
         if(getTweetEmbeddedUrl() == null || getTweetEmbeddedUrl().isValid() == false){
             return formattedBody;
         }
-        
+
         try {
             formattedBody = formattedBody.substring(0, tweetEmbeddedUrl.getStartIndex()) +
                     "<a href=\"" + getTweetEmbeddedUrl().getExpandedUrl() + "\">" + getTweetEmbeddedUrl().getDisplayUrl() + "</a> " +
@@ -139,6 +140,10 @@ public class Tweet extends Model implements Parcelable{
     }
 
     public String getRelativeTimeAgo() {
+
+        if(relativeTimestamp != null && !relativeTimestamp.isEmpty()){
+            return relativeTimestamp;
+        }
         String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
         SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
         sf.setLenient(true);
@@ -146,9 +151,10 @@ public class Tweet extends Model implements Parcelable{
         String relativeDate = "";
         try {
             long dateMillis = sf.parse(createdAt).getTime();
-            relativeDate = Utils.getElapsedDisplayTime(dateMillis);
+            relativeDate = relativeTimestamp = Utils.getElapsedDisplayTime(dateMillis);
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.d(TAG, "Excpetion in getRelativeTimeAgo" + e.getMessage());
+            relativeTimestamp = null;
         }
 
         return relativeDate;
@@ -161,15 +167,23 @@ public class Tweet extends Model implements Parcelable{
         try{
             tweet.tweetID = jsonObject.getLong("id");
             tweet.text = jsonObject.getString("text");
-
             tweet.createdAt = jsonObject.getString("created_at");
+
             try {
                 tweet.retweet_count = jsonObject.getString("retweet_count");
+                if(tweet.retweet_count.equals("0")){
+                    tweet.retweet_count = " ";
+                }
+
                 tweet.favorite_count = jsonObject.getString("favorite_count");
-            }
+                if(tweet.favorite_count.equals("0")){
+                    tweet.favorite_count = " ";
+                }
+                }
             catch (Exception e){
-                System.out.println("Something wrong");
+                Log.d(TAG, "Exception while extracting Retweet and favorite count");
             }
+
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
 
             try {
@@ -178,12 +192,12 @@ public class Tweet extends Model implements Parcelable{
 
                 for (int i = 0; i < urls.length(); i++) {
                     JSONObject obj = urls.getJSONObject(0);
-                    tweet.tweetEmbeddedUrl = TweetEmbeddedUrl.fromJSON(obj);
+                    tweet.tweetEmbeddedUrl = TweetEmbeddedUrl.fromJSON(obj, tweet.tweetID);
                     break;
                 }
             }
-            catch (Exception eh){
-
+            catch (JSONException eh){
+                Log.d(TAG, "Exception while extracting Embedded urls");
             }
         }
         catch (JSONException ex){
@@ -214,7 +228,7 @@ public class Tweet extends Model implements Parcelable{
                     continue;
                 }
 
-                //tweet.save();
+                tweet.save();
                 list.add(tweet);
             }
             catch (JSONException ex){

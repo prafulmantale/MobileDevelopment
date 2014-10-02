@@ -33,7 +33,7 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
         private TextView tvScreenName;
         private TextView tvCreatedTime;
         private TextView tvTweet;
-        private ImageView ivReply;
+        private TextView tvReply;
         private TextView tvRetweetsCount;
         private TextView tvFavoritesCount;
         private ImageView ivFollow;
@@ -44,7 +44,7 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
             tvScreenName = (TextView)convertView.findViewById(R.id.tvUserHandle_timeline);
             tvCreatedTime = (TextView)convertView.findViewById(R.id.tvElapsedTime_timeline);
             tvTweet = (TextView)convertView.findViewById(R.id.tvTweet_timeline);
-            ivReply = (ImageView)convertView.findViewById(R.id.ivReply_timeline);
+            tvReply = (TextView)convertView.findViewById(R.id.tvReply_timeline);
             tvRetweetsCount = (TextView)convertView.findViewById(R.id.tvRetweets_timeline);
             tvFavoritesCount = (TextView)convertView.findViewById(R.id.tvFavorites_timeline);
             ivFollow = (ImageView)convertView.findViewById(R.id.ivFollow_timeline);
