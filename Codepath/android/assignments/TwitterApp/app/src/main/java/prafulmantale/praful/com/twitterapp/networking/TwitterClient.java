@@ -77,8 +77,6 @@ public class TwitterClient  extends OAuthBaseClient{
         if(apiRequest == APIRequest.LOGGEDIN_USER_INFO){
             getLoggedInUserDetails(responseHandler);
         }
-
-
     }
 
     private void getHomeTimeline(JsonHttpResponseHandler responseHandler, QueryParameters queryParameters){
