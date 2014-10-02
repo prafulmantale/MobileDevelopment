@@ -22,6 +22,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
+import prafulmantale.praful.com.twitterapp.helpers.Utils;
 import prafulmantale.praful.com.twitterapp.models.TweetRequest;
 
 public class CreateTweetActivity extends Activity {
@@ -61,7 +62,7 @@ public class CreateTweetActivity extends Activity {
         tvUserName = (TextView)findViewById(R.id.tvUserName_createtweet);
         tvScreenName = (TextView)findViewById(R.id.tvUserHandle_createtweet);
 
-        ImageLoader.getInstance().displayImage(HomeActivity.loggedInUser.getProfileImageUrl(), ivProfileImage);
+        ImageLoader.getInstance().displayImage(HomeActivity.loggedInUser.getProfileImageUrl(), ivProfileImage, Utils.roundedImageOptions);
         tvUserName.setText(HomeActivity.loggedInUser.getName());
         tvScreenName.setText("@" + HomeActivity.loggedInUser.getScreenName());
 

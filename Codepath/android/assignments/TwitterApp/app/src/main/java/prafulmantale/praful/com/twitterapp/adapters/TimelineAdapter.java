@@ -19,6 +19,7 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 import prafulmantale.praful.com.twitterapp.R;
+import prafulmantale.praful.com.twitterapp.helpers.Utils;
 import prafulmantale.praful.com.twitterapp.interfaces.ViewsClickListener;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
 
@@ -64,7 +65,7 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
             tvRetweetsCount.setText(tweet.getRetweet_count());
             tvFavoritesCount.setText(tweet.getFavorite_count());
 
-            ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(),ivProfileImage);
+            ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(),ivProfileImage, Utils.roundedImageOptions);
 
             if(tweet.isFavorited()){
                 tvFavoritesCount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_favorite_on, 0, 0, 0);
@@ -123,6 +124,13 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
                 else {
                     listener.OnCreateFavoriteTweetRequested(tweet);
                 }
+            }
+        });
+
+        viewHolder.ivProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.OnUserProfileRequested(tweet.getUser());
             }
         });
 

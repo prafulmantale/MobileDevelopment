@@ -242,4 +242,15 @@ public class HomeActivity extends Activity implements ViewsClickListener {
 
         startActivityForResult(intent, AppConstants.RequestCodes.TWEET_REPLY_FROM_HOME);
     }
+
+    @Override
+    public void OnUserProfileRequested(User user) {
+        showUserProfile(user);
+    }
+
+    private void showUserProfile(User user) {
+
+        Intent intent = new Intent(this, UserProfileActivity.class);
+        startActivity(intent);
+    }
 }

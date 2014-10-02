@@ -28,6 +28,7 @@ public class RestClientApp extends com.activeandroid.app.Application{
                 .cacheOnDisc()
                 .build();
 
+
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .defaultDisplayImageOptions(displayImageOptions)
                 .build();

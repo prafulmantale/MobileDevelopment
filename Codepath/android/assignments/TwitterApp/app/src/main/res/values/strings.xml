@@ -28,5 +28,6 @@
     <string name="button_tweet_text">Tweet</string>
     <string name="title_activity_tweet_details">TweetDetailsActivity</string>
     <string name="reply_to_tweet_text_hint">Reply to </string>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
 
 </resources>

@@ -49,6 +49,11 @@
             android:name=".activities.TweetDetailsActivity"
             android:parentActivityName=".activities.HomeActivity" >
         </activity>
+        <activity
+            android:name=".activities.UserProfileActivity"
+            android:label="@string/title_activity_user_profile"
+            android:parentActivityName=".activities.HomeActivity">
+        </activity>
     </application>
 
 </manifest>

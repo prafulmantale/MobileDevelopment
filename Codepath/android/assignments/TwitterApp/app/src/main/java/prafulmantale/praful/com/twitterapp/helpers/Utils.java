@@ -1,5 +1,8 @@
 package prafulmantale.praful.com.twitterapp.helpers;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+
 import java.net.URLConnection;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,6 +13,12 @@ import java.util.concurrent.TimeUnit;
  * Created by prafulmantale on 9/26/14.
  */
 public class Utils {
+
+    public static DisplayImageOptions roundedImageOptions = new DisplayImageOptions.Builder()
+            .cacheInMemory()
+            .displayer(new RoundedBitmapDisplayer(10))
+            .cacheOnDisc()
+            .build();
 
     private Utils(){
 
