@@ -82,11 +82,14 @@ public class User extends Model implements Parcelable{
                 user.name = jsonObject.getString("name");
                 user.screenName = jsonObject.getString("screen_name");
                 user.profileImageUrl = jsonObject.getString("profile_image_url");
-                user.save();
+                //user.save();
             }
         }
         catch (JSONException ex){
-            user = null;
+
+            Log.d(TAG, "Exception while creating User from JSON" + ex.getMessage());
+            ex.printStackTrace();
+            //user = null;
         }
 
         return user;

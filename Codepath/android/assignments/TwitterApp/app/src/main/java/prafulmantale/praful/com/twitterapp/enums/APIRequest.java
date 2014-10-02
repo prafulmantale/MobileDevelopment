@@ -7,5 +7,7 @@ public enum APIRequest {
 
     HOME_TIMELINE,
     LOGGEDIN_USER_INFO,
-    TWEET
+    TWEET,
+    CREATE_FAVORITE,
+    DESTROY_FAVORITE
 }

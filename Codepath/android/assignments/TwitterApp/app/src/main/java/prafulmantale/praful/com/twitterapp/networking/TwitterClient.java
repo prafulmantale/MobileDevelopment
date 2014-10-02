@@ -51,6 +51,8 @@ public class TwitterClient  extends OAuthBaseClient{
         requestMap.put(APIRequest.HOME_TIMELINE, new Request("statuses/home_timeline.json", HttpMethod.Get));
         requestMap.put(APIRequest.LOGGEDIN_USER_INFO, new Request("account/verify_credentials.json", HttpMethod.Get));
         requestMap.put(APIRequest.TWEET, new Request("statuses/update.json", HttpMethod.Post));
+        requestMap.put(APIRequest.CREATE_FAVORITE, new Request("favorites/create.json", HttpMethod.Post));
+        requestMap.put(APIRequest.DESTROY_FAVORITE, new Request("favorites/destroy.json", HttpMethod.Post));
     }
 
 
@@ -113,6 +115,24 @@ public class TwitterClient  extends OAuthBaseClient{
         if(request.getTweetID() != -1){
             params.put("in_reply_to_status_id", String.valueOf(request.getTweetID()));
         }
+
+        getClient().post(url, params, responseHandler);
+    }
+
+    public void postCreateFavoriteTweet(JsonHttpResponseHandler responseHandler, TweetRequest request){
+
+        String url = getApiUrl(requestMap.get(APIRequest.CREATE_FAVORITE).url);
+        RequestParams params = new RequestParams();
+        params.put("id", String.valueOf(request.getTweetID()));
+
+        getClient().post(url, params, responseHandler);
+    }
+
+    public void postDestroyFavoriteTweet(JsonHttpResponseHandler responseHandler, TweetRequest request){
+
+        String url = getApiUrl(requestMap.get(APIRequest.DESTROY_FAVORITE).url);
+        RequestParams params = new RequestParams();
+        params.put("id", String.valueOf(request.getTweetID()));
 
         getClient().post(url, params, responseHandler);
     }

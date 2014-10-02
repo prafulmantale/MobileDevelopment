@@ -2,6 +2,7 @@ package prafulmantale.praful.com.twitterapp.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
@@ -11,11 +12,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import prafulmantale.praful.com.twitterapp.handlers.LoggedInUserResponseHandler;
+
 /**
  * Created by prafulmantale on 9/30/14.
  */
 @Table(name = "TweetEmbeddedUrl")
 public class TweetEmbeddedUrl extends Model implements Parcelable{
+
+    private static final String TAG = TweetEmbeddedUrl.class.getName();
 
     @Column(name = "tweetid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private long tweetID;
@@ -94,9 +99,10 @@ public class TweetEmbeddedUrl extends Model implements Parcelable{
             tweetEmbeddedUrl.displayUrl = jsonObject.getString("display_url");
             tweetEmbeddedUrl.expandedUrl = jsonObject.getString("expanded_url");
 
-            tweetEmbeddedUrl.save();
+            //tweetEmbeddedUrl.save();
         }
         catch (JSONException e){
+            Log.d(TAG, "Exception while creating TweetEmbeddedUrl from JSON ");
             tweetEmbeddedUrl = null;
         }
         return tweetEmbeddedUrl;

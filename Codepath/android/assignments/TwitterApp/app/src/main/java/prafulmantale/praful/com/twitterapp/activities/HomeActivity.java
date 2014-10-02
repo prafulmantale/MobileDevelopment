@@ -14,6 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -202,6 +206,32 @@ public class HomeActivity extends Activity implements ViewsClickListener {
     public void OnReplyToTweetRequested(Tweet tweet) {
 
         startComposeForReply(tweet);
+    }
+
+    @Override
+    public void OnCreateFavoriteTweetRequested(final Tweet tweet) {
+        TweetRequest request = new TweetRequest();
+        request.setTweetID(tweet.getTweetID());
+        RestClientApp.getTwitterClient().postCreateFavoriteTweet(new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(JSONObject response) {
+                //super.onSuccess(response);
+                tweet.setFavorited(true);
+            }
+        }, request);
+    }
+
+    @Override
+    public void OnDestroyFavoriteTweetRequested(final Tweet tweet) {
+        TweetRequest request = new TweetRequest();
+        request.setTweetID(tweet.getTweetID());
+        RestClientApp.getTwitterClient().postDestroyFavoriteTweet(new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(JSONObject response) {
+                //super.onSuccess(response);
+                tweet.setFavorited(false);
+            }
+        }, request);
     }
 
     private void startComposeForReply(Tweet tweet) {

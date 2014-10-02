@@ -1,6 +1,7 @@
 package prafulmantale.praful.com.twitterapp.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.media.Image;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -27,6 +28,7 @@ import prafulmantale.praful.com.twitterapp.models.Tweet;
 public class TimelineAdapter extends ArrayAdapter<Tweet> {
 
     private Context context;
+    ViewsClickListener listener;
 
     private class ViewHolder{
 
@@ -63,6 +65,15 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
             tvFavoritesCount.setText(tweet.getFavorite_count());
 
             ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(),ivProfileImage);
+
+            if(tweet.isFavorited()){
+                tvFavoritesCount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_favorite_on, 0, 0, 0);
+                tvFavoritesCount.setTextColor(Color.parseColor("#FDD502"));
+            }
+            else{
+                tvFavoritesCount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_favorite_default, 0, 0, 0);
+                tvFavoritesCount.setTextColor(Color.parseColor("#000000"));
+            }
         }
     }
 
@@ -71,6 +82,7 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
         super(context, R.layout.item_timeline_row, objects);
 
         this.context = context;
+        listener = (ViewsClickListener)context;
     }
 
     @Override
@@ -97,8 +109,20 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
         viewHolder.tvReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ViewsClickListener listener = (ViewsClickListener)context;
+
                 listener.OnReplyToTweetRequested(tweet);
+            }
+        });
+
+        viewHolder.tvFavoritesCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tweet.isFavorited()){
+                    listener.OnDestroyFavoriteTweetRequested(tweet);
+                }
+                else {
+                    listener.OnCreateFavoriteTweetRequested(tweet);
+                }
             }
         });
 

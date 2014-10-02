@@ -8,4 +8,6 @@ import prafulmantale.praful.com.twitterapp.models.Tweet;
 public interface ViewsClickListener {
 
     public void OnReplyToTweetRequested(Tweet tweet);
+    public void OnCreateFavoriteTweetRequested(Tweet tweet);
+    public void OnDestroyFavoriteTweetRequested(Tweet tweet);
 }

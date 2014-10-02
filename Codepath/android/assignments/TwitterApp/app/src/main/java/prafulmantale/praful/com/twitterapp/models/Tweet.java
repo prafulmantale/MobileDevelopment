@@ -44,7 +44,10 @@ public class Tweet extends Model implements Parcelable{
     @Column(name="favorite_count")
     private String favorite_count;
 
-    @Column(name = "user" , onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
+    @Column(name = "favorited")
+    private boolean favorited;
+
+    @Column(name = "user", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     private User user;
 
     @Column(name = "tweetEmbeddedUrl", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
@@ -88,6 +91,10 @@ public class Tweet extends Model implements Parcelable{
         return createdAt;
     }
 
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public String getRetweet_count() {
         return retweet_count;
     }
@@ -104,8 +111,20 @@ public class Tweet extends Model implements Parcelable{
         this.favorite_count = favorite_count;
     }
 
+    public boolean isFavorited() {
+        return favorited;
+    }
+
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
+    }
+
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public TweetEmbeddedUrl getTweetEmbeddedUrl() {
@@ -184,6 +203,8 @@ public class Tweet extends Model implements Parcelable{
                 Log.d(TAG, "Exception while extracting Retweet and favorite count");
             }
 
+            tweet.favorited = jsonObject.getBoolean("favorited");
+
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
 
             try {
@@ -247,6 +268,7 @@ public class Tweet extends Model implements Parcelable{
         createdAt = in.readString();
         retweet_count = in.readString();
         favorite_count = in.readString();
+        favorited = in.readInt() == 1 ? true : false;
         if(in.readInt() == -1){
             user = null;
         }
@@ -272,6 +294,7 @@ public class Tweet extends Model implements Parcelable{
         dest.writeString(createdAt);
         dest.writeString(retweet_count);
         dest.writeString(favorite_count);
+        dest.writeInt(favorited ? 1 : 0);
         if(user == null){
             dest.writeInt(-1);
         }

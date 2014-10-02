@@ -32,7 +32,6 @@ public class TweetResponseHandler extends JsonHttpResponseHandler {
         }
 
         adapter.insert(tweet, 0);
-
     }
 
     @Override
