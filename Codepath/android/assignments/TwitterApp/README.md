@@ -33,7 +33,7 @@ Not Done:
 	Bonus: Compose activity is replaced with a modal overlay
 		
 Notes:
-	Total time spent 10-12 Hrs.
+	Total time spent 20-22 Hrs.
 
 
 Walkthrough of all user stories:
