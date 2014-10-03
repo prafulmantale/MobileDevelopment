@@ -5,12 +5,14 @@ package prafulmantale.praful.com.twitterapp.query;
  */
 public class QueryParameters {
 
+    private String userID;
     private String max_id; //Endless scrolling
     private String since_id; //pull to refresh
 
     public QueryParameters(String max_id, String since_id) {
         this.max_id = max_id;
         this.since_id = since_id;
+        userID = null;
     }
 
 
@@ -28,5 +30,13 @@ public class QueryParameters {
 
     public void setSince_id(String since_id) {
         this.since_id = since_id;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }

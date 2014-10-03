@@ -9,11 +9,13 @@ import android.util.Log;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Map;
 
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.helpers.Utils;
@@ -75,21 +77,23 @@ public class User extends Model implements Parcelable{
 
         try{
             long uid = jsonObject.getLong("id");
-            user = User.load(User.class, uid);
+            //user = User.load(User.class, uid);
+            //?? Is this an expensive operation, how to reduce DB hit
+            user = new Select().from(User.class).where("userid = ?", uid).executeSingle();
             if(user == null) {
                 user = new User();
                 user.userID = jsonObject.getLong("id");
                 user.name = jsonObject.getString("name");
                 user.screenName = jsonObject.getString("screen_name");
                 user.profileImageUrl = jsonObject.getString("profile_image_url");
-                //user.save();
+                user.save();
             }
         }
         catch (JSONException ex){
 
             Log.d(TAG, "Exception while creating User from JSON" + ex.getMessage());
             ex.printStackTrace();
-            //user = null;
+            user = null;
         }
 
         return user;

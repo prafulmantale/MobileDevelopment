@@ -53,6 +53,7 @@ public class TwitterClient  extends OAuthBaseClient{
         requestMap.put(APIRequest.TWEET, new Request("statuses/update.json", HttpMethod.Post));
         requestMap.put(APIRequest.CREATE_FAVORITE, new Request("favorites/create.json", HttpMethod.Post));
         requestMap.put(APIRequest.DESTROY_FAVORITE, new Request("favorites/destroy.json", HttpMethod.Post));
+        requestMap.put(APIRequest.USER_TIMELINE, new Request("statuses/user_timeline.json", HttpMethod.Get));
     }
 
 
@@ -79,6 +80,10 @@ public class TwitterClient  extends OAuthBaseClient{
         if(apiRequest == APIRequest.LOGGEDIN_USER_INFO){
             getLoggedInUserDetails(responseHandler);
         }
+
+        if(apiRequest == APIRequest.USER_TIMELINE){
+            getUserTimeline(responseHandler, queryParameters);
+        }
     }
 
     private void getHomeTimeline(JsonHttpResponseHandler responseHandler, QueryParameters queryParameters){
@@ -95,6 +100,31 @@ public class TwitterClient  extends OAuthBaseClient{
 
             if (queryParameters.getSince_id() != null){
                 params.put("since_id", queryParameters.getSince_id());
+            }
+        }
+
+        System.out.println("Request: " + url + params);
+        getClient().get(url, params, responseHandler);
+    }
+
+    private void getUserTimeline(JsonHttpResponseHandler responseHandler, QueryParameters queryParameters){
+
+        String url = getApiUrl(requestMap.get(APIRequest.USER_TIMELINE).url);
+
+        RequestParams params = null;
+        if(queryParameters.getMax_id() != null || queryParameters.getSince_id() != null || queryParameters.getUserID() != null) {
+            params = new RequestParams();
+
+            if(queryParameters.getMax_id() != null){
+                params.put("max_id", queryParameters.getMax_id());
+            }
+
+            if (queryParameters.getSince_id() != null){
+                params.put("since_id", queryParameters.getSince_id());
+            }
+
+            if(queryParameters.getUserID() != null){
+                params.put("user_id", queryParameters.getUserID());
             }
         }
 

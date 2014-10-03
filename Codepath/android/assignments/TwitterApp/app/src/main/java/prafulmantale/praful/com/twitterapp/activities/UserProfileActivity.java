@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import prafulmantale.praful.com.twitterapp.R;
+import prafulmantale.praful.com.twitterapp.application.RestClientApp;
+import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
 
 public class UserProfileActivity extends Activity {
 
@@ -12,6 +14,8 @@ public class UserProfileActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
+        //RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler());
     }
 
 

@@ -99,7 +99,7 @@ public class TweetEmbeddedUrl extends Model implements Parcelable{
             tweetEmbeddedUrl.displayUrl = jsonObject.getString("display_url");
             tweetEmbeddedUrl.expandedUrl = jsonObject.getString("expanded_url");
 
-            //tweetEmbeddedUrl.save();
+            tweetEmbeddedUrl.save();
         }
         catch (JSONException e){
             Log.d(TAG, "Exception while creating TweetEmbeddedUrl from JSON ");

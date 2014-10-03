@@ -245,6 +245,9 @@ public class HomeActivity extends Activity implements ViewsClickListener {
 
     @Override
     public void OnUserProfileRequested(User user) {
+        QueryParameters parameters = new QueryParameters(null, null);
+        parameters.setUserID(String.valueOf(user.getUserID()));
+        RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.USER_TIMELINE, parameters);
         showUserProfile(user);
     }
 
