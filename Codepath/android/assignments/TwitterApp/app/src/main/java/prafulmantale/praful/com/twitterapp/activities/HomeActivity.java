@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +18,8 @@ import android.widget.ListView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -34,9 +38,10 @@ import prafulmantale.praful.com.twitterapp.models.Tweet;
 import prafulmantale.praful.com.twitterapp.models.TweetRequest;
 import prafulmantale.praful.com.twitterapp.models.User;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
+import prafulmantale.praful.com.twitterapp.models.UserProfile;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
-public class HomeActivity extends Activity implements ViewsClickListener {
+public class HomeActivity extends FragmentActivity implements ViewsClickListener {
 
     private static final String TAG = HomeActivity.class.getName();
 
@@ -251,9 +256,29 @@ public class HomeActivity extends Activity implements ViewsClickListener {
         showUserProfile(user);
     }
 
-    private void showUserProfile(User user) {
+    private void showUserProfile(final User user) {
 
-        Intent intent = new Intent(this, UserProfileActivity.class);
-        startActivity(intent);
+        QueryParameters qp = new QueryParameters(null, null);
+        qp.setUserID(String.valueOf(user.getUserID()));
+
+        RestClientApp.getTwitterClient().sendRequest(new JsonHttpResponseHandler(){
+
+            @Override
+            public void onSuccess(JSONArray response) {
+
+                System.out.println("User Profile:\r\n" + response);
+                try {
+                    UserProfile userProfile = UserProfile.fromJSON(response.getJSONObject(0));
+                    Intent intent = new Intent(HomeActivity.this, UserProfileActivity.class);
+                    intent.putExtra("UID", userProfile);
+                    startActivity(intent);
+                }
+                catch (JSONException ex){
+                    Log.d(TAG, ex.getMessage());
+                    ex.printStackTrace();
+                }
+            }
+        }, APIRequest.USER_PROFILE, qp);
+
     }
 }

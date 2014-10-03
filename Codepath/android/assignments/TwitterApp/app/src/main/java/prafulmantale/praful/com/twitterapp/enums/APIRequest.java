@@ -10,5 +10,6 @@ public enum APIRequest {
     TWEET,
     CREATE_FAVORITE,
     DESTROY_FAVORITE,
-    USER_TIMELINE
+    USER_TIMELINE,
+    USER_PROFILE
 }

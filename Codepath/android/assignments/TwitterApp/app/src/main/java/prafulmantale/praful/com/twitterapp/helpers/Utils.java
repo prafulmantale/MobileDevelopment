@@ -14,6 +14,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class Utils {
 
+
+
     public static DisplayImageOptions roundedImageOptions = new DisplayImageOptions.Builder()
             .cacheInMemory()
             .displayer(new RoundedBitmapDisplayer(10))
@@ -77,5 +79,25 @@ public class Utils {
         }
 
         return display;
+    }
+
+    public static String getFormattedCountDisplay(long count){
+
+        if(count >= AppConstants.MILLION){
+            return getFormattedCountDisplay(count, AppConstants.MILLION, AppConstants.MILLION_SYM);
+        }
+
+        if(count >= AppConstants.THOUSAND){
+            return getFormattedCountDisplay(count, AppConstants.THOUSAND, AppConstants.THOUSAND_SYM);
+        }
+
+
+        return String.valueOf(count);
+    }
+
+    private static String getFormattedCountDisplay(long count, long unit, String symbol){
+        double tempDisplaycount = count;
+        tempDisplaycount = count/unit;
+        return String.valueOf(tempDisplaycount) + symbol;
     }
 }

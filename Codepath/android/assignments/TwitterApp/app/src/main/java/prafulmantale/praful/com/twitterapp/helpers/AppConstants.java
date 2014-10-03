@@ -34,4 +34,9 @@ public class AppConstants {
         public static final int TWEET_DETAILS_FROM_HOME = 102;
         public static final int TWEET_REPLY_FROM_HOME= 103;
     }
+
+    public static final long MILLION = 1000000;
+    public static final String MILLION_SYM = "M";
+    public static final long THOUSAND = 1000;
+    public static final String THOUSAND_SYM = "K";
 }

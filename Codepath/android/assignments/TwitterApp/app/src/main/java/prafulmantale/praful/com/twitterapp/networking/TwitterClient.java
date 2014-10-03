@@ -54,6 +54,7 @@ public class TwitterClient  extends OAuthBaseClient{
         requestMap.put(APIRequest.CREATE_FAVORITE, new Request("favorites/create.json", HttpMethod.Post));
         requestMap.put(APIRequest.DESTROY_FAVORITE, new Request("favorites/destroy.json", HttpMethod.Post));
         requestMap.put(APIRequest.USER_TIMELINE, new Request("statuses/user_timeline.json", HttpMethod.Get));
+        requestMap.put(APIRequest.USER_PROFILE, new Request("users/lookup.json", HttpMethod.Get));
     }
 
 
@@ -83,6 +84,10 @@ public class TwitterClient  extends OAuthBaseClient{
 
         if(apiRequest == APIRequest.USER_TIMELINE){
             getUserTimeline(responseHandler, queryParameters);
+        }
+
+        if(apiRequest == APIRequest.USER_PROFILE){
+            getUserProfile(responseHandler, queryParameters);
         }
     }
 
@@ -126,6 +131,20 @@ public class TwitterClient  extends OAuthBaseClient{
             if(queryParameters.getUserID() != null){
                 params.put("user_id", queryParameters.getUserID());
             }
+        }
+
+        System.out.println("Request: " + url + params);
+        getClient().get(url, params, responseHandler);
+    }
+
+    private void getUserProfile(JsonHttpResponseHandler responseHandler, QueryParameters queryParameters){
+
+        String url = getApiUrl(requestMap.get(APIRequest.USER_PROFILE).url);
+
+        RequestParams params = null;
+        if( queryParameters.getUserID() != null) {
+            params = new RequestParams();
+                params.put("user_id", queryParameters.getUserID());
         }
 
         System.out.println("Request: " + url + params);

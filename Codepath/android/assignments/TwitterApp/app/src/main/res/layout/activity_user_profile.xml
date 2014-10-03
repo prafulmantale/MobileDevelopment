@@ -4,19 +4,92 @@
     android:layout_height="match_parent"
     tools:context="prafulmantale.praful.com.twitterapp.activities.UserProfileActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:src="@drawable/welcome_background"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="-300dp"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        />
+        <LinearLayout
+            android:id="@+id/llUserProfile"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal|top"
+            android:gravity="center"
+            android:background="#1e090f18"
+            android:weightSum="1"
+            android:paddingTop="2dp">
+
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/ivProfileImage"
+                android:src="@drawable/ic_launcher"
+                style="@style/ProfileImage"
+                android:padding="3dp"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="User Name"
+                android:id="@+id/tvProfileUserName"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp"
+                android:textSize="12dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Screen Name"
+                    android:id="@+id/tvProfileScreenName"
+                    android:textColor="#ffffff"
+                    android:textSize="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="FOLLOWS YOU"
+                    android:id="@+id/tvProfileFollowsYou"
+                    android:background="#6e160107"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="#ffffff"
+                    android:textSize="8dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription"
+                android:id="@+id/tvProfileDescription"
+                android:layout_gravity="center_horizontal"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textColor="#ffffff"
+                android:textSize="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Location"
+                android:id="@+id/tvProfileLocation"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="10dp"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
 
 
 </RelativeLayout>
