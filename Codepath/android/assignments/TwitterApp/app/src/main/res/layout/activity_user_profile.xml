@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="prafulmantale.praful.com.twitterapp.activities.UserProfileActivity">
+    tools:context="prafulmantale.praful.com.twitterapp.activities.UserProfileActivity"
+    android:background="@android:color/darker_gray">
 
         <LinearLayout
             android:id="@+id/llUserProfile"
@@ -91,5 +92,54 @@
                 android:layout_marginTop="2dp"/>
         </LinearLayout>
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:paddingTop="0dip"
+        android:paddingLeft="1dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:layout_below="@+id/llUserProfile">
 
+        <LinearLayout android:orientation="horizontal"
+            android:gravity="center" android:measureWithLargestChild="true"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="@android:color/darker_gray">
+            <Button android:id="@+id/tvTweetsHeader"
+                android:layout_width="105dp" android:layout_height="40sp"
+                android:text="16.4K\nTWEETS"
+                android:background="@android:color/white"
+                android:textSize="12sp"
+                android:gravity="left|center"
+                android:padding="2dp"
+                >
+            </Button>
+            <Button android:id="@+id/tvFollowingHeader"
+                android:layout_width="105dp" android:layout_height="40sp"
+                android:text="8.9M\nFOLLOWING"
+                android:background="@android:color/white"
+                android:layout_marginLeft="1dp"
+                android:textSize="12sp"
+                android:gravity="left|center"
+                android:padding="2dp">
+            </Button>
+            <Button android:id="@+id/tvFollowersHeader"
+                android:layout_width="105dp" android:layout_height="40sp"
+                android:text="890\nFOLLOWERS"
+                android:background="@android:color/white"
+                android:layout_marginLeft="1dp"
+                android:textSize="12sp"
+                android:gravity="left|center"
+                android:padding="2dp"
+                >
+            </Button>
+        </LinearLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1">
+        </android.support.v4.view.ViewPager>
+
+
+    </LinearLayout>
 </RelativeLayout>

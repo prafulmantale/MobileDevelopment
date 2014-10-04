@@ -4,6 +4,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.net.URLConnection;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -96,8 +97,10 @@ public class Utils {
     }
 
     private static String getFormattedCountDisplay(long count, long unit, String symbol){
-        double tempDisplaycount = count;
-        tempDisplaycount = count/unit;
-        return String.valueOf(tempDisplaycount) + symbol;
+        double tempDisplayCount = count;
+        tempDisplayCount = (double)count/(double)unit;
+        DecimalFormat df = new DecimalFormat("#.#");
+
+        return df.format(tempDisplayCount) + symbol;
     }
 }

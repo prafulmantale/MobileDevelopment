@@ -39,4 +39,8 @@ public class AppConstants {
     public static final String MILLION_SYM = "M";
     public static final long THOUSAND = 1000;
     public static final String THOUSAND_SYM = "K";
+
+    public static final String TWEETS_UPPER = "TWEETS";
+    public static final String FOLLOWING_UPPER = "FOLLOWING";
+    public static final String FOLLOWERS_UPPER = "FOLLOWERS";
 }

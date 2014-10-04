@@ -7,6 +7,9 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
+import prafulmantale.praful.com.twitterapp.helpers.Utils;
+
 /**
  * Created by prafulmantale on 10/2/14.
  */
@@ -18,24 +21,31 @@ public class UserProfile implements Serializable{
     private String userIdStr;
     private String name;
     private String screenName;
-    private boolean followsYou;
+    private boolean following;
     private String description;
     private String profileImageUrl;
     private String profileBannerUrl;
 
-    private String friendsCount; //following
-    private String followersCount;
+    private long friendsCount; //following
+    private long followersCount;
 
-    private String statusCount; //no. of tweets
-    private String photosCount; //Photos posted
-    private String favoritesCount;//Liked tweets
+    private long statusCount; //no. of tweets
+    private long photosCount; //Photos posted
+    private long favoritesCount;//Liked tweets
 
     private String location;
 
+    //not serialized
     private String displayScreenName;
+    private String displayStatusCount;
+    private String displayFollowersCount;
+    private String displayFriendsCount;
 
     public UserProfile() {
         displayScreenName = null;
+        displayStatusCount = null;
+        displayFollowersCount = null;
+        displayFriendsCount = null;
     }
 
     public long getUserId() {
@@ -70,12 +80,12 @@ public class UserProfile implements Serializable{
         this.screenName = screenName;
     }
 
-    public boolean isFollowsYou() {
-        return followsYou;
+    public boolean isFollowing() {
+        return following;
     }
 
-    public void setFollowsYou(boolean followsYou) {
-        this.followsYou = followsYou;
+    public void setFollowing(boolean following) {
+        this.following = following;
     }
 
     public String getDescription() {
@@ -102,43 +112,43 @@ public class UserProfile implements Serializable{
         this.profileBannerUrl = profileBannerUrl;
     }
 
-    public String getFriendsCount() {
+    public long getFriendsCount() {
         return friendsCount;
     }
 
-    public void setFriendsCount(String friendsCount) {
+    public void setFriendsCount(long friendsCount) {
         this.friendsCount = friendsCount;
     }
 
-    public String getFollowersCount() {
+    public long getFollowersCount() {
         return followersCount;
     }
 
-    public void setFollowersCount(String followersCount) {
+    public void setFollowersCount(long followersCount) {
         this.followersCount = followersCount;
     }
 
-    public String getStatusCount() {
+    public long getStatusCount() {
         return statusCount;
     }
 
-    public void setStatusCount(String statusCount) {
+    public void setStatusCount(long statusCount) {
         this.statusCount = statusCount;
     }
 
-    public String getPhotosCount() {
+    public long getPhotosCount() {
         return photosCount;
     }
 
-    public void setPhotosCount(String photosCount) {
+    public void setPhotosCount(long photosCount) {
         this.photosCount = photosCount;
     }
 
-    public String getFavoritesCount() {
+    public long getFavoritesCount() {
         return favoritesCount;
     }
 
-    public void setFavoritesCount(String favoritesCount) {
+    public void setFavoritesCount(long favoritesCount) {
         this.favoritesCount = favoritesCount;
     }
 
@@ -159,6 +169,33 @@ public class UserProfile implements Serializable{
         return displayScreenName;
     }
 
+    public String getHTMLDisplayStatusCount(){
+        if(displayStatusCount == null){
+            displayStatusCount =  Utils.getFormattedCountDisplay(statusCount);
+            displayStatusCount = "<strong>" + displayStatusCount + "</strong><br><small>" + AppConstants.TWEETS_UPPER + "</small>";
+        }
+
+        return displayStatusCount;
+    }
+
+    public String getHTMLDisplayFollowersCount(){
+        if(displayFollowersCount == null){
+            displayFollowersCount =  Utils.getFormattedCountDisplay(followersCount);
+            displayFollowersCount = "<strong>" + displayFollowersCount + "</strong><br><small>" + AppConstants.FOLLOWERS_UPPER + "</small>";
+        }
+
+        return displayFollowersCount;
+    }
+
+    public String getHTMLDisplayFriendsCount(){
+        if(displayFriendsCount == null){
+            displayFriendsCount =  Utils.getFormattedCountDisplay(friendsCount);
+            displayFriendsCount = "<strong>" + displayFriendsCount + "</strong><br><small>" + AppConstants.FOLLOWING_UPPER + "</small>";
+        }
+
+        return displayFriendsCount;
+    }
+
     public static UserProfile fromJSON(JSONObject jsonObject){
         UserProfile userProfile = new UserProfile();
 
@@ -167,17 +204,17 @@ public class UserProfile implements Serializable{
             userProfile.userIdStr = jsonObject.getString("id_str");
             userProfile.name = jsonObject.getString("name");
             userProfile.screenName = jsonObject.getString("screen_name");
-            userProfile.followsYou = jsonObject.getBoolean("following");
+            userProfile.following = jsonObject.getBoolean("following");
             userProfile.description = jsonObject.getString("description");
             userProfile.profileImageUrl = jsonObject.getString("profile_image_url");
             userProfile.profileBannerUrl = jsonObject.getString("profile_banner_url");
 
-            userProfile.friendsCount = jsonObject.getString("friends_count");
-            userProfile.followersCount = jsonObject.getString("followers_count");
+            userProfile.friendsCount = jsonObject.getLong("friends_count");
+            userProfile.followersCount = jsonObject.getLong("followers_count");
 
-            userProfile.statusCount = jsonObject.getString("statuses_count");
-            //??userProfile.photosCount = jsonObject.getString("");
-            userProfile.favoritesCount = jsonObject.getString("favourites_count");
+            userProfile.statusCount = jsonObject.getLong("statuses_count");
+            //??userProfile.photosCount = jsonObject.getLong("");
+            userProfile.favoritesCount = jsonObject.getLong("favourites_count");
 
             userProfile.location = jsonObject.getString("location");
 
