@@ -79,6 +79,19 @@ public class TweetListFragment extends Fragment implements ViewsClickListener {
         lvTweets = (ListView) view.findViewById(R.id.lvItemsList_users_list);
 
         lvTweets.setAdapter(adapter);
+
+
+        QueryParameters parameters = new QueryParameters(null, null);
+        parameters.setUserID(userID);
+        RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, null), APIRequest.USER_TIMELINE, parameters);
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -99,17 +112,15 @@ public class TweetListFragment extends Fragment implements ViewsClickListener {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
+
+        if (adapter.getCount() != 0) {
+            Tweet tweet = adapter.getItem(adapter.getCount() - 1);
+            preMaxId = String.valueOf(tweet.getTweetID());
+        }
         setupListeners();
-
-        QueryParameters parameters = new QueryParameters(null, null);
-        parameters.setUserID(userID);
-        RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, null), APIRequest.USER_TIMELINE, parameters);
-
-        return view;
     }
 
     private void setupListeners() {
-
 
         lvTweets.setOnScrollListener(new EndlessScrollListener() {
             @Override

@@ -132,7 +132,6 @@ public class UserProfileActivity extends FragmentActivity {
         btnFollowing.setText(Html.fromHtml(userProfile.getHTMLDisplayFriendsCount()));
 
 
-        System.out.println("####:" + userProfile.getScreenName());
         tweetsFragment = TweetListFragment.newInstance(userProfile.getUserIdStr());
         followersFragment = UsersListFragment.newInstance(UserListType.Followers.getValue(), userProfile.getUserIdStr());
         followingFragment = UsersListFragment.newInstance(UserListType.Following.getValue(), userProfile.getUserIdStr());
