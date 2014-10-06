@@ -30,17 +30,21 @@ public class UsersListFragment extends Fragment{
     private ListView lvFollowers;
     private View view;
     private UserListType listType;
+    private String userID;
 
     public UsersListFragment(){
 
 
     }
 
-    public static UsersListFragment newInstance(int listType){
+    public static UsersListFragment newInstance(int listType, String userID){
         UsersListFragment fragment = new UsersListFragment();
         Bundle args = new Bundle();
         args.putInt(AppConstants.KEY_USER_LIST_TYPE, listType);
+        args.putString(AppConstants.KEY_USER_ID, userID);
+
         fragment.setArguments(args);
+
 
         return fragment;
     }
@@ -50,6 +54,9 @@ public class UsersListFragment extends Fragment{
         super.onCreate(savedInstanceState);
 
         int type = getArguments().getInt(AppConstants.KEY_USER_LIST_TYPE);
+        if(getArguments().containsKey(AppConstants.KEY_USER_ID)){
+            userID = getArguments().getString(AppConstants.KEY_USER_ID);
+        }
 
         listType = (type == 0) ? UserListType.Followers : UserListType.Following;
 
@@ -68,11 +75,11 @@ public class UsersListFragment extends Fragment{
         lvFollowers.setAdapter(followersAdapter);
 
         if(listType == UserListType.Followers) {
-            RestClientApp.getTwitterClient().getFollowersList(new UsersListResponseHandler(followersAdapter), "");
+            RestClientApp.getTwitterClient().getFollowersList(new UsersListResponseHandler(followersAdapter), userID);
         }
 
         if(listType == UserListType.Following){
-            RestClientApp.getTwitterClient().getFriendsList(new UsersListResponseHandler(followersAdapter), "");
+            RestClientApp.getTwitterClient().getFriendsList(new UsersListResponseHandler(followersAdapter), userID);
         }
 
         return view;

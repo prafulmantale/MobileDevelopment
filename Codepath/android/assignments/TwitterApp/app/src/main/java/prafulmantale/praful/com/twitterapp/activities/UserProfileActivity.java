@@ -132,9 +132,10 @@ public class UserProfileActivity extends FragmentActivity {
         btnFollowing.setText(Html.fromHtml(userProfile.getHTMLDisplayFriendsCount()));
 
 
-        tweetsFragment = TweetListFragment.newInstance();
-        followersFragment = UsersListFragment.newInstance(UserListType.Followers.getValue());
-        followingFragment = UsersListFragment.newInstance(UserListType.Following.getValue());
+        System.out.println("####:" + userProfile.getScreenName());
+        tweetsFragment = TweetListFragment.newInstance(userProfile.getUserIdStr());
+        followersFragment = UsersListFragment.newInstance(UserListType.Followers.getValue(), userProfile.getUserIdStr());
+        followingFragment = UsersListFragment.newInstance(UserListType.Following.getValue(), userProfile.getUserIdStr());
 
         final List<Fragment> list = new ArrayList<Fragment>(3);
         list.add(tweetsFragment);
@@ -174,10 +175,6 @@ public class UserProfileActivity extends FragmentActivity {
         setSelectedButton(btnTweets);
         unSelectButton(btnFollowers);
         unSelectButton(btnFollowing);
-
-
-        //followingFragment.set
-
     }
 
     public void onTabChanged(View view){
