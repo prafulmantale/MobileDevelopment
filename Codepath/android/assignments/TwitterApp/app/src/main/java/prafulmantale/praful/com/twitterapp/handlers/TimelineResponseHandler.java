@@ -48,7 +48,9 @@ public class TimelineResponseHandler extends JsonHttpResponseHandler {
             adapter.addAll(list);
         }
         finally {
-            swipeRefreshLayout.setRefreshing(false);
+            if(swipeRefreshLayout != null) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
         }
     }
 

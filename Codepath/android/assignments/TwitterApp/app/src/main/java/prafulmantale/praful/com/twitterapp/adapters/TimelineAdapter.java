@@ -1,10 +1,14 @@
 package prafulmantale.praful.com.twitterapp.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
+import android.os.Build;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import org.w3c.dom.Text;
 
@@ -65,7 +71,26 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
             tvRetweetsCount.setText(tweet.getRetweet_count());
             tvFavoritesCount.setText(tweet.getFavorite_count());
 
-            ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(),ivProfileImage, Utils.roundedImageOptions);
+            //ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(),ivProfileImage, Utils.roundedImageOptions);
+
+            ImageLoader.getInstance().loadImage(tweet.getUser().getProfileImageUrl(), Utils.roundedImageOptions, new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String s, View view) {
+                }
+
+                @Override
+                public void onLoadingFailed(String s, View view, FailReason failReason) {
+                }
+
+                @Override
+                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+                    ivProfileImage.setImageBitmap(bitmap);
+                }
+
+                @Override
+                public void onLoadingCancelled(String s, View view) {
+                }
+            });
 
             if(tweet.isFavorited()){
                 tvFavoritesCount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_favorite_on, 0, 0, 0);
@@ -83,7 +108,10 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
         super(context, R.layout.item_timeline_row, objects);
 
         this.context = context;
-        listener = (ViewsClickListener)context;
+        try {
+            listener = (ViewsClickListener) context;
+        }
+        catch(Exception ex) {}
     }
 
     @Override
