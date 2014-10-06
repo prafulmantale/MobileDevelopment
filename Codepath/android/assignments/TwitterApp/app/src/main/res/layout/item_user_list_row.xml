@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp" android:descendantFocusability="blocksDescendants">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivProfilePicture_user_list"
+        android:src="@drawable/ic_launcher"
+        android:maxHeight="40dp"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/ivProfilePicture_user_list"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Name"
+            android:id="@+id/tvUserName_user_list"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textAlignment="center"
+            android:textSize="10sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="userid"
+            android:id="@+id/tvUserHandle_user_list"
+            android:layout_below="@+id/tvUserName_user_list"
+            android:layout_marginLeft="3dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="8sp"
+            android:layout_marginTop="2dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:id="@+id/tvDescription_user_list"
+            android:layout_below="@+id/tvUserHandle_user_list"
+            android:layout_marginLeft="3dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="8sp"
+            android:layout_marginTop="2dp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivFollowingIndicator_user_list"
+            android:src="@drawable/ic_launcher"
+            android:maxHeight="30dp"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

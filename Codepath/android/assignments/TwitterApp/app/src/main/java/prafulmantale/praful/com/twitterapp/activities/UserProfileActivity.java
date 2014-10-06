@@ -1,6 +1,5 @@
 package prafulmantale.praful.com.twitterapp.activities;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,34 +18,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.adapters.ProfileFragmentsPageAdapter;
-import prafulmantale.praful.com.twitterapp.application.RestClientApp;
-import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.fragments.ItemsListFragment;
-import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
-import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 public class UserProfileActivity extends FragmentActivity {
 
     private static final String TAG = UserProfileActivity.class.getName();
     private UserProfile userProfile;
     private Drawable selectedDrawable;
+    private Drawable tabUnselectedDrawable;
     private ItemsListFragment tweetsFragment;
     private ItemsListFragment followersFragment;
     private ItemsListFragment followingFragment;
@@ -93,9 +82,9 @@ public class UserProfileActivity extends FragmentActivity {
         TextView tvDescription = (TextView)findViewById(R.id.tvProfileDescription);
         TextView tvFollowsYou = (TextView)findViewById(R.id.tvProfileFollowsYou);
         TextView tvLocation = (TextView)findViewById(R.id.tvProfileLocation);
-        btnTweets = (Button)findViewById(R.id.tvTweetsHeader);
-        btnFollowers = (Button)findViewById(R.id.tvFollowersHeader);
-        btnFollowing = (Button)findViewById(R.id.tvFollowingHeader);
+        btnTweets = (Button)findViewById(R.id.btnTweetsHeader);
+        btnFollowers = (Button)findViewById(R.id.btnFollowersHeader);
+        btnFollowing = (Button)findViewById(R.id.btnFollowingHeader);
         viewPager = (ViewPager)findViewById(R.id.viewPager);
 
         ImageLoader.getInstance().loadImage(userProfile.getProfileBannerUrl(), new ImageLoadingListener() {
@@ -158,12 +147,13 @@ public class UserProfileActivity extends FragmentActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if(position < 0 || position > 2){
+                if(position < 0 || position > 2
+                        || selectedPageIndex == position){
                     return;
                 }
 
-                setSelectButton(getTabButton(position));
-                setUnSelectButton(getTabButton(selectedPageIndex));
+                setSelectedButton(getTabButton(position));
+                unSelectButton(getTabButton(selectedPageIndex));
                 selectedPageIndex = position;
             }
 
@@ -173,10 +163,32 @@ public class UserProfileActivity extends FragmentActivity {
             }
         });
 
-        selectedDrawable = getResources().getDrawable(R.drawable.tab_button_style);
-
-        setSelectButton(btnTweets);
+        selectedDrawable = getResources().getDrawable(R.drawable.tab_button_style_selected);
+        tabUnselectedDrawable = getResources().getDrawable(R.drawable.tab_button_style_unselected);
+        setSelectedButton(btnTweets);
+        unSelectButton(btnFollowers);
+        unSelectButton(btnFollowing);
     }
+
+    public void onTabChanged(View view){
+
+        int currentItem = selectedPageIndex;
+
+        if(view.getId() == R.id.btnTweetsHeader){
+            currentItem = 0;
+        }
+
+        if(view.getId() == R.id.btnFollowingHeader){
+            currentItem = 1;
+        }
+
+        if(view.getId() == R.id.btnFollowersHeader){
+            currentItem = 2;
+        }
+
+        viewPager.setCurrentItem(currentItem);
+    }
+
 
     private Button getTabButton(int position){
 
@@ -196,7 +208,7 @@ public class UserProfileActivity extends FragmentActivity {
         return null;
     }
 
-    private void setSelectButton(Button newSelect){
+    private void setSelectedButton(Button newSelect){
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             newSelect.setBackground(selectedDrawable);
@@ -206,13 +218,13 @@ public class UserProfileActivity extends FragmentActivity {
         }
     }
 
-    private void setUnSelectButton(Button newSelect){
+    private void unSelectButton(Button unSelect){
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            newSelect.setBackgroundColor(Color.WHITE);
+            unSelect.setBackground(tabUnselectedDrawable);
         }
         else{
-            newSelect.setBackgroundColor(Color.WHITE);
+            unSelect.setBackgroundDrawable(tabUnselectedDrawable);
         }
     }
 

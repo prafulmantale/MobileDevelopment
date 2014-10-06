@@ -104,32 +104,18 @@
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_weight="0"
             android:background="@android:color/darker_gray">
-            <Button android:id="@+id/tvTweetsHeader"
-                android:layout_width="105dp" android:layout_height="40sp"
-                android:text="16.4K\nTWEETS"
-                android:background="@android:color/white"
-                android:textSize="12sp"
-                android:gravity="left|center"
-                android:padding="2dp"
+            <Button android:id="@+id/btnTweetsHeader"
+                style="@style/ProfileTabButton_Unselect"
+                android:onClick="onTabChanged"
                 >
             </Button>
-            <Button android:id="@+id/tvFollowingHeader"
-                android:layout_width="105dp" android:layout_height="40sp"
-                android:text="8.9M\nFOLLOWING"
-                android:background="@android:color/white"
-                android:layout_marginLeft="1dp"
-                android:textSize="12sp"
-                android:gravity="left|center"
-                android:padding="2dp">
+            <Button android:id="@+id/btnFollowingHeader"
+                style="@style/ProfileTabButton_Unselect"
+                android:onClick="onTabChanged">
             </Button>
-            <Button android:id="@+id/tvFollowersHeader"
-                android:layout_width="105dp" android:layout_height="40sp"
-                android:text="890\nFOLLOWERS"
-                android:background="@android:color/white"
-                android:layout_marginLeft="1dp"
-                android:textSize="12sp"
-                android:gravity="left|center"
-                android:padding="2dp"
+            <Button android:id="@+id/btnFollowersHeader"
+                style="@style/ProfileTabButton_Unselect"
+                android:onClick="onTabChanged"
                 >
             </Button>
         </LinearLayout>
