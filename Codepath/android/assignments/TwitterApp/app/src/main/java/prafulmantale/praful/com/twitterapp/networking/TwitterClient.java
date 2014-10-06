@@ -55,6 +55,9 @@ public class TwitterClient  extends OAuthBaseClient{
         requestMap.put(APIRequest.DESTROY_FAVORITE, new Request("favorites/destroy.json", HttpMethod.Post));
         requestMap.put(APIRequest.USER_TIMELINE, new Request("statuses/user_timeline.json", HttpMethod.Get));
         requestMap.put(APIRequest.USER_PROFILE, new Request("users/lookup.json", HttpMethod.Get));
+
+        requestMap.put(APIRequest.FRIENDS_LIST, new Request("friends/list.json", HttpMethod.Get));
+        requestMap.put(APIRequest.FOLLOWERS_LIST, new Request("followers/list.json", HttpMethod.Get));
     }
 
 
@@ -184,6 +187,31 @@ public class TwitterClient  extends OAuthBaseClient{
         params.put("id", String.valueOf(request.getTweetID()));
 
         getClient().post(url, params, responseHandler);
+    }
+
+
+    public void getFriendsList(JsonHttpResponseHandler responseHandler, String userId){
+        String url = getApiUrl(requestMap.get(APIRequest.FRIENDS_LIST).url);
+        RequestParams params = new RequestParams();
+//        params.put("user_id", userId);
+//        params.put("count", "20");
+//        params.put("cursor", "-1");
+        params.put("skip_status", "1");
+
+        System.out.println(url + params);
+        getClient().get(url, null, responseHandler);
+    }
+
+    public void getFollowersList(JsonHttpResponseHandler responseHandler, String userId){
+        String url = getApiUrl(requestMap.get(APIRequest.FOLLOWERS_LIST).url);
+        RequestParams params = new RequestParams();
+//        params.put("user_id", userId);
+//        params.put("count", "20");
+//        params.put("cursor", "-1");
+        params.put("skip_status", "1");
+
+        System.out.println(url + params);
+        getClient().get(url, null, responseHandler);
     }
 
 }

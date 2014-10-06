@@ -1,11 +1,11 @@
 package prafulmantale.praful.com.twitterapp.activities;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
@@ -27,7 +27,8 @@ import java.util.List;
 
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.adapters.ProfileFragmentsPageAdapter;
-import prafulmantale.praful.com.twitterapp.fragments.ItemsListFragment;
+import prafulmantale.praful.com.twitterapp.enums.UserListType;
+import prafulmantale.praful.com.twitterapp.fragments.UsersListFragment;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
 
 public class UserProfileActivity extends FragmentActivity {
@@ -36,9 +37,9 @@ public class UserProfileActivity extends FragmentActivity {
     private UserProfile userProfile;
     private Drawable selectedDrawable;
     private Drawable tabUnselectedDrawable;
-    private ItemsListFragment tweetsFragment;
-    private ItemsListFragment followersFragment;
-    private ItemsListFragment followingFragment;
+    private Fragment tweetsFragment;
+    private UsersListFragment followingFragment;
+    private UsersListFragment followersFragment;
     private ViewPager viewPager;
 
     private ProfileFragmentsPageAdapter fragmentsPageAdapter;
@@ -87,35 +88,38 @@ public class UserProfileActivity extends FragmentActivity {
         btnFollowing = (Button)findViewById(R.id.btnFollowingHeader);
         viewPager = (ViewPager)findViewById(R.id.viewPager);
 
-        ImageLoader.getInstance().loadImage(userProfile.getProfileBannerUrl(), new ImageLoadingListener() {
-            @Override
-            public void onLoadingStarted(String s, View view) {
-            }
-
-            @Override
-            public void onLoadingFailed(String s, View view, FailReason failReason) {
-                Log.d(TAG, "onLoadingFailed: " + failReason.getCause());
-            }
-
-            @Override
-            public void onLoadingComplete(String s, View view, Bitmap bitmap) {
-
-                BitmapDrawable drawable = new BitmapDrawable(bitmap);
-                if(Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                    layout.setBackground(drawable);
+        if(userProfile.getProfileBannerUrl() != null && !userProfile.getProfileBannerUrl().isEmpty()) {
+            ImageLoader.getInstance().loadImage(userProfile.getProfileBannerUrl(), new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String s, View view) {
                 }
-                else {
-                    layout.setBackgroundDrawable(drawable);
+
+                @Override
+                public void onLoadingFailed(String s, View view, FailReason failReason) {
+                    Log.d(TAG, "onLoadingFailed: " + failReason.getCause());
                 }
-            }
 
-            @Override
-            public void onLoadingCancelled(String s, View view) {
-                Log.d(TAG, "onLoadingCancelled");
-            }
-        });
+                @Override
+                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
 
-        ImageLoader.getInstance().displayImage(userProfile.getProfileImageUrl(), ivProfileImage);
+                    BitmapDrawable drawable = new BitmapDrawable(bitmap);
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                        layout.setBackground(drawable);
+                    } else {
+                        layout.setBackgroundDrawable(drawable);
+                    }
+                }
+
+                @Override
+                public void onLoadingCancelled(String s, View view) {
+                    Log.d(TAG, "onLoadingCancelled");
+                }
+            });
+        }
+
+        if(userProfile.getProfileImageUrl() != null && !userProfile.getProfileImageUrl().isEmpty()) {
+            ImageLoader.getInstance().displayImage(userProfile.getProfileImageUrl(), ivProfileImage);
+        }
 
         tvName.setText(userProfile.getName());
         tvSceenName.setText(userProfile.getDisplayScreenName());
@@ -127,10 +131,11 @@ public class UserProfileActivity extends FragmentActivity {
         btnFollowing.setText(Html.fromHtml(userProfile.getHTMLDisplayFriendsCount()));
 
 
-        tweetsFragment = new ItemsListFragment();
-        followersFragment = new ItemsListFragment();
-        followingFragment = new ItemsListFragment();
-        final List<ItemsListFragment> list = new ArrayList<ItemsListFragment>(3);
+        tweetsFragment = new Fragment();
+        followersFragment = UsersListFragment.newInstance(UserListType.Followers.getValue());
+        followingFragment = UsersListFragment.newInstance(UserListType.Following.getValue());
+
+        final List<Fragment> list = new ArrayList<Fragment>(3);
         list.add(tweetsFragment);
         list.add(followingFragment);
         list.add(followersFragment);
@@ -168,6 +173,10 @@ public class UserProfileActivity extends FragmentActivity {
         setSelectedButton(btnTweets);
         unSelectButton(btnFollowers);
         unSelectButton(btnFollowing);
+
+
+        //followingFragment.set
+
     }
 
     public void onTabChanged(View view){
@@ -187,6 +196,7 @@ public class UserProfileActivity extends FragmentActivity {
         }
 
         viewPager.setCurrentItem(currentItem);
+
     }
 
 

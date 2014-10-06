@@ -6,16 +6,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-import prafulmantale.praful.com.twitterapp.fragments.ItemsListFragment;
-
 /**
  * Created by prafulmantale on 10/4/14.
  */
 public class ProfileFragmentsPageAdapter extends FragmentPagerAdapter {
 
-    List<ItemsListFragment> fragmentList;
+    List<Fragment> fragmentList;
 
-    public ProfileFragmentsPageAdapter(FragmentManager fm, List<ItemsListFragment> list) {
+    public ProfileFragmentsPageAdapter(FragmentManager fm, List<Fragment> list) {
         super(fm);
 
         fragmentList = list;

@@ -2,10 +2,13 @@ package prafulmantale.praful.com.twitterapp.models;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.helpers.Utils;
@@ -13,7 +16,7 @@ import prafulmantale.praful.com.twitterapp.helpers.Utils;
 /**
  * Created by prafulmantale on 10/2/14.
  */
-public class UserProfile implements Serializable{
+public class UserProfile implements Serializable {
 
     private static final String TAG = UserProfile.class.getName();
 
@@ -162,44 +165,44 @@ public class UserProfile implements Serializable{
 
 
     public String getDisplayScreenName() {
-        if(displayScreenName == null){
+        if (displayScreenName == null) {
             displayScreenName = "@" + screenName;
         }
 
         return displayScreenName;
     }
 
-    public String getHTMLDisplayStatusCount(){
-        if(displayStatusCount == null){
-            displayStatusCount =  Utils.getFormattedCountDisplay(statusCount);
+    public String getHTMLDisplayStatusCount() {
+        if (displayStatusCount == null) {
+            displayStatusCount = Utils.getFormattedCountDisplay(statusCount);
             displayStatusCount = "<strong>" + displayStatusCount + "</strong><br><small>" + AppConstants.TWEETS_UPPER + "</small>";
         }
 
         return displayStatusCount;
     }
 
-    public String getHTMLDisplayFollowersCount(){
-        if(displayFollowersCount == null){
-            displayFollowersCount =  Utils.getFormattedCountDisplay(followersCount);
+    public String getHTMLDisplayFollowersCount() {
+        if (displayFollowersCount == null) {
+            displayFollowersCount = Utils.getFormattedCountDisplay(followersCount);
             displayFollowersCount = "<strong>" + displayFollowersCount + "</strong><br><small>" + AppConstants.FOLLOWERS_UPPER + "</small>";
         }
 
         return displayFollowersCount;
     }
 
-    public String getHTMLDisplayFriendsCount(){
-        if(displayFriendsCount == null){
-            displayFriendsCount =  Utils.getFormattedCountDisplay(friendsCount);
+    public String getHTMLDisplayFriendsCount() {
+        if (displayFriendsCount == null) {
+            displayFriendsCount = Utils.getFormattedCountDisplay(friendsCount);
             displayFriendsCount = "<strong>" + displayFriendsCount + "</strong><br><small>" + AppConstants.FOLLOWING_UPPER + "</small>";
         }
 
         return displayFriendsCount;
     }
 
-    public static UserProfile fromJSON(JSONObject jsonObject){
+    public static UserProfile fromJSON(JSONObject jsonObject) {
         UserProfile userProfile = new UserProfile();
 
-        try{
+        try {
             userProfile.userId = jsonObject.getLong("id");
             userProfile.userIdStr = jsonObject.getString("id_str");
             userProfile.name = jsonObject.getString("name");
@@ -207,7 +210,7 @@ public class UserProfile implements Serializable{
             userProfile.following = jsonObject.getBoolean("following");
             userProfile.description = jsonObject.getString("description");
             userProfile.profileImageUrl = jsonObject.getString("profile_image_url");
-            userProfile.profileBannerUrl = jsonObject.getString("profile_banner_url");
+            userProfile.profileBannerUrl = jsonObject.optString("profile_banner_url", "");
 
             userProfile.friendsCount = jsonObject.getLong("friends_count");
             userProfile.followersCount = jsonObject.getLong("followers_count");
@@ -218,8 +221,7 @@ public class UserProfile implements Serializable{
 
             userProfile.location = jsonObject.getString("location");
 
-        }
-        catch (JSONException ex){
+        } catch (JSONException ex) {
 
             Log.d(TAG, "Exception while extracting User profile from JSON\r\n" + ex.getMessage());
             ex.printStackTrace();
@@ -229,4 +231,34 @@ public class UserProfile implements Serializable{
 
         return userProfile;
     }
+
+    public static List<UserProfile> fromJSON(JSONArray jsonArray) {
+        List<UserProfile> list = new ArrayList<UserProfile>();
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+
+            try {
+                JSONObject obj = jsonArray.getJSONObject(i);
+
+                if(obj == null){
+                    continue;
+                }
+
+                UserProfile up = UserProfile.fromJSON(obj);
+
+                if (up == null) {
+                    continue;
+                }
+
+                list.add(up);
+
+            } catch (JSONException ex) {
+                Log.d(TAG, "Exception while extracting User profiles from Array");
+            }
+        }
+
+        return list;
+    }
+
 }
+
