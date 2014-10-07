@@ -1,35 +1,17 @@
 package prafulmantale.praful.com.twitterapp.activities;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-
-import com.loopj.android.http.JsonHttpResponseHandler;
-
-import org.json.JSONArray;
-
-import java.util.List;
 
 import prafulmantale.praful.com.twitterapp.R;
-import prafulmantale.praful.com.twitterapp.application.RestClientApp;
-import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.fragments.HomeTimelineFragment;
 import prafulmantale.praful.com.twitterapp.fragments.MentionsTimelineFragment;
-import prafulmantale.praful.com.twitterapp.fragments.TweetListFragment;
-import prafulmantale.praful.com.twitterapp.fragments.TweetsFragment;
-import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
 import prafulmantale.praful.com.twitterapp.listeners.FragmentTabListener;
-import prafulmantale.praful.com.twitterapp.models.Tweet;
-import prafulmantale.praful.com.twitterapp.networking.TwitterClient;
-import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 public class MainActivity extends FragmentActivity {
 
