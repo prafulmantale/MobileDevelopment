@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_gravity="center"
+    android:layout_gravity="top"
     android:background="#ff55acee"
-    android:gravity="center"
-    android:padding="4dp">
+    android:gravity="top"
+    android:padding="4dp"
+    >
 
 
     <ImageView

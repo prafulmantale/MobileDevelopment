@@ -54,6 +54,7 @@ public class TwitterClient  extends OAuthBaseClient{
         requestMap.put(APIRequest.CREATE_FAVORITE, new Request("favorites/create.json", HttpMethod.Post));
         requestMap.put(APIRequest.DESTROY_FAVORITE, new Request("favorites/destroy.json", HttpMethod.Post));
         requestMap.put(APIRequest.USER_TIMELINE, new Request("statuses/user_timeline.json", HttpMethod.Get));
+        requestMap.put(APIRequest.USER_MENTIONS, new Request("statuses/mentions_timeline.json", HttpMethod.Get));
         requestMap.put(APIRequest.USER_PROFILE, new Request("users/lookup.json", HttpMethod.Get));
 
         requestMap.put(APIRequest.FRIENDS_LIST, new Request("friends/list.json", HttpMethod.Get));
@@ -92,6 +93,10 @@ public class TwitterClient  extends OAuthBaseClient{
         if(apiRequest == APIRequest.USER_PROFILE){
             getUserProfile(responseHandler, queryParameters);
         }
+
+        if(apiRequest == APIRequest.USER_MENTIONS){
+            getMentionsTimeline(responseHandler, queryParameters);
+        }
     }
 
     private void getHomeTimeline(JsonHttpResponseHandler responseHandler, QueryParameters queryParameters){
@@ -110,6 +115,32 @@ public class TwitterClient  extends OAuthBaseClient{
                 params.put("since_id", queryParameters.getSince_id());
             }
         }
+
+        System.out.println("Request: " + url + params);
+        getClient().get(url, params, responseHandler);
+    }
+
+    private void getMentionsTimeline(JsonHttpResponseHandler responseHandler, QueryParameters queryParameters){
+
+        String url = getApiUrl(requestMap.get(APIRequest.USER_MENTIONS).url);
+
+        RequestParams params = null;
+        params = new RequestParams();
+        if(queryParameters.getMax_id() != null || queryParameters.getSince_id() != null) {
+
+
+            if(queryParameters.getMax_id() != null){
+                params.put("max_id", queryParameters.getMax_id());
+            }
+
+            if (queryParameters.getSince_id() != null){
+                params.put("since_id", queryParameters.getSince_id());
+            }
+
+
+        }
+
+        params.put("count", "5");
 
         System.out.println("Request: " + url + params);
         getClient().get(url, params, responseHandler);

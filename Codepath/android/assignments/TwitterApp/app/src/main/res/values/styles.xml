@@ -5,6 +5,25 @@
         <!-- Customize your theme here. -->
         <item name="android:actionBarItemBackground">@drawable/action_bar_style</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_backbutton</item>
+
+        <item name="android:actionBarTabBarStyle">@style/MyTheme.ActionBar.TabBar</item>
+        <item name="android:actionBarTabStyle">@style/MyTheme.ActionBar.TabView</item>
+        <item name="android:actionBarTabTextStyle">@style/MyTheme.ActionBar.TabText</item>
+    </style>
+
+    <style name="MyTheme.ActionBar.TabBar" parent="android:style/Widget.Holo.Light.ActionBar.TabBar">
+        <!-- This is an ORANGE background -->
+        <item name="android:background">@drawable/tab_bar_background</item>
+    </style>
+
+    <style name="MyTheme.ActionBar.TabView" parent="android:style/Widget.Holo.ActionBar.TabView">
+        <!-- This is a GREEN background -->
+        <!--<item name="android:background">@drawable/tab_view_background</item>-->
+    </style>
+
+    <style name="MyTheme.ActionBar.TabText" parent="android:style/Widget.Holo.ActionBar.TabText">
+        <!-- This is a WHITE tab color -->
+        <item name="android:textColor">@color/selector_tab_text</item>
     </style>
 
     <style name="SignButtons" parent="@android:attr/buttonStyleSmall">

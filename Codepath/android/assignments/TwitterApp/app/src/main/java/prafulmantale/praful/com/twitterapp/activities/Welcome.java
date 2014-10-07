@@ -105,7 +105,8 @@ public class Welcome extends OAuthLoginActivity<TwitterClient> {
 
     private void showHomeActivity() {
 
-        Intent intent = new Intent(this, HomeActivity.class);
+        //Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

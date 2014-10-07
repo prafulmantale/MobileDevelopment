@@ -46,6 +46,7 @@ public class TimelineResponseHandler extends JsonHttpResponseHandler {
             List<Tweet> list = Tweet.fromJSON(response);
 
             adapter.addAll(list);
+            adapter.notifyDataSetChanged();
         }
         finally {
             if(swipeRefreshLayout != null) {
