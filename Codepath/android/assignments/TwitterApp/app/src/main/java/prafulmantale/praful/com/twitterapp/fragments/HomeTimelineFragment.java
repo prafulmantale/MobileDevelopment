@@ -11,6 +11,7 @@ import java.util.List;
 
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
+import prafulmantale.praful.com.twitterapp.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
@@ -72,5 +73,10 @@ public class HomeTimelineFragment extends TweetsFragment {
     @Override
     void fetchNextPage(QueryParameters parameters) {
         RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.HOME_TIMELINE, parameters);
+    }
+
+    @Override
+    public void OnNetworkResponseReceived(NetworkResponseHandler.RequestStatus status, APIRequest requestType, Object responseObject) {
+
     }
 }

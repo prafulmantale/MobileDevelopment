@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,21 +14,24 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.fragments.HomeTimelineFragment;
 import prafulmantale.praful.com.twitterapp.fragments.MentionsTimelineFragment;
-import prafulmantale.praful.com.twitterapp.handlers.LoggedInUserResponseHandler;
+import prafulmantale.praful.com.twitterapp.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.interfaces.NetworkOperationsListener;
+import prafulmantale.praful.com.twitterapp.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.twitterapp.listeners.FragmentTabListener;
 import prafulmantale.praful.com.twitterapp.models.TweetRequest;
 import prafulmantale.praful.com.twitterapp.models.User;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
-public class MainActivity extends FragmentActivity implements NetworkOperationsListener{
+public class MainActivity extends FragmentActivity implements NetworkOperationsListener, NetworkResponseListener{
 
     private static final String TAG = MainActivity.class.getName();
 
@@ -49,11 +53,24 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
         loggedInUser = User.getLoggedInUserDetails(this);
 
         //if (loggedInUser == null) {
-            RestClientApp.getTwitterClient().sendRequest(new LoggedInUserResponseHandler(this), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
+        RestClientApp.getTwitterClient().sendRequest(new NetworkResponseHandler(this, APIRequest.LOGGEDIN_USER_INFO), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
         //}
 
         initializeActionBar();
         setupListeners();
+    }
+
+    @Override
+    public void OnNetworkResponseReceived(NetworkResponseHandler.RequestStatus status, APIRequest requestType, Object responseObject) {
+        if(requestType == APIRequest.LOGGEDIN_USER_INFO){
+            JSONObject response = (JSONObject)responseObject;
+            User user = User.fromJSON(response);
+            UserProfile userProfile = UserProfile.fromJSON(response);
+            loggedInUser = user;
+            lp = userProfile;
+            User.saveLoggedInUserDetails(getBaseContext(), user);
+            Log.d("USER", user.toString());//??
+        }
     }
 
     public void showProgressBar(){

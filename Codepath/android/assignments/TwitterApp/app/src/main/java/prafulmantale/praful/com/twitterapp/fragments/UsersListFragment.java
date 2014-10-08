@@ -15,6 +15,7 @@ import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.adapters.UserListAdapter;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
+import prafulmantale.praful.com.twitterapp.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.twitterapp.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
 import prafulmantale.praful.com.twitterapp.networking.TwitterClient;
@@ -22,7 +23,7 @@ import prafulmantale.praful.com.twitterapp.networking.TwitterClient;
 /**
  * Created by prafulmantale on 10/3/14.
  */
-public abstract class UsersListFragment extends Fragment{
+public abstract class UsersListFragment extends Fragment implements NetworkResponseListener{
 
     private static final String TAG = UsersListFragment.class.getName();
 

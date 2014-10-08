@@ -11,6 +11,7 @@ import java.util.List;
 
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
+import prafulmantale.praful.com.twitterapp.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
@@ -89,11 +90,16 @@ public class UserTimelineFragment extends TweetsFragment {
     @Override
     void fetchNextPage(QueryParameters parameters) {
         parameters.setUserID(userID);
-        RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.USER_TIMELINE, parameters);
+        restClient.sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.USER_TIMELINE, parameters);
     }
 
     @Override
     public void OnUserProfileRequested(User user) {
        //NO OP
+    }
+
+    @Override
+    public void OnNetworkResponseReceived(NetworkResponseHandler.RequestStatus status, APIRequest requestType, Object responseObject) {
+
     }
 }

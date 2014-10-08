@@ -31,6 +31,7 @@ import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.handlers.TweetResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.interfaces.NetworkOperationsListener;
+import prafulmantale.praful.com.twitterapp.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.twitterapp.interfaces.ViewsClickListener;
 import prafulmantale.praful.com.twitterapp.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
@@ -43,7 +44,7 @@ import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 /**
  * Created by prafulmantale on 10/7/14.
  */
-public abstract class TweetsFragment extends Fragment  implements ViewsClickListener{
+public abstract class TweetsFragment extends Fragment  implements ViewsClickListener, NetworkResponseListener{
 
     protected TimelineAdapter adapter;
     protected List<Tweet> tweetsList;

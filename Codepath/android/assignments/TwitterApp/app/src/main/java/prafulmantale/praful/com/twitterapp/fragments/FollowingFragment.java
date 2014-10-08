@@ -2,6 +2,8 @@ package prafulmantale.praful.com.twitterapp.fragments;
 
 import android.os.Bundle;
 
+import prafulmantale.praful.com.twitterapp.enums.APIRequest;
+import prafulmantale.praful.com.twitterapp.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.twitterapp.handlers.UsersListResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 
@@ -32,5 +34,10 @@ public class FollowingFragment extends UsersListFragment {
     @Override
     void fetchNextPage() {
         restClient.getFriendsList(new UsersListResponseHandler(adapter, this), userID, nextCursor);
+    }
+
+    @Override
+    public void OnNetworkResponseReceived(NetworkResponseHandler.RequestStatus status, APIRequest requestType, Object responseObject) {
+
     }
 }
