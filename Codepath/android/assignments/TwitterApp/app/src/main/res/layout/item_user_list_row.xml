@@ -54,8 +54,8 @@
             android:id="@+id/tvDescription_user_list"
             android:layout_below="@+id/tvUserHandle_user_list"
             android:textAlignment="center"
-            android:textColor="#6e160107"
-            android:textSize="10sp"
+            android:textColor="#fd18050c"
+            android:textSize="9sp"
             />
 
         <ImageView
