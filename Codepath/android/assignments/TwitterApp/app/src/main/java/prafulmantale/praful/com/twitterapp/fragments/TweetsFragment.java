@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.activities.CreateTweetActivity;
+import prafulmantale.praful.com.twitterapp.activities.TweetDetailsActivity;
 import prafulmantale.praful.com.twitterapp.activities.UserProfileActivity;
 import prafulmantale.praful.com.twitterapp.adapters.TimelineAdapter;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
@@ -117,6 +119,19 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
                 fetchNextPage(new QueryParameters(max_id, null));
             }
         });
+
+        lvTweets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showTweetDetails(adapter.getItem(position));
+            }
+        });
+    }
+
+    private void showTweetDetails(Tweet tweet) {
+        Intent intent = new Intent(getActivity(), TweetDetailsActivity.class);
+        intent.putExtra(AppConstants.KEY_TWEET, tweet);
+        startActivity(intent);
     }
 
     abstract void refresh(QueryParameters parameters);

@@ -1,12 +1,16 @@
 package prafulmantale.praful.com.twitterapp.activities;
 
 import android.app.ActionBar;
+import android.app.Activity;
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
@@ -14,8 +18,12 @@ import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.fragments.HomeTimelineFragment;
 import prafulmantale.praful.com.twitterapp.fragments.MentionsTimelineFragment;
 import prafulmantale.praful.com.twitterapp.handlers.LoggedInUserResponseHandler;
+import prafulmantale.praful.com.twitterapp.handlers.TweetResponseHandler;
+import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.listeners.FragmentTabListener;
+import prafulmantale.praful.com.twitterapp.models.TweetRequest;
 import prafulmantale.praful.com.twitterapp.models.User;
+import prafulmantale.praful.com.twitterapp.models.UserProfile;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 public class MainActivity extends FragmentActivity {
@@ -23,6 +31,10 @@ public class MainActivity extends FragmentActivity {
     private static final String TAG = MainActivity.class.getName();
 
     public static User loggedInUser = null;
+    public static UserProfile lp = null;
+
+    private ImageView ivComposeTweet;
+    private ImageView ivProfile;
 
 
     @Override
@@ -32,10 +44,12 @@ public class MainActivity extends FragmentActivity {
 
         loggedInUser = User.getLoggedInUserDetails(this);
 
-        if (loggedInUser == null) {
+        //if (loggedInUser == null) {
             RestClientApp.getTwitterClient().sendRequest(new LoggedInUserResponseHandler(this), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
-        }
+        //}
+
         initializeActionBar();
+        setupListeners();
     }
 
 
@@ -44,6 +58,8 @@ public class MainActivity extends FragmentActivity {
         final ActionBar actionBar = getActionBar();
 
         View view = getLayoutInflater().inflate(R.layout.action_bar_home_title, null);
+        ivComposeTweet = (ImageView) view.findViewById(R.id.ivCreateTweet_actionbar);
+        ivProfile = (ImageView)view.findViewById(R.id.ivShowProfile_actionbar);
 
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(
                 ActionBar.LayoutParams.MATCH_PARENT,
@@ -79,6 +95,39 @@ public class MainActivity extends FragmentActivity {
 
     }
 
+    private void setupListeners() {
+        ivComposeTweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CreateTweetActivity.class);
+                startActivityForResult(intent, AppConstants.RequestCodes.COMPOSE_FROM_HOME);
+            }
+        });
+
+        ivProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProfile();
+            }
+        });
+    }
+
+    private void showProfile(){
+        Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
+        intent.putExtra("UID", lp);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == AppConstants.RequestCodes.COMPOSE_FROM_HOME) {
+            if (resultCode == Activity.RESULT_OK) {
+                TweetRequest request = data.getParcelableExtra(AppConstants.KEY_TWEET_REQUEST);
+                //RestClientApp.getTwitterClient().postTweet(new TweetResponseHandler(), request);
+            }
+        }
+    }
 
     public void onProfileView(MenuItem item){
 

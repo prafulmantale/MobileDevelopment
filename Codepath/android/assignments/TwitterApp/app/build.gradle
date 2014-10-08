@@ -28,4 +28,5 @@ dependencies {
     compile files('libs/codepath-oauth-0.3.0.jar')
     compile files('libs/codepath-utils.jar')
     compile files('libs/sribe-codepath.jar')
+    compile 'com.android.support:appcompat-v7:19.1.+'
 }

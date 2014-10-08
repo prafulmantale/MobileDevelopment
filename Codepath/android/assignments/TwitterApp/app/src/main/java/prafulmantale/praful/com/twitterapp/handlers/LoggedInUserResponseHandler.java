@@ -8,9 +8,9 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONObject;
 
-import prafulmantale.praful.com.twitterapp.activities.HomeActivity;
 import prafulmantale.praful.com.twitterapp.activities.MainActivity;
 import prafulmantale.praful.com.twitterapp.models.User;
+import prafulmantale.praful.com.twitterapp.models.UserProfile;
 
 /**
  * Created by prafulmantale on 9/30/14.
@@ -26,7 +26,9 @@ public class LoggedInUserResponseHandler extends JsonHttpResponseHandler {
     public void onSuccess(JSONObject response) {
 
         User user = User.fromJSON(response);
+        UserProfile userProfile = UserProfile.fromJSON(response);
         MainActivity.loggedInUser = user;//NOT a good practice
+        MainActivity.lp = userProfile;
         User.saveLoggedInUserDetails(context, user);
         Log.d("USER" , user.toString());
     }

@@ -1,5 +1,7 @@
 package prafulmantale.praful.com.twitterapp.activities;
 
+import android.app.ActionBar;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -10,6 +12,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,9 +33,13 @@ import prafulmantale.praful.com.twitterapp.adapters.ProfileFragmentsPageAdapter;
 import prafulmantale.praful.com.twitterapp.enums.UserListType;
 import prafulmantale.praful.com.twitterapp.fragments.FollowersFragment;
 import prafulmantale.praful.com.twitterapp.fragments.FollowingFragment;
+import prafulmantale.praful.com.twitterapp.fragments.HomeTimelineFragment;
+import prafulmantale.praful.com.twitterapp.fragments.MentionsTimelineFragment;
 import prafulmantale.praful.com.twitterapp.fragments.TweetsFragment;
 import prafulmantale.praful.com.twitterapp.fragments.UserTimelineFragment;
 import prafulmantale.praful.com.twitterapp.fragments.UsersListFragment;
+import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
+import prafulmantale.praful.com.twitterapp.listeners.FragmentTabListener;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
 
 public class UserProfileActivity extends FragmentActivity {
@@ -49,9 +56,12 @@ public class UserProfileActivity extends FragmentActivity {
     private ProfileFragmentsPageAdapter fragmentsPageAdapter;
     private int selectedPageIndex = 0;
 
-    Button btnTweets;
-    Button btnFollowers;
-    Button btnFollowing;
+    private Button btnTweets;
+    private Button btnFollowers;
+    private Button btnFollowing;
+
+    private ImageView ivComposeTweet;
+    private ImageView ivBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +70,11 @@ public class UserProfileActivity extends FragmentActivity {
 
         userProfile = (UserProfile)getIntent().getSerializableExtra("UID");
 
-        populateTestData();
+//        populateTestData();
 
         initialize();
+
+        setupListeners();
 
     }
 
@@ -79,6 +91,8 @@ public class UserProfileActivity extends FragmentActivity {
 
 
     private void initialize(){
+
+        initializeActionBar();
 
         final LinearLayout layout = (LinearLayout)findViewById(R.id.llUserProfile);
         ImageView ivProfileImage = (ImageView)findViewById(R.id.ivProfileImage);
@@ -177,6 +191,48 @@ public class UserProfileActivity extends FragmentActivity {
         setSelectedButton(btnTweets);
         unSelectButton(btnFollowers);
         unSelectButton(btnFollowing);
+    }
+
+    private void initializeActionBar() {
+
+        final ActionBar actionBar = getActionBar();
+
+        View view = getLayoutInflater().inflate(R.layout.action_bar_home_title, null);
+        ivComposeTweet = (ImageView) view.findViewById(R.id.ivCreateTweet_actionbar);
+
+        ivBack = (ImageView)view.findViewById(R.id.ivBackbutton);
+        ivBack.setVisibility(View.VISIBLE);
+        ImageView ivBird = (ImageView)view.findViewById(R.id.ivFindPeopleIcon_home);
+        ivBird.setVisibility(View.GONE);
+
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+
+
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setHomeButtonEnabled(false);
+        actionBar.setCustomView(view, params);
+        actionBar.setDisplayShowHomeEnabled(false);
+    }
+
+    private void setupListeners() {
+        ivComposeTweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserProfileActivity.this, CreateTweetActivity.class);
+                startActivityForResult(intent, AppConstants.RequestCodes.COMPOSE_FROM_HOME);
+            }
+        });
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void onTabChanged(View view){
