@@ -38,21 +38,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.HomeActivity"
-            android:label="@string/title_activity_home" >
-        </activity>
-        <activity
             android:name=".activities.CreateTweetActivity"
-            android:parentActivityName=".activities.HomeActivity" >
+            android:parentActivityName=".activities.MainActivity" >
         </activity>
         <activity
             android:name=".activities.TweetDetailsActivity"
-            android:parentActivityName=".activities.HomeActivity" >
+            android:parentActivityName=".activities.MainActivity" >
         </activity>
         <activity
             android:name=".activities.UserProfileActivity"
             android:label="@string/title_activity_user_profile"
-            android:parentActivityName=".activities.HomeActivity" >
+            android:parentActivityName=".activities.MainActivity" >
         </activity>
         <activity
             android:name=".activities.MainActivity"
