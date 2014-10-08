@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.ListView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -27,7 +26,6 @@ import prafulmantale.praful.com.twitterapp.activities.UserProfileActivity;
 import prafulmantale.praful.com.twitterapp.adapters.TimelineAdapter;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
-import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
 import prafulmantale.praful.com.twitterapp.handlers.TweetResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.interfaces.ViewsClickListener;
@@ -65,7 +63,7 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //Inflate the layout
-        View view = inflater.inflate(R.layout.fragment_tweets, container, false);
+        View view = inflater.inflate(R.layout.fragment_items_list, container, false);
 
         //Assign view references
         lvTweets = (ListView)view.findViewById(R.id.lvTweets_tweets);

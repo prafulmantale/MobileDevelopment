@@ -2,6 +2,7 @@ package prafulmantale.praful.com.twitterapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,78 +14,86 @@ import java.util.List;
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.adapters.UserListAdapter;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
-import prafulmantale.praful.com.twitterapp.enums.UserListType;
-import prafulmantale.praful.com.twitterapp.handlers.UsersListResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
+import prafulmantale.praful.com.twitterapp.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
+import prafulmantale.praful.com.twitterapp.networking.TwitterClient;
 
 /**
  * Created by prafulmantale on 10/3/14.
  */
-public class UsersListFragment extends Fragment{
+public abstract class UsersListFragment extends Fragment{
 
     private static final String TAG = UsersListFragment.class.getName();
 
-    private UserListAdapter followersAdapter;
-    private List<UserProfile> followersList;
-    private ListView lvFollowers;
-    private View view;
-    private UserListType listType;
-    private String userID;
+    protected UserListAdapter adapter;
+    protected List<UserProfile> userProfileList;
+    protected ListView lvUsers;
+    protected String userID;
+    protected TwitterClient restClient ;
+
+    protected SwipeRefreshLayout swipeRefreshLayout;
+    public String nextCursor = null;
+    public String prev_nextCursor = null;
+
 
     public UsersListFragment(){
 
 
     }
 
-    public static UsersListFragment newInstance(int listType, String userID){
-        UsersListFragment fragment = new UsersListFragment();
-        Bundle args = new Bundle();
-        args.putInt(AppConstants.KEY_USER_LIST_TYPE, listType);
-        args.putString(AppConstants.KEY_USER_ID, userID);
-
-        fragment.setArguments(args);
-
-
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int type = getArguments().getInt(AppConstants.KEY_USER_LIST_TYPE);
-        if(getArguments().containsKey(AppConstants.KEY_USER_ID)){
+        if(getArguments() != null && getArguments().containsKey(AppConstants.KEY_USER_ID)){
             userID = getArguments().getString(AppConstants.KEY_USER_ID);
         }
 
-        listType = (type == 0) ? UserListType.Followers : UserListType.Following;
-
-        followersList = new ArrayList<UserProfile>();
-        followersAdapter = new UserListAdapter(getActivity(), followersList);
-
-        if(savedInstanceState == null) {
-            if (listType == UserListType.Followers) {
-                RestClientApp.getTwitterClient().getFollowersList(new UsersListResponseHandler(followersAdapter), userID);
-            }
-
-            if (listType == UserListType.Following) {
-                RestClientApp.getTwitterClient().getFriendsList(new UsersListResponseHandler(followersAdapter), userID);
-            }
-        }
+        //Non-view initialization
+        restClient = RestClientApp.getTwitterClient();
+        userProfileList = new ArrayList<UserProfile>();
+        adapter = new UserListAdapter(getActivity(), userProfileList);
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_users_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_items_list, container, false);
 
-        lvFollowers = (ListView) view.findViewById(R.id.lvItemsList_users_list);
+        lvUsers = (ListView) view.findViewById(R.id.lvTweets_tweets);
+        lvUsers.setAdapter(adapter);
 
-        lvFollowers.setAdapter(followersAdapter);
+        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout_tweets_fragment);
 
+        setupListeners();
 
         return view;
     }
+
+    protected void setupListeners(){
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        lvUsers.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalCount) {
+
+                if (totalCount == 0 || nextCursor == null ||
+                        prev_nextCursor == nextCursor) {
+                    return;
+                }
+
+                prev_nextCursor = nextCursor;
+                fetchNextPage();
+            }
+        });
+    }
+
+    abstract void fetchNextPage();
 }

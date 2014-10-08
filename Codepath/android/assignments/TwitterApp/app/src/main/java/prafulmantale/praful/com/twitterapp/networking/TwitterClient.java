@@ -221,29 +221,33 @@ public class TwitterClient  extends OAuthBaseClient{
     }
 
 
-    public void getFriendsList(JsonHttpResponseHandler responseHandler, String userId){
+    public void getFriendsList(JsonHttpResponseHandler responseHandler, String userId, String cursor){
         String url = getApiUrl(requestMap.get(APIRequest.FRIENDS_LIST).url);
         RequestParams params = new RequestParams();
         if(userId != null && !userId.isEmpty()) {
             params.put("user_id", userId);
         }
-//        params.put("count", "20");
-//        params.put("cursor", "-1");
+        params.put("count", "20");
         params.put("skip_status", "1");
+        if(cursor != null) {
+            params.put("cursor", cursor);
+        }
 
         System.out.println(url + params);
         getClient().get(url, params, responseHandler);
     }
 
-    public void getFollowersList(JsonHttpResponseHandler responseHandler, String userId){
+    public void getFollowersList(JsonHttpResponseHandler responseHandler, String userId, String cursor){
         String url = getApiUrl(requestMap.get(APIRequest.FOLLOWERS_LIST).url);
         RequestParams params = new RequestParams();
         if(userId != null && !userId.isEmpty()) {
             params.put("user_id", userId);
         }
-//        params.put("count", "20");
-//        params.put("cursor", "-1");
+        params.put("count", "20");
         params.put("skip_status", "1");
+        if(cursor != null) {
+            params.put("cursor", cursor);
+        }
 
         System.out.println(url + params);
         getClient().get(url, params, responseHandler);

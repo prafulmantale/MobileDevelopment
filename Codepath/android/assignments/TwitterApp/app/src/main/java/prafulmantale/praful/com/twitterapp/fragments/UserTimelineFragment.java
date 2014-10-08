@@ -9,6 +9,7 @@ import org.json.JSONArray;
 
 import java.util.List;
 
+import prafulmantale.praful.com.twitterapp.activities.MainActivity;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
@@ -94,9 +95,6 @@ public class UserTimelineFragment extends TweetsFragment {
 
     @Override
     public void OnUserProfileRequested(User user) {
-
-        //if user is logged in user, ignore the request
-        //else super.OnUserProfile
-
+       //NO OP
     }
 }

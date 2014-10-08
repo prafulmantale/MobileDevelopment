@@ -34,7 +34,6 @@ public class HomeTimelineFragment extends TweetsFragment {
         if(savedInstanceState == null) {
             refresh(new QueryParameters(null, null));
         }
-
     }
 
     @Override
