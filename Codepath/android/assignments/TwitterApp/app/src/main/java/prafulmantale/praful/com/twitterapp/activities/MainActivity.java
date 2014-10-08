@@ -29,7 +29,6 @@ import prafulmantale.praful.com.twitterapp.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.twitterapp.listeners.FragmentTabListener;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
 import prafulmantale.praful.com.twitterapp.models.TweetRequest;
-import prafulmantale.praful.com.twitterapp.models.User;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
@@ -37,8 +36,7 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
 
     private static final String TAG = MainActivity.class.getName();
 
-    public static User loggedInUser = null;
-    public static UserProfile lp = null;
+    public static UserProfile loggedInUser = null;
 
     private ImageView ivComposeTweet;
     private ImageView ivProfile;
@@ -52,11 +50,11 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_main);
 
-        loggedInUser = User.getLoggedInUserDetails(this);
+//        loggedInUser = UserProfile.getLoggedInUserDetails(this);
 
-        //if (loggedInUser == null) {
-        RestClientApp.getTwitterClient().sendRequest(new NetworkResponseHandler(this, APIRequest.LOGGEDIN_USER_INFO, RefreshType.LATEST), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
-        //}
+        if (loggedInUser == null) {
+            RestClientApp.getTwitterClient().sendRequest(new NetworkResponseHandler(this, APIRequest.LOGGEDIN_USER_INFO, RefreshType.LATEST), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
+        }
 
         initializeActionBar();
         setupListeners();
@@ -64,14 +62,13 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
 
     @Override
     public void OnNetworkResponseReceived(NetworkResponseHandler.RequestStatus status, APIRequest requestType, Object responseObject, RefreshType refreshType) {
+
         if(requestType == APIRequest.LOGGEDIN_USER_INFO){
             JSONObject response = (JSONObject)responseObject;
-            User user = User.fromJSON(response);
             UserProfile userProfile = UserProfile.fromJSON(response);
-            loggedInUser = user;
-            lp = userProfile;
-            User.saveLoggedInUserDetails(getBaseContext(), user);
-            Log.d("USER", user.toString());//??
+            loggedInUser = userProfile;
+            UserProfile.saveLoggedInUserDetails(getBaseContext(), userProfile);
+            Log.d("USER", userProfile.toString());//??
         }
 
         if(requestType == APIRequest.TWEET){
@@ -157,7 +154,7 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
 
     private void showProfile(){
         Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
-        intent.putExtra("UID", lp);
+        intent.putExtra(AppConstants.KEY_USER_PROFILE, loggedInUser);
         startActivity(intent);
     }
 

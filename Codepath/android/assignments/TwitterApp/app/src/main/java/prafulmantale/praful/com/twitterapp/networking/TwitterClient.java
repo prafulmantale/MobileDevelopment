@@ -160,6 +160,8 @@ public class TwitterClient  extends OAuthBaseClient{
             if(queryParameters.getUserID() != null){
                 params.put("user_id", queryParameters.getUserID());
             }
+
+            //params.put("trim_user", "1");
         }
 
         System.out.println("Request: " + url + params);

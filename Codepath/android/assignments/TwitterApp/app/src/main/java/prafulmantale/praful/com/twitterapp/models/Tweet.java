@@ -48,10 +48,13 @@ public class Tweet extends Model implements Parcelable{
     private boolean favorited;
 
     @Column(name = "user", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
-    private User user;
+    private UserProfile user;
 
     @Column(name = "tweetEmbeddedUrl", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     private TweetEmbeddedUrl tweetEmbeddedUrl;
+
+    @Column(name="mediaUrl")
+    private String mediaUrl;
 
     private String formattedBody;
     private String relativeTimestamp;
@@ -65,10 +68,11 @@ public class Tweet extends Model implements Parcelable{
         createdAt = "";
         retweet_count = " ";
         favorite_count = " ";
-        user = new User();
+        user = new UserProfile();
         tweetEmbeddedUrl = new TweetEmbeddedUrl();
         formattedBody = null;
         relativeTimestamp = null;
+        mediaUrl = null;
     }
 
     public long getTweetID() {
@@ -119,11 +123,11 @@ public class Tweet extends Model implements Parcelable{
         this.favorited = favorited;
     }
 
-    public User getUser() {
+    public UserProfile getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserProfile user) {
         this.user = user;
     }
 
@@ -179,6 +183,14 @@ public class Tweet extends Model implements Parcelable{
         return relativeDate;
     }
 
+    public String getMediaUrl() {
+        return mediaUrl;
+    }
+
+    public void setMediaUrl(String mediaUrl) {
+        this.mediaUrl = mediaUrl;
+    }
+
     public static Tweet fromJSON(JSONObject jsonObject){
 
         Tweet tweet = new Tweet();
@@ -205,7 +217,7 @@ public class Tweet extends Model implements Parcelable{
 
             tweet.favorited = jsonObject.getBoolean("favorited");
 
-            tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+            tweet.user = UserProfile.fromJSON(jsonObject.getJSONObject("user"));
 
             try {
                 JSONObject entities = jsonObject.getJSONObject("entities");
@@ -216,6 +228,14 @@ public class Tweet extends Model implements Parcelable{
                     tweet.tweetEmbeddedUrl = TweetEmbeddedUrl.fromJSON(obj, tweet.tweetID);
                     break;
                 }
+
+                JSONArray mediaArr = entities.getJSONArray("media");
+                for (int i = 0; i < mediaArr.length(); i++) {
+                    JSONObject obj = mediaArr.getJSONObject(0);
+                    tweet.mediaUrl = obj.getString("media_url");
+                    break;
+                }
+
             }
             catch (JSONException eh){
                 Log.d(TAG, "Exception while extracting Embedded urls");
@@ -273,7 +293,7 @@ public class Tweet extends Model implements Parcelable{
             user = null;
         }
         else{
-            user = in.readParcelable(User.class.getClassLoader());
+            user = in.readParcelable(UserProfile.class.getClassLoader());
         }
 
         if(in.readInt() == -1){
@@ -283,6 +303,7 @@ public class Tweet extends Model implements Parcelable{
             tweetEmbeddedUrl = in.readParcelable(TweetEmbeddedUrl.class.getClassLoader());
         }
 
+        mediaUrl = in.readString();
     }
 
     @Override
@@ -310,6 +331,8 @@ public class Tweet extends Model implements Parcelable{
             dest.writeInt(1);
             dest.writeParcelable(tweetEmbeddedUrl, flags);
         }
+
+        dest.writeString(mediaUrl);
     }
 
     public static final Creator<Tweet> CREATOR = new Creator<Tweet>() {

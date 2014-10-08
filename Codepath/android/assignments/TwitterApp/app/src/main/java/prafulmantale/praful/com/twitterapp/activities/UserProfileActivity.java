@@ -64,27 +64,13 @@ public class UserProfileActivity extends FragmentActivity implements NetworkOper
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        userProfile = (UserProfile)getIntent().getSerializableExtra("UID");
-
-//        populateTestData();
+        userProfile = getIntent().getParcelableExtra(AppConstants.KEY_USER_PROFILE);
 
         initialize();
 
         setupListeners();
 
     }
-
-    private void populateTestData(){
-//        userProfile = new UserProfile();
-//        userProfile.setProfileBannerUrl("https://pbs.twimg.com/profile_banners/135511832/1403063877");
-//        userProfile.setProfileImageUrl("http://pbs.twimg.com/profile_images/512834721970024449/Vq_gAqV6_normal.jpeg");
-//        userProfile.setName("Vikas");
-//        userProfile.setScreenName("vikaschhatwal");
-//        userProfile.setDescription("It doesn't matter. Who is without a flaw?");
-//        userProfile.setLocation("San Fransisco, California");
-//        userProfile.setFollowing(false);
-    }
-
 
     private void initialize(){
 
@@ -102,7 +88,7 @@ public class UserProfileActivity extends FragmentActivity implements NetworkOper
         btnFollowing = (Button)findViewById(R.id.btnFollowingHeader);
         viewPager = (ViewPager)findViewById(R.id.viewPager);
 
-        if(userProfile.getUserId() == MainActivity.lp.getUserId()){
+        if(userProfile.getUserId() == MainActivity.loggedInUser.getUserId()){
             tvFollowsYou.setVisibility(View.GONE);
         }
 

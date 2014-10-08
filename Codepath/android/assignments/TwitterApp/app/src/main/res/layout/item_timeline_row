@@ -76,13 +76,26 @@
             android:textSize="10sp"
             android:textColor="#6e160107"
             />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivMedia_timeline"
+            android:src="@drawable/ic_action_start_following"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_below="@+id/tvTweet_timeline"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+
+            android:visibility="gone"
+            />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/userActionsRow"
             android:visibility="visible"
-            android:layout_below="@id/tvTweet_timeline"
+            android:layout_below="@id/ivMedia_timeline"
             android:layout_marginTop="2dp"
             >
 

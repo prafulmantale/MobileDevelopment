@@ -6,7 +6,7 @@ import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.enums.RefreshType;
 import prafulmantale.praful.com.twitterapp.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
-import prafulmantale.praful.com.twitterapp.models.User;
+import prafulmantale.praful.com.twitterapp.models.UserProfile;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 /**
@@ -57,7 +57,7 @@ public class UserTimelineFragment extends TweetsFragment {
     }
 
     @Override
-    public void OnUserProfileRequested(User user) {
+    public void OnUserProfileRequested(UserProfile user) {
        //NO OP
     }
 

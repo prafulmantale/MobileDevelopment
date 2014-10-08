@@ -37,7 +37,6 @@ import prafulmantale.praful.com.twitterapp.interfaces.ViewsClickListener;
 import prafulmantale.praful.com.twitterapp.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
 import prafulmantale.praful.com.twitterapp.models.TweetRequest;
-import prafulmantale.praful.com.twitterapp.models.User;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
 import prafulmantale.praful.com.twitterapp.networking.TwitterClient;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
@@ -214,25 +213,23 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
         RestClientApp.getTwitterClient().postDestroyFavoriteTweet(new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(JSONObject response) {
-                //super.onSuccess(response);
                 tweet.setFavorited(false);
             }
         }, request);
     }
 
     @Override
-    public void OnUserProfileRequested(User user) {
+    public void OnUserProfileRequested(UserProfile user) {
 
         QueryParameters parameters = new QueryParameters(null, null);
-        parameters.setUserID(String.valueOf(user.getUserID()));
-        //RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.USER_TIMELINE, parameters);
+        parameters.setUserID(user.getUserIdStr());
         showUserProfile(user);
     }
 
-    private void showUserProfile(final User user) {
+    private void showUserProfile(final UserProfile user) {
 
         QueryParameters qp = new QueryParameters(null, null);
-        qp.setUserID(String.valueOf(user.getUserID()));
+        qp.setUserID(user.getUserIdStr());
 
         RestClientApp.getTwitterClient().sendRequest(new JsonHttpResponseHandler(){
 
@@ -243,7 +240,7 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
                 try {
                     UserProfile userProfile = UserProfile.fromJSON(response.getJSONObject(0));
                     Intent intent = new Intent(getActivity(), UserProfileActivity.class);
-                    intent.putExtra("UID", userProfile);
+                    intent.putExtra(AppConstants.KEY_USER_PROFILE, userProfile);
                     startActivity(intent);
                 }
                 catch (JSONException ex){

@@ -24,6 +24,7 @@ public class AppConstants {
     public static final String KEY_USER_LIST_TYPE = "USERLISTTYPE";
     public static final String KEY_USER_ID = "USERID";
 
+    public static final String KEY_USER_PROFILE = "KUP";
 
     public static class RequestCodes {
 

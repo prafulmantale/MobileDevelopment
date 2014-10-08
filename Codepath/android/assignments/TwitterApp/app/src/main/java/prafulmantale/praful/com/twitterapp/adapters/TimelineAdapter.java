@@ -42,6 +42,7 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
         private TextView tvRetweetsCount;
         private TextView tvFavoritesCount;
         private ImageView ivFollow;
+        private ImageView ivMedia;
 
 
         void init(View convertView){
@@ -54,6 +55,7 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
             tvRetweetsCount = (TextView)convertView.findViewById(R.id.tvRetweets_timeline);
             tvFavoritesCount = (TextView)convertView.findViewById(R.id.tvFavorites_timeline);
             ivFollow = (ImageView)convertView.findViewById(R.id.ivFollow_timeline);
+            ivMedia = (ImageView)convertView.findViewById(R.id.ivMedia_timeline);
         }
 
         void populateViews(Tweet tweet){
@@ -93,6 +95,30 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
             else{
                 tvFavoritesCount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_favorite_default, 0, 0, 0);
                 tvFavoritesCount.setTextColor(Color.parseColor("#000000"));
+            }
+
+            ivMedia.setVisibility(View.GONE);
+            if(tweet.getMediaUrl() != null && !tweet.getMediaUrl().isEmpty()){
+                ivMedia.setVisibility(View.VISIBLE);
+
+                ImageLoader.getInstance().loadImage(tweet.getMediaUrl(), Utils.roundedImageOptions, new ImageLoadingListener() {
+                    @Override
+                    public void onLoadingStarted(String s, View view) {
+                    }
+
+                    @Override
+                    public void onLoadingFailed(String s, View view, FailReason failReason) {
+                    }
+
+                    @Override
+                    public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+                        ivMedia.setImageBitmap(bitmap);
+                    }
+
+                    @Override
+                    public void onLoadingCancelled(String s, View view) {
+                    }
+                });
             }
         }
     }

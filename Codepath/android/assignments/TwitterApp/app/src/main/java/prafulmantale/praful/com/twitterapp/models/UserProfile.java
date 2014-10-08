@@ -1,6 +1,14 @@
 package prafulmantale.praful.com.twitterapp.models;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
+
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,26 +24,51 @@ import prafulmantale.praful.com.twitterapp.helpers.Utils;
 /**
  * Created by prafulmantale on 10/2/14.
  */
-public class UserProfile implements Serializable {
+@Table(name="users")
+public class UserProfile extends Model implements Parcelable {
 
     private static final String TAG = UserProfile.class.getName();
 
+    @Column(name="userid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private long userId;
+
+    @Column(name="useridStr", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private String userIdStr;
+
+    @Column(name="name")
     private String name;
+
+    @Column(name="screenname")
     private String screenName;
+
+    @Column(name = "following")
     private boolean following;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "profileurl")
     private String profileImageUrl;
+
+    @Column(name = "profilebannerurl")
     private String profileBannerUrl;
 
+    @Column(name = "friendsCount")
     private long friendsCount; //following
+
+    @Column(name = "followersCount")
     private long followersCount;
 
+    @Column(name = "statusCount")
     private long statusCount; //no. of tweets
+
+    @Column(name = "photosCount")
     private long photosCount; //Photos posted
+
+    @Column(name = "favoritesCount")
     private long favoritesCount;//Liked tweets
 
+    @Column(name = "location")
     private String location;
 
     //not serialized
@@ -260,5 +293,140 @@ public class UserProfile implements Serializable {
         return list;
     }
 
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(userId);
+        dest.writeString(userIdStr);
+        dest.writeString(name);
+        dest.writeString(screenName);
+        dest.writeInt((following) ? 1 : 0);
+        dest.writeString(description);
+        dest.writeString(profileImageUrl);
+        dest.writeString(profileBannerUrl);
+        dest.writeLong(friendsCount);
+        dest.writeLong(followersCount);
+        dest.writeLong(statusCount);
+        dest.writeLong(photosCount);
+        dest.writeLong(favoritesCount);
+        dest.writeString(location);
+    }
+
+
+
+    private UserProfile(Parcel in) {
+        userId = in.readLong();
+        userIdStr = in.readString();
+        name = in.readString();
+        screenName = in.readString();
+        following = (in.readInt() == 1 ? true : false);
+        description = in.readString();
+        profileImageUrl = in.readString();
+        profileBannerUrl = in.readString();
+        friendsCount = in.readLong();
+        followersCount = in.readLong();
+        statusCount = in.readLong();
+        photosCount = in.readLong();
+        favoritesCount = in.readLong();
+        location = in.readString();
+    }
+
+    public static final Creator<UserProfile> CREATOR = new Creator<UserProfile>() {
+        @Override
+        public UserProfile createFromParcel(Parcel source) {
+            return new UserProfile(source);
+        }
+
+        @Override
+        public UserProfile[] newArray(int size) {
+            return new UserProfile[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "UserProfile{" +
+                "userId=" + userId +
+                ", userIdStr='" + userIdStr + '\'' +
+                ", name='" + name + '\'' +
+                ", screenName='" + screenName + '\'' +
+                ", following=" + following +
+                ", description='" + description + '\'' +
+                ", profileImageUrl='" + profileImageUrl + '\'' +
+                ", profileBannerUrl='" + profileBannerUrl + '\'' +
+                ", friendsCount=" + friendsCount +
+                ", followersCount=" + followersCount +
+                ", statusCount=" + statusCount +
+                ", photosCount=" + photosCount +
+                ", favoritesCount=" + favoritesCount +
+                ", location='" + location + '\'' +
+                '}';
+    }
+
+    public static UserProfile getLoggedInUserDetails(Context context){
+
+        UserProfile loggedInUser = null;
+        try {
+            SharedPreferences settings = context.getSharedPreferences(AppConstants.PREFS_FILE, 0);
+
+            String uname = settings.getString(AppConstants.KEY_SHARED_PREF_USER_NAME, null);
+
+            if (uname == null || uname.isEmpty()) {
+                return loggedInUser;
+            }
+
+            String screenname = settings.getString(AppConstants.KEY_SHARED_PREF_SCREEN_NAME, null);
+
+            if (screenname == null || screenname.isEmpty()) {
+                return loggedInUser;
+            }
+
+            long uid = settings.getLong(AppConstants.KEY_SHARED_PREF_USER_ID, -1);
+            if (uid == -1) {
+                return loggedInUser;
+            }
+
+            String url = settings.getString(AppConstants.KEY_SHARED_PREF_PROFILE_IMG_URL, null);
+
+            if (url == null || url.isEmpty()) {
+                return loggedInUser;
+            }
+
+            loggedInUser = new UserProfile();
+
+            loggedInUser.userId = uid;
+            loggedInUser.name = uname;
+            loggedInUser.screenName = screenname;
+            loggedInUser.profileImageUrl = url;
+        }
+        catch (Exception ex){
+            Log.d(TAG, "Exception while extracting logged in user from shared preferences");
+            loggedInUser = null;
+        }
+
+        return loggedInUser;
+    }
+
+    public static void saveLoggedInUserDetails(Context context, UserProfile user){
+
+        try {
+            SharedPreferences settings = context.getSharedPreferences(AppConstants.PREFS_FILE, 0);
+            SharedPreferences.Editor editor = settings.edit();
+
+            editor.putString(AppConstants.KEY_SHARED_PREF_USER_NAME, user.getName());
+            editor.putString(AppConstants.KEY_SHARED_PREF_SCREEN_NAME, user.getScreenName());
+            editor.putLong(AppConstants.KEY_SHARED_PREF_USER_ID, user.getUserId());
+            editor.putString(AppConstants.KEY_SHARED_PREF_PROFILE_IMG_URL, user.getProfileImageUrl());
+
+            editor.commit();
+        }
+        catch (Exception ex){
+            Log.d(TAG, "Exception while saving logged in user to shared preferences");
+        }
+    }
 }
 
