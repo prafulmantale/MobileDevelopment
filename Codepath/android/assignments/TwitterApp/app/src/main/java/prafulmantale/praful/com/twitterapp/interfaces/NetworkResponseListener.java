@@ -1,8 +1,7 @@
 package prafulmantale.praful.com.twitterapp.interfaces;
 
-import java.util.Objects;
-
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
+import prafulmantale.praful.com.twitterapp.enums.RefreshType;
 import prafulmantale.praful.com.twitterapp.handlers.NetworkResponseHandler;
 
 /**
@@ -10,5 +9,5 @@ import prafulmantale.praful.com.twitterapp.handlers.NetworkResponseHandler;
  */
 public interface NetworkResponseListener {
 
-    public void OnNetworkResponseReceived(NetworkResponseHandler.RequestStatus status, APIRequest requestType, Object responseObject);
+    public void OnNetworkResponseReceived(NetworkResponseHandler.RequestStatus status, APIRequest requestType, Object responseObject, RefreshType refreshType);
 }

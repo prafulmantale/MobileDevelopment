@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
+import prafulmantale.praful.com.twitterapp.enums.RefreshType;
 import prafulmantale.praful.com.twitterapp.fragments.HomeTimelineFragment;
 import prafulmantale.praful.com.twitterapp.fragments.MentionsTimelineFragment;
 import prafulmantale.praful.com.twitterapp.handlers.NetworkResponseHandler;
@@ -53,7 +54,7 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
         loggedInUser = User.getLoggedInUserDetails(this);
 
         //if (loggedInUser == null) {
-        RestClientApp.getTwitterClient().sendRequest(new NetworkResponseHandler(this, APIRequest.LOGGEDIN_USER_INFO), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
+        RestClientApp.getTwitterClient().sendRequest(new NetworkResponseHandler(this, APIRequest.LOGGEDIN_USER_INFO, RefreshType.LATEST), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
         //}
 
         initializeActionBar();
@@ -61,7 +62,7 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
     }
 
     @Override
-    public void OnNetworkResponseReceived(NetworkResponseHandler.RequestStatus status, APIRequest requestType, Object responseObject) {
+    public void OnNetworkResponseReceived(NetworkResponseHandler.RequestStatus status, APIRequest requestType, Object responseObject, RefreshType refreshType) {
         if(requestType == APIRequest.LOGGEDIN_USER_INFO){
             JSONObject response = (JSONObject)responseObject;
             User user = User.fromJSON(response);

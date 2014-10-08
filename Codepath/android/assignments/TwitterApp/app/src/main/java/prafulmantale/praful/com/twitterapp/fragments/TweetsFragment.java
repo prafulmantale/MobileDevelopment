@@ -28,6 +28,8 @@ import prafulmantale.praful.com.twitterapp.activities.UserProfileActivity;
 import prafulmantale.praful.com.twitterapp.adapters.TimelineAdapter;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
+import prafulmantale.praful.com.twitterapp.enums.RefreshType;
+import prafulmantale.praful.com.twitterapp.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.twitterapp.handlers.TweetResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.interfaces.NetworkOperationsListener;
@@ -46,6 +48,8 @@ import prafulmantale.praful.com.twitterapp.query.QueryParameters;
  */
 public abstract class TweetsFragment extends Fragment  implements ViewsClickListener, NetworkResponseListener{
 
+    private static final String TAG = TweetsFragment.class.getName();
+
     protected TimelineAdapter adapter;
     protected List<Tweet> tweetsList;
     protected ListView lvTweets;
@@ -54,6 +58,7 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
     protected String preMaxId = null;
 
     protected NetworkOperationsListener listener;
+    protected APIRequest requestType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -154,9 +159,13 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
             return;
         }
 
+        if(adapter.getCount() > 0) {
+            preMaxId = String.valueOf(adapter.getItem(adapter.getCount() - 1).getTweetID());
+        }
+
         adapter.addAll(tweets);
 
-        preMaxId = String.valueOf(adapter.getItem(adapter.getCount() - 1).getTweetID());
+
     }
 
     public void addAllStart(List<Tweet> tweets){
@@ -281,5 +290,44 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
             throw new ClassCastException(activity.toString()
                     + " must implement NetworkOperationsListener");
         }
+    }
+
+    @Override
+    public void OnNetworkResponseReceived(NetworkResponseHandler.RequestStatus status, APIRequest requestType, Object responseObject, RefreshType refreshType) {
+
+        if(this.requestType == requestType){
+            if(status == NetworkResponseHandler.RequestStatus.SUCCESS){
+                try {
+                    JSONArray response = (JSONArray)responseObject;
+                    Log.d("DEBUG: Response Body:" + response.length() +  " \r\n", response.toString());
+
+                    if (response == null) {
+                        Log.d(TAG, "Null response for successful request");
+                        return;
+                    }
+
+                    List<Tweet> list = Tweet.fromJSON(response);
+
+                   if(refreshType == RefreshType.PAGINATION) {
+                       addAll(list);
+                   }
+                    else{
+                       addAllStart(list);
+                   }
+                    adapter.notifyDataSetChanged();
+                }
+                catch (Exception ex){
+                    Log.d(TAG, "Exception in processing next page");
+                }
+            }
+            else{
+
+            }
+
+            if(swipeRefreshLayout != null) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }
+
     }
 }

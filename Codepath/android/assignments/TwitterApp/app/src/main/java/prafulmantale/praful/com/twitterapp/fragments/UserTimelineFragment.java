@@ -1,20 +1,11 @@
 package prafulmantale.praful.com.twitterapp.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
-
-import org.json.JSONArray;
-
-import java.util.List;
-
-import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
+import prafulmantale.praful.com.twitterapp.enums.RefreshType;
 import prafulmantale.praful.com.twitterapp.handlers.NetworkResponseHandler;
-import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
-import prafulmantale.praful.com.twitterapp.models.Tweet;
 import prafulmantale.praful.com.twitterapp.models.User;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
@@ -41,6 +32,7 @@ public class UserTimelineFragment extends TweetsFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        requestType = APIRequest.USER_TIMELINE;
         if(getArguments()!= null && getArguments().containsKey(AppConstants.KEY_USER_ID)){
             userID = getArguments().getString(AppConstants.KEY_USER_ID);
         }
@@ -55,42 +47,13 @@ public class UserTimelineFragment extends TweetsFragment {
     @Override
     protected void refresh(QueryParameters parameters){
         parameters.setUserID(userID);
-        restClient.sendRequest(new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(JSONArray response) {
-                try {
-                    Log.d("DEBUG: Response Body:" + response.length() + " \r\n", response.toString());
-
-                    if (response == null) {
-                        Log.d(TAG, "Null response for successful request");
-                        return;
-                    }
-
-                    List<Tweet> list = Tweet.fromJSON(response);
-                    addAllStart(list);
-
-                } finally {
-                    if(swipeRefreshLayout != null) {
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable e, String s) {
-                Log.d(TAG, e.toString());
-                Log.d(TAG, s.toString());
-                if(swipeRefreshLayout != null) {
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            }
-        }, APIRequest.USER_TIMELINE, parameters);
+        restClient.sendRequest(new NetworkResponseHandler(this, requestType, RefreshType.LATEST), requestType, parameters);
     }
 
     @Override
     void fetchNextPage(QueryParameters parameters) {
         parameters.setUserID(userID);
-        restClient.sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.USER_TIMELINE, parameters);
+        restClient.sendRequest(new NetworkResponseHandler(this, requestType, RefreshType.PAGINATION), requestType, parameters);
     }
 
     @Override
@@ -98,8 +61,4 @@ public class UserTimelineFragment extends TweetsFragment {
        //NO OP
     }
 
-    @Override
-    public void OnNetworkResponseReceived(NetworkResponseHandler.RequestStatus status, APIRequest requestType, Object responseObject) {
-
-    }
 }
