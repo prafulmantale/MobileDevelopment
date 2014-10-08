@@ -102,6 +102,10 @@ public class UserProfileActivity extends FragmentActivity implements NetworkOper
         btnFollowing = (Button)findViewById(R.id.btnFollowingHeader);
         viewPager = (ViewPager)findViewById(R.id.viewPager);
 
+        if(userProfile.getUserId() == MainActivity.lp.getUserId()){
+            tvFollowsYou.setVisibility(View.GONE);
+        }
+        
         if(userProfile.getProfileBannerUrl() != null && !userProfile.getProfileBannerUrl().isEmpty()) {
             ImageLoader.getInstance().loadImage(userProfile.getProfileBannerUrl(), new ImageLoadingListener() {
                 @Override
