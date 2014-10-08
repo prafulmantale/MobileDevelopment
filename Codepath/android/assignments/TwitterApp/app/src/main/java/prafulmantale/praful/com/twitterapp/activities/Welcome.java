@@ -1,7 +1,5 @@
 package prafulmantale.praful.com.twitterapp.activities;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,7 +10,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.codepath.oauth.OAuthBaseClient;
 import com.codepath.oauth.OAuthLoginActivity;
 
 import prafulmantale.praful.com.twitterapp.R;

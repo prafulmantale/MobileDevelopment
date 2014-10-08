@@ -30,16 +30,11 @@ import java.util.List;
 
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.adapters.ProfileFragmentsPageAdapter;
-import prafulmantale.praful.com.twitterapp.enums.UserListType;
 import prafulmantale.praful.com.twitterapp.fragments.FollowersFragment;
 import prafulmantale.praful.com.twitterapp.fragments.FollowingFragment;
-import prafulmantale.praful.com.twitterapp.fragments.HomeTimelineFragment;
-import prafulmantale.praful.com.twitterapp.fragments.MentionsTimelineFragment;
-import prafulmantale.praful.com.twitterapp.fragments.TweetsFragment;
 import prafulmantale.praful.com.twitterapp.fragments.UserTimelineFragment;
 import prafulmantale.praful.com.twitterapp.fragments.UsersListFragment;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
-import prafulmantale.praful.com.twitterapp.listeners.FragmentTabListener;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
 
 public class UserProfileActivity extends FragmentActivity {

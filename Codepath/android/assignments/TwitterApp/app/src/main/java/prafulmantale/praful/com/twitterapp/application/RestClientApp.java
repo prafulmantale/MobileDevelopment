@@ -2,6 +2,8 @@ package prafulmantale.praful.com.twitterapp.application;
 
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -38,5 +40,25 @@ public class RestClientApp extends com.activeandroid.app.Application{
 
     public static TwitterClient getTwitterClient(){
         return (TwitterClient)TwitterClient.getInstance(TwitterClient.class, context);
+    }
+
+    /*
+    Check if network is available
+     */
+    public static boolean isNetworkAvailable(){
+
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null)
+        {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null)
+                for (int i = 0; i < info.length; i++)
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED)
+                    {
+                        return true;
+                    }
+
+        }
+        return false;
     }
 }

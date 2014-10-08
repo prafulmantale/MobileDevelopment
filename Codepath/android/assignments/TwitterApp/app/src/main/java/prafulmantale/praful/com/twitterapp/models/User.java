@@ -15,10 +15,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
-import java.util.Map;
 
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
-import prafulmantale.praful.com.twitterapp.helpers.Utils;
 
 /**
  * Created by prafulmantale on 9/27/14.

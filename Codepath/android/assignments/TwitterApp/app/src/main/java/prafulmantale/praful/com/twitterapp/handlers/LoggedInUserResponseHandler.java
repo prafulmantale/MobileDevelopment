@@ -2,7 +2,6 @@ package prafulmantale.praful.com.twitterapp.handlers;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.MenuItem;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 

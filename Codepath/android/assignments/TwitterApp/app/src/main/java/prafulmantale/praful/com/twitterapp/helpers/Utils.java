@@ -3,7 +3,6 @@ package prafulmantale.praful.com.twitterapp.helpers;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
-import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,25 +26,6 @@ public class Utils {
 
     }
 
-    public static boolean isNetworkAvailable(){
-        boolean isAvailable = false;
-
-//        ConnectivityManager connectivity = (ConnectivityManager) _context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//        if (connectivity != null)
-//        {
-//            NetworkInfo[] info = connectivity.getAllNetworkInfo();
-//            if (info != null)
-//                for (int i = 0; i < info.length; i++)
-//                    if (info[i].getState() == NetworkInfo.State.CONNECTED)
-//                    {
-//                        return true;
-//                    }
-//
-//        }
-//        return false;
-
-        return isAvailable;
-    }
 
     public static String getElapsedDisplayTime(long createdTime){
         String display = "";

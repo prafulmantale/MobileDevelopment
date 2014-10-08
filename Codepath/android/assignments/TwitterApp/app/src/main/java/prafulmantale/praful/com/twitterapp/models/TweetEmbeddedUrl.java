@@ -12,8 +12,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import prafulmantale.praful.com.twitterapp.handlers.LoggedInUserResponseHandler;
-
 /**
  * Created by prafulmantale on 9/30/14.
  */

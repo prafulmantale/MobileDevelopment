@@ -1,7 +1,5 @@
 package prafulmantale.praful.com.twitterapp.helpers;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-
 /**
  * Created by prafulmantale on 10/1/14.
  */

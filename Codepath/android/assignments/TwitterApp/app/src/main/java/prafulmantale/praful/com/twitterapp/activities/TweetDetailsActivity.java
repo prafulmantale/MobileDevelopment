@@ -94,7 +94,6 @@ public class TweetDetailsActivity extends Activity {
     }
 
     private void setUpListeners(){
-
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

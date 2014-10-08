@@ -3,12 +3,9 @@ package prafulmantale.praful.com.twitterapp.networking;
 import android.content.Context;
 
 import com.codepath.oauth.OAuthBaseClient;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.json.JSONArray;
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
@@ -136,8 +133,6 @@ public class TwitterClient  extends OAuthBaseClient{
             if (queryParameters.getSince_id() != null){
                 params.put("since_id", queryParameters.getSince_id());
             }
-
-
         }
 
         params.put("count", "5");

@@ -9,7 +9,6 @@ import org.json.JSONArray;
 
 import java.util.List;
 
-import prafulmantale.praful.com.twitterapp.activities.MainActivity;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;

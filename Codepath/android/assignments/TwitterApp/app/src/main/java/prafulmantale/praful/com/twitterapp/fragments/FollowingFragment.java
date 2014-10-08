@@ -2,10 +2,8 @@ package prafulmantale.praful.com.twitterapp.fragments;
 
 import android.os.Bundle;
 
-import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.handlers.UsersListResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
-import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 /**
  * Created by prafulmantale on 10/7/14.

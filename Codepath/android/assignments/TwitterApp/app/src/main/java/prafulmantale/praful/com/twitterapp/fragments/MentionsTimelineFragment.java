@@ -13,7 +13,6 @@ import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
-import prafulmantale.praful.com.twitterapp.networking.TwitterClient;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 /**
