@@ -223,6 +223,7 @@ public class UserProfileActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserProfileActivity.this, CreateTweetActivity.class);
+                intent.putExtra(AppConstants.KEY_USER_HANDLE, userProfile.getScreenName());
                 startActivityForResult(intent, AppConstants.RequestCodes.COMPOSE_FROM_HOME);
             }
         });

@@ -46,8 +46,12 @@ public class CreateTweetActivity extends Activity {
 
         if(getIntent().hasExtra(AppConstants.KEY_TWEET_ID) && getIntent().hasExtra(AppConstants.KEY_USER_HANDLE)){
             tweetID = (long)getIntent().getLongExtra(AppConstants.KEY_TWEET_ID, -1);
-            userHandle = (String)getIntent().getStringExtra(AppConstants.KEY_USER_HANDLE);
+
             isReplyMessage = true;
+        }
+
+        if(getIntent().hasExtra(AppConstants.KEY_USER_HANDLE)) {
+            userHandle = (String) getIntent().getStringExtra(AppConstants.KEY_USER_HANDLE);
         }
 
         initialize();
