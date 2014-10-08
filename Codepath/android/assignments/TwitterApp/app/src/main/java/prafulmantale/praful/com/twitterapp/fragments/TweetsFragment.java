@@ -30,7 +30,6 @@ import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.enums.RefreshType;
 import prafulmantale.praful.com.twitterapp.handlers.NetworkResponseHandler;
-import prafulmantale.praful.com.twitterapp.handlers.TweetResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.interfaces.NetworkOperationsListener;
 import prafulmantale.praful.com.twitterapp.interfaces.NetworkResponseListener;
@@ -164,8 +163,6 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
         }
 
         adapter.addAll(tweets);
-
-
     }
 
     public void addAllStart(List<Tweet> tweets){
@@ -174,7 +171,6 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
         }
 
         tweetsList.addAll(0, tweets);
-        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -194,7 +190,7 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
         intent.putExtra(AppConstants.KEY_TWEET_ID, tweet.getTweetID());
         intent.putExtra(AppConstants.KEY_USER_HANDLE, tweet.getUser().getScreenName());
 
-        startActivityForResult(intent, AppConstants.RequestCodes.TWEET_REPLY_FROM_HOME);
+        getActivity().startActivityForResult(intent, AppConstants.RequestCodes.TWEET_REPLY_FROM_HOME);
     }
 
     @Override
@@ -262,18 +258,17 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == AppConstants.RequestCodes.COMPOSE_FROM_HOME) {
-            if (resultCode == Activity.RESULT_OK) {
-                TweetRequest request = data.getParcelableExtra(AppConstants.KEY_TWEET_REQUEST);
-                RestClientApp.getTwitterClient().postTweet(new TweetResponseHandler(adapter), request);
-            }
-        }
+//        if (requestCode == AppConstants.RequestCodes.COMPOSE_FROM_HOME) {
+//            if (resultCode == Activity.RESULT_OK) {
+//                TweetRequest request = data.getParcelableExtra(AppConstants.KEY_TWEET_REQUEST);
+//                RestClientApp.getTwitterClient().postTweet(new TweetResponseHandler(adapter), request);
+//            }
+//        }
 
         if (requestCode == AppConstants.RequestCodes.TWEET_REPLY_FROM_HOME) {
             if (resultCode == Activity.RESULT_OK) {
                 TweetRequest request = data.getParcelableExtra(AppConstants.KEY_TWEET_REQUEST);
-
-                RestClientApp.getTwitterClient().postTweet(new TweetResponseHandler(adapter), request);
+                RestClientApp.getTwitterClient().postTweet(new NetworkResponseHandler(this, APIRequest.TWEET, RefreshType.LATEST), request);
             }
         }
     }
@@ -326,6 +321,15 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
 
             if(swipeRefreshLayout != null) {
                 swipeRefreshLayout.setRefreshing(false);
+            }
+        }
+
+        if(requestType == APIRequest.TWEET){
+            if(status == NetworkResponseHandler.RequestStatus.SUCCESS) {
+                //No op - Ask user to refresh
+            }
+            else{
+                //Show error
             }
         }
 

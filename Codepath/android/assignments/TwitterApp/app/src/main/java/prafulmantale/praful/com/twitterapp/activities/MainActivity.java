@@ -27,6 +27,7 @@ import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.interfaces.NetworkOperationsListener;
 import prafulmantale.praful.com.twitterapp.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.twitterapp.listeners.FragmentTabListener;
+import prafulmantale.praful.com.twitterapp.models.Tweet;
 import prafulmantale.praful.com.twitterapp.models.TweetRequest;
 import prafulmantale.praful.com.twitterapp.models.User;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
@@ -71,6 +72,17 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
             lp = userProfile;
             User.saveLoggedInUserDetails(getBaseContext(), user);
             Log.d("USER", user.toString());//??
+        }
+
+        if(requestType == APIRequest.TWEET){
+            JSONObject response = (JSONObject)responseObject;
+            Tweet tweet = Tweet.fromJSON(response);
+            if(tweet == null){
+                Log.d(TAG, "Compose tweet response is null");
+                return;
+            }
+
+            //Tell the time lines to refresh??
         }
     }
 
@@ -155,7 +167,14 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
         if (requestCode == AppConstants.RequestCodes.COMPOSE_FROM_HOME) {
             if (resultCode == Activity.RESULT_OK) {
                 TweetRequest request = data.getParcelableExtra(AppConstants.KEY_TWEET_REQUEST);
-                //RestClientApp.getTwitterClient().postTweet(new TweetResponseHandler(), request);
+                RestClientApp.getTwitterClient().postTweet(new NetworkResponseHandler(this, APIRequest.TWEET, RefreshType.LATEST), request);
+            }
+        }
+
+        if (requestCode == AppConstants.RequestCodes.TWEET_REPLY_FROM_HOME) {
+            if (resultCode == Activity.RESULT_OK) {
+                TweetRequest request = data.getParcelableExtra(AppConstants.KEY_TWEET_REQUEST);
+                RestClientApp.getTwitterClient().postTweet(new NetworkResponseHandler(this, APIRequest.TWEET, RefreshType.LATEST), request);
             }
         }
     }

@@ -14,7 +14,6 @@ public class MentionsTimelineFragment extends TweetsFragment {
 
     private static final String TAG = MentionsTimelineFragment.class.getName();
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +25,6 @@ public class MentionsTimelineFragment extends TweetsFragment {
     }
 
 
-
     protected void refresh(QueryParameters parameters){
         restClient.sendRequest(new NetworkResponseHandler(this, requestType, RefreshType.LATEST), requestType, new QueryParameters(null, null));
     }
@@ -35,6 +33,5 @@ public class MentionsTimelineFragment extends TweetsFragment {
     void fetchNextPage(QueryParameters parameters) {
         restClient.sendRequest(new NetworkResponseHandler(this, requestType, RefreshType.PAGINATION), requestType, parameters);
     }
-
 
 }
