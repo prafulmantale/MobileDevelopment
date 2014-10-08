@@ -30,6 +30,7 @@ import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.handlers.TweetResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
+import prafulmantale.praful.com.twitterapp.interfaces.NetworkOperationsListener;
 import prafulmantale.praful.com.twitterapp.interfaces.ViewsClickListener;
 import prafulmantale.praful.com.twitterapp.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
@@ -50,6 +51,8 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
     protected TwitterClient restClient ;
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected String preMaxId = null;
+
+    protected NetworkOperationsListener listener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -262,6 +265,20 @@ public abstract class TweetsFragment extends Fragment  implements ViewsClickList
 
                 RestClientApp.getTwitterClient().postTweet(new TweetResponseHandler(adapter), request);
             }
+        }
+    }
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            listener = (NetworkOperationsListener) activity;
+        }
+        catch (Exception ex){
+            throw new ClassCastException(activity.toString()
+                    + " must implement NetworkOperationsListener");
         }
     }
 }

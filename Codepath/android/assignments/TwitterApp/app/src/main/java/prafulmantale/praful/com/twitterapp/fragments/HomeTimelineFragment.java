@@ -33,8 +33,9 @@ public class HomeTimelineFragment extends TweetsFragment {
 
     @Override
     protected void refresh(QueryParameters parameters){
+        listener.OnNetworkOperationStarted();
         restClient.sendRequest(new JsonHttpResponseHandler() {
-            @Override
+                @Override
             public void onSuccess(JSONArray response) {
                 try {
                     Log.d("DEBUG: Response Body:" + response.length() + " \r\n", response.toString());
@@ -51,6 +52,8 @@ public class HomeTimelineFragment extends TweetsFragment {
                     if(swipeRefreshLayout != null) {
                         swipeRefreshLayout.setRefreshing(false);
                     }
+
+                    listener.OnNetworkOperationFinished();
                 }
             }
 
@@ -61,6 +64,7 @@ public class HomeTimelineFragment extends TweetsFragment {
                 if(swipeRefreshLayout != null) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
+                listener.OnNetworkOperationFinished();
             }
         }, APIRequest.HOME_TIMELINE, parameters);
     }

@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 
 import prafulmantale.praful.com.twitterapp.R;
@@ -18,13 +19,14 @@ import prafulmantale.praful.com.twitterapp.fragments.HomeTimelineFragment;
 import prafulmantale.praful.com.twitterapp.fragments.MentionsTimelineFragment;
 import prafulmantale.praful.com.twitterapp.handlers.LoggedInUserResponseHandler;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
+import prafulmantale.praful.com.twitterapp.interfaces.NetworkOperationsListener;
 import prafulmantale.praful.com.twitterapp.listeners.FragmentTabListener;
 import prafulmantale.praful.com.twitterapp.models.TweetRequest;
 import prafulmantale.praful.com.twitterapp.models.User;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements NetworkOperationsListener{
 
     private static final String TAG = MainActivity.class.getName();
 
@@ -38,6 +40,8 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_main);
 
         loggedInUser = User.getLoggedInUserDetails(this);
@@ -50,6 +54,13 @@ public class MainActivity extends FragmentActivity {
         setupListeners();
     }
 
+    public void showProgressBar(){
+        setProgressBarIndeterminateVisibility(true);
+    }
+
+    public void hideProgressBar(){
+        setProgressBarIndeterminateVisibility(false);
+    }
 
     private void initializeActionBar() {
 
@@ -148,5 +159,16 @@ public class MainActivity extends FragmentActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void OnNetworkOperationStarted() {
+        showProgressBar();
+    }
+
+    @Override
+    public void OnNetworkOperationFinished() {
+        hideProgressBar();
     }
 }

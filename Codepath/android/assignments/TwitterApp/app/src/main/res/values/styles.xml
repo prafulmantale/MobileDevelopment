@@ -18,7 +18,7 @@
 
     <style name="MyTheme.ActionBar.TabView" parent="android:style/Widget.Holo.ActionBar.TabView">
         <!-- This is a GREEN background -->
-        <!--<item name="android:background">@drawable/tab_view_background</item>-->
+        <item name="android:background">@drawable/tab_view_background</item>
     </style>
 
     <style name="MyTheme.ActionBar.TabText" parent="android:style/Widget.Holo.ActionBar.TabText">

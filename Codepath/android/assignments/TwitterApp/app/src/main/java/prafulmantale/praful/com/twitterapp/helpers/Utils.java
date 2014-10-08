@@ -14,8 +14,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class Utils {
 
-
-
     public static DisplayImageOptions roundedImageOptions = new DisplayImageOptions.Builder()
             .cacheInMemory()
             .displayer(new RoundedBitmapDisplayer(10))
