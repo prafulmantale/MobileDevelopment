@@ -9,13 +9,20 @@ import android.view.MenuItem;
 import android.view.View;
 
 import prafulmantale.praful.com.twitterapp.R;
+import prafulmantale.praful.com.twitterapp.application.RestClientApp;
+import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.fragments.HomeTimelineFragment;
 import prafulmantale.praful.com.twitterapp.fragments.MentionsTimelineFragment;
+import prafulmantale.praful.com.twitterapp.handlers.LoggedInUserResponseHandler;
 import prafulmantale.praful.com.twitterapp.listeners.FragmentTabListener;
+import prafulmantale.praful.com.twitterapp.models.User;
+import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 public class MainActivity extends FragmentActivity {
 
     private static final String TAG = MainActivity.class.getName();
+
+    public static User loggedInUser = null;
 
 
     @Override
@@ -23,6 +30,11 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        loggedInUser = User.getLoggedInUserDetails(this);
+
+        if (loggedInUser == null) {
+            RestClientApp.getTwitterClient().sendRequest(new LoggedInUserResponseHandler(this), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
+        }
         initializeActionBar();
     }
 
@@ -66,6 +78,12 @@ public class MainActivity extends FragmentActivity {
         actionBar.addTab(tab2);
 
     }
+
+
+    public void onProfileView(MenuItem item){
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

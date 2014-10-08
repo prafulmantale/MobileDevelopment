@@ -29,6 +29,7 @@ import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.adapters.ProfileFragmentsPageAdapter;
 import prafulmantale.praful.com.twitterapp.enums.UserListType;
 import prafulmantale.praful.com.twitterapp.fragments.TweetsFragment;
+import prafulmantale.praful.com.twitterapp.fragments.UserTimelineFragment;
 import prafulmantale.praful.com.twitterapp.fragments.UsersListFragment;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
 
@@ -38,7 +39,7 @@ public class UserProfileActivity extends FragmentActivity {
     private UserProfile userProfile;
     private Drawable selectedDrawable;
     private Drawable tabUnselectedDrawable;
-    private UsersListFragment tweetsFragment;
+    private UserTimelineFragment userTimelineFragment;
     private UsersListFragment followingFragment;
     private UsersListFragment followersFragment;
     private ViewPager viewPager;
@@ -132,12 +133,12 @@ public class UserProfileActivity extends FragmentActivity {
         btnFollowing.setText(Html.fromHtml(userProfile.getHTMLDisplayFriendsCount()));
 
 
-        tweetsFragment = UsersListFragment.newInstance(UserListType.Followers.getValue(), userProfile.getUserIdStr());
+        userTimelineFragment = UserTimelineFragment.newInstance(userProfile.getUserIdStr());
         followersFragment = UsersListFragment.newInstance(UserListType.Followers.getValue(), userProfile.getUserIdStr());
         followingFragment = UsersListFragment.newInstance(UserListType.Following.getValue(), userProfile.getUserIdStr());
 
         final List<Fragment> list = new ArrayList<Fragment>(3);
-        list.add(tweetsFragment);
+        list.add(userTimelineFragment);
         list.add(followingFragment);
         list.add(followersFragment);
 

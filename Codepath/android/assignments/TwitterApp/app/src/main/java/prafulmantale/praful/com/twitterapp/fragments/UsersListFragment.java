@@ -63,6 +63,16 @@ public class UsersListFragment extends Fragment{
         followersList = new ArrayList<UserProfile>();
         followersAdapter = new UserListAdapter(getActivity(), followersList);
 
+        if(savedInstanceState == null) {
+            if (listType == UserListType.Followers) {
+                RestClientApp.getTwitterClient().getFollowersList(new UsersListResponseHandler(followersAdapter), userID);
+            }
+
+            if (listType == UserListType.Following) {
+                RestClientApp.getTwitterClient().getFriendsList(new UsersListResponseHandler(followersAdapter), userID);
+            }
+        }
+
     }
 
     @Override
@@ -74,13 +84,6 @@ public class UsersListFragment extends Fragment{
 
         lvFollowers.setAdapter(followersAdapter);
 
-        if(listType == UserListType.Followers) {
-            RestClientApp.getTwitterClient().getFollowersList(new UsersListResponseHandler(followersAdapter), userID);
-        }
-
-        if(listType == UserListType.Following){
-            RestClientApp.getTwitterClient().getFriendsList(new UsersListResponseHandler(followersAdapter), userID);
-        }
 
         return view;
     }

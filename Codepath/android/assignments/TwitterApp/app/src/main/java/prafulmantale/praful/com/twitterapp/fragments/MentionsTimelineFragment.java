@@ -28,8 +28,9 @@ public class MentionsTimelineFragment extends TweetsFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        refresh(new QueryParameters(null, null));
+        if(savedInstanceState == null) {
+            refresh(new QueryParameters(null, null));
+        }
     }
 
 

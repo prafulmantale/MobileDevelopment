@@ -1,31 +1,48 @@
 package prafulmantale.praful.com.twitterapp.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.ListView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import prafulmantale.praful.com.twitterapp.R;
+import prafulmantale.praful.com.twitterapp.activities.CreateTweetActivity;
+import prafulmantale.praful.com.twitterapp.activities.UserProfileActivity;
 import prafulmantale.praful.com.twitterapp.adapters.TimelineAdapter;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
+import prafulmantale.praful.com.twitterapp.handlers.TweetResponseHandler;
+import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
+import prafulmantale.praful.com.twitterapp.interfaces.ViewsClickListener;
 import prafulmantale.praful.com.twitterapp.listeners.EndlessScrollListener;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
+import prafulmantale.praful.com.twitterapp.models.TweetRequest;
+import prafulmantale.praful.com.twitterapp.models.User;
+import prafulmantale.praful.com.twitterapp.models.UserProfile;
 import prafulmantale.praful.com.twitterapp.networking.TwitterClient;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 /**
  * Created by prafulmantale on 10/7/14.
  */
-public abstract class TweetsFragment extends Fragment {
+public abstract class TweetsFragment extends Fragment  implements ViewsClickListener{
 
     protected TimelineAdapter adapter;
     protected List<Tweet> tweetsList;
@@ -41,7 +58,7 @@ public abstract class TweetsFragment extends Fragment {
         //Non-view initialization
         restClient = RestClientApp.getTwitterClient();
         tweetsList = new ArrayList<Tweet>();
-        adapter = new TimelineAdapter(getActivity(), tweetsList);
+        adapter = new TimelineAdapter(getActivity(), tweetsList, this);
     }
 
     @Override
@@ -137,5 +154,101 @@ public abstract class TweetsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+
+    @Override
+    public void OnReplyToTweetRequested(Tweet tweet) {
+        startComposeForReply(tweet);
+    }
+
+    private void startComposeForReply(Tweet tweet) {
+
+        Intent intent = new Intent(getActivity(), CreateTweetActivity.class);
+        intent.putExtra(AppConstants.KEY_TWEET_ID, tweet.getTweetID());
+        intent.putExtra(AppConstants.KEY_USER_HANDLE, tweet.getUser().getScreenName());
+
+        startActivityForResult(intent, AppConstants.RequestCodes.TWEET_REPLY_FROM_HOME);
+    }
+
+    @Override
+    public void OnCreateFavoriteTweetRequested(final Tweet tweet) {
+        TweetRequest request = new TweetRequest();
+        request.setTweetID(tweet.getTweetID());
+        RestClientApp.getTwitterClient().postCreateFavoriteTweet(new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(JSONObject response) {
+                //super.onSuccess(response);
+                tweet.setFavorited(true);
+            }
+        }, request);
+    }
+
+    @Override
+    public void OnDestroyFavoriteTweetRequested(final Tweet tweet) {
+
+        TweetRequest request = new TweetRequest();
+        request.setTweetID(tweet.getTweetID());
+        RestClientApp.getTwitterClient().postDestroyFavoriteTweet(new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(JSONObject response) {
+                //super.onSuccess(response);
+                tweet.setFavorited(false);
+            }
+        }, request);
+    }
+
+    @Override
+    public void OnUserProfileRequested(User user) {
+
+        QueryParameters parameters = new QueryParameters(null, null);
+        parameters.setUserID(String.valueOf(user.getUserID()));
+        //RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.USER_TIMELINE, parameters);
+        showUserProfile(user);
+    }
+
+    private void showUserProfile(final User user) {
+
+        QueryParameters qp = new QueryParameters(null, null);
+        qp.setUserID(String.valueOf(user.getUserID()));
+
+        RestClientApp.getTwitterClient().sendRequest(new JsonHttpResponseHandler(){
+
+            @Override
+            public void onSuccess(JSONArray response) {
+
+                System.out.println("User Profile:\r\n" + response);
+                try {
+                    UserProfile userProfile = UserProfile.fromJSON(response.getJSONObject(0));
+                    Intent intent = new Intent(getActivity(), UserProfileActivity.class);
+                    intent.putExtra("UID", userProfile);
+                    startActivity(intent);
+                }
+                catch (JSONException ex){
+                    Log.d("TWEETS", ex.getMessage());
+                    ex.printStackTrace();
+                }
+            }
+        }, APIRequest.USER_PROFILE, qp);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == AppConstants.RequestCodes.COMPOSE_FROM_HOME) {
+            if (resultCode == Activity.RESULT_OK) {
+                TweetRequest request = data.getParcelableExtra(AppConstants.KEY_TWEET_REQUEST);
+                RestClientApp.getTwitterClient().postTweet(new TweetResponseHandler(adapter), request);
+            }
+        }
+
+        if (requestCode == AppConstants.RequestCodes.TWEET_REPLY_FROM_HOME) {
+            if (resultCode == Activity.RESULT_OK) {
+                TweetRequest request = data.getParcelableExtra(AppConstants.KEY_TWEET_REQUEST);
+
+                RestClientApp.getTwitterClient().postTweet(new TweetResponseHandler(adapter), request);
+            }
+        }
     }
 }

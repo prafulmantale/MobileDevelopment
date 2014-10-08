@@ -1,44 +1,59 @@
 package prafulmantale.praful.com.twitterapp.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
 import prafulmantale.praful.com.twitterapp.enums.APIRequest;
 import prafulmantale.praful.com.twitterapp.handlers.TimelineResponseHandler;
-import prafulmantale.praful.com.twitterapp.listeners.EndlessScrollListener;
+import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
 import prafulmantale.praful.com.twitterapp.models.Tweet;
-import prafulmantale.praful.com.twitterapp.networking.TwitterClient;
+import prafulmantale.praful.com.twitterapp.models.User;
 import prafulmantale.praful.com.twitterapp.query.QueryParameters;
 
 /**
  * Created by prafulmantale on 10/7/14.
  */
-public class HomeTimelineFragment extends TweetsFragment {
+public class UserTimelineFragment extends TweetsFragment {
 
-    private static final String TAG = HomeTimelineFragment.class.getName();
+    private static final String TAG = UserTimelineFragment.class.getName();
+    private String userID = null;
+
+    public static UserTimelineFragment newInstance(String userID){
+        UserTimelineFragment fragment = new UserTimelineFragment();
+        Bundle args = new Bundle();
+        args.putString(AppConstants.KEY_USER_ID, userID);
+
+        fragment.setArguments(args);
+
+
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(savedInstanceState == null) {
-            refresh(new QueryParameters(null, null));
+        if(getArguments()!= null && getArguments().containsKey(AppConstants.KEY_USER_ID)){
+            userID = getArguments().getString(AppConstants.KEY_USER_ID);
         }
 
+        if(savedInstanceState == null) {
+            QueryParameters parameters = new QueryParameters(null, null);
+            parameters.setUserID(userID);
+            refresh(parameters);
+        }
     }
 
     @Override
     protected void refresh(QueryParameters parameters){
+        parameters.setUserID(userID);
         restClient.sendRequest(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONArray response) {
@@ -68,11 +83,20 @@ public class HomeTimelineFragment extends TweetsFragment {
                     swipeRefreshLayout.setRefreshing(false);
                 }
             }
-        }, APIRequest.HOME_TIMELINE, parameters);
+        }, APIRequest.USER_TIMELINE, parameters);
     }
 
     @Override
     void fetchNextPage(QueryParameters parameters) {
-        RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.HOME_TIMELINE, parameters);
+        parameters.setUserID(userID);
+        RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.USER_TIMELINE, parameters);
+    }
+
+    @Override
+    public void OnUserProfileRequested(User user) {
+
+        //if user is logged in user, ignore the request
+        //else super.OnUserProfile
+
     }
 }

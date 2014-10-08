@@ -52,7 +52,7 @@ public class HomeActivity extends FragmentActivity implements ViewsClickListener
     private ImageView ivComposeTweet;
     private SwipeRefreshLayout swipeRefreshLayout;
     private String preMaxId = null;
-    public static User loggedInUser = null;
+    //public static User loggedInUser = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +62,11 @@ public class HomeActivity extends FragmentActivity implements ViewsClickListener
         initialize();
         setupListeners();
 
-        loggedInUser = User.getLoggedInUserDetails(this);
+        //loggedInUser = User.getLoggedInUserDetails(this);
 
-        if (loggedInUser == null) {
-            RestClientApp.getTwitterClient().sendRequest(new LoggedInUserResponseHandler(this), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
-        }
+//        if (loggedInUser == null) {
+//            RestClientApp.getTwitterClient().sendRequest(new LoggedInUserResponseHandler(this), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
+//        }
 
         RestClientApp.getTwitterClient().sendRequest(new TimelineResponseHandler(adapter, swipeRefreshLayout), APIRequest.HOME_TIMELINE, new QueryParameters(null, null));
     }
@@ -96,7 +96,7 @@ public class HomeActivity extends FragmentActivity implements ViewsClickListener
         initializeActionBar();
         lvTimeline = (ListView) findViewById(R.id.lvTimeline);
         tweetList = new ArrayList<Tweet>();
-        adapter = new TimelineAdapter(this, tweetList);
+        adapter = new TimelineAdapter(this, tweetList, this);
         lvTimeline.setAdapter(adapter);
     }
 

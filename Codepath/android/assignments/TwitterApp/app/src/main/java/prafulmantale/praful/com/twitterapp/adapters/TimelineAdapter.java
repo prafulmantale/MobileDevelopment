@@ -35,7 +35,7 @@ import prafulmantale.praful.com.twitterapp.models.Tweet;
 public class TimelineAdapter extends ArrayAdapter<Tweet> {
 
     private Context context;
-    ViewsClickListener listener;
+    private ViewsClickListener listener;
 
     private class ViewHolder{
 
@@ -103,13 +103,13 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
         }
     }
 
-    public TimelineAdapter(Context context, List<Tweet> objects) {
+    public TimelineAdapter(Context context, List<Tweet> objects, ViewsClickListener listener) {
 
         super(context, R.layout.item_timeline_row, objects);
 
         this.context = context;
         try {
-            listener = (ViewsClickListener) context;
+            this.listener = listener;
         }
         catch(Exception ex) {}
     }
@@ -139,18 +139,21 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
             @Override
             public void onClick(View v) {
 
-                listener.OnReplyToTweetRequested(tweet);
+                if(listener != null) {
+                    listener.OnReplyToTweetRequested(tweet);
+                }
             }
         });
 
         viewHolder.tvFavoritesCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(tweet.isFavorited()){
-                    listener.OnDestroyFavoriteTweetRequested(tweet);
-                }
-                else {
-                    listener.OnCreateFavoriteTweetRequested(tweet);
+                if(listener != null) {
+                    if (tweet.isFavorited()) {
+                        listener.OnDestroyFavoriteTweetRequested(tweet);
+                    } else {
+                        listener.OnCreateFavoriteTweetRequested(tweet);
+                    }
                 }
             }
         });
@@ -158,7 +161,9 @@ public class TimelineAdapter extends ArrayAdapter<Tweet> {
         viewHolder.ivProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.OnUserProfileRequested(tweet.getUser());
+                if(listener != null) {
+                    listener.OnUserProfileRequested(tweet.getUser());
+                }
             }
         });
 

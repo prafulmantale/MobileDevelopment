@@ -62,9 +62,9 @@ public class CreateTweetActivity extends Activity {
         tvUserName = (TextView)findViewById(R.id.tvUserName_createtweet);
         tvScreenName = (TextView)findViewById(R.id.tvUserHandle_createtweet);
 
-        ImageLoader.getInstance().displayImage(HomeActivity.loggedInUser.getProfileImageUrl(), ivProfileImage, Utils.roundedImageOptions);
-        tvUserName.setText(HomeActivity.loggedInUser.getName());
-        tvScreenName.setText("@" + HomeActivity.loggedInUser.getScreenName());
+        ImageLoader.getInstance().displayImage(MainActivity.loggedInUser.getProfileImageUrl(), ivProfileImage, Utils.roundedImageOptions);
+        tvUserName.setText(MainActivity.loggedInUser.getName());
+        tvScreenName.setText("@" + MainActivity.loggedInUser.getScreenName());
 
         initializeActionBar();
         setupListeners();
