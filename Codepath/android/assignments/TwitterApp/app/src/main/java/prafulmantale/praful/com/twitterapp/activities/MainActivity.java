@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import prafulmantale.praful.com.twitterapp.R;
 import prafulmantale.praful.com.twitterapp.application.RestClientApp;
@@ -35,6 +36,7 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
 
     private ImageView ivComposeTweet;
     private ImageView ivProfile;
+    private TextView tvActionBarTitle;
 
 
     @Override
@@ -69,6 +71,8 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
         View view = getLayoutInflater().inflate(R.layout.action_bar_home_title, null);
         ivComposeTweet = (ImageView) view.findViewById(R.id.ivCreateTweet_actionbar);
         ivProfile = (ImageView)view.findViewById(R.id.ivShowProfile_actionbar);
+        tvActionBarTitle = (TextView)view.findViewById(R.id.tvTitle_home);
+
 
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(
                 ActionBar.LayoutParams.MATCH_PARENT,
@@ -90,7 +94,7 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
         ActionBar.Tab tab1 = actionBar.newTab().setText(R.string.tab_home)
                 .setIcon(R.drawable.ic_home)
                 .setTag("HOME")
-                .setTabListener(new FragmentTabListener<HomeTimelineFragment>(R.id.flContainer, this, "HOME", HomeTimelineFragment.class));
+                .setTabListener(new FragmentTabListener<HomeTimelineFragment>(R.id.flContainer, this, "HOME", HomeTimelineFragment.class, tvActionBarTitle));
 
         actionBar.addTab(tab1);
         actionBar.selectTab(tab1);
@@ -98,7 +102,7 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
         ActionBar.Tab tab2 = actionBar.newTab().setText(R.string.tab_mentions)
                 .setIcon(R.drawable.ic_mentions)
                 .setTag("MENTIONS")
-                .setTabListener(new FragmentTabListener<MentionsTimelineFragment>(R.id.flContainer, this, "MENTIONS", MentionsTimelineFragment.class));
+                .setTabListener(new FragmentTabListener<MentionsTimelineFragment>(R.id.flContainer, this, "MENTIONS", MentionsTimelineFragment.class, tvActionBarTitle));
 
         actionBar.addTab(tab2);
 

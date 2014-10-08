@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.widget.TextView;
 
 /**
  * Created by prafulmantale on 10/6/14.
@@ -17,19 +18,21 @@ public class FragmentTabListener<T extends Fragment> implements ActionBar.TabLis
     private final Class<T> clazz;
     private final int fragmentContainerId;
     private final Bundle fragmentArgs;
+    private final TextView tvActionBarTitle;
 
-    public FragmentTabListener(FragmentActivity fragmentActivity, String tag, Class<T> clazz){
+    public FragmentTabListener(FragmentActivity fragmentActivity, String tag, Class<T> clazz, TextView tvActionBarTitle){
         this.fragmentActivity = fragmentActivity;
         this.tag = tag;
         this.clazz = clazz;
 
         fragmentContainerId = android.R.id.content;
         fragmentArgs = new Bundle();
+        this.tvActionBarTitle = tvActionBarTitle;
     }
 
 
     public FragmentTabListener(int fragmentContainerId, FragmentActivity fragmentActivity,
-                               String tag, Class<T> clz) {
+                               String tag, Class<T> clz, TextView tvActionBarTitle) {
 
         this.fragmentContainerId = fragmentContainerId;
         this.fragmentActivity = fragmentActivity;
@@ -37,15 +40,17 @@ public class FragmentTabListener<T extends Fragment> implements ActionBar.TabLis
         this.clazz = clz;
 
         fragmentArgs = new Bundle();
+        this.tvActionBarTitle = tvActionBarTitle;
     }
 
     public FragmentTabListener(int fragmentContainerId, FragmentActivity activity,
-                               String tag, Class<T> clz, Bundle args) {
+                               String tag, Class<T> clz, Bundle args,TextView tvActionBarTitle) {
         this.fragmentActivity = activity;
         this.tag = tag;
         this.clazz = clz;
         this.fragmentContainerId = fragmentContainerId;
         this.fragmentArgs = args;
+        this.tvActionBarTitle = tvActionBarTitle;
     }
 
     @Override
@@ -59,6 +64,8 @@ public class FragmentTabListener<T extends Fragment> implements ActionBar.TabLis
         else{
             sft.attach(fragment);
         }
+
+        tvActionBarTitle.setText(this.tag);
 
         sft.commit();
     }
