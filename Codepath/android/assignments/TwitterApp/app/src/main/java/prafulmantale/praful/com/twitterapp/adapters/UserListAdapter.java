@@ -46,10 +46,10 @@ public class UserListAdapter extends ArrayAdapter<UserProfile>{
             tvDescription.setText(profile.getDescription());
 
             if(profile.isFollowing()){
-                //Load image 1
+                ivFriendshipStatus.setImageResource(R.drawable.ic_remove_user);
             }
             else{
-                //Load image 2
+                ivFriendshipStatus.setImageResource(R.drawable.ic_social_add_person);
             }
         }
     }

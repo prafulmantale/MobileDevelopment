@@ -35,9 +35,10 @@ import prafulmantale.praful.com.twitterapp.fragments.FollowingFragment;
 import prafulmantale.praful.com.twitterapp.fragments.UserTimelineFragment;
 import prafulmantale.praful.com.twitterapp.fragments.UsersListFragment;
 import prafulmantale.praful.com.twitterapp.helpers.AppConstants;
+import prafulmantale.praful.com.twitterapp.interfaces.NetworkOperationsListener;
 import prafulmantale.praful.com.twitterapp.models.UserProfile;
 
-public class UserProfileActivity extends FragmentActivity {
+public class UserProfileActivity extends FragmentActivity implements NetworkOperationsListener{
 
     private static final String TAG = UserProfileActivity.class.getName();
     private UserProfile userProfile;
@@ -307,5 +308,16 @@ public class UserProfileActivity extends FragmentActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void OnNetworkOperationStarted() {
+
+    }
+
+    @Override
+    public void OnNetworkOperationFinished() {
+
     }
 }

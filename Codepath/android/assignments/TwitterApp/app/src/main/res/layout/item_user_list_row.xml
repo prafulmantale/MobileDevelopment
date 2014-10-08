@@ -61,11 +61,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ivFollowingIndicator_user_list"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/ic_social_add_person"
             android:maxHeight="30dp"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
             android:layout_alignParentRight="true"
+
             />
 
     </RelativeLayout>
