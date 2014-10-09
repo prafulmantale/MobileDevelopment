@@ -220,20 +220,24 @@ public class Tweet extends Model implements Parcelable{
             tweet.user = UserProfile.fromJSON(jsonObject.getJSONObject("user"));
 
             try {
-                JSONObject entities = jsonObject.getJSONObject("entities");
-                JSONArray urls = entities.getJSONArray("urls");
+                JSONObject entities = jsonObject.optJSONObject("entities");
+                if(entities != null) {
+                    JSONArray urls = entities.getJSONArray("urls");
 
-                for (int i = 0; i < urls.length(); i++) {
-                    JSONObject obj = urls.getJSONObject(0);
-                    tweet.tweetEmbeddedUrl = TweetEmbeddedUrl.fromJSON(obj, tweet.tweetID);
-                    break;
-                }
+                    for (int i = 0; i < urls.length(); i++) {
+                        JSONObject obj = urls.getJSONObject(0);
+                        tweet.tweetEmbeddedUrl = TweetEmbeddedUrl.fromJSON(obj, tweet.tweetID);
+                        break;
+                    }
 
-                JSONArray mediaArr = entities.getJSONArray("media");
-                for (int i = 0; i < mediaArr.length(); i++) {
-                    JSONObject obj = mediaArr.getJSONObject(0);
-                    tweet.mediaUrl = obj.getString("media_url");
-                    break;
+                    JSONArray mediaArr = entities.optJSONArray("media");
+                    if(mediaArr != null) {
+                        for (int i = 0; i < mediaArr.length(); i++) {
+                            JSONObject obj = mediaArr.getJSONObject(0);
+                            tweet.mediaUrl = obj.getString("media_url");
+                            break;
+                        }
+                    }
                 }
 
             }
