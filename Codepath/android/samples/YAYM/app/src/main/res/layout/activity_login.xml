@@ -1,0 +1,131 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    tools:context="prafulmantale.praful.com.yaym.activities.LoginActivity"
+    android:background="@android:color/white">
+
+
+    <RelativeLayout
+        android:id="@+id/rlCenter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/imageView2"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ym_logo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:scaleType="fitCenter"
+            android:background="@android:color/white"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            />
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout"
+
+            android:layout_marginBottom="5dp">
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="26sp"
+                android:id="@+id/editText"
+                android:layout_gravity="center_horizontal"
+                android:hint="Organization"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                android:textSize="10sp"
+                android:background="@drawable/loginscreen_edit_text_style"
+                android:textColorHint="#999999"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_lock"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="26sp"
+                android:id="@+id/etUserName"
+                android:layout_gravity="center_horizontal"
+                android:hint="Username"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                android:textSize="10sp"
+                android:background="@drawable/loginscreen_edit_text_style"
+                android:textColorHint="#999999"
+                android:drawableLeft="@drawable/ic_user"
+                android:drawablePadding="10dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="26sp"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/editText2"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:hint="Password"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                android:textSize="10sp"
+                android:background="@drawable/loginscreen_edit_text_style"
+                android:textColorHint="#999999"
+                android:includeFontPadding="true"
+                android:drawableLeft="@drawable/ic_lock"
+                android:drawablePadding="10dp"
+                />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="26sp"
+                android:text="Log In"
+                android:id="@+id/button"
+                android:layout_gravity="right"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="12sp"
+                android:textColor="#ffffff"
+                android:background="@drawable/signin_button_style"
+                />
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Integral Development Corp. 2014"
+        android:id="@+id/textView"
+        android:layout_below="@+id/rlCenter"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffE0E0E0"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="12sp"/>
+</RelativeLayout>
