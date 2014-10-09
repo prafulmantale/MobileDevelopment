@@ -39,3 +39,4 @@ Notes:
 Walkthrough of all user stories:
 
 ![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/Codepath/android/assignments/TwitterApp/TwitterApp.gif)
+![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/Codepath/android/assignments/TwitterApp/TwitterApp_2.gif)
