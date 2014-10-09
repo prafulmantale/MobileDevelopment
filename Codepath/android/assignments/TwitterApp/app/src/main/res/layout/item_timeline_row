@@ -74,7 +74,7 @@
             android:ellipsize="end"
             android:padding="1dp"
             android:textSize="9sp"
-            android:textColor="#fd18050c"
+            android:textColor="#a2160803"
             />
         <ImageView
             android:layout_width="wrap_content"

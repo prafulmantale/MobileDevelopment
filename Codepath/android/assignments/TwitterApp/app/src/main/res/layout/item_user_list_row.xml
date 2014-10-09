@@ -54,7 +54,7 @@
             android:id="@+id/tvDescription_user_list"
             android:layout_below="@+id/tvUserHandle_user_list"
             android:textAlignment="center"
-            android:textColor="#fd18050c"
+            android:textColor="#a2160803"
             android:textSize="9sp"
             />
 
