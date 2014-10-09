@@ -7,6 +7,7 @@ import android.util.Log;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -358,4 +359,9 @@ public class Tweet extends Model implements Parcelable{
     }
 
 
+    public static List<Tweet> getAllTweets(){
+        List<Tweet> tweetList = new Select().from(Tweet.class).execute();
+        System.out.println("Tweetlist: " + tweetList.size());
+        return tweetList;
+    }
 }

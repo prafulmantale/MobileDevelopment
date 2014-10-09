@@ -9,6 +9,7 @@ import android.util.Log;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -233,9 +234,18 @@ public class UserProfile extends Model implements Parcelable {
     }
 
     public static UserProfile fromJSON(JSONObject jsonObject) {
-        UserProfile userProfile = new UserProfile();
+
+        UserProfile userProfile = null;
+
 
         try {
+            long uid = jsonObject.getLong("id");
+            userProfile = new Select().from(UserProfile.class).where("userid = ?", uid).executeSingle();
+
+            if(userProfile != null){
+                return userProfile;
+            }
+            userProfile = new UserProfile();
             userProfile.userId = jsonObject.getLong("id");
             userProfile.userIdStr = jsonObject.getString("id_str");
             userProfile.name = jsonObject.getString("name");
@@ -254,6 +264,8 @@ public class UserProfile extends Model implements Parcelable {
 
             userProfile.location = jsonObject.getString("location");
 
+            userProfile.save();
+
         } catch (JSONException ex) {
 
             Log.d(TAG, "Exception while extracting User profile from JSON\r\n" + ex.getMessage());
@@ -261,6 +273,7 @@ public class UserProfile extends Model implements Parcelable {
 
             userProfile = null;
         }
+
 
         return userProfile;
     }

@@ -52,6 +52,8 @@ public class MainActivity extends FragmentActivity implements NetworkOperationsL
 
 //        loggedInUser = UserProfile.getLoggedInUserDetails(this);
 
+        Tweet.getAllTweets();
+
         if (loggedInUser == null) {
             RestClientApp.getTwitterClient().sendRequest(new NetworkResponseHandler(this, APIRequest.LOGGEDIN_USER_INFO, RefreshType.LATEST), APIRequest.LOGGEDIN_USER_INFO, new QueryParameters(null, null));
         }
