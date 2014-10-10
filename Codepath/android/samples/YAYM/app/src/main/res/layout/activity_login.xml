@@ -49,17 +49,20 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="26sp"
-                android:id="@+id/editText"
+                android:id="@+id/etOrganization"
                 android:layout_gravity="center_horizontal"
                 android:hint="Organization"
+                android:text="YMSBAQA"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginLeft="25dp"
-                android:textSize="10sp"
+                android:textSize="9sp"
                 android:background="@drawable/loginscreen_edit_text_style"
                 android:textColorHint="#999999"
                 android:drawablePadding="10dp"
                 android:drawableLeft="@drawable/ic_lock"
+                android:textColor="#ff363636"
+                android:typeface="sans"
                 />
             <EditText
                 android:layout_width="match_parent"
@@ -67,6 +70,7 @@
                 android:id="@+id/etUserName"
                 android:layout_gravity="center_horizontal"
                 android:hint="Username"
+                android:text="RWPraful"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginLeft="25dp"
@@ -75,6 +79,8 @@
                 android:textColorHint="#999999"
                 android:drawableLeft="@drawable/ic_user"
                 android:drawablePadding="10dp"
+                android:textColor="#ff363636"
+                android:typeface="sans"
                 />
 
             <EditText
@@ -82,10 +88,11 @@
                 android:layout_height="26sp"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/editText2"
+                android:id="@+id/etPassword"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:hint="Password"
+                android:text="Test123"
                 android:layout_marginRight="25dp"
                 android:layout_marginLeft="25dp"
                 android:textSize="10sp"
@@ -94,6 +101,8 @@
                 android:includeFontPadding="true"
                 android:drawableLeft="@drawable/ic_lock"
                 android:drawablePadding="10dp"
+                android:textColor="#ff363636"
+                android:typeface="sans"
                 />
 
             <Button
@@ -110,6 +119,7 @@
                 android:textSize="12sp"
                 android:textColor="#ffffff"
                 android:background="@drawable/signin_button_style"
+                android:onClick="doLogin"
                 />
         </LinearLayout>
 

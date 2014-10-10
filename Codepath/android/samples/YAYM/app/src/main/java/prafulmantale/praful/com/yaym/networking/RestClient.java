@@ -6,14 +6,16 @@ import com.loopj.android.http.RequestParams;
 
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.helpers.Utils;
+import prafulmantale.praful.com.yaym.models.LoginRequest;
 
 /**
  * Created by prafulmantale on 10/9/14.
  */
 public class RestClient {
 
-    private static final String API_BASE_URL =  "https://demo3.ym.integral.net/fxi/fxiapi/";
-    private static final String SNAPSHOt_URL = "snapshot";
+    private static final String API_BASE_URL =  "https://demo3.ym.integral.net/fxi/";
+    private static final String SNAPSHOt_URL = "fxiapi/snapshot";
+    private static final String LOGIN_URL = "admin/auth/login";
 
     private AsyncHttpClient client;
 
@@ -29,6 +31,11 @@ public class RestClient {
 
         client.get(Utils.getAPIUrl(API_BASE_URL, SNAPSHOt_URL), params, handler);
 
+    }
+
+    public void login(JsonHttpResponseHandler handler, LoginRequest request){
+
+        client.post(Utils.getAPIUrl(API_BASE_URL, LOGIN_URL), request.getRequestParams(), handler);
     }
 
 }

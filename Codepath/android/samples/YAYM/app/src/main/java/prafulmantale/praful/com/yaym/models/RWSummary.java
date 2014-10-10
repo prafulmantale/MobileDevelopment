@@ -14,22 +14,22 @@ public class RWSummary {
 
     //"summary":{"nrp":3.2,"yld":123.3,"vol":5.086220669E8,"rpnl":62767.24,"upnl":-49.86,"pnl":62717.38,"tlim":3103007.5,"tacc":98979.13}
 
-    private double nrp;//??
+    private double netRiskPercentage;
     private double yield;
     private double volume;
     private double realizedPnL;
     private double unrealizedPnL;
     private double pnL;
-    private double tradeLimit;
-    private double tradeAcc;
+    private double totalMaxLimit;
+    private double totalAccumulation;
 
 
-    public double getNrp() {
-        return nrp;
+    public double getNetRiskPercentage() {
+        return netRiskPercentage;
     }
 
-    public void setNrp(double nrp) {
-        this.nrp = nrp;
+    public void setNetRiskPercentage(double netRiskPercentage) {
+        this.netRiskPercentage = netRiskPercentage;
     }
 
     public double getYield() {
@@ -72,36 +72,34 @@ public class RWSummary {
         this.pnL = pnL;
     }
 
-    public double getTradeLimit() {
-        return tradeLimit;
+    public double getTotalMaxLimit() {
+        return totalMaxLimit;
     }
 
-    public void setTradeLimit(double tradeLimit) {
-        this.tradeLimit = tradeLimit;
+    public void setTotalMaxLimit(double totalMaxLimit) {
+        this.totalMaxLimit = totalMaxLimit;
     }
 
-    public double getTradeAcc() {
-        return tradeAcc;
+    public double getTotalAccumulation() {
+        return totalAccumulation;
     }
 
-    public void setTradeAcc(double tradeAcc) {
-        this.tradeAcc = tradeAcc;
+    public void setTotalAccumulation(double totalAccumulation) {
+        this.totalAccumulation = totalAccumulation;
     }
-
-
 
     public static RWSummary fromJSON(JSONObject jsonObject){
         RWSummary summary = new RWSummary();
 
         try {
-            summary.nrp = jsonObject.getDouble("nrp");
+            summary.netRiskPercentage = jsonObject.getDouble("nrp");
             summary.yield = jsonObject.getDouble("yld");
             summary.volume = jsonObject.getDouble("vol");
             summary.realizedPnL = jsonObject.getDouble("rpnl");
             summary.unrealizedPnL = jsonObject.getDouble("upnl");
             summary.pnL = jsonObject.getDouble("pnl");
-            summary.tradeLimit = jsonObject.getDouble("tlim");
-            summary.tradeAcc = jsonObject.getDouble("tacc");
+            summary.totalMaxLimit = jsonObject.getDouble("tlim");
+            summary.totalAccumulation = jsonObject.getDouble("tacc");
         }
         catch (JSONException ex){
             Log.d(TAG, "Exception while creating object from JSON");
@@ -110,18 +108,17 @@ public class RWSummary {
         return summary;
     }
 
-
     @Override
     public String toString() {
         return "RWSummary{" +
-                "nrp=" + nrp +
+                "netRiskPercentage=" + netRiskPercentage +
                 ", yield=" + yield +
                 ", volume=" + volume +
                 ", realizedPnL=" + realizedPnL +
                 ", unrealizedPnL=" + unrealizedPnL +
                 ", pnL=" + pnL +
-                ", tradeLimit=" + tradeLimit +
-                ", tradeAcc=" + tradeAcc +
+                ", totalMaxLimit=" + totalMaxLimit +
+                ", totalAccumulation=" + totalAccumulation +
                 '}';
     }
 }
