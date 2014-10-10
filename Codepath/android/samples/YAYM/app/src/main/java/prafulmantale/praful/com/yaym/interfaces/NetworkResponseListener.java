@@ -1,6 +1,7 @@
 package prafulmantale.praful.com.yaym.interfaces;
 
 import prafulmantale.praful.com.yaym.enums.APIRequest;
+import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
 
 /**
@@ -8,5 +9,5 @@ import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
  */
 public interface NetworkResponseListener {
 
-    public void OnNetworkResponseReceived(NetworkResponseHandler.RequestStatus status, APIRequest requestType, Object responseObject);
+    public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject);
 }

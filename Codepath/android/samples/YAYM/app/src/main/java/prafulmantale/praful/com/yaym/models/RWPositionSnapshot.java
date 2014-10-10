@@ -307,7 +307,7 @@ public class RWPositionSnapshot {
         //"org":"YMSBAQA","ccyPair":"EUR/AUD","accumulation":7000.0,"accumulationInUSD":8913.45,"rPNL":5394.34,"rPNLInUSD":4765.36,
 
         try {
-            rwPositionSnapshot.org = jsonObject.getString("YMSBAQA");
+            rwPositionSnapshot.org = jsonObject.getString("org");
             rwPositionSnapshot.currencyPair = jsonObject.getString("ccyPair");
             rwPositionSnapshot.accumulation = jsonObject.getDouble("accumulation");
             rwPositionSnapshot.accumulationInUSD = jsonObject.getDouble("accumulationInUSD");

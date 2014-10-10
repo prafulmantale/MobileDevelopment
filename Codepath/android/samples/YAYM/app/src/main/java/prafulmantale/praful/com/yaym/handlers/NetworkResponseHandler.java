@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import prafulmantale.praful.com.yaym.enums.APIRequest;
+import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 
 
@@ -15,11 +16,6 @@ import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
  * Created by prafulmantale on 10/8/14.
  */
 public class NetworkResponseHandler extends JsonHttpResponseHandler{
-
-    public enum RequestStatus{
-        SUCCESS,
-        FAILURE
-    }
 
     private static final String TAG = NetworkResponseHandler.class.getName();
 
@@ -44,12 +40,12 @@ public class NetworkResponseHandler extends JsonHttpResponseHandler{
     @Override
     public void onFailure(Throwable e, JSONObject errorResponse) {
         Log.d("DEBUG: Failure \r\n", e.getMessage());
-        listener.OnNetworkResponseReceived(RequestStatus.SUCCESS, requestType, null);
+        listener.OnNetworkResponseReceived(RequestStatus.FAILURE, requestType, null);
     }
 
     @Override
     protected void handleFailureMessage(Throwable e, String responseBody) {
         super.handleFailureMessage(e, responseBody);
-        listener.OnNetworkResponseReceived(RequestStatus.SUCCESS, requestType, null);
+        listener.OnNetworkResponseReceived(RequestStatus.FAILURE, requestType, null);
     }
 }
