@@ -1,10 +1,12 @@
 package prafulmantale.praful.com.yaym.activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 
+import org.apache.http.cookie.Cookie;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -40,7 +43,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     private EditText etUserName;
     private EditText etPassword;
 
-    private PersistentCookieStore cookieStore;
+    public static PersistentCookieStore cookieStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
         client = new RestClient(cookieStore);
 
         initialize();
+        initializeActionBar();
     }
 
     private void initialize(){
@@ -60,6 +64,28 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
         etPassword = (EditText)findViewById(R.id.etPassword);
     }
 
+    private void initializeActionBar(){
+
+        ActionBar actionBar = getActionBar();
+
+        View view = getLayoutInflater().inflate(R.layout.action_bar_title, null);
+
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setHomeButtonEnabled(false);
+        actionBar.setCustomView(view, params);
+        actionBar.setDisplayShowHomeEnabled(true);
+
+        //Hack to hide the home icon -- Otherwise the action bar was getting displayed on top of Tabs
+        View homeIcon = findViewById(android.R.id.home);
+        ((View) homeIcon.getParent()).setVisibility(View.GONE);
+
+    }
+
     public void doLogin(View view){
 
         client.login(this, new NetworkResponseHandler(this, APIRequest.LOGIN), getLoginRequest());
@@ -67,8 +93,13 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
 
     @Override
     public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject) {
+        System.out.println("OnNetworkResponseReceived: " + status + "|" + requestType);
         if(requestType == APIRequest.LOGIN){
             if(RequestStatus.SUCCESS == status){
+                System.out.println("PersistentCookieStore: ");
+                for(Cookie cookie : cookieStore.getCookies()){
+                    System.out.println(cookie.getName() + "|" + cookie.getValue());
+                }
                 showMain();
             }
         }

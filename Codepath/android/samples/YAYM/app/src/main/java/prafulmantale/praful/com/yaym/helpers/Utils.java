@@ -1,5 +1,8 @@
 package prafulmantale.praful.com.yaym.helpers;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -17,4 +20,6 @@ public class Utils {
 
        return appURL + apiUrl;
     }
+
+
 }

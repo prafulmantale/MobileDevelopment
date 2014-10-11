@@ -30,6 +30,7 @@ public class NetworkResponseHandler extends JsonHttpResponseHandler{
     @Override
     public void onSuccess(JSONObject response) {
         listener.OnNetworkResponseReceived(RequestStatus.SUCCESS, requestType, response);
+        //System.out.println("JSONObject Response:" + response.toString());
     }
 
     @Override
@@ -46,6 +47,7 @@ public class NetworkResponseHandler extends JsonHttpResponseHandler{
     @Override
     protected void handleFailureMessage(Throwable e, String responseBody) {
         super.handleFailureMessage(e, responseBody);
+        System.out.println("handleFailureMessage responseBody: " + (responseBody == null ? "null" : responseBody));
         listener.OnNetworkResponseReceived(RequestStatus.FAILURE, requestType, null);
     }
 }

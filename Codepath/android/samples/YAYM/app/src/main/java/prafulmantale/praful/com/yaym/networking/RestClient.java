@@ -12,6 +12,7 @@ import org.apache.http.entity.StringEntity;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import prafulmantale.praful.com.yaym.activities.LoginActivity;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.helpers.Utils;
 import prafulmantale.praful.com.yaym.models.LoginRequest;
@@ -35,7 +36,7 @@ public class RestClient {
 
 
 
-    public void getRWSnapshot(JsonHttpResponseHandler handler){
+    public void getRWSnapshot(JsonHttpResponseHandler handler, PersistentCookieStore cookieStore){
         RequestParams params = new RequestParams();
 
         params.put(AppConstants.PARAM_KEY_ORG,"YMSBAQA");
@@ -43,12 +44,15 @@ public class RestClient {
 
         String url = Utils.getAPIUrl(API_BASE_URL, SNAPSHOt_URL);
         System.out.println("getRWSnapshot: " + url + params);
+        client.setCookieStore(cookieStore);
+
         client.get(Utils.getAPIUrl(API_BASE_URL, SNAPSHOt_URL), params, handler);
 
     }
 
     public void login(Context context, JsonHttpResponseHandler handler, LoginRequest request){
 
+        LoginActivity.cookieStore.clear();
         System.out.println("### login" + request.getRequestParams().toString());
         String url = Utils.getAPIUrl(API_BASE_URL, LOGIN_URL);
         System.out.println("### login url" + url);
@@ -62,11 +66,6 @@ public class RestClient {
         catch (Exception ex){
 
         }
-
-        //client.addHeader("Content-Length", String.valueOf(request.getRequestParams().length());
-        //client.post(Utils.getAPIUrl(API_BASE_URL, LOGIN_URL), request.getRequestParams(), handler);
     }
-
-
 
 }

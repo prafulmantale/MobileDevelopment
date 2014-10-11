@@ -1,14 +1,18 @@
 package prafulmantale.praful.com.yaym.activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,47 +45,84 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         setContentView(R.layout.activity_yield_manger);
 
         initialize();
+        initializeActionBar();
+
+        if(savedInstanceState == null){
+            snapshots = new ArrayList<RWPositionSnapshot>();
+            adapter = new PositionsAdapter(getBaseContext(), snapshots);
+            lvPositions.setAdapter(adapter);
+        }
+
         getRWSnapshot();
     }
 
     private void initialize(){
 
         lvPositions = (ListView)findViewById(R.id.lvPositionsList);
-        //View headerView = ((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_positions_header, null, false);
+        View headerView = ((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_positions_header, null, false);
 
-        //lvPositions.addHeaderView(headerView);
-        //lvPositions.setHeaderDividersEnabled(true);
+        lvPositions.addHeaderView(headerView);
+        lvPositions.setHeaderDividersEnabled(true);
         lvPositions.setDividerHeight(1);
-
-        snapshots = new ArrayList<RWPositionSnapshot>();
-        adapter = new PositionsAdapter(getBaseContext(), snapshots);
-        lvPositions.setAdapter(adapter);
-
 
     }
 
+    private void initializeActionBar(){
+
+        ActionBar actionBar = getActionBar();
+
+        View view = getLayoutInflater().inflate(R.layout.action_bar_title, null);
+
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setHomeButtonEnabled(false);
+        actionBar.setCustomView(view, params);
+        actionBar.setDisplayShowHomeEnabled(true);
+
+        //Hack to hide the home icon -- Otherwise the action bar was getting displayed on top of Tabs
+        View homeIcon = findViewById(android.R.id.home);
+        ((View) homeIcon.getParent()).setVisibility(View.GONE);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        pause = false;
+    }
+
     public void startPoll(){
+        if(pause){
+            return;
+        }
         System.out.println("######################  startPoll ");
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                getRWSnapshot();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        getRWSnapshot();
+                    }
+                });
             }
-        }, 5000);
+        }, 15000);
     }
 
     private void getRWSnapshot(){
-        LoginActivity.client.getRWSnapshot(new NetworkResponseHandler(this, APIRequest.SNAPSHOT));
-        startPoll();
+        LoginActivity.client.getRWSnapshot(new NetworkResponseHandler(this, APIRequest.SNAPSHOT), LoginActivity.cookieStore);
+        //startPoll();
     }
-
-    private static int counter = 1;
 
     @Override
     public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject) {
 
-        System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
+        //System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
         if(APIRequest.SNAPSHOT == requestType) {
 
             if(status == RequestStatus.SUCCESS){
@@ -93,18 +134,17 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
                     List<RWPositionSnapshot> list = RWPositionSnapshot.fromJSON(arr);
 
                     if (list != null && list.size() > 0) {
-                        counter ++;
                         snapshots.clear();
-                        if(counter <= 2) {
-                            snapshots.addAll(list);
-                        }
+                        //snapshots.addAll(list);
+                        snapshots.add(list.get(0));
+
                         adapter.notifyDataSetChanged();
                     }
 
                     JSONObject summary = obj.getJSONObject("summary");
                     RWSummary rwSummary = RWSummary.fromJSON(summary);
 
-                        System.out.println("Summary: " + rwSummary);
+                        //System.out.println("Summary: " + rwSummary);
                 }
                 catch (JSONException ex){
                     System.out.println("Excption!!!!!!!!!!");
@@ -113,8 +153,13 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
             }
 
         }
+    }
 
-
+    static boolean pause;
+    @Override
+    protected void onPause() {
+        super.onPause();
+        pause = true;
     }
 
     @Override
