@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    tools:context="prafulmantale.simpletodolist.activities.ToDoItemRow"
+    >
+
+    <CheckBox
+        android:id="@+id/itemCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        />
+    <EditText
+        android:id="@+id/itemLabel"
+        android:layout_width="180dp"
+        android:layout_height="26dp"
+        />
+</RelativeLayout>

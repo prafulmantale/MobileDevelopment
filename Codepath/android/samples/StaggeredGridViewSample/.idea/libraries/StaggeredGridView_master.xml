@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="StaggeredGridView-master">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/StaggeredGridView-master.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
