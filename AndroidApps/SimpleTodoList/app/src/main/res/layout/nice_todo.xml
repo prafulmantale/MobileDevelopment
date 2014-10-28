@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/etTodoItemText_nice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:inputType="none"
+        android:layout_toLeftOf="@+id/imageView">
+    </EditText>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_action_green_save"
+        android:layout_above="@+id/linearLayout"
+        android:layout_alignParentTop="true"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/etTodoItemText_nice"
+        android:background="#501a2943"
+
+        android:weightSum="1"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Done"
+            android:id="@+id/tvComplete"
+            android:layout_below="@+id/etTodoItemText_nice"
+            android:drawableTop="@drawable/ic_navigation_accept"
+            android:layout_weight="0.15"
+            android:gravity="bottom|center"
+            android:layout_marginLeft="5dp"
+
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Schedule"
+            android:id="@+id/tvSchedule"
+            android:layout_below="@+id/etTodoItemText_nice"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:drawableTop="@drawable/ic_action_event"
+            android:layout_weight="0.18"
+            android:gravity="bottom|center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Place"
+            android:id="@+id/tvPlace"
+            android:layout_below="@+id/etTodoItemText_nice"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:drawableTop="@drawable/ic_action_place"
+            android:layout_weight="0.15"
+            android:gravity="bottom|center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Share"
+            android:id="@+id/tvShare"
+            android:layout_below="@+id/etTodoItemText_nice"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:drawableTop="@drawable/ic_action_share"
+            android:layout_weight="0.16"
+            android:gravity="bottom|center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Edit"
+            android:id="@+id/textView3"
+            android:layout_below="@+id/etTodoItemText_nice"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:drawableTop="@drawable/ic_action_edit"
+            android:layout_weight="0.15"
+            android:gravity="bottom|center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Remove"
+            android:id="@+id/tvRemove"
+            android:layout_below="@+id/etTodoItemText_nice"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:drawableTop="@drawable/ic_action_remove"
+            android:layout_weight="0.15"
+            android:gravity="bottom|center"/>
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

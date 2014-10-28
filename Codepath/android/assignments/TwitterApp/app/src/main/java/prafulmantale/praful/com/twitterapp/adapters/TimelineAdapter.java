@@ -28,6 +28,8 @@ import prafulmantale.praful.com.twitterapp.models.Tweet;
  */
 public class TimelineAdapter extends ArrayAdapter<Tweet> {
 
+
+
     private Context context;
     private ViewsClickListener listener;
 

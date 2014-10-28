@@ -62,7 +62,7 @@
         android:id="@+id/tvFollowingCount"
         android:textSize="10sp"
         android:layout_toRightOf="@+id/tvFollowersCount"
-        com.custom:typeface="fonts/Roboto-Medium.ttf"
+        com.custom:typeface="fonts/AlexBrush-Regular.ttf"
         />
 
     </LinearLayout>
@@ -74,9 +74,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="3dp"
         android:id="@+id/tvUserFullName"
-        android:textSize="10sp"
+        android:textSize="14sp"
         android:layout_below="@+id/llUserDetailsHeader"
-        com.custom:typeface="fonts/Roboto-Regular.ttf"
+        com.custom:typeface="fonts/DancingScript-Regular.otf"
         />
 
     <prafulmantale.praful.com.instagramviewer.widgets.TypefacedTextView
@@ -98,9 +98,10 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:id="@+id/tvWebsite"
-        android:textSize="8sp"
+        android:textSize="14sp"
+        android:textStyle="bold"
         android:layout_below="@+id/tvUserBio"
-        com.custom:typeface="fonts/Roboto-Regular.ttf"
+        com.custom:typeface="fonts/AlexBrush-Regular.ttf"
         />
 
 </RelativeLayout>
