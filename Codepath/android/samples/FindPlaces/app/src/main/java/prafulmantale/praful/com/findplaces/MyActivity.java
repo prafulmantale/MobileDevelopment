@@ -2,6 +2,8 @@ package prafulmantale.praful.com.findplaces;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 public class MyActivity extends Activity {
 
     //https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Vict&types=geocode&language=fr&key=AIzaSyCrW18eNpNzaWeV1hARKaVQpwjLy5JU0_I
-
+    EditText et;
     ArrayList<String> placesList = new ArrayList<String>();
     ArrayAdapter<String> adapter;
     private ListView listView;
@@ -30,10 +32,13 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
+        et = (EditText)findViewById(R.id.editText);
         listView = (ListView)findViewById(R.id.listView);
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, placesList);
         listView.setAdapter(adapter);
+
+        setupListeners();
     }
 
 
@@ -56,9 +61,33 @@ public class MyActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void setupListeners(){
+            et.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    String str = et.getText().toString();
+                    if(str.length() > 3){
+                        search(null);
+                    }
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+    }
+
     public void search(View view){
         System.out.println("Search");
-        EditText et = (EditText)findViewById(R.id.editText);
+
         String s1 = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
         String s2 = et.getText().toString();
         s2= s2.replace(" ", "%20");
