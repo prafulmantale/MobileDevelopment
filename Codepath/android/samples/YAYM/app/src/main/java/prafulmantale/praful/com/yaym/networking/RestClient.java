@@ -9,9 +9,6 @@ import com.loopj.android.http.RequestParams;
 
 import org.apache.http.entity.StringEntity;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import prafulmantale.praful.com.yaym.activities.LoginActivity;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.helpers.Utils;
@@ -23,7 +20,7 @@ import prafulmantale.praful.com.yaym.models.LoginRequest;
 public class RestClient {
 
     private static final String API_BASE_URL =  "https://demo3.ym.integral.net/fxi/";
-    private static final String SNAPSHOt_URL = "fxiapi/riskwarehouse/snapshot";
+    private static final String SNAPSHOt_URL = "rw/riskwarehouse/snapshot";
     private static final String LOGIN_URL = "admin/auth/login";
 
     private AsyncHttpClient client;

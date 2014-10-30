@@ -9,10 +9,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +26,6 @@ import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
-import prafulmantale.praful.com.yaym.models.LoginRequest;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.models.RWSummary;
 
@@ -116,7 +112,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
     private void getRWSnapshot(){
         LoginActivity.client.getRWSnapshot(new NetworkResponseHandler(this, APIRequest.SNAPSHOT), LoginActivity.cookieStore);
-        //startPoll();
+        startPoll();
     }
 
     @Override
@@ -135,8 +131,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
                     if (list != null && list.size() > 0) {
                         snapshots.clear();
-                        //snapshots.addAll(list);
-                        snapshots.add(list.get(0));
+                        snapshots.addAll(list);
 
                         adapter.notifyDataSetChanged();
                     }
@@ -165,7 +160,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.yield_manger, menu);
+        //getMenuInflater().inflate(R.menu.yield_manger, menu);
         return true;
     }
 

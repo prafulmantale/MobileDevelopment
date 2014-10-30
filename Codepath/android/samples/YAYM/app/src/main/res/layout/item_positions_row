@@ -10,40 +10,6 @@
         android:layout_height="40dp"
         layout="@layout/item_ccypair_rate"
         android:id="@+id/itemCcyPairRate"/>
-    <SeekBar
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/sbPositionsStatus"
-        android:layout_weight="1"
-        android:thumb="@drawable/ic_pointer"
-        android:progress="0"
-        android:secondaryProgress="0"
-        android:progressDrawable="@drawable/search_progress_drawable"
-        android:visibility="gone"
-
-        />
-    <include
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        layout="@layout/item_positions_seekbar"
-        android:id="@+id/itemPositionSeekBar"
-        android:layout_marginLeft="5dp"
-        />
-
-    <TextView
-
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:text="100"
-        android:id="@+id/tvPosition"
-        android:layout_alignBottom="@+id/tvRate"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/tvRate"
-        android:layout_marginLeft="1dp"
-        android:textSize="12sp"
-        android:gravity="center"
-        android:visibility="gone"
-        />
 
     <TextView
         android:layout_width="60dp"
@@ -56,10 +22,5 @@
         android:layout_alignParentTop="true"
         android:gravity="center"
         />
-    <ProgressBar
-        android:id="@+id/ProgressBar01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background ="@xml/progress"
-        android:visibility="gone"/>
+
 </LinearLayout>

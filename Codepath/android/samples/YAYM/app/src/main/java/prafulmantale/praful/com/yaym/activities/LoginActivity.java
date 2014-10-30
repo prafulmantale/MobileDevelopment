@@ -3,30 +3,16 @@ package prafulmantale.praful.com.yaym.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 
 import org.apache.http.cookie.Cookie;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.zip.GZIPInputStream;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
@@ -122,7 +108,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.login, menu);
+        //getMenuInflater().inflate(R.menu.login, menu);
         return true;
     }
 
