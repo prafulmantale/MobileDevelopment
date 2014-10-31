@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -35,6 +36,8 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     private ListView lvPositions;
     private PositionsAdapter adapter;
     private List<RWPositionSnapshot> snapshots;
+    private RWPositionSnapshot prevSelectedSnapshot;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         }
 
         getRWSnapshot();
+        setupListeners();
     }
 
     private void initialize(){
@@ -59,8 +63,22 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
         lvPositions.addHeaderView(headerView);
         lvPositions.setHeaderDividersEnabled(true);
-        lvPositions.setDividerHeight(1);
 
+    }
+
+    private void setupListeners(){
+        lvPositions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                RWPositionSnapshot snapshot = adapter.getItem(position);
+                snapshot.setItemSelected(true);
+                if(prevSelectedSnapshot != null){
+                    prevSelectedSnapshot.setItemSelected(false);
+                }
+
+                prevSelectedSnapshot = snapshot;
+            }
+        });
     }
 
     private void initializeActionBar(){

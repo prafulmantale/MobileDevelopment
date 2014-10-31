@@ -2,13 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    tools:context=".YieldMangerActivity">
+    android:padding="5dp"
+    tools:context=".YieldMangerActivity"
+    android:background="#ffEAEAEA">
 
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/lvPositionsList"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:dividerHeight="5.0sp"
+        android:divider="#ffEAEAEA"
+        android:choiceMode="singleChoice"
+        android:background="@color/white"
+        />
 </RelativeLayout>

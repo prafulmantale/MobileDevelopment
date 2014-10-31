@@ -2,6 +2,7 @@ package prafulmantale.praful.com.yaym.adapters;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,9 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
 
     private class ViewHolder{
         TextView tvCcyPair;
-        TextView tvRate;
+        TextView tvBigFigure;
+        TextView tvPips;
+        TextView tvHalfPips;
         View ccyPairRate;
         TextView tvUnrealizedPnL;
 
@@ -36,14 +39,24 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             ccyPairRate = convertView.findViewById(R.id.itemCcyPairRate);
 
             tvCcyPair = (TextView)ccyPairRate.findViewById(R.id.tvCcyPair_ratecontrol);
-            tvRate = (TextView)ccyPairRate.findViewById(R.id.tvRate_ratecontrol);
+            tvCcyPair.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Bold.ttf"));
+            tvBigFigure = (TextView)ccyPairRate.findViewById(R.id.tvRate_BigFigure);
+            tvBigFigure.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Medium.ttf"));
+            tvPips = (TextView)ccyPairRate.findViewById(R.id.tvRate_Pips);
+            tvPips.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Medium.ttf"));
+            tvHalfPips = (TextView)ccyPairRate.findViewById(R.id.tvRate_halfPips);
+            tvHalfPips.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Medium.ttf"));
+
             tvUnrealizedPnL = (TextView)convertView.findViewById(R.id.tvUnrealizedPnl);
         }
 
         @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
         protected void populateData(RWPositionSnapshot snapshot){
             tvCcyPair.setText(snapshot.getCurrencyPair());
-            tvRate.setText(String.valueOf(snapshot.getMidRate()));
+            tvBigFigure.setText(String.valueOf(snapshot.getBigFigure()));
+            tvPips.setText(snapshot.getPips());
+            tvHalfPips.setText(snapshot.getHalfPips());
+
             tvUnrealizedPnL.setText(String.valueOf(snapshot.getUnrealizedPnL()));
 
            // sbPositionsStatusLong.setThumb(writeOnDrawable(R.drawable.pointer, "0.0"));
@@ -65,6 +78,13 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
         else{
             viewHolder = (ViewHolder)convertView.getTag();
         }
+
+//        if(snapshot.isItemSelected()){
+//            viewHolder.ccyPairRate.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.ccypair_rate_selected_style));
+//        }
+//        else {
+//            viewHolder.ccyPairRate.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.ccypair_rate_unselected_style));
+//        }
 
         viewHolder.populateData(snapshot);
         return convertView;

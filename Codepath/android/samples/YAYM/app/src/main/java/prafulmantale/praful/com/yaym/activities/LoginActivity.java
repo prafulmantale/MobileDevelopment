@@ -24,6 +24,7 @@ import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.models.LoginRequest;
 import prafulmantale.praful.com.yaym.networking.RestClient;
 
+
 public class LoginActivity extends Activity  implements NetworkResponseListener{
 
     public static RestClient client;
@@ -31,6 +32,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     private EditText etUserName;
     private EditText etPassword;
     private Button btnLogin;
+
 
     public static PersistentCookieStore cookieStore;
 

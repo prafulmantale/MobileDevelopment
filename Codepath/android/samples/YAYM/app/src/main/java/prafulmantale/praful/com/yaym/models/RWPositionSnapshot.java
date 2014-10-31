@@ -68,6 +68,12 @@ public class RWPositionSnapshot {
 
     private double yield;
 
+    private boolean isItemSelected;
+
+    private String bigFigure;
+    private String pips;
+    private String halfPips;
+
 
     public String getOrg() {
         return org;
@@ -301,6 +307,27 @@ public class RWPositionSnapshot {
         this.yield = yield;
     }
 
+
+    public boolean isItemSelected() {
+        return isItemSelected;
+    }
+
+    public void setItemSelected(boolean isItemSelected) {
+        this.isItemSelected = isItemSelected;
+    }
+
+    public String getBigFigure() {
+        return bigFigure;
+    }
+
+    public String getPips() {
+        return pips;
+    }
+
+    public String getHalfPips() {
+        return halfPips;
+    }
+
     public static RWPositionSnapshot fromJSON(JSONObject jsonObject){
         RWPositionSnapshot rwPositionSnapshot = new RWPositionSnapshot();
 
@@ -344,6 +371,7 @@ public class RWPositionSnapshot {
             rwPositionSnapshot.bidRate = jsonObject.getDouble("bidRate");
             rwPositionSnapshot.offerRate = jsonObject.getDouble("offerRate");
             rwPositionSnapshot.midRate = jsonObject.getDouble("midRate");
+            rwPositionSnapshot.updateFormattedRates();
 
             // "skewedBidRate":1.43622,"skewedOfferRate":1.43629,"volume":1.5618E7,"volumeInUSD":1.98871803E7,"yield":238.38,
 
@@ -384,6 +412,24 @@ public class RWPositionSnapshot {
         }
 
         return list;
+    }
+
+    private void  updateFormattedRates ()
+    {
+        bigFigure = "1.39";
+        pips = "88";
+        halfPips = "4";
+
+        if(currencyPair.indexOf("JPY") !=-1)
+        {
+            //Pips 2
+            //Halfpips 1
+        }
+        else {
+
+            //pips = 3
+            //halfPips = 1
+        }
     }
 
 

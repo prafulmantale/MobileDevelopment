@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ccypairrate_view_style"
+    android:background="@drawable/ccypair_rate_control_states"
     android:orientation="vertical"
     android:padding="1dp"
     android:weightSum="1"
@@ -21,20 +21,47 @@
 
         />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="1.3299"
-        android:id="@+id/tvRate_ratecontrol"
-        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:background="@drawable/rate_rounded_text_style"
         android:layout_margin="2dp"
-        android:gravity="center_horizontal|center_vertical"
+        android:layout_weight="0.7"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="1.32"
+        android:id="@+id/tvRate_BigFigure"
         android:textColor="#C1C1C1"
         android:background="@drawable/rate_rounded_text_style"
-        android:textSize="14sp"
-        android:layout_weight="0.7"
-
-
+        android:textSize="10sp"
         />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="99"
+            android:id="@+id/tvRate_Pips"
+            android:textColor="#C1C1C1"
+            android:background="@drawable/rate_rounded_text_style"
+            android:textSize="14sp"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="88"
+            android:id="@+id/tvRate_halfPips"
+            android:textColor="#C1C1C1"
+            android:background="@drawable/rate_rounded_text_style"
+            android:textSize="8sp"
+
+            />
+    </LinearLayout>
 </LinearLayout>
