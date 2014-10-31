@@ -19,8 +19,9 @@ import prafulmantale.praful.com.yaym.models.LoginRequest;
  */
 public class RestClient {
 
-    private static final String API_BASE_URL =  "https://demo3.ym.integral.net/fxi/";
-    private static final String SNAPSHOt_URL = "rw/riskwarehouse/snapshot";
+    private static final String API_BASE_URL =  "https://demo3.ym.integral.net/fxi/rw/riskwarehouse/";
+    private static final String SNAPSHOt_URL = "snapshot";
+    private static final String RULES_URL = "rule";
     private static final String LOGIN_URL = "admin/auth/login";
 
     private AsyncHttpClient client;
@@ -32,6 +33,19 @@ public class RestClient {
     }
 
 
+    public void getRWRules(JsonHttpResponseHandler handler, PersistentCookieStore cookieStore){
+        RequestParams params = new RequestParams();
+
+        params.put(AppConstants.PARAM_KEY_ORG,"YMSBAQA");
+        params.put(AppConstants.PARAM_KEY_NAMESPACE,"YMSBAQA");
+
+        String url = Utils.getAPIUrl(API_BASE_URL, RULES_URL);
+        System.out.println("getRWSnapshot: " + url + params);
+        client.setCookieStore(cookieStore);
+
+        client.get(Utils.getAPIUrl(API_BASE_URL, RULES_URL), params, handler);
+
+    }
 
     public void getRWSnapshot(JsonHttpResponseHandler handler, PersistentCookieStore cookieStore){
         RequestParams params = new RequestParams();
