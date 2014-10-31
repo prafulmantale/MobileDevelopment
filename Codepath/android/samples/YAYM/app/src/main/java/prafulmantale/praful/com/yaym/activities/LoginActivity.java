@@ -3,11 +3,13 @@ package prafulmantale.praful.com.yaym.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.loopj.android.http.PersistentCookieStore;
@@ -28,6 +30,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     private EditText etOrg;
     private EditText etUserName;
     private EditText etPassword;
+    private Button btnLogin;
 
     public static PersistentCookieStore cookieStore;
 
@@ -46,8 +49,15 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     private void initialize(){
 
         etOrg = (EditText)findViewById(R.id.etOrganization);
+        etOrg.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
         etUserName = (EditText)findViewById(R.id.etUserName);
+        etUserName.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
         etPassword = (EditText)findViewById(R.id.etPassword);
+        etPassword.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
+
+        btnLogin = (Button)findViewById(R.id.btnLogin);
+        btnLogin.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Bold.ttf"));
+
     }
 
     private void initializeActionBar(){
