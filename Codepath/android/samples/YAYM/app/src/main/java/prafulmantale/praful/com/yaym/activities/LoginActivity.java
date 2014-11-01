@@ -60,7 +60,6 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
         etPassword.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
 
         btnLogin = (BootstrapButton)findViewById(R.id.btnLogin);
-//        btnLogin.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Bold.ttf"));
 
         tvCopyright = (TextView) findViewById(R.id.tvCopyright);
         tvCopyright.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
@@ -111,6 +110,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     private void showMain(){
         Intent intent = new Intent(this, YieldMangerActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_from_left);
     }
 
     private LoginRequest getLoginRequest(){
