@@ -177,13 +177,13 @@
                 android:text="@string/login_button_text"
                 bootstrapbutton:bb_type="primary"
                 android:layout_gravity="right"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginLeft="15dp"
                 android:onClick="doLogin"
                 bootstrapbutton:bb_size="xsmall"
-
+                bootstrapbutton:bb_roundedCorners="true"
                 />
 
         </LinearLayout>
@@ -200,7 +200,7 @@
         android:layout_below="@+id/rlCenter"
         android:layout_centerHorizontal="true"
         android:textColor="#444"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="-10dp"
         android:layout_marginBottom="5dp"
         android:textSize="10sp"/>
 </RelativeLayout>
