@@ -6,8 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by prafulmantale on 10/31/14.
@@ -81,8 +81,8 @@ public class RiskRules {
     }
 
 
-    public static List<RiskRules> fromJSON(JSONArray jsonArray){
-        List<RiskRules> rules = new ArrayList<RiskRules>();
+    public static Map<String, RiskRules> fromJSON(JSONArray jsonArray){
+        Map<String, RiskRules> rules = new HashMap<String, RiskRules>();
 
         if(jsonArray == null){
             return rules;
@@ -101,7 +101,9 @@ public class RiskRules {
                     continue;
                 }
 
-                rules.add(riskRules);
+                if(!rules.containsKey(riskRules.currencyPair)){
+                    rules.put(riskRules.currencyPair, riskRules);
+                }
             }
             catch (JSONException ex){
                 Log.d(TAG, "Exception while extracting JSON Object from array");

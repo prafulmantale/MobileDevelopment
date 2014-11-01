@@ -41,85 +41,151 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivLogo"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="14dp"
             android:orientation="vertical"
             android:id="@+id/linearLayout"
 
             android:layout_marginBottom="5dp">
 
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivLogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            android:padding="2dp">
+
+            <com.beardedhen.androidbootstrap.FontAwesomeText
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                fontawesometext:fa_icon="fa-bank"
+                android:background="@drawable/item_back_icons"
+                android:id="@+id/bankIcon"
+                android:layout_marginLeft="25dp"
+                android:textSize="8sp"
+                android:textAlignment="center"
+                android:paddingTop="4dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="3dp"
+                />
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="26sp"
+                android:layout_height="23sp"
                 android:id="@+id/etOrganization"
                 android:layout_gravity="center_horizontal"
                 android:hint="Organization"
                 android:text="YMSBAQA"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginLeft="25dp"
+                android:paddingLeft="5dp"
                 android:textSize="9sp"
                 android:background="@drawable/loginscreen_edit_text_style"
                 android:textColorHint="#999999"
-                android:drawablePadding="10dp"
-                android:drawableLeft="@drawable/ic_lock"
                 android:textColor="#000000"
+                />
+            </LinearLayout>
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivLogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal"
+            android:padding="2dp">
+
+            <com.beardedhen.androidbootstrap.FontAwesomeText
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                fontawesometext:fa_icon="fa-user"
+                android:background="@drawable/item_back_icons"
+                android:id="@+id/userIcon"
+                android:layout_marginLeft="25dp"
+                android:textSize="8sp"
+                android:textAlignment="center"
+                android:paddingTop="4dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
                 />
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="26sp"
+                android:layout_height="23sp"
                 android:id="@+id/etUserName"
                 android:layout_gravity="center_horizontal"
                 android:hint="Username"
                 android:text="RWPraful"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginLeft="25dp"
-                android:textSize="10sp"
+                android:textSize="9sp"
                 android:background="@drawable/loginscreen_edit_text_style"
                 android:textColorHint="#999999"
-                android:drawableLeft="@drawable/ic_user"
-                android:drawablePadding="10dp"
-                android:textColor="#000000"
+                android:paddingLeft="5dp"
+                android:textColor="#555"
                 />
+            </LinearLayout>
 
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivLogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal"
+            android:padding="2dp">
+
+            <com.beardedhen.androidbootstrap.FontAwesomeText
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                fontawesometext:fa_icon="fa-lock"
+                android:background="@drawable/item_back_icons"
+                android:id="@+id/lockIcon"
+                android:layout_marginLeft="25dp"
+                android:textSize="8sp"
+                android:textAlignment="center"
+                android:paddingTop="4dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                />
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="26sp"
+                android:layout_height="23sp"
                 android:inputType="textPassword"
                 android:ems="10"
                 android:id="@+id/etPassword"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:hint="Password"
                 android:text="Test123"
                 android:layout_marginRight="25dp"
-                android:layout_marginLeft="25dp"
-                android:textSize="10sp"
+                android:textSize="9sp"
                 android:background="@drawable/loginscreen_edit_text_style"
                 android:textColorHint="#999999"
                 android:includeFontPadding="true"
-                android:drawableLeft="@drawable/ic_lock"
-                android:drawablePadding="10dp"
-                android:textColor="#000000"
+                android:paddingLeft="5dp"
+                android:textColor="#555"
                 />
+            </LinearLayout>
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="26sp"
-                android:text="Log In"
+            <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_button_text"
+                bootstrapbutton:bb_type="primary"
                 android:layout_gravity="right"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="4dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginLeft="15dp"
-                android:textSize="12sp"
-                android:textColor="#ffffff"
-                android:background="@drawable/signin_button_style"
                 android:onClick="doLogin"
+                bootstrapbutton:bb_size="xsmall"
+
                 />
+
         </LinearLayout>
 
 
@@ -129,12 +195,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Integral Development Corp. 2014"
-        android:id="@+id/textView"
+        android:text="@string/copyright_text"
+        android:id="@+id/tvCopyright"
         android:layout_below="@+id/rlCenter"
         android:layout_centerHorizontal="true"
-        android:textColor="#ffE0E0E0"
+        android:textColor="#444"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:textSize="12sp"/>
+        android:textSize="10sp"/>
 </RelativeLayout>

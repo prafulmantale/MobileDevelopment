@@ -6,4 +6,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">Yield Manager</string>
 
+    <string name="login_button_text">Log in</string>
+    <string name="copyright_text">&#169; Integral Development Corp. 2014</string>
 </resources>

@@ -6,5 +6,6 @@ package prafulmantale.praful.com.yaym.enums;
 public enum APIRequest {
 
     LOGIN,
-    SNAPSHOT
+    SNAPSHOT,
+    RULES
 }

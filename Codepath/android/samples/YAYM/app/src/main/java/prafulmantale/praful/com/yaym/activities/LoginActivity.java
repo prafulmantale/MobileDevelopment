@@ -9,9 +9,10 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.loopj.android.http.PersistentCookieStore;
 
 import org.apache.http.cookie.Cookie;
@@ -31,7 +32,8 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     private EditText etOrg;
     private EditText etUserName;
     private EditText etPassword;
-    private Button btnLogin;
+    private BootstrapButton btnLogin;
+    private TextView tvCopyright;
 
 
     public static PersistentCookieStore cookieStore;
@@ -57,8 +59,11 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
         etPassword = (EditText)findViewById(R.id.etPassword);
         etPassword.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
 
-        btnLogin = (Button)findViewById(R.id.btnLogin);
-        btnLogin.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Bold.ttf"));
+        btnLogin = (BootstrapButton)findViewById(R.id.btnLogin);
+//        btnLogin.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Bold.ttf"));
+
+        tvCopyright = (TextView) findViewById(R.id.tvCopyright);
+        tvCopyright.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
 
     }
 

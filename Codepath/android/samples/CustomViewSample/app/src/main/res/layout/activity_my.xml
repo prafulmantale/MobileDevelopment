@@ -1,17 +1,57 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:com.custom="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MyActivity">
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white">
+
+        <com.beardedhen.androidbootstrap.FontAwesomeText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fontawesometext:fa_icon="fa-bank"
+            android:layout_margin="10dp"
+            android:textSize="12sp"
+            android:background="@drawable/item_back_icons"
+            />
+
+        <include layout="@layout/font_awesome_text_example" />
+
+        <include layout="@layout/bootstrap_button_basic_buttons_example" />
+
+        <include layout="@layout/bootstrap_button_rounded_buttons_example" />
+
+        <include layout="@layout/bootstrap_button_disabled_buttons_example" />
+
+        <include layout="@layout/bootstrap_button_other_buttons_example" />
+
+        <include layout="@layout/bootstrap_button_size_buttons_example" />
+
+        <include layout="@layout/bootstrap_edit_text_example" />
+
+        <include layout="@layout/bootstrap_thumbnail_example" />
+
+        <include layout="@layout/bootstrap_thumbnail_circle_example" />
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/btnBig"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:text="Change Alignment"
+            bootstrapbutton:bb_icon_right="fa-angellist"
+            bootstrapbutton:bb_roundedCorners="true"
+            bootstrapbutton:bb_type="primary"
+            bootstrapbutton:bb_text_gravity="right"
+            android:textSize="32sp" />
+
+    </LinearLayout>
 
 
-    <prafulmantale.praful.com.customviewsample.SketchView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
-</RelativeLayout>
+</ScrollView>

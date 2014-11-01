@@ -23,6 +23,7 @@ import java.util.TimerTask;
 
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.adapters.PositionsAdapter;
+import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
@@ -52,6 +53,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
             lvPositions.setAdapter(adapter);
         }
 
+        getRules();
         getRWSnapshot();
         setupListeners();
     }
@@ -128,6 +130,11 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         }, 15000);
     }
 
+    private void getRules(){
+        LoginActivity.client.getRWRules(new NetworkResponseHandler(this, APIRequest.RULES), LoginActivity.cookieStore);
+        startPoll();
+    }
+
     private void getRWSnapshot(){
         LoginActivity.client.getRWSnapshot(new NetworkResponseHandler(this, APIRequest.SNAPSHOT), LoginActivity.cookieStore);
         startPoll();
@@ -136,7 +143,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     @Override
     public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject) {
 
-        //System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
+        System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
         if(APIRequest.SNAPSHOT == requestType) {
 
             if(status == RequestStatus.SUCCESS){
@@ -164,7 +171,13 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
                     ex.printStackTrace();
                 }
             }
+        }
 
+        if(APIRequest.RULES == requestType){
+            if(status == RequestStatus.SUCCESS) {
+                JSONObject obj = (JSONObject) responseObject;
+                RulesCache.getInstance().updateCache(obj);
+            }
         }
     }
 

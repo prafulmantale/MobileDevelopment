@@ -63,6 +63,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="support-v4-18.0.0" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.3" level="project" />
+    <orderEntry type="module" module-name="AndroidBootstrap" exported="" />
   </component>
 </module>
 
