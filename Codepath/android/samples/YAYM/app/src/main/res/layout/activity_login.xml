@@ -123,7 +123,7 @@
                 android:background="@drawable/loginscreen_edit_text_style"
                 android:textColorHint="#999999"
                 android:paddingLeft="5dp"
-                android:textColor="#555"
+                android:textColor="#000"
                 />
             </LinearLayout>
 
@@ -166,7 +166,7 @@
                 android:textColorHint="#999999"
                 android:includeFontPadding="true"
                 android:paddingLeft="5dp"
-                android:textColor="#555"
+                android:textColor="#000"
                 />
             </LinearLayout>
 
