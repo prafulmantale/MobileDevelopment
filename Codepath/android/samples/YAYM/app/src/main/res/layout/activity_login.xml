@@ -199,8 +199,8 @@
         android:id="@+id/tvCopyright"
         android:layout_below="@+id/rlCenter"
         android:layout_centerHorizontal="true"
-        android:textColor="#444"
+        android:textColor="#000"
         android:layout_marginTop="-10dp"
         android:layout_marginBottom="5dp"
-        android:textSize="10sp"/>
+        android:textSize="9sp"/>
 </RelativeLayout>
