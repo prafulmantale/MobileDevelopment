@@ -19,9 +19,9 @@ import prafulmantale.praful.com.yaym.models.LoginRequest;
  */
 public class RestClient {
 
-    private static final String API_BASE_URL =  "https://demo3.ym.integral.net/fxi/rw/riskwarehouse/";
-    private static final String SNAPSHOt_URL = "snapshot";
-    private static final String RULES_URL = "rule";
+    private static final String API_BASE_URL =  "https://demo3.ym.integral.net/fxi/";
+    private static final String SNAPSHOt_URL = "rw/riskwarehouse/snapshot";
+    private static final String RULES_URL = "rw/riskwarehouse/rule";
     private static final String LOGIN_URL = "admin/auth/login";
 
     private AsyncHttpClient client;
