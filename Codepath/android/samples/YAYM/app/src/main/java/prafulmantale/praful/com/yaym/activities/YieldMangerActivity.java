@@ -34,6 +34,8 @@ import prafulmantale.praful.com.yaym.models.RWSummary;
 
 public class YieldMangerActivity extends Activity implements NetworkResponseListener {
 
+    private static final String TAG = YieldMangerActivity.class.getSimpleName();
+    
     private ListView lvPositions;
     private PositionsAdapter adapter;
     private List<RWPositionSnapshot> snapshots;
@@ -157,14 +159,12 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
                     if (list != null && list.size() > 0) {
                         snapshots.clear();
                         snapshots.addAll(list);
-
                         adapter.notifyDataSetChanged();
                     }
 
                     JSONObject summary = obj.getJSONObject("summary");
                     RWSummary rwSummary = RWSummary.fromJSON(summary);
 
-                        //System.out.println("Summary: " + rwSummary);
                 }
                 catch (JSONException ex){
                     System.out.println("Excption!!!!!!!!!!");

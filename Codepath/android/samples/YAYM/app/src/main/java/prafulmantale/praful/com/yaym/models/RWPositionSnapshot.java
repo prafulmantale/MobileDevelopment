@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
 public class RWPositionSnapshot {
 
     private static final String TAG = RWPositionSnapshot.class.getName();
+    private static final DecimalFormat jpyRateFormat = new DecimalFormat("0.000");
+    private static final DecimalFormat nonJPYRateFormat = new DecimalFormat("0.00000");
 
     //{"rwpositionSnapshot":[{"org":"YMSBAQA","ccyPair":"EUR/AUD","accumulation":7000.0,"accumulationInUSD":8913.45,"rPNL":5394.34,"rPNLInUSD":4765.36,
     // "uPNL":-27.81593336894006,"uPNLInUSD":-24.57,"totalPNL":5366.52,"totalPNLUSD":4740.78,"skewEnabled":false,"skewSpread":0.0,
@@ -416,20 +419,18 @@ public class RWPositionSnapshot {
 
     private void  updateFormattedRates ()
     {
-        bigFigure = "1.39";
-        pips = "88";
-        halfPips = "4";
-
+        String midRateStr = null;
         if(currencyPair.indexOf("JPY") !=-1)
         {
-            //Pips 2
-            //Halfpips 1
+             midRateStr = jpyRateFormat.format(midRate);
         }
         else {
-
-            //pips = 3
-            //halfPips = 1
+             midRateStr = nonJPYRateFormat.format(midRate);
         }
+
+        bigFigure = midRateStr.substring(0, midRateStr.length() - 3);
+        pips = midRateStr.substring(bigFigure.length(), bigFigure.length() + 2);
+        halfPips = midRateStr.substring(bigFigure.length() + 2  , bigFigure.length() + 3);
     }
 
 

@@ -7,6 +7,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
  * Created by prafulmantale on 10/9/14.
  */
 public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
+
+    private int mLastPosition;
 
     public PositionsAdapter(Context context, List<RWPositionSnapshot> objects) {
         super(context, R.layout.item_positions_row, objects);
@@ -79,15 +82,19 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-//        if(snapshot.isItemSelected()){
-//            viewHolder.ccyPairRate.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.ccypair_rate_selected_style));
-//        }
-//        else {
-//            viewHolder.ccyPairRate.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.ccypair_rate_unselected_style));
-//        }
-
         viewHolder.populateData(snapshot);
+        float initialTranslation = (mLastPosition <= position ? 500f : -500f);
+
+        convertView.setTranslationY(initialTranslation);
+        convertView.animate()
+                .setInterpolator(new DecelerateInterpolator(1.0f))
+                .translationY(0f)
+                .setDuration(300l)
+                .setListener(null);
+
+        // Keep track of the last position we loaded
+        mLastPosition = position;
+
         return convertView;
     }
-
 }

@@ -37,9 +37,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="1.32"
         android:id="@+id/tvRate_BigFigure"
-        android:textColor="#C1C1C1"
+        android:textColor="#ffC1C1C1"
         android:background="@drawable/rate_rounded_text_style"
         android:textSize="10sp"
+        android:layout_gravity="bottom"
         />
         <TextView
             android:layout_width="wrap_content"
@@ -47,10 +48,10 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="99"
             android:id="@+id/tvRate_Pips"
-            android:textColor="#C1C1C1"
+            android:textColor="#ffC1C1C1"
             android:background="@drawable/rate_rounded_text_style"
-            android:textSize="14sp"
-
+            android:textSize="18sp"
+            android:layout_gravity="bottom"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -58,10 +59,11 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="88"
             android:id="@+id/tvRate_halfPips"
-            android:textColor="#C1C1C1"
+            android:textColor="#ffC1C1C1"
             android:background="@drawable/rate_rounded_text_style"
             android:textSize="8sp"
-
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="8sp"
             />
     </LinearLayout>
 </LinearLayout>
