@@ -300,7 +300,7 @@ public class SketchView extends View implements SensorEventListener {
     }
 
     private void drawFace(Canvas canvas) {
-        canvas.drawOval(faceRect, rimCirclePaint);
+            canvas.drawOval(faceRect, rimCirclePaint);
     }
 
     private void drawScale(Canvas canvas) {
