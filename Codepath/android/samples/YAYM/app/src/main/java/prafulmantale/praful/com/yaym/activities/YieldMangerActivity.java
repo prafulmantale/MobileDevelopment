@@ -3,6 +3,7 @@ package prafulmantale.praful.com.yaym.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,6 +66,9 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
         lvPositions = (ListView)findViewById(R.id.lvPositionsList);
         View headerView = ((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_positions_header, null, false);
+
+        TextView tvCcyPair = (TextView)headerView.findViewById(R.id.tvCurrencyPair_header);
+        tvCcyPair.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Bold.ttf"));
 
         lvPositions.addHeaderView(headerView);
         lvPositions.setHeaderDividersEnabled(true);

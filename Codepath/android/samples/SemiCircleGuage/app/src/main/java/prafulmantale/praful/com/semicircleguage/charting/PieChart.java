@@ -590,7 +590,7 @@ public class PieChart extends ViewGroup {
      * field accordingly.
      */
     private void calcCurrentItem() {
-        int pointerAngle = (mCurrentItemAngle + 360 + mPieRotation) % 360;
+        int pointerAngle = (mCurrentItemAngle + 180 + mPieRotation) % 180;
         for (int i = 0; i < mData.size(); ++i) {
             Item it = mData.get(i);
             if (it.mStartAngle <= pointerAngle && pointerAngle <= it.mEndAngle) {
@@ -611,7 +611,7 @@ public class PieChart extends ViewGroup {
         int currentAngle = 0;
         for (Item it : mData) {
             it.mStartAngle = currentAngle;
-            it.mEndAngle = (int) ((float) currentAngle + it.mValue * 360.0f / mTotal);
+            it.mEndAngle = (int) ((float) currentAngle + it.mValue * 180.0f / mTotal);
             currentAngle = it.mEndAngle;
 
 
@@ -633,8 +633,8 @@ public class PieChart extends ViewGroup {
                     },
                     new float[]{
                             0,
-                            (float) (360 - it.mEndAngle) / 360.0f,
-                            (float) (360 - it.mStartAngle) / 360.0f,
+                            (float) (180 - it.mEndAngle) / 180.0f,
+                            (float) (180 - it.mStartAngle) / 180.0f,
                             1.0f
                     }
             );
@@ -860,7 +860,7 @@ public class PieChart extends ViewGroup {
             for (Item it : mData) {
                 mPiePaint.setShader(it.mShader);
                 canvas.drawArc(mBounds,
-                        360 - it.mEndAngle,
+                        180 - it.mEndAngle,
                         it.mEndAngle - it.mStartAngle,
                         true, mPiePaint);
             }
