@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="card_flip_full_time">1000</integer>
+    <integer name="card_flip_half_time">500</integer>
+
+</resources>
