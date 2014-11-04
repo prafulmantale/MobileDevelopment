@@ -35,7 +35,7 @@ import prafulmantale.praful.com.yaym.models.RWSummary;
 public class YieldMangerActivity extends Activity implements NetworkResponseListener {
 
     private static final String TAG = YieldMangerActivity.class.getSimpleName();
-    
+
     private ListView lvPositions;
     private PositionsAdapter adapter;
     private List<RWPositionSnapshot> snapshots;

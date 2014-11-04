@@ -1,5 +1,6 @@
 package prafulmantale.praful.com.yaym.caches;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,5 +31,9 @@ public class SnapshotCache {
         for(RWPositionSnapshot snapshot : list){
             cache.put(snapshot.getCurrencyPair(), snapshot);
         }
+    }
+
+    public List<RWPositionSnapshot> getSnapshots(){
+        return new ArrayList<RWPositionSnapshot>(cache.values());
     }
 }

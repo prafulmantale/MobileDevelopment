@@ -22,6 +22,7 @@ import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
 
     private int mLastPosition;
+    private boolean disableAnimation = true;
 
     public PositionsAdapter(Context context, List<RWPositionSnapshot> objects) {
         super(context, R.layout.item_positions_row, objects);
@@ -85,16 +86,33 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
         viewHolder.populateData(snapshot);
         float initialTranslation = (mLastPosition <= position ? 500f : -500f);
 
-        convertView.setTranslationY(initialTranslation);
-        convertView.animate()
-                .setInterpolator(new DecelerateInterpolator(1.0f))
-                .translationY(0f)
-                .setDuration(300l)
-                .setListener(null);
+        if(disableAnimation == false) {
+            convertView.setTranslationY(initialTranslation);
+            convertView.animate()
+                    .setInterpolator(new DecelerateInterpolator(1.0f))
+                    .translationY(0f)
+                    .setDuration(300l)
+                    .setListener(null);
+        }
 
         // Keep track of the last position we loaded
         mLastPosition = position;
 
         return convertView;
     }
+
+    @Override
+    public void notifyDataSetChanged() {
+        try {
+            disableAnimation = true;
+            mLastPosition = 0;
+            super.notifyDataSetChanged();
+
+        }
+        finally {
+            disableAnimation = false;
+        }
+
+    }
+
 }
