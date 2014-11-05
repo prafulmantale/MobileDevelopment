@@ -40,6 +40,7 @@
     <color name="progressprimary">#00AEEF</color>
     <color name="progresssecondary">#41C3EA</color>
 
+    <color name="arccolor">#B3C5D9</color>
 
     <color name="firstcolor">#E0DCC0</color>
     <color name="secondcolor">#F59DF1</color>
@@ -47,4 +48,6 @@
     <color name="fourcolor">#F44479</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#BDBDBD</color>
+
+    <color name="needle_color">#646464</color>
 </resources>

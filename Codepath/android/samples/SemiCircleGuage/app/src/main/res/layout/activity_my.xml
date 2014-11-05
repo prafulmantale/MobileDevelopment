@@ -33,7 +33,7 @@
         />
     <prafulmantale.praful.com.semicircleguage.charting.GaugeView
         android:layout_width="wrap_content"
-        android:layout_height="100dp" />
+        android:layout_height="wrap_content" />
 
     <prafulmantale.praful.com.semicircleguage.charting.ArcProgressBar
         android:id="@+id/progressArc"
@@ -44,6 +44,7 @@
         android:layout_gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="2dp"
+        android:visibility="gone"
 
         />
 </LinearLayout>

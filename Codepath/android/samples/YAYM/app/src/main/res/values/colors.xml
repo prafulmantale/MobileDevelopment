@@ -26,5 +26,8 @@
     
     <color name="white">#ffffff</color>
     <color name="light_white">#88ffffff</color>
+
+    <color name="needle_color">#646464</color>
+    <color name="arcsecondarycolor">#41C3EA</color>
     
 </resources>
