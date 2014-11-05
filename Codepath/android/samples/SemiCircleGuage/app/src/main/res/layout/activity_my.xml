@@ -23,6 +23,7 @@
         custom:labelColor="@android:color/black"
         custom:autoCenterPointerInSlice="true"
         custom:pointerRadius="4dp"
+        android:visibility="gone"
         />
     <Button
         android:id="@+id/Reset"
@@ -32,5 +33,17 @@
         />
     <prafulmantale.praful.com.semicircleguage.charting.GaugeView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="100dp" />
+
+    <prafulmantale.praful.com.semicircleguage.charting.ArcProgressBar
+        android:id="@+id/progressArc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:max="180"
+        android:progress="60"
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="2dp"
+
+        />
 </LinearLayout>
