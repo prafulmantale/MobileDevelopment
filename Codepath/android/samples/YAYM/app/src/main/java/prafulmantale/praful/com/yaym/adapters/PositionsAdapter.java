@@ -42,13 +42,13 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             ccyPairRate = convertView.findViewById(R.id.itemCcyPairRate);
 
             tvCcyPair = (TextView)ccyPairRate.findViewById(R.id.tvCcyPair_ratecontrol);
-            tvCcyPair.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Bold.ttf"));
+            tvCcyPair.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Bold.ttf"));
             tvBigFigure = (TextView)ccyPairRate.findViewById(R.id.tvRate_BigFigure);
-            tvBigFigure.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Medium.ttf"));
+            tvBigFigure.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Bold.ttf"));
             tvPips = (TextView)ccyPairRate.findViewById(R.id.tvRate_Pips);
-            tvPips.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Medium.ttf"));
+            tvPips.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Bold.ttf"));
             tvHalfPips = (TextView)ccyPairRate.findViewById(R.id.tvRate_halfPips);
-            tvHalfPips.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Medium.ttf"));
+            tvHalfPips.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Bold.ttf"));
 
             tvUnrealizedPnL = (TextView)convertView.findViewById(R.id.tvUnrealizedPnl);
         }

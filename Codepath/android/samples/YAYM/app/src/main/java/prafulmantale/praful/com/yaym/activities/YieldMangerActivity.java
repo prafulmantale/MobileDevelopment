@@ -68,7 +68,12 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         View headerView = ((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_positions_header, null, false);
 
         TextView tvCcyPair = (TextView)headerView.findViewById(R.id.tvCurrencyPair_header);
+        TextView tvPositionsStatus = (TextView)headerView.findViewById(R.id.tvPosition_header);
+        TextView tvUnrealizedPnL = (TextView)headerView.findViewById(R.id.tvUnrealizedPnl_header);
         tvCcyPair.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Bold.ttf"));
+        tvPositionsStatus.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Bold.ttf"));
+        tvUnrealizedPnL.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Bold.ttf"));
+
 
         lvPositions.addHeaderView(headerView);
         lvPositions.setHeaderDividersEnabled(true);
