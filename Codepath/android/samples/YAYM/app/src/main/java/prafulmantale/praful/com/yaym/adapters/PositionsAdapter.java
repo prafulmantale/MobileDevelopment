@@ -3,17 +3,21 @@ package prafulmantale.praful.com.yaym.adapters;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.ClipDrawable;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
+import prafulmantale.praful.com.yaym.models.RiskRules;
 
 /**
  * Created by prafulmantale on 10/9/14.
@@ -34,12 +38,18 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
         TextView tvPips;
         TextView tvHalfPips;
         View ccyPairRate;
-        TextView tvUnrealizedPnL;
 
+        View itemPosition;
+        ImageView ivShort;
+        ImageView ivLong;
+
+        ClipDrawable ivLongDrawable;
+        ClipDrawable ivShortDrawable;
 
 
         protected void init(View convertView){
             ccyPairRate = convertView.findViewById(R.id.itemCcyPairRate);
+            itemPosition = convertView.findViewById(R.id.itemPosition);
 
             tvCcyPair = (TextView)ccyPairRate.findViewById(R.id.tvCcyPair_ratecontrol);
             tvCcyPair.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Bold.ttf"));
@@ -50,7 +60,15 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             tvHalfPips = (TextView)ccyPairRate.findViewById(R.id.tvRate_halfPips);
             tvHalfPips.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Bold.ttf"));
 
-            tvUnrealizedPnL = (TextView)convertView.findViewById(R.id.tvUnrealizedPnl);
+            ivShort = (ImageView)itemPosition.findViewById(R.id.iv_position_short);
+            ivLong = (ImageView)itemPosition.findViewById(R.id.iv_position_long);
+
+            ivLongDrawable = (ClipDrawable) ivLong.getDrawable();
+            //ivLongDrawable.setLevel(10000);
+
+            ivShortDrawable = (ClipDrawable) ivShort.getDrawable();
+            //ivShortDrawable.setLevel(10000);
+
         }
 
         @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -60,10 +78,23 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             tvPips.setText(snapshot.getPips());
             tvHalfPips.setText(snapshot.getHalfPips());
 
-            tvUnrealizedPnL.setText(String.valueOf(snapshot.getUnrealizedPnL()));
+            setClipLevel(snapshot);
+        }
 
-           // sbPositionsStatusLong.setThumb(writeOnDrawable(R.drawable.pointer, "0.0"));
+        private void setClipLevel(RWPositionSnapshot snapshot){
 
+            RiskRules rule = RulesCache.getInstance().getRule(snapshot.getCurrencyPair());
+            double pnl = 0;
+            if(snapshot.getUnrealizedPnL() < 0){
+                pnl =  (-1) * snapshot.getUnrealizedPnL();
+                int level = (int)((10000/rule.getMaxLimitShort()) * pnl);
+                ivShortDrawable.setLevel(level);
+            }
+            else{
+                pnl =  snapshot.getUnrealizedPnL();
+                int level = (int)((10000/rule.getMaxLimitLong()) * pnl);
+                ivLongDrawable.setLevel(level);
+            }
         }
     }
     @Override
@@ -83,6 +114,7 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
         }
 
         viewHolder.populateData(snapshot);
+
         float initialTranslation = (mLastPosition <= position ? 500f : -500f);
 //
 //        if(disableAnimation == false) {
@@ -100,18 +132,5 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
         return convertView;
     }
 
-    @Override
-    public void notifyDataSetChanged() {
-        try {
-            disableAnimation = true;
-            mLastPosition = 0;
-            super.notifyDataSetChanged();
-
-        }
-        finally {
-            disableAnimation = false;
-        }
-
-    }
 
 }

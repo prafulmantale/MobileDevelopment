@@ -1,40 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical">
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/ivShort"
-        android:src="@drawable/position_short172"
-        android:layout_gravity="center"
-        />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/ivNoneShort"
-        android:layout_gravity="center"
-        android:src="@drawable/position_none_long"/>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/ivNoneShort"
-        android:id="@+id/ivLong"
-        android:layout_gravity="center"
-        android:src="@drawable/position_long"
-        />
+    <FrameLayout
+        android:layout_width="75dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_position_short_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/position_none_long"
+            android:scaleType="fitXY"
+            />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/ivNoneShort"
-        android:id="@+id/ivNoneLong"
-        android:layout_gravity="center"
-        android:src="@drawable/position_none_long"
-        />
+        <ImageView
+            android:id="@+id/iv_position_short"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/clip_short_position"
+            android:scaleType="fitXY"/>
 
-</RelativeLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="75dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_position_long_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/position_none_long"
+            android:scaleType="fitXY"
+            />
+
+        <ImageView
+            android:id="@+id/iv_position_long"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/clip_long_position"
+            android:scaleType="fitXY"/>
+
+    </FrameLayout>
+
+
+
+
+</LinearLayout>
