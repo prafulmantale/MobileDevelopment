@@ -143,6 +143,8 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             gaugeView.setMax((int)(rule.getProfitThreshold()));
             gaugeView.setMin((int)(rule.getLossThreshold()));
             gaugeView.setCurrent((int)(snapshot.getUnrealizedPnL()));
+
+            //???? To be changed
             tvUnPnL.setText(String.valueOf(rule.getLossThreshold()) + "|" + String.valueOf(snapshot.getUnrealizedPnL()) + "|" + String.valueOf(rule.getProfitThreshold()) );
         }
     }
