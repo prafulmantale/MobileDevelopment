@@ -20,6 +20,7 @@ import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.models.RiskRules;
+import prafulmantale.praful.com.yaym.widgets.GaugeView;
 
 /**
  * Created by prafulmantale on 10/9/14.
@@ -56,6 +57,9 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
 
         FrameLayout frameLong;
 
+        GaugeView gaugeView;
+        TextView tvUnPnL;
+
 
         protected void init(View convertView){
             ccyPairRate = convertView.findViewById(R.id.itemCcyPairRate);
@@ -82,6 +86,10 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             frameLong = (FrameLayout)itemPosition.findViewById(R.id.frameLong);
             ivPointer = (ImageView)itemPosition.findViewById(R.id.ivPointer);
             tvPosition = (TextView)itemPosition.findViewById(R.id.tvPosition);
+
+            gaugeView = (GaugeView)convertView.findViewById(R.id.gvPnLGauge);
+            tvUnPnL = (TextView)convertView.findViewById(R.id.tvUnPnL);
+
         }
 
         @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -131,6 +139,11 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             LinearLayout.LayoutParams  params2 = (LinearLayout.LayoutParams)tvPosition.getLayoutParams();
             params2.leftMargin = params.leftMargin - (tvPosition.getWidth()/2);
             tvPosition.setLayoutParams(params2);
+
+            gaugeView.setMax((int)(rule.getProfitThreshold()));
+            gaugeView.setMin((int)(rule.getLossThreshold()));
+            gaugeView.setCurrent((int)(snapshot.getUnrealizedPnL()));
+            tvUnPnL.setText(String.valueOf(rule.getLossThreshold()) + "|" + String.valueOf(snapshot.getUnrealizedPnL()) + "|" + String.valueOf(rule.getProfitThreshold()) );
         }
     }
     @Override

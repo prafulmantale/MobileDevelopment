@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,7 +19,8 @@ import prafulmantale.praful.com.yaym.enums.PositionType;
 public class GaugeView extends View {
 
     private PositionType positionType = PositionType.NONE;
-    private Bitmap bgImage = null;
+    private Bitmap bgImageBlue = null;
+    private Bitmap bgImageRed = null;
 
     float w;
     float h;
@@ -30,8 +30,6 @@ public class GaugeView extends View {
     private int startAngle = 180;
 
     private Paint needlePaint;
-    private Path needlePath;
-
 
     private Matrix matrix;
     private int framePerSeconds = 100;
@@ -40,6 +38,9 @@ public class GaugeView extends View {
 
     private float needlePosition = 60;
 
+    private int max;
+    private int min;
+    private int current;
 
 
     public GaugeView(Context context) {
@@ -64,15 +65,11 @@ public class GaugeView extends View {
         this.startTime = System.currentTimeMillis();
         this.postInvalidate();
 
-        if(positionType == PositionType.SHORT) {
-            bgImage = BitmapFactory.decodeResource(getResources(), R.drawable.red_guage);
-        }
-        else {
-            bgImage = BitmapFactory.decodeResource(getResources(), R.drawable.blue_guage);
-        }
+        bgImageBlue = BitmapFactory.decodeResource(getResources(), R.drawable.blue_guage);
+        bgImageRed = BitmapFactory.decodeResource(getResources(), R.drawable.red_guage);
 
-        w = bgImage.getWidth();
-        h = bgImage.getHeight();
+        w = bgImageBlue.getWidth();
+        h = bgImageBlue.getHeight();
 
         arcPaint = new Paint();
         arcPaint.setStyle(Paint.Style.STROKE);
@@ -89,23 +86,74 @@ public class GaugeView extends View {
         needlePaint.setAntiAlias(true);
         needlePaint.setStyle(Paint.Style.FILL_AND_STROKE);
         needlePaint.setStrokeWidth(1f);
-
-        needlePath = new Path();
-        needlePath.moveTo(w/2, h);
-        needlePath.lineTo(w/3,h/1.7f);
-        needlePath.lineTo(w/3,h/1.8f);
-        needlePath.lineTo(w/2 + 1, h);
-        needlePath.addCircle(w/2+1, h + 1, 3, Path.Direction.CW);
-        needlePath.close();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+        //super.onDraw(canvas);
 
-        canvas.drawBitmap(bgImage, 0, 0, null);
+        if(current >= 0) {
+            canvas.drawBitmap(bgImageBlue, 0, 0, null);
+            w = bgImageBlue.getWidth();
+            h = bgImageBlue.getHeight();
+        }
+        else{
+            canvas.drawBitmap(bgImageRed, 0, 0, null);
+            w = bgImageRed.getWidth();
+            h = bgImageRed.getHeight();
+        }
         canvas.drawArc(mOval, startAngle, 180, false, arcPaint);
 
-       canvas.drawPath(needlePath, needlePaint);
+        drawNeedle(canvas);
+    }
+
+    private void drawNeedle(Canvas canvas) {
+
+        float radius = mOval.width() * 0.35f + 10;
+        float centerX = w/2;
+        float centerY = h;
+
+        float angle = getAngle();
+        canvas.drawLine(
+                centerX,
+                centerY,
+                (float) (centerX + Math.cos((180 - angle) / 180 * Math.PI) * (radius)),
+                (float) (centerY - Math.sin(angle / 180 * Math.PI) * (radius)),
+                needlePaint
+        );
+        canvas.drawCircle(w/2-1, h, 3, needlePaint);
+
+    }
+
+    private float getAngle(){
+        float angle = 60;
+
+        int total = min + max;
+        if(total == 0 || current == 0){
+            return angle;
+        }
+
+        angle = angle + (float) (current* 180/ total );
+
+        return angle;
+    }
+    public void setMax(int max){
+        this.max = max;
+    }
+
+    public void setMin(int min){
+        if(min < 0){
+            min = -1 * min;
+        }
+        this.min = min;
+    }
+
+    public void setCurrent(int current){
+        this.current = current;
+        invalidate();
+    }
+
+    private void drawText(Canvas canvas){
+
     }
 }

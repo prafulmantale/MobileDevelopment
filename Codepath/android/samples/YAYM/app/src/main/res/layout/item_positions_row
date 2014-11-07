@@ -23,11 +23,28 @@
         layout="@layout/item_position_progress"
         android:id="@+id/itemPosition"
         android:layout_gravity="center_vertical"/>
-    <prafulmantale.praful.com.yaym.widgets.GaugeView
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="0.2"
         android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        >
+
+        <prafulmantale.praful.com.yaym.widgets.GaugeView
+        android:id="@+id/gvPnLGauge"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:gravity="center"
-        android:layout_marginLeft="10dp"/>
+       />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:id="@+id/tvUnPnL"
+            android:gravity="center"
+            android:textSize="8sp"
+            />
+     </LinearLayout>
 
 </LinearLayout>

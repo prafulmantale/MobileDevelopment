@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -127,7 +128,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         if(pause){
             return;
         }
-        System.out.println("######################  startPoll ");
+        //System.out.println("######################  startPoll ");
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -155,7 +156,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     @Override
     public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject) {
 
-        System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
+        //System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
         if(APIRequest.SNAPSHOT == requestType) {
 
             if(status == RequestStatus.SUCCESS){
@@ -177,7 +178,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
                 }
                 catch (JSONException ex){
-                    System.out.println("Excption!!!!!!!!!!");
+                    Log.d(TAG, "Excption while extracting Snapshots");
                     ex.printStackTrace();
                 }
             }
