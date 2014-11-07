@@ -18,6 +18,7 @@ public class RWPositionSnapshot {
     private static final String TAG = RWPositionSnapshot.class.getName();
     private static final DecimalFormat jpyRateFormat = new DecimalFormat("0.000");
     private static final DecimalFormat nonJPYRateFormat = new DecimalFormat("0.00000");
+    private static final DecimalFormat accumulationFormat = new DecimalFormat("0.0");
 
     //{"rwpositionSnapshot":[{"org":"YMSBAQA","ccyPair":"EUR/AUD","accumulation":7000.0,"accumulationInUSD":8913.45,"rPNL":5394.34,"rPNLInUSD":4765.36,
     // "uPNL":-27.81593336894006,"uPNLInUSD":-24.57,"totalPNL":5366.52,"totalPNLUSD":4740.78,"skewEnabled":false,"skewSpread":0.0,
@@ -33,6 +34,7 @@ public class RWPositionSnapshot {
 
     private double accumulation;
     private double accumulationInUSD;
+    private String accumulationDisplay;
 
     private double realizedPnL;
     private double realizedPnLInUSD;
@@ -96,6 +98,10 @@ public class RWPositionSnapshot {
 
     public double getAccumulation() {
         return accumulation;
+    }
+
+    public String getAccumulationDisplay() {
+        return accumulationDisplay;
     }
 
     public void setAccumulation(double accumulation) {
@@ -339,8 +345,11 @@ public class RWPositionSnapshot {
         try {
             rwPositionSnapshot.org = jsonObject.getString("org");
             rwPositionSnapshot.currencyPair = jsonObject.getString("ccyPair");
+
             rwPositionSnapshot.accumulation = jsonObject.getDouble("accumulation");
             rwPositionSnapshot.accumulationInUSD = jsonObject.getDouble("accumulationInUSD");
+            rwPositionSnapshot.accumulationDisplay = accumulationFormat.format(rwPositionSnapshot.accumulation / 1000);
+
             rwPositionSnapshot.realizedPnL = jsonObject.getDouble("rPNL");
             rwPositionSnapshot.realizedPnLInUSD = jsonObject.getDouble("rPNLInUSD");
 

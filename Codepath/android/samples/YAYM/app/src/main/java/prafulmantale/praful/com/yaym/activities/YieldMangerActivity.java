@@ -139,7 +139,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
                     }
                 });
             }
-        }, 15000);
+        }, 1000);
     }
 
     private void getRules(){

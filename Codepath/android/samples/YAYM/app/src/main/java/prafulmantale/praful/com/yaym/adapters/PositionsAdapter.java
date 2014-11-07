@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -46,6 +48,14 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
         ClipDrawable ivLongDrawable;
         ClipDrawable ivShortDrawable;
 
+        TextView tvMaxShort;
+        TextView tvMaxLong;
+
+        ImageView ivPointer;
+        TextView tvPosition;
+
+        FrameLayout frameLong;
+
 
         protected void init(View convertView){
             ccyPairRate = convertView.findViewById(R.id.itemCcyPairRate);
@@ -64,11 +74,14 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             ivLong = (ImageView)itemPosition.findViewById(R.id.iv_position_long);
 
             ivLongDrawable = (ClipDrawable) ivLong.getDrawable();
-            //ivLongDrawable.setLevel(10000);
-
             ivShortDrawable = (ClipDrawable) ivShort.getDrawable();
-            //ivShortDrawable.setLevel(10000);
 
+            tvMaxShort = (TextView)itemPosition.findViewById(R.id.tvMaxShort);
+            tvMaxLong = (TextView)itemPosition.findViewById(R.id.tvMaxLong);
+
+            frameLong = (FrameLayout)itemPosition.findViewById(R.id.frameLong);
+            ivPointer = (ImageView)itemPosition.findViewById(R.id.ivPointer);
+            tvPosition = (TextView)itemPosition.findViewById(R.id.tvPosition);
         }
 
         @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -79,22 +92,45 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             tvHalfPips.setText(snapshot.getHalfPips());
 
             setClipLevel(snapshot);
+
+
         }
 
         private void setClipLevel(RWPositionSnapshot snapshot){
 
             RiskRules rule = RulesCache.getInstance().getRule(snapshot.getCurrencyPair());
             double pnl = 0;
-            if(snapshot.getUnrealizedPnL() < 0){
-                pnl =  (-1) * snapshot.getUnrealizedPnL();
-                int level = (int)((10000/rule.getMaxLimitShort()) * pnl);
+            int level = 0;
+            boolean isShort = false;
+            if(snapshot.getAccumulation() < 0){
+                pnl =  snapshot.getAccumulation()/1000;
+                level = (int)((10000/rule.getMaxShortInThousands()) * pnl);
                 ivShortDrawable.setLevel(level);
+                ivLongDrawable.setLevel(0);
+                isShort = true;
             }
             else{
-                pnl =  snapshot.getUnrealizedPnL();
-                int level = (int)((10000/rule.getMaxLimitLong()) * pnl);
+                pnl =  snapshot.getAccumulation()/1000;
+                level = (int)((10000/rule.getMaxLongInThousands()) * pnl);
                 ivLongDrawable.setLevel(level);
+                ivShortDrawable.setLevel(0);
             }
+
+            tvMaxLong.setText("(" + rule.getMaxLongInThousandsStr() + ")");
+            tvMaxShort.setText("(" + rule.getMaxShortInThousandsStr() + ")");
+
+            int addMargin = (frameLong.getWidth() * level/10000);
+            if(isShort){
+                addMargin = addMargin * -1 + 1 - ivPointer.getWidth()/2;
+            }
+            LinearLayout.LayoutParams  params = (LinearLayout.LayoutParams)ivPointer.getLayoutParams();
+            params.leftMargin = frameLong.getLeft() - (ivPointer.getWidth()/2) - 1 + addMargin;
+            ivPointer.setLayoutParams(params);
+
+            tvPosition.setText("(" + snapshot.getAccumulationDisplay() + ")");
+            LinearLayout.LayoutParams  params2 = (LinearLayout.LayoutParams)tvPosition.getLayoutParams();
+            params2.leftMargin = params.leftMargin - (tvPosition.getWidth()/2);
+            tvPosition.setLayoutParams(params2);
         }
     }
     @Override

@@ -22,6 +22,10 @@ public class RiskRules {
     private double maxLimitLong;
     private double profitThreshold;
     private double lossThreshold;
+    private int maxShortInThousands;
+    private int maxLongInThousands;
+    private String maxShortInThousandsStr;
+    private String maxLongInThousandsStr;
 
     public RiskRules() {
         currencyPair = "";
@@ -81,6 +85,23 @@ public class RiskRules {
     }
 
 
+    public int getMaxShortInThousands(){
+        return maxShortInThousands;
+    }
+
+    public int getMaxLongInThousands(){
+        return maxLongInThousands;
+    }
+
+
+    public String getMaxShortInThousandsStr() {
+        return maxShortInThousandsStr;
+    }
+
+    public String getMaxLongInThousandsStr() {
+        return maxLongInThousandsStr;
+    }
+
     public static Map<String, RiskRules> fromJSON(JSONArray jsonArray){
         Map<String, RiskRules> rules = new HashMap<String, RiskRules>();
 
@@ -127,6 +148,11 @@ public class RiskRules {
             riskRules.maxLimitLong = jsonObject.getDouble("maxLimitLong");
             riskRules.profitThreshold = jsonObject.getDouble("uPNLTakeProfit");
             riskRules.lossThreshold = jsonObject.getDouble("uPNLStopLoss");
+
+            riskRules.maxLongInThousands = (int)riskRules.maxLimitLong/1000;
+            riskRules.maxShortInThousands = (int)riskRules.maxLimitShort/1000;
+            riskRules.maxLongInThousandsStr = String.valueOf(riskRules.maxLongInThousands);
+            riskRules.maxShortInThousandsStr = String.valueOf(riskRules.maxShortInThousands);
         }
         catch(JSONException ex){
             Log.d(TAG, "Excption while extracting Risk Rule from JSON object\r\n" + jsonObject);
