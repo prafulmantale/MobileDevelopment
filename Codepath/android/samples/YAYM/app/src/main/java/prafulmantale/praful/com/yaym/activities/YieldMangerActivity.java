@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,28 +15,25 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.adapters.PositionsAdapter;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
+import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
+import prafulmantale.praful.com.yaym.interfaces.SnapshotUpdateListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
-import prafulmantale.praful.com.yaym.models.RWSummary;
 import prafulmantale.praful.com.yaym.services.RWPollService;
 
 
-public class YieldMangerActivity extends Activity implements NetworkResponseListener {
+public class YieldMangerActivity extends Activity implements NetworkResponseListener, SnapshotUpdateListener {
 
     private static final String TAG = YieldMangerActivity.class.getSimpleName();
 
@@ -61,7 +57,6 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         }
 
         getRules();
-        getRWSnapshot();
         setupListeners();
         startPollService();
     }
@@ -97,6 +92,8 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
                 prevSelectedSnapshot = snapshot;
             }
         });
+
+        SnapshotCache.getInstance().addListener(this);
     }
 
     private void initializeActionBar(){
@@ -128,65 +125,14 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         startPollService();
     }
 
-    public void startPoll(){
-        if(pause){
-            return;
-        }
-        //System.out.println("######################  startPoll ");
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        getRWSnapshot();
-                    }
-                });
-            }
-        }, 30000);
-    }
+
 
     private void getRules(){
         LoginActivity.client.getRWRules(new NetworkResponseHandler(this, APIRequest.RULES), LoginActivity.cookieStore);
-        startPoll();
-    }
-
-    private void getRWSnapshot(){
-        LoginActivity.client.getRWSnapshot(new NetworkResponseHandler(this, APIRequest.SNAPSHOT), LoginActivity.cookieStore);
-        startPoll();
     }
 
     @Override
     public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject) {
-
-        //System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
-        if(APIRequest.SNAPSHOT == requestType) {
-
-            if(status == RequestStatus.SUCCESS){
-
-                try {
-                    JSONObject obj = (JSONObject) responseObject;
-
-                    JSONArray arr = obj.getJSONArray("rwpositionSnapshot");
-                    List<RWPositionSnapshot> list = RWPositionSnapshot.fromJSON(arr);
-
-                    if (list != null && list.size() > 0) {
-                        snapshots.clear();
-                        snapshots.addAll(list);
-                        adapter.notifyDataSetChanged();
-                    }
-
-                    JSONObject summary = obj.getJSONObject("summary");
-                    RWSummary rwSummary = RWSummary.fromJSON(summary);
-
-                }
-                catch (JSONException ex){
-                    Log.d(TAG, "Excption while extracting Snapshots");
-                    ex.printStackTrace();
-                }
-            }
-        }
 
         if(APIRequest.RULES == requestType){
             if(status == RequestStatus.SUCCESS) {
@@ -235,5 +181,17 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
     private void stopPollService(){
         stopService(new Intent(this, RWPollService.class));
+    }
+
+    @Override
+    public void onSnapshotUpdated() {
+
+        List<RWPositionSnapshot> list = SnapshotCache.getInstance().getSnapshots();
+
+        if (list != null && list.size() > 0) {
+            snapshots.clear();
+            snapshots.addAll(list);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

@@ -6,6 +6,22 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
+import prafulmantale.praful.com.yaym.activities.LoginActivity;
+import prafulmantale.praful.com.yaym.caches.RulesCache;
+import prafulmantale.praful.com.yaym.caches.SnapshotCache;
+import prafulmantale.praful.com.yaym.enums.APIRequest;
+import prafulmantale.praful.com.yaym.enums.RequestStatus;
+import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
+import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
+import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
+import prafulmantale.praful.com.yaym.models.RWSummary;
+
 /**
  * Created by prafulmantale on 10/9/14.
  */
@@ -24,13 +40,6 @@ public class RWPollService extends Service {
         super.onCreate();
         poller = new Poller();
         Log.d(TAG, "OnCreated");
-    }
-
-    @Override
-    public void onStart(Intent intent, int startId) {
-        super.onStart(intent, startId);
-
-        Log.d(TAG, "OnStart");
     }
 
     @Override
@@ -61,7 +70,7 @@ public class RWPollService extends Service {
         return null;
     }
 
-    class Poller extends Thread{
+    class Poller extends Thread implements NetworkResponseListener {
 
         public Poller(){
             super("Poller");
@@ -74,10 +83,48 @@ public class RWPollService extends Service {
                 Log.d(TAG, "Poller.run");
 
                 try {
+                    LoginActivity.client.getRWSnapshot(new NetworkResponseHandler(this, APIRequest.SNAPSHOT), LoginActivity.cookieStore);
                     sleep(POLL_FREQUENCY);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     isPolling = false;
+                }
+            }
+        }
+
+        @Override
+        public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject) {
+
+            //System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
+            if(APIRequest.SNAPSHOT == requestType) {
+
+                if(status == RequestStatus.SUCCESS){
+
+                    try {
+                        JSONObject obj = (JSONObject) responseObject;
+
+                        JSONArray arr = obj.getJSONArray("rwpositionSnapshot");
+                        List<RWPositionSnapshot> list = RWPositionSnapshot.fromJSON(arr);
+
+                        if (list != null && list.size() > 0) {
+                            SnapshotCache.getInstance().update(list);
+                        }
+
+                        JSONObject summary = obj.getJSONObject("summary");
+                        RWSummary rwSummary = RWSummary.fromJSON(summary);
+
+                    }
+                    catch (JSONException ex){
+                        Log.d(TAG, "Excption while extracting Snapshots");
+                        ex.printStackTrace();
+                    }
+                }
+            }
+
+            if(APIRequest.RULES == requestType){
+                if(status == RequestStatus.SUCCESS) {
+                    JSONObject obj = (JSONObject) responseObject;
+                    RulesCache.getInstance().updateCache(obj);
                 }
             }
         }
