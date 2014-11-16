@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import java.util.List;
 
 import prafulmantale.praful.com.yaym.activities.LoginActivity;
-import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
@@ -32,7 +31,6 @@ public class RWPollService extends Service {
 
     private Looper looper;
     private Poller poller;
-    private boolean isPolling = false;
 
 
     @Override
@@ -45,23 +43,22 @@ public class RWPollService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "onStartCommand");
-        synchronized (this) {
-            if (isPolling == false) {
-                isPolling = true;
-                poller.start();
-            }
+
+        if(poller.isRunning() == false) {
+            poller.start();
+            poller.setRunning(true);
         }
+
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        synchronized (this) {
-            Log.d(TAG, "onDestroy");
+
+        if(poller != null && poller.isRunning()){
+            poller.setRunning(false);
             poller.interrupt();
-            isPolling = false;
-            poller = null;
         }
     }
 
@@ -72,6 +69,8 @@ public class RWPollService extends Service {
 
     class Poller extends Thread implements NetworkResponseListener {
 
+        private boolean running = false;
+
         public Poller(){
             super("Poller");
         }
@@ -79,7 +78,7 @@ public class RWPollService extends Service {
         @Override
         public void run() {
 
-            while(isPolling) {
+            while(isRunning()) {
                 Log.d(TAG, "Poller.run");
 
                 try {
@@ -87,7 +86,7 @@ public class RWPollService extends Service {
                     sleep(POLL_FREQUENCY);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    isPolling = false;
+                    setRunning(false);
                 }
             }
         }
@@ -120,13 +119,14 @@ public class RWPollService extends Service {
                     }
                 }
             }
+        }
 
-            if(APIRequest.RULES == requestType){
-                if(status == RequestStatus.SUCCESS) {
-                    JSONObject obj = (JSONObject) responseObject;
-                    RulesCache.getInstance().updateCache(obj);
-                }
-            }
+        public boolean isRunning() {
+            return running;
+        }
+
+        public void setRunning(boolean running) {
+            this.running = running;
         }
     }
 }
