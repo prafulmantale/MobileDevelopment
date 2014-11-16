@@ -3,6 +3,7 @@ package prafulmantale.praful.com.yaym.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.models.RWSummary;
+import prafulmantale.praful.com.yaym.services.RWPollService;
 
 
 public class YieldMangerActivity extends Activity implements NetworkResponseListener {
@@ -61,6 +63,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         getRules();
         getRWSnapshot();
         setupListeners();
+        startPollService();
     }
 
     private void initialize(){
@@ -122,6 +125,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     protected void onResume() {
         super.onResume();
         pause = false;
+        startPollService();
     }
 
     public void startPoll(){
@@ -140,7 +144,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
                     }
                 });
             }
-        }, 1000);
+        }, 30000);
     }
 
     private void getRules(){
@@ -197,6 +201,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     protected void onPause() {
         super.onPause();
         pause = true;
+        stopPollService();
     }
 
     @Override
@@ -222,5 +227,13 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition (R.anim.slide_in_from_left, R.anim.slide_out_from_right);
+    }
+
+    private void startPollService(){
+        startService(new Intent(this, RWPollService.class));
+    }
+
+    private void stopPollService(){
+        stopService(new Intent(this, RWPollService.class));
     }
 }
