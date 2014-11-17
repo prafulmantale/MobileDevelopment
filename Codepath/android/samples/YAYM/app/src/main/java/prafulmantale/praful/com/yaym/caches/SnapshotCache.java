@@ -30,7 +30,6 @@ public class SnapshotCache {
     }
 
     public void update(List<RWPositionSnapshot> list){
-
         cache.clear();
         for(RWPositionSnapshot snapshot : list){
             cache.put(snapshot.getCurrencyPair(), snapshot);

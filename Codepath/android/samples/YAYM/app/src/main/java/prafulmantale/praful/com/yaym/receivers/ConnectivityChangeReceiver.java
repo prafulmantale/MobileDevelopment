@@ -17,6 +17,7 @@ public class ConnectivityChangeReceiver extends BroadcastReceiver {
 
         Log.d(TAG, "onReceive");
 
+        //Stop polling when the connectivity changes
 
     }
 }
