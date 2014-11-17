@@ -150,7 +150,7 @@ public class GaugeView extends View {
 
     public void setCurrent(int current){
         this.current = current;
-        invalidate();
+        this.invalidate();
     }
 
     private void drawText(Canvas canvas){

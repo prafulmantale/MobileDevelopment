@@ -15,6 +15,7 @@ import prafulmantale.praful.com.yaym.services.RefreshService;
 public class BootReceiver extends BroadcastReceiver {
 
     private static final String TAG = BootReceiver.class.getSimpleName();
+    private PendingIntent lastPendingIntent = null;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -30,8 +31,12 @@ public class BootReceiver extends BroadcastReceiver {
 
         PendingIntent pendingIntent = PendingIntent.getService(context, 101, new Intent(context, RefreshService.class), PendingIntent.FLAG_UPDATE_CURRENT );
         AlarmManager manager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        manager.cancel(pendingIntent);
-        manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 3000, pendingIntent);
+        if(lastPendingIntent != null) {
+            manager.cancel(lastPendingIntent);
+        }
 
+        lastPendingIntent = pendingIntent;
+
+        manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 3000, pendingIntent);
     }
 }
