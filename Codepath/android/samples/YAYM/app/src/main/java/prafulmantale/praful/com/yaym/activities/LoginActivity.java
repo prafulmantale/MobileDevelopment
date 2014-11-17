@@ -13,38 +13,28 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
-import com.loopj.android.http.PersistentCookieStore;
-
-import org.apache.http.cookie.Cookie;
 
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.models.LoginRequest;
-import prafulmantale.praful.com.yaym.networking.RestClient;
 
 
 public class LoginActivity extends Activity  implements NetworkResponseListener{
 
-    public static RestClient client;
     private EditText etOrg;
     private EditText etUserName;
     private EditText etPassword;
     private BootstrapButton btnLogin;
     private TextView tvCopyright;
 
-
-    public static PersistentCookieStore cookieStore;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        cookieStore = new PersistentCookieStore(this);
-        client = new RestClient(cookieStore);
 
         initialize();
         initializeActionBar();
@@ -90,7 +80,8 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
 
     public void doLogin(View view){
 
-        client.login(this, new NetworkResponseHandler(this, APIRequest.LOGIN), getLoginRequest());
+        YMApplication application = (YMApplication)getApplication();
+        application.getClient().login(this, new NetworkResponseHandler(this, APIRequest.LOGIN), getLoginRequest());
     }
 
     @Override
@@ -98,10 +89,6 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
         System.out.println("OnNetworkResponseReceived: " + status + "|" + requestType);
         if(requestType == APIRequest.LOGIN){
             if(RequestStatus.SUCCESS == status){
-                System.out.println("PersistentCookieStore: ");
-                for(Cookie cookie : cookieStore.getCookies()){
-                    System.out.println(cookie.getName() + "|" + cookie.getValue());
-                }
                 showMain();
             }
         }

@@ -1,10 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
     tools:context=".YieldMangerActivity"
-    android:background="#ffEAEAEA">
+    android:background="#ffEAEAEA"
+    android:id="@+id/swipeRefreshLayout">
 
     <ListView
         android:layout_width="fill_parent"
@@ -17,4 +18,4 @@
         android:choiceMode="singleChoice"
         android:background="@color/white"
         />
-</RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

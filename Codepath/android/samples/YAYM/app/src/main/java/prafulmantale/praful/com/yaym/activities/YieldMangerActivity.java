@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.adapters.PositionsAdapter;
+import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
@@ -31,6 +33,7 @@ import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.interfaces.SnapshotUpdateListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.services.RWPollService;
+import prafulmantale.praful.com.yaym.services.RefreshService;
 
 
 public class YieldMangerActivity extends Activity implements NetworkResponseListener, SnapshotUpdateListener {
@@ -41,6 +44,10 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     private PositionsAdapter adapter;
     private List<RWPositionSnapshot> snapshots;
     private RWPositionSnapshot prevSelectedSnapshot;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private boolean swipedToRefresh = false;
+
+    private YMApplication application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +70,8 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
     private void initialize(){
 
+        application = (YMApplication)getApplication();
+
         lvPositions = (ListView)findViewById(R.id.lvPositionsList);
         View headerView = ((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_positions_header, null, false);
 
@@ -76,6 +85,12 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
         lvPositions.addHeaderView(headerView);
         lvPositions.setHeaderDividersEnabled(true);
+
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
     }
 
@@ -94,6 +109,14 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         });
 
         SnapshotCache.getInstance().addListener(this);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipedToRefresh = true;
+                startService(new Intent(YieldMangerActivity.this, RefreshService.class));
+            }
+        });
     }
 
     private void initializeActionBar(){
@@ -128,7 +151,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
 
     private void getRules(){
-        LoginActivity.client.getRWRules(new NetworkResponseHandler(this, APIRequest.RULES), LoginActivity.cookieStore);
+        application.getClient().getRWRules(new NetworkResponseHandler(this, APIRequest.RULES));
     }
 
     @Override
@@ -192,6 +215,13 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
             snapshots.clear();
             snapshots.addAll(list);
             adapter.notifyDataSetChanged();
+        }
+
+        if(swipedToRefresh) {
+            swipedToRefresh = false;
+            if (swipeRefreshLayout != null) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
         }
     }
 }

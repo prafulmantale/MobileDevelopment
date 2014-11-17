@@ -9,7 +9,6 @@ import com.loopj.android.http.RequestParams;
 
 import org.apache.http.entity.StringEntity;
 
-import prafulmantale.praful.com.yaym.activities.LoginActivity;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.helpers.Utils;
 import prafulmantale.praful.com.yaym.models.LoginRequest;
@@ -25,36 +24,34 @@ public class RestClient {
     private static final String LOGIN_URL = "admin/auth/login";
 
     private AsyncHttpClient client;
+    private PersistentCookieStore cookieStore;
 
 
     public RestClient(PersistentCookieStore cookieStore) {
         this.client = new AsyncHttpClient();
         this.client.setCookieStore(cookieStore);
+        this.cookieStore = cookieStore;
     }
 
 
-    public void getRWRules(JsonHttpResponseHandler handler, PersistentCookieStore cookieStore){
+    public void getRWRules(JsonHttpResponseHandler handler){
         RequestParams params = new RequestParams();
 
         params.put(AppConstants.PARAM_KEY_ORG,"YMSBAQA");
         params.put(AppConstants.PARAM_KEY_NAMESPACE,"YMSBAQA");
 
-        String url = Utils.getAPIUrl(API_BASE_URL, RULES_URL);
-        System.out.println("getRWSnapshot: " + url + params);
         client.setCookieStore(cookieStore);
 
         client.get(Utils.getAPIUrl(API_BASE_URL, RULES_URL), params, handler);
 
     }
 
-    public void getRWSnapshot(JsonHttpResponseHandler handler, PersistentCookieStore cookieStore){
+    public void getRWSnapshot(JsonHttpResponseHandler handler){
         RequestParams params = new RequestParams();
 
         params.put(AppConstants.PARAM_KEY_ORG,"YMSBAQA");
         params.put(AppConstants.PARAM_KEY_CCYPAIR, AppConstants.TEXT_ALL);
 
-        String url = Utils.getAPIUrl(API_BASE_URL, SNAPSHOt_URL);
-        System.out.println("getRWSnapshot: " + url + params);
         client.setCookieStore(cookieStore);
 
         client.get(Utils.getAPIUrl(API_BASE_URL, SNAPSHOt_URL), params, handler);
@@ -63,10 +60,8 @@ public class RestClient {
 
     public void login(Context context, JsonHttpResponseHandler handler, LoginRequest request){
 
-        LoginActivity.cookieStore.clear();
-        System.out.println("### login" + request.getRequestParams().toString());
+        cookieStore.clear();
         String url = Utils.getAPIUrl(API_BASE_URL, LOGIN_URL);
-        System.out.println("### login url" + url);
         client.addHeader("Content-Type", "application/json; charset=UTF-8");
 
 

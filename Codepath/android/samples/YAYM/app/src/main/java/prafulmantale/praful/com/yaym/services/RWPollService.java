@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-import prafulmantale.praful.com.yaym.activities.LoginActivity;
+import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
@@ -32,11 +32,14 @@ public class RWPollService extends Service {
     private Looper looper;
     private Poller poller;
 
+    private YMApplication application;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
         poller = new Poller();
+        application = (YMApplication)getApplication();
         Log.d(TAG, "OnCreated");
     }
 
@@ -82,7 +85,7 @@ public class RWPollService extends Service {
                 Log.d(TAG, "Poller.run");
 
                 try {
-                    LoginActivity.client.getRWSnapshot(new NetworkResponseHandler(this, APIRequest.SNAPSHOT), LoginActivity.cookieStore);
+                    application.getClient().getRWSnapshot(new NetworkResponseHandler(this, APIRequest.SNAPSHOT));
                     sleep(POLL_FREQUENCY);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -94,7 +97,7 @@ public class RWPollService extends Service {
         @Override
         public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject) {
 
-            //System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
+            System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
             if(APIRequest.SNAPSHOT == requestType) {
 
                 if(status == RequestStatus.SUCCESS){
