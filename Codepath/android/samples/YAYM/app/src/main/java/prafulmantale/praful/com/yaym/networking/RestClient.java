@@ -25,6 +25,7 @@ public class RestClient {
 
     private AsyncHttpClient client;
     private PersistentCookieStore cookieStore;
+    private LoginRequest loginRequest;
 
 
     public RestClient(PersistentCookieStore cookieStore) {
@@ -37,8 +38,8 @@ public class RestClient {
     public void getRWRules(JsonHttpResponseHandler handler){
         RequestParams params = new RequestParams();
 
-        params.put(AppConstants.PARAM_KEY_ORG,"YMSBAQA");
-        params.put(AppConstants.PARAM_KEY_NAMESPACE,"YMSBAQA");
+        params.put(AppConstants.PARAM_KEY_ORG, loginRequest.getOrganization());
+        params.put(AppConstants.PARAM_KEY_NAMESPACE, loginRequest.getOrganization());
 
         client.setCookieStore(cookieStore);
 
@@ -49,7 +50,7 @@ public class RestClient {
     public void getRWSnapshot(JsonHttpResponseHandler handler){
         RequestParams params = new RequestParams();
 
-        params.put(AppConstants.PARAM_KEY_ORG,"YMSBAQA");
+        params.put(AppConstants.PARAM_KEY_ORG, loginRequest.getOrganization());
         params.put(AppConstants.PARAM_KEY_CCYPAIR, AppConstants.TEXT_ALL);
 
         client.setCookieStore(cookieStore);
@@ -64,7 +65,7 @@ public class RestClient {
         String url = Utils.getAPIUrl(API_BASE_URL, LOGIN_URL);
         client.addHeader("Content-Type", "application/json; charset=UTF-8");
 
-
+        loginRequest = request;
         try {
             StringEntity entity = new StringEntity(request.toJSON());
             client.post(context, url, entity, "application/json", handler);
