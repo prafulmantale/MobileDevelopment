@@ -82,7 +82,6 @@ public class RWPollService extends Service {
         public void run() {
 
             while(isRunning()) {
-                Log.d(TAG, "Poller.run");
 
                 try {
                     application.getClient().getRWSnapshot(new NetworkResponseHandler(this, APIRequest.SNAPSHOT));
@@ -97,7 +96,7 @@ public class RWPollService extends Service {
         @Override
         public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject) {
 
-            System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
+//            System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
             if(APIRequest.SNAPSHOT == requestType) {
 
                 if(status == RequestStatus.SUCCESS){
