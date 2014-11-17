@@ -29,5 +29,10 @@
 
     <color name="needle_color">#646464</color>
     <color name="arcsecondarycolor">#41C3EA</color>
+
+    <color name="pos_blank">#dddddd</color>
+    <color name="pos_normal">#3366CC</color>
+    <color name="pos_warning">#FF9900</color>
+    <color name="pos_danger">#CC3300</color>
     
 </resources>
