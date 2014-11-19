@@ -2,7 +2,9 @@ package prafulmantale.praful.com.yaym.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -194,8 +196,29 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition (R.anim.slide_in_from_left, R.anim.slide_out_from_right);
+        showLogoutAlert();
+    }
+
+    private void showLogoutAlert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.logout_confirm_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.logout_confirm_yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        YieldMangerActivity.this.finish();
+                        overridePendingTransition (R.anim.slide_in_from_left, R.anim.slide_out_from_right);
+                    }
+                })
+                .setNegativeButton(R.string.logout_confirm_no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void startPollService(){

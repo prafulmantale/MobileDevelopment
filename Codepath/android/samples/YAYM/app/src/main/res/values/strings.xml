@@ -8,4 +8,9 @@
 
     <string name="login_button_text">Log in</string>
     <string name="copyright_text">&#169; Integral Development Corp. 2014</string>
+
+    <string name="logout_confirm_message">Are you sure you want to exit?</string>
+    
+    <string name="logout_confirm_yes">Yes</string>
+    <string name="logout_confirm_no">No</string>
 </resources>
