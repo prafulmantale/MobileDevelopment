@@ -3,15 +3,11 @@ package prafulmantale.praful.com.yaym.adapters;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.graphics.drawable.ClipDrawable;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,6 +17,7 @@ import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.models.RiskRules;
 import prafulmantale.praful.com.yaym.widgets.GaugeViewEx;
+import prafulmantale.praful.com.yaym.widgets.PositionStatusView;
 
 /**
  * Created by prafulmantale on 10/9/14.
@@ -42,27 +39,12 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
         TextView tvHalfPips;
         View ccyPairRate;
 
-        View itemPosition;
-        ImageView ivShort;
-        ImageView ivLong;
-
-        ClipDrawable ivLongDrawable;
-        ClipDrawable ivShortDrawable;
-
-        TextView tvMaxShort;
-        TextView tvMaxLong;
-
-        ImageView ivPointer;
-        TextView tvPosition;
-
-        FrameLayout frameLong;
-
         GaugeViewEx gaugeView;
+        PositionStatusView positionStatusView;
 
 
         protected void init(View convertView){
             ccyPairRate = convertView.findViewById(R.id.itemCcyPairRate);
-            itemPosition = convertView.findViewById(R.id.itemPosition);
 
             tvCcyPair = (TextView)ccyPairRate.findViewById(R.id.tvCcyPair_ratecontrol);
             tvCcyPair.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Bold.ttf"));
@@ -73,77 +55,33 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             tvHalfPips = (TextView)ccyPairRate.findViewById(R.id.tvRate_halfPips);
             tvHalfPips.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Bold.ttf"));
 
-            ivShort = (ImageView)itemPosition.findViewById(R.id.iv_position_short);
-            ivLong = (ImageView)itemPosition.findViewById(R.id.iv_position_long);
-
-            ivLongDrawable = (ClipDrawable) ivLong.getDrawable();
-            ivShortDrawable = (ClipDrawable) ivShort.getDrawable();
-
-            tvMaxShort = (TextView)itemPosition.findViewById(R.id.tvMaxShort);
-            tvMaxLong = (TextView)itemPosition.findViewById(R.id.tvMaxLong);
-
-            frameLong = (FrameLayout)itemPosition.findViewById(R.id.frameLong);
-            ivPointer = (ImageView)itemPosition.findViewById(R.id.ivPointer);
-            tvPosition = (TextView)itemPosition.findViewById(R.id.tvPosition);
-
             gaugeView = (GaugeViewEx)convertView.findViewById(R.id.gvPnLGauge);
 
+            positionStatusView = (PositionStatusView)convertView.findViewById(R.id.psView);
         }
 
         @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
         protected void populateData(RWPositionSnapshot snapshot){
+
+            if(snapshot == null)
+                return;
+
             tvCcyPair.setText(snapshot.getCurrencyPair());
             tvBigFigure.setText(String.valueOf(snapshot.getBigFigure()));
             tvPips.setText(snapshot.getPips());
             tvHalfPips.setText(snapshot.getHalfPips());
 
-            setClipLevel(snapshot);
-
-
-        }
-
-        private void setClipLevel(RWPositionSnapshot snapshot){
-
             RiskRules rule = RulesCache.getInstance().getRule(snapshot.getCurrencyPair());
-            if(rule == null){
-                return;
-            }
-            double pnl = 0;
-            int level = 0;
-            boolean isShort = false;
-            if(snapshot.getAccumulation() < 0){
-                pnl =  snapshot.getAccumulation()/1000;
-                level = (int)((10000/rule.getMaxShortInThousands()) * pnl);
-                ivShortDrawable.setLevel(level);
-                ivLongDrawable.setLevel(0);
-                isShort = true;
-            }
-            else{
-                pnl =  snapshot.getAccumulation()/1000;
-                level = (int)((10000/rule.getMaxLongInThousands()) * pnl);
-                ivLongDrawable.setLevel(level);
-                ivShortDrawable.setLevel(0);
-            }
 
-            tvMaxLong.setText("(" + rule.getMaxLongInThousandsStr() + ")");
-            tvMaxShort.setText("(" + rule.getMaxShortInThousandsStr() + ")");
+            if(rule != null) {
+                positionStatusView.setMaxLongPosition((int) rule.getMaxLimitLong(), rule.getMaxLongInThousandsStr());
+                positionStatusView.setMaxShortPosition((int) rule.getMaxLimitShort(), rule.getMaxShortInThousandsStr());
+                positionStatusView.setCurrentPosition(snapshot.getAccumulation(), snapshot.getAccumulationDisplay());
 
-            int addMargin = (frameLong.getWidth() * level/10000);
-            if(isShort){
-                addMargin = addMargin * -1 + 1 - ivPointer.getWidth()/2;
+                gaugeView.setProfitThreshold((int) rule.getProfitThreshold(), rule.getProfitThresholdStr());
+                gaugeView.setLossThreshold((int) rule.getLossThreshold(), rule.getLossThresholdStr());
+                gaugeView.setCurrentPnL((int) snapshot.getUnrealizedPnL(), snapshot.getUnrealizedPnLDisplay());
             }
-            LinearLayout.LayoutParams  params = (LinearLayout.LayoutParams)ivPointer.getLayoutParams();
-            params.leftMargin = frameLong.getLeft() - (ivPointer.getWidth()/2) - 1 + addMargin;
-            ivPointer.setLayoutParams(params);
-
-            tvPosition.setText("(" + snapshot.getAccumulationDisplay() + ")");
-            LinearLayout.LayoutParams  params2 = (LinearLayout.LayoutParams)tvPosition.getLayoutParams();
-            params2.leftMargin = params.leftMargin - (tvPosition.getWidth()/2);
-            tvPosition.setLayoutParams(params2);
-
-            gaugeView.setProfitThreshold((int)rule.getProfitThreshold(), rule.getProfitThresholdStr());
-            gaugeView.setLossThreshold((int)rule.getLossThreshold(), rule.getLossThresholdStr());
-            gaugeView.setCurrentPnL((int)snapshot.getUnrealizedPnL(), snapshot.getUnrealizedPnLDisplay());
         }
     }
     @Override

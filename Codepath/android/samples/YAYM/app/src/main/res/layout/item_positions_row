@@ -11,7 +11,7 @@
     <include
         android:layout_width="100dp"
         android:layout_weight="0.2"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         layout="@layout/item_ccypair_rate"
         android:id="@+id/itemCcyPairRate"/>
 
@@ -21,18 +21,16 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:gravity="center"
+        android:layout_marginLeft="5dp"
         />
 
-    <include
-        android:layout_below="@+id/itemCcyPairRate"
-        android:layout_width="match_parent"
-        android:layout_weight="0.6"
-        android:layout_height="40dp"
-        layout="@layout/item_position_progress"
-        android:id="@+id/itemPosition"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="5dp"/>
 
+    <prafulmantale.praful.com.yaym.widgets.PositionStatusView
+        android:id="@+id/psView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/itemCcyPairRate"
+        android:layout_marginTop="3dp"/>
 
 
 
