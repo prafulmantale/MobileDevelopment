@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +27,11 @@ public class RiskRules {
     private int maxLongInThousands;
     private String maxShortInThousandsStr;
     private String maxLongInThousandsStr;
+
+    private String lossThresholdStr;
+    private String profitThresholdStr;
+
+    private static final DecimalFormat thresholdFormat = new DecimalFormat("0");
 
     public RiskRules() {
         currencyPair = "";
@@ -102,6 +108,14 @@ public class RiskRules {
         return maxLongInThousandsStr;
     }
 
+    public String getLossThresholdStr() {
+        return lossThresholdStr;
+    }
+
+    public String getProfitThresholdStr() {
+        return profitThresholdStr;
+    }
+
     public static Map<String, RiskRules> fromJSON(JSONArray jsonArray){
         Map<String, RiskRules> rules = new HashMap<String, RiskRules>();
 
@@ -148,6 +162,9 @@ public class RiskRules {
             riskRules.maxLimitLong = jsonObject.getDouble("maxLimitLong");
             riskRules.profitThreshold = jsonObject.getDouble("uPNLTakeProfit");
             riskRules.lossThreshold = jsonObject.getDouble("uPNLStopLoss");
+
+            riskRules.profitThresholdStr = thresholdFormat.format(riskRules.profitThreshold);
+            riskRules.lossThresholdStr = thresholdFormat.format(-1 * riskRules.lossThreshold);
 
             riskRules.maxLongInThousands = (int)riskRules.maxLimitLong/1000;
             riskRules.maxShortInThousands = (int)riskRules.maxLimitShort/1000;

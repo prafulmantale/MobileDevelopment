@@ -33,6 +33,9 @@ public class GaugeView extends View {
     private int meterWidth = 16;
     private int innerWidth = 24;
 
+    private Paint textPaint;
+
+
 
     public GaugeView(Context context) {
         super(context);
@@ -52,7 +55,7 @@ public class GaugeView extends View {
 
         float newangle = (float)(angle * Math.PI / 180);
         float startX = center;
-        float startY = height/2 + height/6;
+        float startY = 0.79f* height - 1;
         float endX   = startX + (float)(40 * Math.sin(newangle));
         float endY   = startY + (float)(40 * Math.cos(newangle));
 
@@ -60,10 +63,19 @@ public class GaugeView extends View {
         canvas.drawArc(outerRect, 180, 60, true, outerCirclePaintBlank);
         canvas.drawArc(outerRect, 240, 120, true, outerCirclePaintProfit);
         canvas.drawArc(innerRect, 180, 180, true, innerCirclePaint);
+        canvas.drawLine(width/4, startY, width/4 + (float)getWidth() - (width/2), startY, innerCirclePaint);
 
         canvas.drawArc(meterRect, 180, 180, false, meterLinePaint);
-        canvas.drawCircle(center, startY, 4, needlePaint);
+        canvas.drawCircle(startX, startY, 4, needlePaint);
         canvas.drawLine(startX, startY, endX, endY, needlePaint);
+
+
+        canvas.drawText("(170)", width/12, (float)getHeight() - height/6, textPaint);
+        canvas.drawText("340", outerRect.right + 5, (float)getHeight() - height/6, textPaint);
+
+        canvas.drawText("34.8", startX - 16, startY + 14, textPaint);
+
+
     }
 
     private void init(){
@@ -93,9 +105,9 @@ public class GaugeView extends View {
         meterLinePaint.setStyle(Paint.Style.STROKE);
 
         float outerRectLeft = width/4;
-        float outerRectTop = height/12;
+        float outerRectTop = height/16;
         float outerRectRight = outerRectLeft + (float)getWidth() - (outerRectLeft * 2);
-        float outerRectHeight = (float)getHeight()*1.2f;
+        float outerRectHeight = (float)getHeight()*1.5f;
         center = width/2;
 
         outerRect = new RectF(outerRectLeft, outerRectTop, outerRectRight, outerRectHeight);
@@ -109,18 +121,19 @@ public class GaugeView extends View {
         needlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         needlePaint.setColor(Color.BLACK);
         needlePaint.setStyle(Paint.Style.FILL);
+
+        textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        textPaint.setColor(Color.BLACK);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//
-//        int measuredWidth = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
-//        int measuredHeight = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
-//
-//        setMeasuredDimension(measuredWidth, measuredHeight);
+        //super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        System.out.println("####Height:" + getHeight() + "|" + getSuggestedMinimumHeight() + "|" + getMeasuredHeight());
+        int measuredWidth = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
+        int measuredHeight = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
 
-        System.out.println("####Height:" + getHeight());
+        setMeasuredDimension(measuredWidth, measuredHeight);
 
         init();
     }

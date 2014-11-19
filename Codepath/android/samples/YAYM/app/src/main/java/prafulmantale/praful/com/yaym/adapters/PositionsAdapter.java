@@ -107,6 +107,9 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
         private void setClipLevel(RWPositionSnapshot snapshot){
 
             RiskRules rule = RulesCache.getInstance().getRule(snapshot.getCurrencyPair());
+            if(rule == null){
+                return;
+            }
             double pnl = 0;
             int level = 0;
             boolean isShort = false;
@@ -145,7 +148,7 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             gaugeView.setCurrent((int)(snapshot.getUnrealizedPnL()));
 
             //???? To be changed
-            tvUnPnL.setText(String.valueOf(rule.getLossThreshold()) + "|" + String.valueOf(snapshot.getUnrealizedPnL()) + "|" + String.valueOf(rule.getProfitThreshold()) );
+            tvUnPnL.setText(String.valueOf(rule.getLossThresholdStr()) + "|" + String.valueOf(snapshot.getUnrealizedPnL()) + "|" + String.valueOf(rule.getProfitThresholdStr()) );
         }
     }
     @Override
