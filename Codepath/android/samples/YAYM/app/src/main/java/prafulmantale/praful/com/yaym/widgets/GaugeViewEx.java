@@ -72,9 +72,17 @@ public class GaugeViewEx extends View {
         float endY   = startY + (float)(40 * Math.cos(newangle));
 
 
-        canvas.drawArc(outerRect, 180, 60, true, outerCirclePaintBlank);
-        canvas.drawArc(outerRect, 240, 120, true, outerCirclePaintProfit);
+        if(currentPnL>= 0) {
+            canvas.drawArc(outerRect, 180, 60, true, outerCirclePaintBlank);
+            canvas.drawArc(outerRect, 240, 120, true, outerCirclePaintProfit);
+        }
+        else{
+            canvas.drawArc(outerRect, 180, 60, true, outerCirclePaintLoss);
+            canvas.drawArc(outerRect, 240, 120, true, outerCirclePaintBlank);
+        }
+
         canvas.drawArc(innerRect, 180, 180, true, innerCirclePaint);
+
         canvas.drawLine(width/4, startY, width/4 + width - (width/2), startY, innerCirclePaint);
 
         canvas.drawArc(meterRect, 180, 180, false, meterLinePaint);
@@ -182,8 +190,8 @@ public class GaugeViewEx extends View {
         }
         else{
             angle = 210 + (float) (60 * currentPnL / lossThreshold);
-            if(angle < 90){
-                angle = 90;
+            if(angle > 270){
+                angle = 270;
             }
         }
     }
