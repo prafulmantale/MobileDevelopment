@@ -17,15 +17,13 @@
         android:id="@+id/pll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" android:showDividers="middle">
+        android:orientation="vertical" android:showDividers="middle"
+        android:dividerPadding="10dp"
+        android:divider="@drawable/one"
+        android:padding="10dp"
+        >
 
-        <prafulmantale.praful.com.positionscale.PositionScale
-            android:id="@+id/ps"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center_horizontal"
-            />
+
         <prafulmantale.praful.com.positionscale.EditablePhoto
             android:layout_marginTop="50dp"
             android:layout_width="80dp"
@@ -34,6 +32,11 @@
             android:layout_gravity="center_horizontal"
 
             />
+        <prafulmantale.praful.com.positionscale.GaugeView
+            android:layout_width="210dp"
+            android:layout_height="80dp"
+            android:background="@android:color/holo_purple"
+            android:id="@+id/gv"/>
 
         <TextView
             android:layout_marginTop="5dp"

@@ -11,13 +11,15 @@ public class MyActivity extends Activity {
 
     PlasticLinearLayout pll;
     PositionScale ps;
+    GaugeView gv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         pll = (PlasticLinearLayout)findViewById(R.id.pll);
-        ps = (PositionScale)findViewById(R.id.ps);
+       // ps = (PositionScale)findViewById(R.id.ps);
+        gv = (GaugeView)findViewById(R.id.gv);
     }
 
 
@@ -40,10 +42,13 @@ public class MyActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    int count = 1;
+    int count = 210;
     public void onTVClick(View view){
-        ps.setBars(count);
-        count ++;
+//        ps.setBars(count);
+//        count ++;
+
+        gv.setAngle(count);
+        count+=-10;
 
     }
 }
