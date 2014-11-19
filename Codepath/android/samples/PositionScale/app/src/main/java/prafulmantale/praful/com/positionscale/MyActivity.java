@@ -4,14 +4,20 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class MyActivity extends Activity {
+
+    PlasticLinearLayout pll;
+    PositionScale ps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+        pll = (PlasticLinearLayout)findViewById(R.id.pll);
+        ps = (PositionScale)findViewById(R.id.ps);
     }
 
 
@@ -32,5 +38,13 @@ public class MyActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    int count = 1;
+    public void onTVClick(View view){
+        pll.setBars(count);
+        ps.setBars(count);
+        count ++;
+
     }
 }
