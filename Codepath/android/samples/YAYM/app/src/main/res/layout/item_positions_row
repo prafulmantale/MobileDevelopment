@@ -16,12 +16,12 @@
         android:id="@+id/itemCcyPairRate"/>
 
     <prafulmantale.praful.com.yaym.widgets.GaugeViewEx
-        android:layout_toRightOf="@+id/itemCcyPairRate"
         android:id="@+id/gvPnLGauge"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:gravity="center"
         android:layout_marginLeft="5dp"
+        android:layout_alignParentRight="true"
         />
 
 

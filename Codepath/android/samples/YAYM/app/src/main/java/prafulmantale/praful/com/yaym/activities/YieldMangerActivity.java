@@ -234,7 +234,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
         List<RWPositionSnapshot> list = SnapshotCache.getInstance().getSnapshots();
 
-        if (list != null && list.size() > 0) {
+        if (list != null && list.size() > 0 &&  snapshots.size() == 0) {
             snapshots.clear();
             snapshots.addAll(list);
             adapter.notifyDataSetChanged();
