@@ -42,7 +42,6 @@ public class MyActivity extends Activity {
 
     int count = 1;
     public void onTVClick(View view){
-        pll.setBars(count);
         ps.setBars(count);
         count ++;
 
