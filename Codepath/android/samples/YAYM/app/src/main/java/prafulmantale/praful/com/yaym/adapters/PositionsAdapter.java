@@ -20,7 +20,7 @@ import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.models.RiskRules;
-import prafulmantale.praful.com.yaym.widgets.GaugeView;
+import prafulmantale.praful.com.yaym.widgets.GaugeViewEx;
 
 /**
  * Created by prafulmantale on 10/9/14.
@@ -57,8 +57,7 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
 
         FrameLayout frameLong;
 
-        GaugeView gaugeView;
-        TextView tvUnPnL;
+        GaugeViewEx gaugeView;
 
 
         protected void init(View convertView){
@@ -87,8 +86,7 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             ivPointer = (ImageView)itemPosition.findViewById(R.id.ivPointer);
             tvPosition = (TextView)itemPosition.findViewById(R.id.tvPosition);
 
-            gaugeView = (GaugeView)convertView.findViewById(R.id.gvPnLGauge);
-            tvUnPnL = (TextView)convertView.findViewById(R.id.tvUnPnL);
+            gaugeView = (GaugeViewEx)convertView.findViewById(R.id.gvPnLGauge);
 
         }
 
@@ -143,12 +141,9 @@ public class PositionsAdapter extends ArrayAdapter<RWPositionSnapshot> {
             params2.leftMargin = params.leftMargin - (tvPosition.getWidth()/2);
             tvPosition.setLayoutParams(params2);
 
-            gaugeView.setMax((int)(rule.getProfitThreshold()));
-            gaugeView.setMin((int)(rule.getLossThreshold()));
-            gaugeView.setCurrent((int)(snapshot.getUnrealizedPnL()));
-
-            //???? To be changed
-            tvUnPnL.setText(String.valueOf(rule.getLossThresholdStr()) + "|" + String.valueOf(snapshot.getUnrealizedPnL()) + "|" + String.valueOf(rule.getProfitThresholdStr()) );
+            gaugeView.setProfitThreshold((int)rule.getProfitThreshold(), rule.getProfitThresholdStr());
+            gaugeView.setLossThreshold((int)rule.getLossThreshold(), rule.getLossThresholdStr());
+            gaugeView.setCurrentPnL((int)snapshot.getUnrealizedPnL(), snapshot.getUnrealizedPnLDisplay());
         }
     }
     @Override

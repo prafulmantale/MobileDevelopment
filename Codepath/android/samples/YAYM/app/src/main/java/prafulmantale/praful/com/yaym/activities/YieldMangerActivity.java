@@ -215,6 +215,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
             snapshots.clear();
             snapshots.addAll(list);
             adapter.notifyDataSetChanged();
+            lvPositions.invalidateViews();
         }
 
         if(swipedToRefresh) {

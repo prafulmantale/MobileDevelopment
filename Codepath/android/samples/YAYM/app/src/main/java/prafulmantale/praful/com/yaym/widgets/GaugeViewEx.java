@@ -8,6 +8,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import prafulmantale.praful.com.yaym.R;
+
 /**
  * Created by prafulmantale on 11/18/14.
  */
@@ -37,8 +39,14 @@ public class GaugeViewEx extends View {
 
 
     private int lossThreshold;
+    private String lossThresholdText;
+
     private int profitThreshold;
+    private String profitThresholdText;
+
     private double currentPnL;
+    private String currentPnLText;
+
     private float angle = 210;
 
     public GaugeViewEx(Context context) {
@@ -67,37 +75,31 @@ public class GaugeViewEx extends View {
         canvas.drawArc(outerRect, 180, 60, true, outerCirclePaintBlank);
         canvas.drawArc(outerRect, 240, 120, true, outerCirclePaintProfit);
         canvas.drawArc(innerRect, 180, 180, true, innerCirclePaint);
-        canvas.drawLine(width/4, startY, width/4 + (float)getWidth() - (width/2), startY, innerCirclePaint);
+        canvas.drawLine(width/4, startY, width/4 + width - (width/2), startY, innerCirclePaint);
 
         canvas.drawArc(meterRect, 180, 180, false, meterLinePaint);
         canvas.drawCircle(startX, startY, 4, needlePaint);
         canvas.drawLine(startX, startY, endX, endY, needlePaint);
 
 
-        canvas.drawText("(170)", width/12, (float)getHeight() - height/6, textPaint);
-        canvas.drawText("340", outerRect.right + 5, (float)getHeight() - height/6, textPaint);
+        canvas.drawText(lossThresholdText, width/12, height - height/6, textPaint);
+        canvas.drawText(profitThresholdText, outerRect.right + 5, height - height/6, textPaint);
 
-        canvas.drawText("34.8", startX - 16, startY + 14, textPaint);
-
-
+        canvas.drawText(currentPnLText, startX - 16, startY + 14, textPaint);
     }
 
     private void init(){
 
-        width = getWidth();
-        height = getHeight();
-
-
         outerCirclePaintBlank = new Paint(Paint.ANTI_ALIAS_FLAG);
-        outerCirclePaintBlank.setColor(Color.GREEN);
+        outerCirclePaintBlank.setColor(getResources().getColor(R.color.pnl_blank));
         outerCirclePaintBlank.setStyle(Paint.Style.FILL);
 
         outerCirclePaintProfit = new Paint(Paint.ANTI_ALIAS_FLAG);
-        outerCirclePaintProfit.setColor(Color.BLUE);
+        outerCirclePaintProfit.setColor(getResources().getColor(R.color.pnl_profit));
         outerCirclePaintProfit.setStyle(Paint.Style.FILL);
 
         outerCirclePaintLoss = new Paint(Paint.ANTI_ALIAS_FLAG);
-        outerCirclePaintLoss.setColor(Color.RED);
+        outerCirclePaintLoss.setColor(getResources().getColor(R.color.pnl_loss));
         outerCirclePaintLoss.setStyle(Paint.Style.FILL);
 
         innerCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -105,57 +107,61 @@ public class GaugeViewEx extends View {
         innerCirclePaint.setStyle(Paint.Style.FILL);
 
         meterLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        meterLinePaint.setColor(Color.MAGENTA);
+        meterLinePaint.setColor(getResources().getColor(R.color.pnl_meter_line));
         meterLinePaint.setStyle(Paint.Style.STROKE);
 
-        float outerRectLeft = width/4;
-        float outerRectTop = height/16;
-        float outerRectRight = outerRectLeft + (float)getWidth() - (outerRectLeft * 2);
-        float outerRectHeight = (float)getHeight()*1.5f;
-        center = width/2;
-
-        outerRect = new RectF(outerRectLeft, outerRectTop, outerRectRight, outerRectHeight);
-
-        System.out.println(outerRect);
-
-        innerRect = new RectF(outerRectLeft + meterWidth, outerRectTop + meterWidth, outerRectRight - meterWidth, outerRectHeight - meterWidth);
-
-        meterRect = new RectF(outerRectLeft +innerWidth, outerRectTop + innerWidth, outerRectRight - innerWidth, outerRectHeight - innerWidth);
-
         needlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        needlePaint.setColor(Color.BLACK);
+        needlePaint.setColor(getResources().getColor(R.color.needle_color));
         needlePaint.setStyle(Paint.Style.FILL);
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setColor(Color.BLACK);
+        textPaint.setColor(getResources().getColor(R.color.pnl_text_color));
+
+        float outerRectLeft = width/4;
+        float outerRectTop = height/16;
+        float outerRectRight = outerRectLeft + width - (outerRectLeft * 2);
+        float outerRectHeight = (float)height*1.5f;
+        center = width/2;
+
+        outerRect = new RectF(outerRectLeft, outerRectTop, outerRectRight, outerRectHeight);
+        innerRect = new RectF(outerRectLeft + meterWidth, outerRectTop + meterWidth, outerRectRight - meterWidth, outerRectHeight - meterWidth);
+        meterRect = new RectF(outerRectLeft +innerWidth, outerRectTop + innerWidth, outerRectRight - innerWidth, outerRectHeight - innerWidth);
+
+
+
+        currentPnLText = "-";
+        profitThresholdText = "-";
+        lossThresholdText = "-";
 
         setAngle();
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        //super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        System.out.println("####Height:" + getHeight() + "|" + getSuggestedMinimumHeight() + "|" + getMeasuredHeight());
-        int measuredWidth = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
-        int measuredHeight = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
+        width = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
+        height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
 
-        setMeasuredDimension(measuredWidth, measuredHeight);
+        setMeasuredDimension(width, height);
+
 
         init();
     }
 
-    public void setLossThreshold(int lossThreshold){
+    public void setLossThreshold(int lossThreshold, String lossThresholdText){
 
         this.lossThreshold = lossThreshold;
+        this.lossThresholdText = lossThresholdText;
     }
 
-    public void setProfitThreshold(int profitThreshold) {
+    public void setProfitThreshold(int profitThreshold, String profitThresholdText) {
         this.profitThreshold = profitThreshold;
+        this.profitThresholdText = profitThresholdText;
     }
 
-    public void setCurrentPnL(double currentPnL) {
+    public void setCurrentPnL(double currentPnL, String currentPnLText) {
         if(this.currentPnL != currentPnL) {
             this.currentPnL = currentPnL;
+            this.currentPnLText = currentPnLText;
             setAngle();
             invalidate();
         }

@@ -41,6 +41,7 @@ public class RWPositionSnapshot {
 
     private double unrealizedPnL;
     private double unrealizedPnlInUSD;
+    private String unrealizedPnLDisplay;
 
     private double totalPnL;
     private double totalPnLInUSD;
@@ -337,6 +338,10 @@ public class RWPositionSnapshot {
         return halfPips;
     }
 
+    public String getUnrealizedPnLDisplay() {
+        return unrealizedPnLDisplay;
+    }
+
     public static RWPositionSnapshot fromJSON(JSONObject jsonObject){
         RWPositionSnapshot rwPositionSnapshot = new RWPositionSnapshot();
 
@@ -356,6 +361,7 @@ public class RWPositionSnapshot {
             // "uPNL":-27.81593336894006,"uPNLInUSD":-24.57,"totalPNL":5366.52,"totalPNLUSD":4740.78,"skewEnabled":false,"skewSpread":0.0,
             rwPositionSnapshot.unrealizedPnL = jsonObject.getDouble("uPNL");
             rwPositionSnapshot.unrealizedPnlInUSD = jsonObject.getDouble("uPNLInUSD");
+            rwPositionSnapshot.unrealizedPnLDisplay = accumulationFormat.format(rwPositionSnapshot.unrealizedPnL);
             rwPositionSnapshot.totalPnL = jsonObject.getDouble("totalPNL");
             rwPositionSnapshot.totalPnLInUSD = jsonObject.getDouble("totalPNLUSD");
             rwPositionSnapshot.skewEnabled = jsonObject.getBoolean("skewEnabled");
