@@ -4,5 +4,15 @@
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_bank">
+        <menu>
+            <item
+                android:id="@+id/menuSettings"
+                android:title="@string/menu_settings"/>
+            <item
+                android:id="@+id/menuAbout"
+                android:title="@string/menu_about"/>
+        </menu>
+       </item>
 </menu>

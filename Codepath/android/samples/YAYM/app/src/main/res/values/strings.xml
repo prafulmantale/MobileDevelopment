@@ -13,4 +13,7 @@
     
     <string name="logout_confirm_yes">Yes</string>
     <string name="logout_confirm_no">No</string>
+
+    <string name="menu_settings">Settings</string>
+    <string name="menu_about">About</string>
 </resources>
