@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/data_update_title">
+        <ListPreference
+            android:dialogTitle="@string/pref_frequency"
+            android:entries="@array/datefetchoptions_display"
+            android:entryValues="@array/datafetchOptions_values"
+            android:defaultValue="5"
+            android:summary="@string/data_update_warning"
+            android:title="@string/pref_title"/>
+    </PreferenceCategory>
+</PreferenceScreen>

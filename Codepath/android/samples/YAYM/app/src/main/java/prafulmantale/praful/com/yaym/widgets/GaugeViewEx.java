@@ -124,6 +124,7 @@ public class GaugeViewEx extends View {
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(getResources().getColor(R.color.pnl_text_color));
+        textPaint.setTextAlign(Paint.Align.RIGHT);
 
         float outerRectLeft = width/4;
         float outerRectTop = height/16;

@@ -70,7 +70,9 @@ public class GaugeView extends View {
         canvas.drawLine(startX, startY, endX, endY, needlePaint);
 
 
+        textPaint.setTextAlign(Paint.Align.LEFT);
         canvas.drawText("(170)", width/12, (float)getHeight() - height/6, textPaint);
+        //textPaint.setTextAlign(Paint.Align.LEFT);
         canvas.drawText("340", outerRect.right + 5, (float)getHeight() - height/6, textPaint);
 
         canvas.drawText("34.8", startX - 16, startY + 14, textPaint);
@@ -129,9 +131,11 @@ public class GaugeView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         //super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        System.out.println("####Height:" + getHeight() + "|" + getSuggestedMinimumHeight() + "|" + getMeasuredHeight());
+
         int measuredWidth = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
         int measuredHeight = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
+
+        System.out.println("####Height:" + getHeight() + "|" + getSuggestedMinimumHeight() + "|" + getMeasuredHeight() + " | " + measuredHeight);
 
         setMeasuredDimension(measuredWidth, measuredHeight);
 
