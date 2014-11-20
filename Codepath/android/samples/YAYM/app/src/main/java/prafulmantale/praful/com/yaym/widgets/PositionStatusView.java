@@ -34,6 +34,7 @@ public class PositionStatusView extends View {
 
     private Paint textPaint;
     private Paint centerCircleColor;
+    private Paint centerBarPaint;
 
     private Bitmap pointerImage;
 
@@ -95,6 +96,9 @@ public class PositionStatusView extends View {
         centerCircleColor.setColor(getResources().getColor(R.color.pos_blank));
         centerCircleColor.setStyle(Paint.Style.FILL);
 
+        centerBarPaint = new Paint();
+        centerBarPaint.setColor(getResources().getColor(R.color.needle_color));
+
         pointerImage = BitmapFactory.decodeResource(getResources(), R.drawable.pointer);
 
         dashPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -142,7 +146,7 @@ public class PositionStatusView extends View {
 
     private void drawCenterBar(Canvas canvas, float left) {
 
-        canvas.drawRect( left, topMargin, left + 1.5f, topMargin + centerBarHeight, blankPaint);
+        canvas.drawRect( left, topMargin, left + 1.5f, topMargin + centerBarHeight, centerBarPaint);
     }
 
     private void drawLongBars(Canvas canvas){
