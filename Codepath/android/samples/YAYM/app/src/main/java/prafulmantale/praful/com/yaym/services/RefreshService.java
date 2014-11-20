@@ -15,6 +15,7 @@ import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
+import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.models.RWSummary;
@@ -65,11 +66,14 @@ public class RefreshService extends IntentService implements NetworkResponseList
 
                     JSONObject summary = obj.getJSONObject("summary");
                     RWSummary rwSummary = RWSummary.fromJSON(summary);
-
                 }
                 catch (JSONException ex){
                     Log.d(TAG, "Excption while extracting Snapshots");
                     ex.printStackTrace();
+                }
+                finally {
+                    Intent intent = new Intent(AppConstants.RW_SNAPSHOT_RECEIVED);
+                    sendBroadcast(intent);
                 }
             }
         }

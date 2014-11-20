@@ -35,6 +35,7 @@ public class RWPositionSnapshot {
     private double accumulation;
     private double accumulationInUSD;
     private String accumulationDisplay;
+    private String accumulationInUSDDisplay;
 
     private double realizedPnL;
     private double realizedPnLInUSD;
@@ -42,6 +43,7 @@ public class RWPositionSnapshot {
     private double unrealizedPnL;
     private double unrealizedPnlInUSD;
     private String unrealizedPnLDisplay;
+    private String unrealizedPnLInUSDDisplay;
 
     private double totalPnL;
     private double totalPnLInUSD;
@@ -103,6 +105,10 @@ public class RWPositionSnapshot {
 
     public String getAccumulationDisplay() {
         return accumulationDisplay;
+    }
+
+    public String getAccumulationInUSDDisplay() {
+        return accumulationInUSDDisplay;
     }
 
     public void setAccumulation(double accumulation) {
@@ -342,6 +348,10 @@ public class RWPositionSnapshot {
         return unrealizedPnLDisplay;
     }
 
+    public String getUnrealizedPnLInUSDDisplay() {
+        return unrealizedPnLInUSDDisplay;
+    }
+
     public static RWPositionSnapshot fromJSON(JSONObject jsonObject){
         RWPositionSnapshot rwPositionSnapshot = new RWPositionSnapshot();
 
@@ -355,6 +365,13 @@ public class RWPositionSnapshot {
             rwPositionSnapshot.accumulationInUSD = jsonObject.getDouble("accumulationInUSD");
             rwPositionSnapshot.accumulationDisplay = accumulationFormat.format(rwPositionSnapshot.accumulation / 1000);
 
+            if(rwPositionSnapshot.accumulationInUSD < 0){
+                rwPositionSnapshot.accumulationInUSDDisplay = accumulationFormat.format(-rwPositionSnapshot.accumulationInUSD / 1000);
+            }
+            else {
+                rwPositionSnapshot.accumulationInUSDDisplay = accumulationFormat.format(rwPositionSnapshot.accumulationInUSD / 1000);
+            }
+
             rwPositionSnapshot.realizedPnL = jsonObject.getDouble("rPNL");
             rwPositionSnapshot.realizedPnLInUSD = jsonObject.getDouble("rPNLInUSD");
 
@@ -362,6 +379,12 @@ public class RWPositionSnapshot {
             rwPositionSnapshot.unrealizedPnL = jsonObject.getDouble("uPNL");
             rwPositionSnapshot.unrealizedPnlInUSD = jsonObject.getDouble("uPNLInUSD");
             rwPositionSnapshot.unrealizedPnLDisplay = accumulationFormat.format(rwPositionSnapshot.unrealizedPnL);
+            if(rwPositionSnapshot.unrealizedPnlInUSD < 0){
+                rwPositionSnapshot.unrealizedPnLInUSDDisplay = accumulationFormat.format(-rwPositionSnapshot.unrealizedPnlInUSD);
+            }
+            else {
+                rwPositionSnapshot.unrealizedPnLInUSDDisplay = accumulationFormat.format(rwPositionSnapshot.unrealizedPnlInUSD);
+            }
             rwPositionSnapshot.totalPnL = jsonObject.getDouble("totalPNL");
             rwPositionSnapshot.totalPnLInUSD = jsonObject.getDouble("totalPNLUSD");
             rwPositionSnapshot.skewEnabled = jsonObject.getBoolean("skewEnabled");

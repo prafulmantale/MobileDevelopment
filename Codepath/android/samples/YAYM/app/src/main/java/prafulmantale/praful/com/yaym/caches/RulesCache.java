@@ -7,10 +7,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import prafulmantale.praful.com.yaym.models.RiskRules;
 
@@ -27,7 +26,7 @@ public class RulesCache {
     private List<String> currencyPairsList;
 
     public RulesCache() {
-        cache = new HashMap<String, RiskRules>();
+        cache = new TreeMap<String, RiskRules>();
         currencyPairsList = new ArrayList<String>();
     }
 
@@ -58,12 +57,14 @@ public class RulesCache {
             JSONArray jsonArray = jsonObject.getJSONArray("rules");
             cache = RiskRules.fromJSON(jsonArray);
 
-            currencyPairsList.clear();
-            for(String key : cache.keySet()){
-                currencyPairsList.add(key);
-            }
+//            currencyPairsList.clear();
+//            for(String key : cache.keySet()){
+//                currencyPairsList.add(key);
+//            }
+//
+//            Collections.sort(currencyPairsList);
 
-            Collections.sort(currencyPairsList);
+            currencyPairsList = new ArrayList<String>(cache.keySet());
         }
         catch(JSONException ex){
             Log.d(TAG, "Exception while populating the Rules cache");

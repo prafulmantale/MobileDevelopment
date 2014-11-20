@@ -9,7 +9,7 @@
     >
 
     <include
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_weight="0.2"
         android:layout_height="50dp"
         layout="@layout/item_ccypair_rate"
@@ -17,8 +17,8 @@
 
     <prafulmantale.praful.com.yaym.widgets.GaugeViewEx
         android:id="@+id/gvPnLGauge"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
         android:gravity="center"
         android:layout_marginLeft="5dp"
         android:layout_alignParentRight="true"

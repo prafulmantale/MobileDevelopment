@@ -34,13 +34,12 @@ import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
-import prafulmantale.praful.com.yaym.interfaces.SnapshotUpdateListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.services.RWPollService;
 import prafulmantale.praful.com.yaym.services.RefreshService;
 
 
-public class YieldMangerActivity extends Activity implements NetworkResponseListener, SnapshotUpdateListener {
+public class YieldMangerActivity extends Activity implements NetworkResponseListener{
 
     private static final String TAG = YieldMangerActivity.class.getSimpleName();
 
@@ -72,9 +71,6 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
         registerReceiver(marketDataReceiver,
                 new IntentFilter(AppConstants.RW_SNAPSHOT_RECEIVED));
-
-        startPollService();
-
     }
 
     private void initialize(){
@@ -104,21 +100,6 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     }
 
     private void setupListeners(){
-//        lvPositions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                RWPositionSnapshot snapshot = adapter.getItem(position);
-//                snapshot.setItemSelected(true);
-//                if(prevSelectedSnapshot != null){
-//                    prevSelectedSnapshot.setItemSelected(false);
-//                }
-//
-//                prevSelectedSnapshot = snapshot;
-//            }
-//        });
-
-        SnapshotCache.getInstance().addListener(this);
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -175,6 +156,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
             snapshots = new ArrayList<RWPositionSnapshot>();
             adapter = new SnapshotAdapter(getBaseContext());
             lvPositions.setAdapter(adapter);
+            startPollService();
         }
     }
 
@@ -240,23 +222,6 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         stopService(new Intent(this, RWPollService.class));
     }
 
-    @Override
-    public void onSnapshotUpdated() {
-
-//        List<RWPositionSnapshot> list = SnapshotCache.getInstance().getSnapshots();
-//
-//        if (list != null && list.size() > 0) {
-//            //snapshots.clear();
-//            if(snapshots.size() == 0) {
-//                adapter.addAll(list);
-//            }
-//            //adapter.notifyDataSetChanged();
-//            //lvPositions.invalidateViews();
-//            adapter.updateViews(lvPositions, list);
-//            lvPositions.invalidateViews();
-//        }
-    }
-
     BroadcastReceiver marketDataReceiver = new BroadcastReceiver() {
 
         @Override
@@ -272,8 +237,4 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
             }
         }
     };
-
-
-
-
 }

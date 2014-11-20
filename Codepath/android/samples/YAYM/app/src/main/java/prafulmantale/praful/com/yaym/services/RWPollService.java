@@ -95,7 +95,7 @@ public class RWPollService extends Service {
         @Override
         public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject) {
 
-            System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
+//            System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
             if(APIRequest.SNAPSHOT == requestType) {
 
                 if(status == RequestStatus.SUCCESS){
@@ -108,18 +108,18 @@ public class RWPollService extends Service {
 
                         if (list != null && list.size() > 0) {
                             SnapshotCache.getInstance().update(list);
-
-                            Intent intent = new Intent(AppConstants.RW_SNAPSHOT_RECEIVED);
-                            sendBroadcast(intent);
                         }
 
                         JSONObject summary = obj.getJSONObject("summary");
                         RWSummary rwSummary = RWSummary.fromJSON(summary);
-
                     }
                     catch (JSONException ex){
                         Log.d(TAG, "Excption while extracting Snapshots");
                         ex.printStackTrace();
+                    }
+                    finally {
+                        Intent intent = new Intent(AppConstants.RW_SNAPSHOT_RECEIVED);
+                        sendBroadcast(intent);
                     }
                 }
             }

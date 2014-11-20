@@ -72,7 +72,6 @@
                 />
 
             <EditText
-                android:drawableLeft="@drawable/ic_bank"
                 android:layout_width="match_parent"
                 android:layout_height="23sp"
                 android:id="@+id/etOrganization"
@@ -112,7 +111,6 @@
                 android:paddingLeft="5dp"
                 />
             <EditText
-                android:drawableLeft="@drawable/ic_user"
                 android:layout_width="match_parent"
                 android:layout_height="23sp"
                 android:id="@+id/etUserName"
@@ -153,7 +151,6 @@
                 android:paddingLeft="5dp"
                 />
             <EditText
-                android:drawableLeft="@drawable/ic_lock"
                 android:layout_width="match_parent"
                 android:layout_height="23sp"
                 android:inputType="textPassword"

@@ -72,11 +72,11 @@ public class SnapshotAdapter extends BaseAdapter {
             if(rule != null) {
                 positionStatusView.setMaxLongPosition((int) rule.getMaxLimitLong(), rule.getMaxLongInThousandsStr());
                 positionStatusView.setMaxShortPosition((int) rule.getMaxLimitShort(), rule.getMaxShortInThousandsStr());
-                positionStatusView.setCurrentPosition(snapshot.getAccumulation(), snapshot.getAccumulationDisplay());
+                positionStatusView.setCurrentPosition(snapshot.getAccumulationInUSD(), snapshot.getAccumulationInUSDDisplay());
 
                 gaugeView.setProfitThreshold((int) rule.getProfitThreshold(), rule.getProfitThresholdStr());
                 gaugeView.setLossThreshold((int) rule.getLossThreshold(), rule.getLossThresholdStr());
-                gaugeView.setCurrentPnL((int) snapshot.getUnrealizedPnL(), snapshot.getUnrealizedPnLDisplay());
+                gaugeView.setCurrentPnL((int) snapshot.getUnrealizedPnlInUSD(), snapshot.getUnrealizedPnLInUSDDisplay());
             }
         }
     }
@@ -149,7 +149,6 @@ public class SnapshotAdapter extends BaseAdapter {
         String ccyPair = ccyPairsList.get(position);
         RWPositionSnapshot snapshot = SnapshotCache.getInstance().getSnapshot(ccyPair);
         updateViewForCurrencyPair(snapshot, convertView);
-        //viewHolder.populateData(snapshot);
 
         float initialTranslation = (mLastPosition <= position ? 500f : -500f);
 
@@ -177,8 +176,6 @@ public class SnapshotAdapter extends BaseAdapter {
             View convertView = getViewForCurrencyPair(lvPositions, snapshot.getCurrencyPair());
             updateViewForCurrencyPair(snapshot, convertView);
         }
-
-        //notifyDataSetChanged();
     }
 
     private void updateViewForCurrencyPair(RWPositionSnapshot snapshot, View convertView){

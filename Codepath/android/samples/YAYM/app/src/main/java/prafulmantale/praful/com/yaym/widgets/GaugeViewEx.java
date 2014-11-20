@@ -15,6 +15,8 @@ import prafulmantale.praful.com.yaym.R;
  */
 public class GaugeViewEx extends View {
 
+    private static final String TAG = GaugeViewEx.class.getSimpleName();
+
     private Paint outerCirclePaintBlank;
     private Paint outerCirclePaintProfit;
     private Paint outerCirclePaintLoss;
@@ -36,6 +38,8 @@ public class GaugeViewEx extends View {
     private int innerWidth = 24;
 
     private Paint textPaint;
+    private Paint textPaintProfit;
+    private Paint textPaintLoss;
 
 
     private int lossThreshold;
@@ -90,10 +94,11 @@ public class GaugeViewEx extends View {
         canvas.drawLine(startX, startY, endX, endY, needlePaint);
 
 
-        canvas.drawText(lossThresholdText, width/12, height - height/6, textPaint);
-        canvas.drawText(profitThresholdText, outerRect.right + 5, height - height/6, textPaint);
+        canvas.drawText(lossThresholdText, outerRect.left - 5, height - height/6, textPaintLoss);
+        canvas.drawText(profitThresholdText, outerRect.right + 5, height - height/6, textPaintProfit);
 
-        canvas.drawText(currentPnLText, startX - 16, startY + 14, textPaint);
+        canvas.drawText(currentPnLText, startX, startY + 18, textPaint);
+
     }
 
     private void init(){
@@ -124,7 +129,16 @@ public class GaugeViewEx extends View {
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(getResources().getColor(R.color.pnl_text_color));
-        textPaint.setTextAlign(Paint.Align.RIGHT);
+        textPaint.setTextAlign(Paint.Align.CENTER);
+        textPaint.setTextSize(14);
+
+        textPaintProfit = new Paint(Paint.ANTI_ALIAS_FLAG);
+        textPaintProfit.setColor(getResources().getColor(R.color.pnl_text_color));
+
+        textPaintLoss = new Paint(Paint.ANTI_ALIAS_FLAG);
+        textPaintLoss.setColor(getResources().getColor(R.color.pnl_text_color));
+        textPaintLoss.setTextAlign(Paint.Align.RIGHT);
+
 
         float outerRectLeft = width/4;
         float outerRectTop = height/16;
@@ -136,11 +150,9 @@ public class GaugeViewEx extends View {
         innerRect = new RectF(outerRectLeft + meterWidth, outerRectTop + meterWidth, outerRectRight - meterWidth, outerRectHeight - meterWidth);
         meterRect = new RectF(outerRectLeft +innerWidth, outerRectTop + innerWidth, outerRectRight - innerWidth, outerRectHeight - innerWidth);
 
-
-
-        currentPnLText = "-";
-        profitThresholdText = "-";
-        lossThresholdText = "-";
+        currentPnLText = "0.0";
+        profitThresholdText = "00";
+        lossThresholdText = "00";
 
         setAngle();
     }
@@ -159,7 +171,7 @@ public class GaugeViewEx extends View {
     public void setLossThreshold(int lossThreshold, String lossThresholdText){
 
         this.lossThreshold = lossThreshold;
-        this.lossThresholdText = lossThresholdText;
+        this.lossThresholdText = "(" + lossThresholdText + ")";
     }
 
     public void setProfitThreshold(int profitThreshold, String profitThresholdText) {
@@ -168,12 +180,17 @@ public class GaugeViewEx extends View {
     }
 
     public void setCurrentPnL(double currentPnL, String currentPnLText) {
-        if(this.currentPnL != currentPnL) {
+//        if(this.currentPnL != currentPnL) {
             this.currentPnL = currentPnL;
-            this.currentPnLText = currentPnLText;
+            if(this.currentPnL >= 0) {
+                this.currentPnLText = currentPnLText;
+            }
+            else{
+                this.currentPnLText = "(" + currentPnLText + ")";
+            }
+
             setAngle();
             invalidate();
-        }
     }
 
     private void setAngle(){

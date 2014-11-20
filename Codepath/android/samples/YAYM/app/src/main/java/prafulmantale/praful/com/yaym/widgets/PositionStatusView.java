@@ -18,6 +18,8 @@ import prafulmantale.praful.com.yaym.R;
  */
 public class PositionStatusView extends View {
 
+    private static final String TAG = PositionStatusView.class.getSimpleName();
+
     private Paint blankPaint;
     private Paint normalPaint;
     private Paint warningPaint;
@@ -87,6 +89,7 @@ public class PositionStatusView extends View {
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(Color.BLACK);
+        textPaint.setTextAlign(Paint.Align.CENTER);
 
         centerCircleColor = new Paint(Paint.ANTI_ALIAS_FLAG);
         centerCircleColor.setColor(getResources().getColor(R.color.pos_blank));
@@ -102,9 +105,9 @@ public class PositionStatusView extends View {
 
         dashPath = new Path();
 
-        maxLongPosText = "";
-        maxShortPosText = "";
-        currentPosText = "";
+        maxLongPosText = "0.0";
+        maxShortPosText = "0.0";
+        currentPosText = "0.0";
     }
 
     @Override
@@ -184,11 +187,11 @@ public class PositionStatusView extends View {
         drawCenterBar(canvas, left + 1);
         rightCenterBarStartPoint = left - 2;
 
-        canvas.drawText(maxLongPosText, left - 10, 35 + topMargin, textPaint);
+        canvas.drawText(maxLongPosText, left + 1, 35 + topMargin, textPaint);
 
         if(isPositionLong) {
             canvas.drawBitmap(pointerImage, width / 2 + barsCount * 5 - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 2, null);
-            canvas.drawText("(" + currentPosText + ")", width / 2 + barsCount * 5 - pointerImage.getWidth() / 2 - 2 - 10, topMargin - pointerImage.getHeight() - 5, textPaint);
+            canvas.drawText(currentPosText, pointerImage.getWidth()/2 + width / 2 + barsCount * 5 - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 5, textPaint);
         }
     }
 
@@ -234,13 +237,12 @@ public class PositionStatusView extends View {
 
         leftCenterBarStartPoint = right - left + 3;
 
-        canvas.drawText("(" + maxShortPosText + ")", right - left -9, 35 + topMargin, textPaint);
+        canvas.drawText("(" + maxShortPosText + ")", right - left + 1, 35 + topMargin, textPaint);
 
         if(!isPositionLong) {
             canvas.drawBitmap(pointerImage, width / 2 - ((barsCount - 1) * 5) - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 2, null);
-            canvas.drawText("(" + currentPosText + ")", width / 2 - barsCount * 5 - pointerImage.getWidth() / 2 - 2 - 10, topMargin - pointerImage.getHeight() - 5, textPaint);
+            canvas.drawText(currentPosText, pointerImage.getWidth()/2 +  width / 2 - ((barsCount - 1) * 5) - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 5, textPaint);
         }
-
     }
 
     private void setBars(){
@@ -295,30 +297,33 @@ public class PositionStatusView extends View {
 
     public void setMaxLongPosition(int maxLong, String displayMaxLong){
 
-        if(this.maxLongPosition != maxLong) {
+//        if(this.maxLongPosition != maxLong) {
             this.maxLongPosition = maxLong;
             this.maxLongPosText = displayMaxLong;
-            invalidate();
-        }
+//            invalidate();
+//        }
     }
 
     public void setMaxShortPosition(int maxShort, String displayMaxShort){
-        if(this.maxShortPosition != maxShort) {
+//        if(this.maxShortPosition != maxShort) {
             this.maxShortPosition = maxShort;
             this.maxShortPosText = displayMaxShort;
-            invalidate();
-        }
+//            invalidate();
+//        }
     }
 
     public void setCurrentPosition(double currentPosition, String displayCurrentPosition){
 
-        if(this.currentPosition != currentPosition) {
+//        if(this.currentPosition != currentPosition) {
             this.currentPosition = currentPosition;
             this.currentPosText = displayCurrentPosition;
             isPositionLong = !(currentPosition < 0);
+            if(!isPositionLong){
+                this.currentPosText = "(" + displayCurrentPosition + ")";
+            }
             setBars();
 
             invalidate();
-        }
+//        }
     }
 }

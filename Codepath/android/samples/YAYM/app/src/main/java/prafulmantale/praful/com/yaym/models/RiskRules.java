@@ -169,7 +169,7 @@ public class RiskRules {
             riskRules.maxLongInThousands = (int)riskRules.maxLimitLong/1000;
             riskRules.maxShortInThousands = (int)riskRules.maxLimitShort/1000;
             riskRules.maxLongInThousandsStr = String.valueOf(riskRules.maxLongInThousands);
-            riskRules.maxShortInThousandsStr = String.valueOf(riskRules.maxShortInThousands);
+            riskRules.maxShortInThousandsStr = String.valueOf(-riskRules.maxShortInThousands);
         }
         catch(JSONException ex){
             Log.d(TAG, "Excption while extracting Risk Rule from JSON object\r\n" + jsonObject);
