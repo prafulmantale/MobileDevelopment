@@ -2,6 +2,7 @@ package prafulmantale.praful.com.yaym.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     private EditText etPassword;
     private BootstrapButton btnLogin;
     private TextView tvCopyright;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
 
         YMApplication application = (YMApplication)getApplication();
         application.getClient().login(this, new NetworkResponseHandler(this, APIRequest.LOGIN), getLoginRequest());
+        progressDialog = ProgressDialog.show(this, "", getString(R.string.login_progress_message));
     }
 
     @Override
@@ -90,6 +93,10 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
         if(requestType == APIRequest.LOGIN){
             if(RequestStatus.SUCCESS == status){
                 showMain();
+            }
+
+            if(progressDialog != null){
+                progressDialog.dismiss();
             }
         }
     }
