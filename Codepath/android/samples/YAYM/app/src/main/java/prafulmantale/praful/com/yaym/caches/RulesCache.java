@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -57,14 +58,12 @@ public class RulesCache {
             JSONArray jsonArray = jsonObject.getJSONArray("rules");
             cache = RiskRules.fromJSON(jsonArray);
 
-//            currencyPairsList.clear();
-//            for(String key : cache.keySet()){
-//                currencyPairsList.add(key);
-//            }
-//
-//            Collections.sort(currencyPairsList);
+            currencyPairsList.clear();
+            for(String key : cache.keySet()){
+                currencyPairsList.add(key);
+            }
 
-            currencyPairsList = new ArrayList<String>(cache.keySet());
+            Collections.sort(currencyPairsList);
         }
         catch(JSONException ex){
             Log.d(TAG, "Exception while populating the Rules cache");
