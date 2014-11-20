@@ -3,8 +3,10 @@ package prafulmantale.praful.com.yaym.widgets;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -117,6 +119,7 @@ public class GaugeViewEx extends View {
 
         innerCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         innerCirclePaint.setColor(Color.WHITE);
+        innerCirclePaint.setShader(new LinearGradient(0, 0, 0, getHeight(), Color.parseColor("#f6f6f6"), Color.parseColor("#ededed"), Shader.TileMode.REPEAT));
         innerCirclePaint.setStyle(Paint.Style.FILL);
 
         meterLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);

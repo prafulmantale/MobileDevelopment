@@ -10,6 +10,8 @@
     <string name="copyright_text">&#169; Integral Development Corp. 2014</string>
     <string name="login_progress_message">Logging in ...</string>
 
+    <string name="loading_progress_message">Loding...</string>
+
     <string name="logout_confirm_message">Are you sure you want to exit?</string>
     
     <string name="logout_confirm_yes">Yes</string>

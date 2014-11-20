@@ -3,6 +3,7 @@ package prafulmantale.praful.com.yaym.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -51,12 +52,14 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     private boolean swipedToRefresh = false;
 
     private YMApplication application;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yield_manger);
 
+        progressDialog = ProgressDialog.show(this, "", getString(R.string.loading_progress_message));
         initialize();
         initializeActionBar();
 
@@ -156,6 +159,11 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
             snapshots = new ArrayList<RWPositionSnapshot>();
             adapter = new SnapshotAdapter(getBaseContext());
             lvPositions.setAdapter(adapter);
+
+            if(progressDialog != null){
+                progressDialog.dismiss();
+            }
+
             startPollService();
         }
     }

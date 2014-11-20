@@ -9,11 +9,21 @@
     >
 
     <include
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_weight="0.2"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="30dp"
         layout="@layout/item_ccypair_rate"
         android:id="@+id/itemCcyPairRate"/>
+
+    <!--<View-->
+        <!--android:id="@+id/center_divider"-->
+        <!--android:layout_width="1px"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:background="#000"-->
+        <!--android:layout_marginTop="10dp"/>-->
 
     <prafulmantale.praful.com.yaym.widgets.GaugeViewEx
         android:id="@+id/gvPnLGauge"
@@ -24,13 +34,25 @@
         android:layout_alignParentRight="true"
         />
 
+    <!--<View-->
+        <!--android:layout_below="@id/itemCcyPairRate"-->
+        <!--android:id="@+id/center_divider_horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1px"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:background="#000"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginLeft="55dp"-->
+        <!--android:layout_marginRight="55dp"-->
+        <!--/>-->
 
     <prafulmantale.praful.com.yaym.widgets.PositionStatusView
         android:id="@+id/psView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/itemCcyPairRate"
-        android:layout_marginTop="3dp"/>
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="2dp"
+        android:layout_below="@id/itemCcyPairRate"/>
 
 
 
