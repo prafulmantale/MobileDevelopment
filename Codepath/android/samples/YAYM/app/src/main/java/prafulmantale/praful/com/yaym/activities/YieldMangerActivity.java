@@ -71,9 +71,23 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
         getRules();
         setupListeners();
+    }
+
+    @Override
+    protected void onStart() {
 
         registerReceiver(marketDataReceiver,
                 new IntentFilter(AppConstants.RW_SNAPSHOT_RECEIVED));
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+
+        unregisterReceiver(marketDataReceiver);
+
+        super.onStop();
     }
 
     private void initialize(){

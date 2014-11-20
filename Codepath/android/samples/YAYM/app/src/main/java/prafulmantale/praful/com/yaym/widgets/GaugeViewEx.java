@@ -128,7 +128,8 @@ public class GaugeViewEx extends View {
 
         needlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         needlePaint.setColor(getResources().getColor(R.color.needle_color));
-        needlePaint.setStyle(Paint.Style.FILL);
+        needlePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        needlePaint.setStrokeWidth(1f);
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(getResources().getColor(R.color.pnl_text_color));
