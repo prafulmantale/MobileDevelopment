@@ -3,9 +3,11 @@ package prafulmantale.praful.com.yaym.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,13 +25,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prafulmantale.praful.com.yaym.R;
-import prafulmantale.praful.com.yaym.adapters.PositionsAdapter;
+import prafulmantale.praful.com.yaym.adapters.SnapshotAdapter;
 import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
+import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.interfaces.SnapshotUpdateListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
@@ -43,7 +45,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     private static final String TAG = YieldMangerActivity.class.getSimpleName();
 
     private ListView lvPositions;
-    private PositionsAdapter adapter;
+    private SnapshotAdapter adapter;
     private List<RWPositionSnapshot> snapshots;
     private RWPositionSnapshot prevSelectedSnapshot;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -60,14 +62,19 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         initializeActionBar();
 
         if(savedInstanceState == null){
-            snapshots = new ArrayList<RWPositionSnapshot>();
-            adapter = new PositionsAdapter(getBaseContext(), snapshots);
-            lvPositions.setAdapter(adapter);
+//            snapshots = new ArrayList<RWPositionSnapshot>();
+//            adapter = new SnapshotAdapter(getBaseContext());
+//            lvPositions.setAdapter(adapter);
         }
 
         getRules();
         setupListeners();
+
+        registerReceiver(marketDataReceiver,
+                new IntentFilter(AppConstants.RW_SNAPSHOT_RECEIVED));
+
         startPollService();
+
     }
 
     private void initialize(){
@@ -97,18 +104,18 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     }
 
     private void setupListeners(){
-        lvPositions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                RWPositionSnapshot snapshot = adapter.getItem(position);
-                snapshot.setItemSelected(true);
-                if(prevSelectedSnapshot != null){
-                    prevSelectedSnapshot.setItemSelected(false);
-                }
-
-                prevSelectedSnapshot = snapshot;
-            }
-        });
+//        lvPositions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                RWPositionSnapshot snapshot = adapter.getItem(position);
+//                snapshot.setItemSelected(true);
+//                if(prevSelectedSnapshot != null){
+//                    prevSelectedSnapshot.setItemSelected(false);
+//                }
+//
+//                prevSelectedSnapshot = snapshot;
+//            }
+//        });
 
         SnapshotCache.getInstance().addListener(this);
 
@@ -164,6 +171,10 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
                 JSONObject obj = (JSONObject) responseObject;
                 RulesCache.getInstance().updateCache(obj);
             }
+
+            snapshots = new ArrayList<RWPositionSnapshot>();
+            adapter = new SnapshotAdapter(getBaseContext());
+            lvPositions.setAdapter(adapter);
         }
     }
 
@@ -232,20 +243,37 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     @Override
     public void onSnapshotUpdated() {
 
-        List<RWPositionSnapshot> list = SnapshotCache.getInstance().getSnapshots();
+//        List<RWPositionSnapshot> list = SnapshotCache.getInstance().getSnapshots();
+//
+//        if (list != null && list.size() > 0) {
+//            //snapshots.clear();
+//            if(snapshots.size() == 0) {
+//                adapter.addAll(list);
+//            }
+//            //adapter.notifyDataSetChanged();
+//            //lvPositions.invalidateViews();
+//            adapter.updateViews(lvPositions, list);
+//            lvPositions.invalidateViews();
+//        }
+    }
 
-        if (list != null && list.size() > 0 &&  snapshots.size() == 0) {
-            snapshots.clear();
-            snapshots.addAll(list);
-            adapter.notifyDataSetChanged();
-            lvPositions.invalidateViews();
-        }
+    BroadcastReceiver marketDataReceiver = new BroadcastReceiver() {
 
-        if(swipedToRefresh) {
-            swipedToRefresh = false;
-            if (swipeRefreshLayout != null) {
-                swipeRefreshLayout.setRefreshing(false);
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            List<RWPositionSnapshot> list = SnapshotCache.getInstance().getSnapshots();
+            adapter.updateViews(lvPositions, list);
+
+            if(swipedToRefresh) {
+                swipedToRefresh = false;
+                if (swipeRefreshLayout != null) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
         }
-    }
+    };
+
+
+
+
 }

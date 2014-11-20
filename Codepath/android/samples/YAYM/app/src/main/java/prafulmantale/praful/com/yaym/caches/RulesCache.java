@@ -6,7 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import prafulmantale.praful.com.yaym.models.RiskRules;
@@ -21,9 +24,11 @@ public class RulesCache {
     private static RulesCache INSTANCE = new RulesCache();
 
     private Map<String, RiskRules> cache;
+    private List<String> currencyPairsList;
 
     public RulesCache() {
         cache = new HashMap<String, RiskRules>();
+        currencyPairsList = new ArrayList<String>();
     }
 
     public static RulesCache getInstance(){
@@ -39,6 +44,11 @@ public class RulesCache {
         return rules;
     }
 
+    public List<String> getCurrencyPairsList(){
+
+        return currencyPairsList;
+    }
+
     public void updateCache(JSONObject jsonObject){
 
         if(jsonObject == null){
@@ -48,6 +58,12 @@ public class RulesCache {
             JSONArray jsonArray = jsonObject.getJSONArray("rules");
             cache = RiskRules.fromJSON(jsonArray);
 
+            currencyPairsList.clear();
+            for(String key : cache.keySet()){
+                currencyPairsList.add(key);
+            }
+
+            Collections.sort(currencyPairsList);
         }
         catch(JSONException ex){
             Log.d(TAG, "Exception while populating the Rules cache");

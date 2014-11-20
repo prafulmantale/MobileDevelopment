@@ -16,4 +16,6 @@ public class AppConstants {
     public static final String TEXT_ALL = "ALL";
 
 
+    public static final String RW_SNAPSHOT_RECEIVED = "snapshotreceived";
+
 }

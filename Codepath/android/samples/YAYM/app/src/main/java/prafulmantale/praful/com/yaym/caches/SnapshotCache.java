@@ -30,7 +30,6 @@ public class SnapshotCache {
     }
 
     public void update(List<RWPositionSnapshot> list){
-        cache.clear();
         for(RWPositionSnapshot snapshot : list){
             cache.put(snapshot.getCurrencyPair(), snapshot);
         }
@@ -42,6 +41,13 @@ public class SnapshotCache {
         return new ArrayList<RWPositionSnapshot>(cache.values());
     }
 
+    public RWPositionSnapshot getSnapshot(String ccyPair){
+        if(cache.containsKey(ccyPair)){
+            return cache.get(ccyPair);
+        }
+
+        return null;
+    }
 
     public void addListener(SnapshotUpdateListener listener){
         this.listeners.add(listener);

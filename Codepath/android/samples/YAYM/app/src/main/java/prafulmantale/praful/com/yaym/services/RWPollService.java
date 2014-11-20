@@ -17,6 +17,7 @@ import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
+import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.models.RWSummary;
@@ -27,7 +28,7 @@ import prafulmantale.praful.com.yaym.models.RWSummary;
 public class RWPollService extends Service {
 
     private static final String TAG = RWPollService.class.getSimpleName();
-    private static final long POLL_FREQUENCY = 3000;
+    private static final long POLL_FREQUENCY = 5000;
 
     private Looper looper;
     private Poller poller;
@@ -40,12 +41,10 @@ public class RWPollService extends Service {
         super.onCreate();
         poller = new Poller();
         application = (YMApplication)getApplication();
-        Log.d(TAG, "OnCreated");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand");
 
         if(poller.isRunning() == false) {
             poller.start();
@@ -96,7 +95,7 @@ public class RWPollService extends Service {
         @Override
         public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject) {
 
-//            System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
+            System.out.println(requestType.toString() + "|" + status + "|" + responseObject);
             if(APIRequest.SNAPSHOT == requestType) {
 
                 if(status == RequestStatus.SUCCESS){
@@ -109,6 +108,9 @@ public class RWPollService extends Service {
 
                         if (list != null && list.size() > 0) {
                             SnapshotCache.getInstance().update(list);
+
+                            Intent intent = new Intent(AppConstants.RW_SNAPSHOT_RECEIVED);
+                            sendBroadcast(intent);
                         }
 
                         JSONObject summary = obj.getJSONObject("summary");
