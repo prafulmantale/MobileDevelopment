@@ -18,4 +18,7 @@ public class AppConstants {
 
     public static final String RW_SNAPSHOT_RECEIVED = "snapshotreceived";
 
+    public static final String STATUS_SUCCESS = "SUCCESS";
+    public static final String STATUS_FAILURE = "FAILURE";
+
 }
