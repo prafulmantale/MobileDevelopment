@@ -1,4 +1,4 @@
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,15 +7,23 @@
     android:background="#ffEAEAEA"
     android:id="@+id/swipeRefreshLayout">
 
+    <include
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/item_positions_header"
+        android:id="@+id/lvHeader"/>
+
     <ListView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:id="@+id/lvPositionsList"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
+        android:layout_below="@id/lvHeader"
         android:dividerHeight="5.0sp"
         android:divider="#ffEAEAEA"
         android:choiceMode="singleChoice"
         android:background="@color/white"
         />
-</android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>

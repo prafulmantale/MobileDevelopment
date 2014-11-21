@@ -33,6 +33,8 @@ public class PositionStatusView extends View {
     private int dangerCount = 0;
 
     private Paint textPaint;
+    private Paint textPaintMaxShort;
+    private Paint textPaintMaxLong;
     private Paint centerCircleColor;
     private Paint centerBarPaint;
 
@@ -93,6 +95,16 @@ public class PositionStatusView extends View {
         textPaint.setColor(Color.BLACK);
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.position_view_current_value_size));
+
+        textPaintMaxShort = new Paint(Paint.ANTI_ALIAS_FLAG);
+        textPaintMaxShort.setColor(Color.BLACK);
+        textPaintMaxShort.setTextAlign(Paint.Align.LEFT);
+        textPaintMaxShort.setTextSize(getResources().getDimensionPixelSize(R.dimen.position_view_current_value_size));
+
+        textPaintMaxLong = new Paint(Paint.ANTI_ALIAS_FLAG);
+        textPaintMaxLong.setColor(Color.BLACK);
+        textPaintMaxLong.setTextAlign(Paint.Align.RIGHT);
+        textPaintMaxLong.setTextSize(getResources().getDimensionPixelSize(R.dimen.position_view_current_value_size));
 
         centerCircleColor = new Paint(Paint.ANTI_ALIAS_FLAG);
         centerCircleColor.setColor(getResources().getColor(R.color.pos_blank));
@@ -194,7 +206,7 @@ public class PositionStatusView extends View {
         drawCenterBar(canvas, left + 1);
         rightCenterBarStartPoint = left - 2;
 
-        canvas.drawText(maxLongPosText, left + 1, 35 + topMargin, textPaint);
+        canvas.drawText(maxLongPosText, left, centerBarHeight + 1.35f*topMargin, textPaintMaxLong);
 
         if(isPositionLong) {
             canvas.drawBitmap(pointerImage, width / 2 + barsCount * xJump - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 2, null);
@@ -245,7 +257,7 @@ public class PositionStatusView extends View {
 
         leftCenterBarStartPoint = right - left + 3;
 
-        canvas.drawText("(" + maxShortPosText + ")", right - left + 1, 35 + topMargin, textPaint);
+        canvas.drawText("(" + maxShortPosText + ")", right - left + 2, centerBarHeight + 1.4f*topMargin, textPaintMaxShort);
 
         if(!isPositionLong) {
             canvas.drawBitmap(pointerImage, width / 2 - ((barsCount - 1) * xJump) - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 2, null);

@@ -21,4 +21,6 @@
     <dimen name="position_view_long_value_size">12sp</dimen>
     <dimen name="position_view_short_value_size">12sp</dimen>
 
+    <dimen name="position_header_textSize">14sp</dimen>
+
 </resources>

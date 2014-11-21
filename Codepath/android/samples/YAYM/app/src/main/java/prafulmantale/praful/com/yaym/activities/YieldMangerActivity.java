@@ -11,9 +11,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +35,6 @@ import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.services.RWPollService;
-import prafulmantale.praful.com.yaym.services.RefreshService;
 
 
 public class YieldMangerActivity extends Activity implements NetworkResponseListener{
@@ -48,7 +45,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     private SnapshotAdapter adapter;
     private List<RWPositionSnapshot> snapshots;
     private RWPositionSnapshot prevSelectedSnapshot;
-    private SwipeRefreshLayout swipeRefreshLayout;
+//    private SwipeRefreshLayout swipeRefreshLayout;
     private boolean swipedToRefresh = false;
 
     private YMApplication application;
@@ -95,7 +92,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         application = (YMApplication)getApplication();
 
         lvPositions = (ListView)findViewById(R.id.lvPositionsList);
-        View headerView = ((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_positions_header, null, false);
+        View headerView = findViewById(R.id.lvHeader);//((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_positions_header, null, false);
 
         TextView tvCcyPair = (TextView)headerView.findViewById(R.id.tvCurrencyPair_header);
         TextView tvPositionsStatus = (TextView)headerView.findViewById(R.id.tvPosition_header);
@@ -105,25 +102,25 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         tvUnrealizedPnL.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Bold.ttf"));
 
 
-        lvPositions.addHeaderView(headerView);
-        lvPositions.setHeaderDividersEnabled(true);
+        //lvPositions.addHeaderView(headerView);
+        //lvPositions.setHeaderDividersEnabled(true);
 
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+//        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+//        swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
+//                android.R.color.holo_green_light,
+//                android.R.color.holo_orange_light,
+//                android.R.color.holo_red_light);
 
     }
 
     private void setupListeners(){
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipedToRefresh = true;
-                startService(new Intent(YieldMangerActivity.this, RefreshService.class));
-            }
-        });
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                swipedToRefresh = true;
+//                startService(new Intent(YieldMangerActivity.this, RefreshService.class));
+//            }
+//        });
     }
 
     private void initializeActionBar(){
@@ -251,12 +248,12 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
             List<RWPositionSnapshot> list = SnapshotCache.getInstance().getSnapshots();
             adapter.updateViews(lvPositions, list);
 
-            if(swipedToRefresh) {
-                swipedToRefresh = false;
-                if (swipeRefreshLayout != null) {
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            }
+//            if(swipedToRefresh) {
+//                swipedToRefresh = false;
+//                if (swipeRefreshLayout != null) {
+//                    swipeRefreshLayout.setRefreshing(false);
+//                }
+//            }
         }
     };
 }
