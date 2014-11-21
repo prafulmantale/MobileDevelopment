@@ -89,17 +89,18 @@ public class GaugeViewEx extends View {
 
         canvas.drawArc(innerRect, 180, 180, true, innerCirclePaint);
 
-        canvas.drawLine(width/4, startY, width/4 + width - (width/2), startY, innerCirclePaint);
-
         canvas.drawArc(meterRect, 180, 180, false, meterLinePaint);
+        canvas.drawLine(width/4, startY, width/4 + width - (width/2), startY, innerCirclePaint);
         canvas.drawCircle(startX, startY, 4, needlePaint);
         canvas.drawLine(startX, startY, endX, endY, needlePaint);
+
+
 
 
         canvas.drawText(lossThresholdText, outerRect.left - 5, height - height/6, textPaintLoss);
         canvas.drawText(profitThresholdText, outerRect.right + 5, height - height/6, textPaintProfit);
 
-        canvas.drawText(currentPnLText, startX, startY + 18, textPaint);
+        canvas.drawText(currentPnLText, startX, startY + 20, textPaint);
 
     }
 
