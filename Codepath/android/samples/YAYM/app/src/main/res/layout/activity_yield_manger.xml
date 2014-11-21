@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/item_positions_header"
-        android:id="@+id/lvHeader"/>
+        android:id="@+id/lvHeader"
+        android:layout_marginBottom="5dp"/>
 
     <ListView
         android:layout_width="fill_parent"

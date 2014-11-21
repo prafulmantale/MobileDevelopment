@@ -179,27 +179,26 @@ public class PositionStatusView extends View {
             }
         }
         else {
-            for (int i = 0; i < normalCount; i++) {
+            int count = 0;
+            while(count < 34){
 
-                canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, normalPaint);
-                left += xJump;
-            }
+                if(count < normalCount){
+                    canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, normalPaint);
+                }
 
-            for (int i = 0; i < warningCount; i++) {
+                if(count >= normalCount && count < normalCount + warningCount){
+                    canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, warningPaint);
+                }
 
-                canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, warningPaint);
-                left += xJump;
-            }
+                if(count >= normalCount + warningCount && count < normalCount + warningCount + dangerCount){
+                    canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, dangerPaint);
+                }
 
-            for (int i = 0; i < dangerCount; i++) {
+                if(count >= normalCount + warningCount + dangerCount && count < normalCount + warningCount + dangerCount + blankCount){
+                    canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, blankPaint);
+                }
 
-                canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, dangerPaint);
-                left += xJump;
-            }
-
-            for (int i = 0; i < blankCount; i++) {
-
-                canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, blankPaint);
+                count += 1;
                 left += xJump;
             }
         }
@@ -229,27 +228,26 @@ public class PositionStatusView extends View {
             }
         }
         else {
-            for (int i = 0; i < normalCount; i++) {
+            int count = 0;
+            while(count < 34){
+                
+                if(count < normalCount) {
+                    canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, normalPaint);
+                }
 
-                canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, normalPaint);
-                right -= xJump;
-            }
+                if(count >= normalCount && count < normalCount + warningCount){
+                    canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, warningPaint);
+                }
 
-            for (int i = 0; i < warningCount; i++) {
+                if(count >= normalCount + warningCount && count < normalCount + warningCount + dangerCount){
+                    canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, dangerPaint);
+                }
 
-                canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, warningPaint);
-                right -= xJump;
-            }
+                if(count >= normalCount + warningCount + dangerCount && count < normalCount + warningCount + dangerCount + blankCount){
+                    canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, blankPaint);
+                }
 
-            for (int i = 0; i < dangerCount; i++) {
-
-                canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, dangerPaint);
-                right -= 5f;
-            }
-
-            for (int i = 0; i < blankCount; i++) {
-
-                canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, blankPaint);
+                count += 1;
                 right -= xJump;
             }
         }
