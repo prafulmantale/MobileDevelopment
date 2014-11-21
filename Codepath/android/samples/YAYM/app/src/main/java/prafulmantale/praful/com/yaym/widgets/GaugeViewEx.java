@@ -134,14 +134,17 @@ public class GaugeViewEx extends View {
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(getResources().getColor(R.color.pnl_text_color));
         textPaint.setTextAlign(Paint.Align.CENTER);
-        textPaint.setTextSize(14);
+        textPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.fontsize_gauge_view_currentvalue));
+
 
         textPaintProfit = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaintProfit.setColor(getResources().getColor(R.color.pnl_text_color));
+        textPaintProfit.setTextSize(getResources().getDimensionPixelSize(R.dimen.fontsize_gauge_view_profitvalue));
 
         textPaintLoss = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaintLoss.setColor(getResources().getColor(R.color.pnl_text_color));
         textPaintLoss.setTextAlign(Paint.Align.RIGHT);
+        textPaintLoss.setTextSize(getResources().getDimensionPixelSize(R.dimen.fontsize_gauge_view_lossvalue));
 
 
         float outerRectLeft = width/4;
