@@ -20,5 +20,14 @@ public class AppConstants {
 
     public static final String STATUS_SUCCESS = "SUCCESS";
     public static final String STATUS_FAILURE = "FAILURE";
+    public static final String STATUS_TEXT = "status";
+    public static final String STATUS_OK = "OK";
 
+    public static class HandlerMessageIds{
+        public static int INVALID = -1;
+        public static int LOGIN = 5000;
+        public static int LOGOUT = 6000;
+        public static int RULE = 5001;
+        public static int SNAPSHOT = 5002;
+    }
 }
