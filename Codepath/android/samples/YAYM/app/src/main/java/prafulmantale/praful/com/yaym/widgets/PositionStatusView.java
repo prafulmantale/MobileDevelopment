@@ -46,6 +46,8 @@ public class PositionStatusView extends View {
     private float centerBarHeight = getResources().getDimensionPixelSize(R.dimen.position_view_center_bar_height);
     private float barMargin = getResources().getDimensionPixelSize(R.dimen.position_view_bar_margin);
 
+    private float circleRadius = getResources().getDimensionPixelSize(R.dimen.position_view_circle_radius);
+
     private Paint dashPaint;
 
     private float rightCenterBarStartPoint;
@@ -119,7 +121,7 @@ public class PositionStatusView extends View {
         dashPaint.setColor(getResources().getColor(R.color.pos_blank));
         dashPaint.setStrokeWidth(1);
         dashPaint.setStyle(Paint.Style.STROKE);
-        dashPaint.setPathEffect(new DashPathEffect(new float[]{5,5}, 0));
+        dashPaint.setPathEffect(new DashPathEffect(new float[]{10,5}, 0));
 
         dashPath = new Path();
 
@@ -133,7 +135,7 @@ public class PositionStatusView extends View {
 
         float left = width/2;
         drawCenterBar(canvas, left);
-        canvas.drawCircle(left + 1, 33 + topMargin, 5, centerCircleColor);
+        canvas.drawCircle(left, centerBarHeight + 1.2f*topMargin, circleRadius, centerCircleColor);
         drawShortBars(canvas);
         drawLongBars(canvas);
         drawDots(canvas,leftCenterBarStartPoint,  rightCenterBarStartPoint);
