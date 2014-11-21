@@ -39,9 +39,10 @@ public class PositionStatusView extends View {
     private Bitmap pointerImage;
 
     private float topMargin = 30f;
-    private float barWidth = 3f;
-    private float barHeight = 16;
-    private float centerBarHeight = 1.5f * barHeight;
+    private float barWidth = getResources().getDimensionPixelSize(R.dimen.position_view_bar_width);
+    private float barHeight = getResources().getDimensionPixelSize(R.dimen.position_view_bar_height);
+    private float centerBarHeight = getResources().getDimensionPixelSize(R.dimen.position_view_center_bar_height);
+    private float barMargin = getResources().getDimensionPixelSize(R.dimen.position_view_bar_margin);
 
     private Paint dashPaint;
 
@@ -91,6 +92,7 @@ public class PositionStatusView extends View {
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(Color.BLACK);
         textPaint.setTextAlign(Paint.Align.CENTER);
+        textPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.position_view_current_value_size));
 
         centerCircleColor = new Paint(Paint.ANTI_ALIAS_FLAG);
         centerCircleColor.setColor(getResources().getColor(R.color.pos_blank));
@@ -152,75 +154,77 @@ public class PositionStatusView extends View {
     private void drawLongBars(Canvas canvas){
 
         float left = width /2 + 2f;
-        float right = 3;
+        float right = barWidth;
+        float xJump = barWidth + barMargin;
 
         if(!isPositionLong){
             for (int i = 0; i < 34; i++) {
 
                 canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, blankPaint);
-                left += 5f;
+                left += xJump;
             }
         }
         else {
             for (int i = 0; i < normalCount; i++) {
 
                 canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, normalPaint);
-                left += 5f;
+                left += xJump;
             }
 
             for (int i = 0; i < warningCount; i++) {
 
                 canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, warningPaint);
-                left += 5f;
+                left += xJump;
             }
 
             for (int i = 0; i < dangerCount; i++) {
 
                 canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, dangerPaint);
-                left += 5f;
+                left += xJump;
             }
 
             for (int i = 0; i < blankCount; i++) {
 
                 canvas.drawRect(left, topMargin, left + right, topMargin + barHeight, blankPaint);
-                left += 5f;
+                left += xJump;
             }
         }
 
-        drawCenterBar(canvas, width /2 + 2f + 17 * 5 -2f);
+        drawCenterBar(canvas, width /2 + 2f + 17 * xJump -2f);
         drawCenterBar(canvas, left + 1);
         rightCenterBarStartPoint = left - 2;
 
         canvas.drawText(maxLongPosText, left + 1, 35 + topMargin, textPaint);
 
         if(isPositionLong) {
-            canvas.drawBitmap(pointerImage, width / 2 + barsCount * 5 - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 2, null);
-            canvas.drawText(currentPosText, pointerImage.getWidth()/2 + width / 2 + barsCount * 5 - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 5, textPaint);
+            canvas.drawBitmap(pointerImage, width / 2 + barsCount * xJump - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 2, null);
+            canvas.drawText(currentPosText, pointerImage.getWidth()/2 + width / 2 + barsCount * xJump - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 5, textPaint);
         }
     }
 
     private void drawShortBars(Canvas canvas){
 
         float right = width /2 - 1f;
-        float left = 3;
+        float left = barWidth;
+        float xJump = barWidth + barMargin;
         if(isPositionLong){
             for (int i = 0; i < 34; i++) {
 
                 canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, blankPaint);
-                right -= 5f;
+                right -= xJump;
             }
         }
         else {
             for (int i = 0; i < normalCount; i++) {
 
                 canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, normalPaint);
-                right -= 5f;
+                right -= xJump;
             }
 
             for (int i = 0; i < warningCount; i++) {
 
                 canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, warningPaint);
-                right -= 5f;
+                right -= xJump;
             }
 
             for (int i = 0; i < dangerCount; i++) {
@@ -232,11 +236,11 @@ public class PositionStatusView extends View {
             for (int i = 0; i < blankCount; i++) {
 
                 canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, blankPaint);
-                right -= 5f;
+                right -= xJump;
             }
         }
 
-        drawCenterBar(canvas, width /2 - 1f - 17*5 - left + 3f);
+        drawCenterBar(canvas, width /2 - 1f - 17*xJump - left + 3f);
         drawCenterBar(canvas, right - left + 1);
 
         leftCenterBarStartPoint = right - left + 3;
@@ -244,8 +248,8 @@ public class PositionStatusView extends View {
         canvas.drawText("(" + maxShortPosText + ")", right - left + 1, 35 + topMargin, textPaint);
 
         if(!isPositionLong) {
-            canvas.drawBitmap(pointerImage, width / 2 - ((barsCount - 1) * 5) - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 2, null);
-            canvas.drawText(currentPosText, pointerImage.getWidth()/2 +  width / 2 - ((barsCount - 1) * 5) - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 5, textPaint);
+            canvas.drawBitmap(pointerImage, width / 2 - ((barsCount - 1) * xJump) - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 2, null);
+            canvas.drawText(currentPosText, pointerImage.getWidth()/2 +  width / 2 - ((barsCount - 1) * xJump) - pointerImage.getWidth() / 2 - (barsCount == 0 ? 0 : 2), topMargin - pointerImage.getHeight() - 5, textPaint);
         }
     }
 

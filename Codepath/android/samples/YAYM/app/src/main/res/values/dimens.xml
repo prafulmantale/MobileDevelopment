@@ -6,4 +6,13 @@
     <dimen name="fontsize_gauge_view_currentvalue">14sp</dimen>
     <dimen name="fontsize_gauge_view_profitvalue">12sp</dimen>
     <dimen name="fontsize_gauge_view_lossvalue">12sp</dimen>
+
+    <dimen name="position_view_bar_height">14dp</dimen>
+    <dimen name="position_view_bar_width">2.5dp</dimen>
+    <dimen name="position_view_center_bar_height">21dp</dimen>
+    <dimen name="position_view_bar_margin">1.5dp</dimen>
+    <dimen name="position_view_current_value_size">12sp</dimen>
+    <dimen name="position_view_long_value_size">12sp</dimen>
+    <dimen name="position_view_short_value_size">12sp</dimen>
+
 </resources>
