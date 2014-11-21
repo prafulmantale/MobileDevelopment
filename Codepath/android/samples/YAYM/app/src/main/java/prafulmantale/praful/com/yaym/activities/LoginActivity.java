@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -32,6 +33,9 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     private BootstrapButton btnLogin;
     private TextView tvCopyright;
     private ProgressDialog progressDialog;
+    private RadioGroup serverGroup;
+    private YMApplication application;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +44,29 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
 
         initialize();
         initializeActionBar();
+        setupListeners();
+    }
+
+    private void setupListeners() {
+        serverGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.demo3Server){
+                   application.setYmServer(getString(R.string.server_demo3));
+                }
+                if(checkedId == R.id.demoServer){
+                    application.setYmServer(getString(R.string.server_demo));
+                }
+            }
+        });
     }
 
     private void initialize(){
+
+        application = (YMApplication)getApplication();
+
+        //??Read from shared preferences. Once user makes changes save them
+        application.setYmServer(getString(R.string.server_demo));
 
         etOrg = (EditText)findViewById(R.id.etOrganization);
         etOrg.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
@@ -55,6 +79,8 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
 
         tvCopyright = (TextView) findViewById(R.id.tvCopyright);
         tvCopyright.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
+
+        serverGroup = (RadioGroup)findViewById(R.id.rgServerGroup);
 
     }
 

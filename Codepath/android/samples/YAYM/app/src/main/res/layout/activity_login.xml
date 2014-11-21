@@ -64,9 +64,12 @@
                 android:background="@drawable/item_back_icons"
                 android:id="@+id/bankIcon"
                 android:layout_marginLeft="25dp"
-                android:textSize="@dimen/login_awesome_text_size"
+                android:textSize="10sp"
                 android:textAlignment="center"
-                android:padding="4dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:paddingTop="6dp"
                 />
 
             <EditText
@@ -77,7 +80,7 @@
                 android:hint="Organization"
                 android:text="YMSBAQA"
                 android:layout_marginTop="0dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="5dp"
                 android:padding="5dp"
                 android:textSize="@dimen/login_input_text_size"
                 android:background="@drawable/loginscreen_edit_text_style"
@@ -105,8 +108,8 @@
                 android:textSize="@dimen/login_input_text_size"
                 android:textAlignment="center"
                 android:paddingTop="4dp"
-                android:paddingRight="8dp"
-                android:paddingLeft="10dp"
+                android:paddingRight="4dp"
+                android:paddingLeft="4dp"
                 />
             <EditText
                 android:layout_width="match_parent"
@@ -116,7 +119,7 @@
                 android:hint="Username"
                 android:text="RWPraful"
                 android:layout_marginTop="0dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="5dp"
                 android:textSize="@dimen/login_input_text_size"
                 android:background="@drawable/loginscreen_edit_text_style"
                 android:textColorHint="#999999"
@@ -145,8 +148,8 @@
                 android:textSize="@dimen/login_input_text_size"
                 android:textAlignment="center"
                 android:paddingTop="4dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="4dp"
                 />
             <EditText
                 android:layout_width="match_parent"
@@ -156,7 +159,7 @@
                 android:layout_gravity="center_horizontal"
                 android:hint="Password"
                 android:text="Test123"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="5dp"
                 android:textSize="@dimen/login_input_text_size"
                 android:background="@drawable/loginscreen_edit_text_style"
                 android:textColorHint="#999999"
@@ -165,6 +168,33 @@
                 />
             </LinearLayout>
 
+            <RadioGroup
+                android:id="@+id/rgServerGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal">
+                <RadioButton
+                    android:id="@+id/demoServer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:singleLine="true"
+                    android:text="@string/server_demo"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/demo3Server"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:singleLine="true"
+                    android:text="@string/server_demo3"
+                    android:checked="false"/>
+
+                </RadioGroup>
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/btnLogin"
                 android:layout_width="wrap_content"
@@ -174,12 +204,14 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="5dp"
                 android:layout_marginLeft="15dp"
                 android:onClick="doLogin"
                 bootstrapbutton:bb_size="small"
                 bootstrapbutton:bb_roundedCorners="true"
                 />
+
+
 
         </LinearLayout>
     </RelativeLayout>

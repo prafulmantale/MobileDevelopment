@@ -22,6 +22,10 @@
 
     <string name="error_message">No Internet Connection</string>
 
+    <string name="server_demo">demo</string>
+    <string name="server_demo3">demo3</string>
+
+
 
     <string name="data_update_title">CELLULAR RATE UPDATE FREQUENCY</string>
     <string name="data_update_warning">Please note that using this application over cellular data networks may incur additional charges from your network provider. Manage data usage by selecting the appropriate value.</string>

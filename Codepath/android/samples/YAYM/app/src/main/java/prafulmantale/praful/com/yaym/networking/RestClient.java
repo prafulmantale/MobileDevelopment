@@ -9,6 +9,7 @@ import com.loopj.android.http.RequestParams;
 
 import org.apache.http.entity.StringEntity;
 
+import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.helpers.Utils;
 import prafulmantale.praful.com.yaym.models.LoginRequest;
@@ -18,7 +19,7 @@ import prafulmantale.praful.com.yaym.models.LoginRequest;
  */
 public class RestClient {
 
-    private static final String API_BASE_URL =  "https://demo3.ym.integral.net/fxi/";
+//    private static final String API_BASE_URL =  "https://demo3.ym.integral.net/fxi/";
     private static final String SNAPSHOt_URL = "rw/riskwarehouse/snapshot";
     private static final String RULES_URL = "rw/riskwarehouse/rule";
     private static final String LOGIN_URL = "admin/auth/login";
@@ -43,7 +44,7 @@ public class RestClient {
 
         client.setCookieStore(cookieStore);
 
-        client.get(Utils.getAPIUrl(API_BASE_URL, RULES_URL), params, handler);
+        client.get(Utils.getAPIUrl(YMApplication.getAppBaseUrl(), RULES_URL), params, handler);
 
     }
 
@@ -55,14 +56,14 @@ public class RestClient {
 
         client.setCookieStore(cookieStore);
 
-        client.get(Utils.getAPIUrl(API_BASE_URL, SNAPSHOt_URL), params, handler);
+        client.get(Utils.getAPIUrl(YMApplication.getAppBaseUrl(), SNAPSHOt_URL), params, handler);
 
     }
 
     public void login(Context context, JsonHttpResponseHandler handler, LoginRequest request){
 
         cookieStore.clear();
-        String url = Utils.getAPIUrl(API_BASE_URL, LOGIN_URL);
+        String url = Utils.getAPIUrl(YMApplication.getAppBaseUrl(), LOGIN_URL);
         client.addHeader("Content-Type", "application/json; charset=UTF-8");
 
         loginRequest = request;
