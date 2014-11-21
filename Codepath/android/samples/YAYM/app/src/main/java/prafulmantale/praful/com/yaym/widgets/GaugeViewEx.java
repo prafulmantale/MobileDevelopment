@@ -78,6 +78,7 @@ public class GaugeViewEx extends View {
         float endY   = startY + (float)(40 * Math.cos(newangle));
 
 
+        //Outer rect
         if(currentPnL>= 0) {
             canvas.drawArc(outerRect, 180, 60, true, outerCirclePaintBlank);
             canvas.drawArc(outerRect, 240, 120, true, outerCirclePaintProfit);
@@ -87,21 +88,22 @@ public class GaugeViewEx extends View {
             canvas.drawArc(outerRect, 240, 120, true, outerCirclePaintBlank);
         }
 
+        //Inner Rect
         canvas.drawArc(innerRect, 180, 180, true, innerCirclePaint);
 
+        //Meter line
         canvas.drawArc(meterRect, 180, 180, false, meterLinePaint);
-        canvas.drawLine(width/4, startY, width/4 + width - (width/2), startY, innerCirclePaint);
+
+//        canvas.drawLine(innerRect.left, innerRect.bottom, innerRect.right, innerRect.bottom, outerCirclePaintLoss);
+
+        //Needle
         canvas.drawCircle(startX, startY, 4, needlePaint);
         canvas.drawLine(startX, startY, endX, endY, needlePaint);
 
 
-
-
         canvas.drawText(lossThresholdText, outerRect.left - 5, height - height/6, textPaintLoss);
         canvas.drawText(profitThresholdText, outerRect.right + 5, height - height/6, textPaintProfit);
-
         canvas.drawText(currentPnLText, startX, startY + 20, textPaint);
-
     }
 
     private void init(){
@@ -129,7 +131,7 @@ public class GaugeViewEx extends View {
 
         needlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         needlePaint.setColor(getResources().getColor(R.color.needle_color));
-        needlePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        needlePaint.setStyle(Paint.Style.FILL);
         needlePaint.setStrokeWidth(1f);
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
