@@ -107,7 +107,7 @@ public class PositionStatusView extends View {
         dashPaint.setColor(getResources().getColor(R.color.pos_blank));
         dashPaint.setStrokeWidth(1);
         dashPaint.setStyle(Paint.Style.STROKE);
-        dashPaint.setPathEffect(new DashPathEffect(new float[]{2,2}, 0));
+        dashPaint.setPathEffect(new DashPathEffect(new float[]{5,5}, 0));
 
         dashPath = new Path();
 

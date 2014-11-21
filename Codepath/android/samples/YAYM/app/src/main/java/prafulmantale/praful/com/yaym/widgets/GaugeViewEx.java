@@ -36,8 +36,8 @@ public class GaugeViewEx extends View {
 
     private int center;
 
-    private int meterWidth = 16;
-    private int innerWidth = 24;
+    private int meterWidth = getResources().getDimensionPixelSize(R.dimen.gauge_view_meter_width);
+    private int innerWidth = getResources().getDimensionPixelSize(R.dimen.gause_view_inner_gap) + meterWidth;
 
     private Paint textPaint;
     private Paint textPaintProfit;
@@ -134,17 +134,17 @@ public class GaugeViewEx extends View {
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(getResources().getColor(R.color.pnl_text_color));
         textPaint.setTextAlign(Paint.Align.CENTER);
-        textPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.fontsize_gauge_view_currentvalue));
+        textPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.gauge_view_currentvalue_fontsize));
 
 
         textPaintProfit = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaintProfit.setColor(getResources().getColor(R.color.pnl_text_color));
-        textPaintProfit.setTextSize(getResources().getDimensionPixelSize(R.dimen.fontsize_gauge_view_profitvalue));
+        textPaintProfit.setTextSize(getResources().getDimensionPixelSize(R.dimen.gauge_view_profitvalue_fontsize));
 
         textPaintLoss = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaintLoss.setColor(getResources().getColor(R.color.pnl_text_color));
         textPaintLoss.setTextAlign(Paint.Align.RIGHT);
-        textPaintLoss.setTextSize(getResources().getDimensionPixelSize(R.dimen.fontsize_gauge_view_lossvalue));
+        textPaintLoss.setTextSize(getResources().getDimensionPixelSize(R.dimen.gauge_view_lossvalue_fontsize));
 
 
         float outerRectLeft = width/4;
@@ -220,5 +220,4 @@ public class GaugeViewEx extends View {
             }
         }
     }
-
 }

@@ -3,9 +3,11 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="fontsize_gauge_view_currentvalue">14sp</dimen>
-    <dimen name="fontsize_gauge_view_profitvalue">12sp</dimen>
-    <dimen name="fontsize_gauge_view_lossvalue">12sp</dimen>
+    <dimen name="gauge_view_currentvalue_fontsize">14sp</dimen>
+    <dimen name="gauge_view_profitvalue_fontsize">12sp</dimen>
+    <dimen name="gauge_view_lossvalue_fontsize">12sp</dimen>
+    <dimen name="gauge_view_meter_width">12dp</dimen>
+    <dimen name="gause_view_inner_gap">6dp</dimen>
 
     <dimen name="position_view_bar_height">14dp</dimen>
     <dimen name="position_view_bar_width">2.5dp</dimen>

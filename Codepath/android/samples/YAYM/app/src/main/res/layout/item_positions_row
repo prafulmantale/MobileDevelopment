@@ -9,10 +9,9 @@
     >
 
     <include
-        android:layout_width="70dp"
-        android:layout_weight="0.2"
+        android:layout_width="100dp"
         android:layout_height="60dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="10dp"
         layout="@layout/item_ccypair_rate"
         android:id="@+id/itemCcyPairRate"/>
 
@@ -29,7 +28,6 @@
         android:id="@+id/gvPnLGauge"
         android:layout_width="170dp"
         android:layout_height="60dp"
-        android:gravity="center"
         android:layout_marginLeft="5dp"
         android:layout_alignParentRight="true"
         />
