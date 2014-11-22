@@ -236,6 +236,11 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         int id = item.getItemId();
         switch (id){
             case R.id.menuSettings:
+
+//                startActivity(new Intent(getApplicationContext(),
+//                        SettingsActivity.class));
+//                overridePendingTransition(R.anim.slide_in_from_top, R.anim.slide_out_from_top);
+
                 return true;
             case R.id.menuAbout:
                 startActivity(new Intent(this, AboutActivity.class));

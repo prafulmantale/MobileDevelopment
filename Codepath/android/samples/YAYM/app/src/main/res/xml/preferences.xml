@@ -8,6 +8,7 @@
             android:entries="@array/datefetchoptions_display"
             android:entryValues="@array/datafetchOptions_values"
             android:defaultValue="5"
+            android:key="list_preference"
             android:summary="@string/data_update_warning"
             android:title="@string/pref_title"/>
     </PreferenceCategory>
