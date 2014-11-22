@@ -1,7 +1,6 @@
 package prafulmantale.praful.com.yaym.activities;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -11,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.Menu;
@@ -32,6 +32,7 @@ import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
+import prafulmantale.praful.com.yaym.fragments.FrequencySettingsFragment;
 import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
@@ -41,7 +42,7 @@ import prafulmantale.praful.com.yaym.services.RWPollService;
 import prafulmantale.praful.com.yaym.widgets.YieldPercentageView;
 
 
-public class YieldMangerActivity extends Activity implements NetworkResponseListener{
+public class YieldMangerActivity extends FragmentActivity implements NetworkResponseListener{
 
     private static final String TAG = YieldMangerActivity.class.getSimpleName();
 
@@ -236,6 +237,8 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         int id = item.getItemId();
         switch (id){
             case R.id.menuSettings:
+
+                FrequencySettingsFragment.newInstance().show(getSupportFragmentManager(), "frequency_settings");
 
 //                startActivity(new Intent(getApplicationContext(),
 //                        SettingsActivity.class));

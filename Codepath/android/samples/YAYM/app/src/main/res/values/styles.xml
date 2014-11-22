@@ -33,4 +33,9 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
+    <style name="frequency_pref_dialog_animation">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
 </resources>

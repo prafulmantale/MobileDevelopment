@@ -28,6 +28,12 @@
     <string name="pref_title">Select Frequency</string>
     <string name="about">This application is provided by Integral Development Corporation.  \n\nIntegral’s electronic trading network FX Grid® allows all market participants to design and deploy their own private FX marketplaces. Hundreds of major institutions around the world have delivered branded trading services to their customers through this open cloud-based platform. \n\nMore information about Integral’s complete suite of on demand services are available at www.integral.com. \n\n© 2014 Integral Development Corp. All rights reserved. Integral technology is protected under U.S. Patent Nos. 6,347,307 and 7,882,011 B2, patent pending applications and related intellectual property.</string>
 
+    <string name="second_one">1 Second</string>
+    <string name="seconds_five">5 Seconds</string>
+    <string name="seconds_fifteen">15 Seconds</string>
+    <string name="seconds_thirty">30 Seconds</string>
+    <string name="manual">Manual</string>
+
     <string-array name="datefetchoptions_display">
         <item>1 Second</item>
         <item>5 Second</item>
