@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -156,6 +157,14 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
 //                startService(new Intent(YieldMangerActivity.this, RefreshService.class));
 //            }
 //        });
+
+        lvPositions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(YieldMangerActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_from_left);
+            }
+        });
     }
 
     private void initializeActionBar(){

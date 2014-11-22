@@ -49,6 +49,7 @@
     <color name="risk_capacity_title">#ffffff</color>
 
     <color name="yeild_details_header_background">#fff</color>
+    <color name="yeild_details_header_value">#333</color>
 
     <color name="positions_header_background">#EAEAEA</color>
     <color name="positions_header_text">#333</color>

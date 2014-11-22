@@ -16,6 +16,11 @@
         <item name="android:padding">2dp</item>
     </style>
 
+    <style name="yield_details_value" parent="risk_capacity_value">
+        <item name="android:layout_weight">0.4</item>
+        <item name="android:textColor">@color/yeild_details_header_value</item>
+    </style>
+
     <style name="risk_capacity_text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
@@ -24,6 +29,10 @@
         <item name="android:textSize">10sp</item>
         <item name="android:gravity">center</item>
         <item name="android:maxLines">3</item>
+    </style>
+
+    <style name="yield_details_text" parent="risk_capacity_text">
+        <item name="android:layout_weight">0.6</item>
     </style>
 
     <style name="positions_header">

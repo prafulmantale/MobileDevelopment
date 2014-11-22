@@ -26,17 +26,17 @@
             <TextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.4"
                 android:id="@+id/tvYieldValue"
-                style="@style/risk_capacity_value"
+                style="@style/yield_details_value"
                 android:text="0"
                 />
             <TextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:id="@+id/tvYeildText"
-                style="@style/risk_capacity_text"/>
+                style="@style/yield_details_text"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -47,17 +47,17 @@
             <TextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.4"
                 android:id="@+id/tvVolumeValue"
-                style="@style/risk_capacity_value"
+                style="@style/yield_details_value"
                 android:text="0"
                 />
             <TextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:id="@+id/tvVolumeText"
-                style="@style/risk_capacity_text"/>
+                style="@style/yield_details_text"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -68,17 +68,17 @@
             <TextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.4"
                 android:id="@+id/tvRealizedPnLValue"
-                style="@style/risk_capacity_value"
+                style="@style/yield_details_value"
                 android:text="0"
                 />
             <TextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:id="@+id/tvRealizedPnLText"
-                style="@style/risk_capacity_text"/>
+                style="@style/yield_details_text"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -89,24 +89,19 @@
             <TextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.4"
                 android:id="@+id/tvUnRealizedPnLValue"
-                style="@style/risk_capacity_value"
+                style="@style/yield_details_value"
                 android:text="0"
                 />
             <TextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:id="@+id/tvUnRealizedPnLText"
-                style="@style/risk_capacity_text"/>
+                style="@style/yield_details_text"/>
         </LinearLayout>
 
-
     </LinearLayout>
-
-
-
-
 
     </RelativeLayout>
