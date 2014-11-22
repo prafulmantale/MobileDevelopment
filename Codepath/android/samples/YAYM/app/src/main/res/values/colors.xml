@@ -48,6 +48,6 @@
     <color name="risk_capacity_background">#262D33</color>
     <color name="risk_capacity_title">#ffffff</color>
 
-    <color name="listview_positions_header_background">#EAEAEA</color>
-    <color name="listview_positions_header_text">#333</color>
+    <color name="positions_header_background">#EAEAEA</color>
+    <color name="positions_header_text">#333</color>
 </resources>

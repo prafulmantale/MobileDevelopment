@@ -37,11 +37,17 @@
            android:weightSum="1"
            android:layout_gravity="center">
            <TextView
+               android:layout_height="0dp"
+               android:layout_width="match_parent"
+               android:layout_weight="0.5"
                android:id="@+id/tvYieldValue"
                style="@style/risk_capacity_value"
                android:text="0"
                />
            <TextView
+               android:layout_height="0dp"
+               android:layout_width="match_parent"
+               android:layout_weight="0.5"
                android:id="@+id/tvYeildText"
                style="@style/risk_capacity_text"/>
            </LinearLayout>
@@ -52,11 +58,17 @@
             android:orientation="vertical"
             android:weightSum="1">
             <TextView
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_weight="0.5"
                 android:id="@+id/tvVolumeValue"
                 style="@style/risk_capacity_value"
                 android:text="0"
                 />
             <TextView
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_weight="0.5"
                 android:id="@+id/tvVolumeText"
                 style="@style/risk_capacity_text"/>
         </LinearLayout>
@@ -67,11 +79,17 @@
             android:orientation="vertical"
             android:weightSum="1">
             <TextView
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_weight="0.5"
                 android:id="@+id/tvRealizedPnLValue"
                 style="@style/risk_capacity_value"
                 android:text="0"
                 />
             <TextView
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_weight="0.5"
                 android:id="@+id/tvRealizedPnLText"
                 style="@style/risk_capacity_text"/>
         </LinearLayout>
@@ -82,11 +100,17 @@
             android:orientation="vertical"
             android:weightSum="1">
             <TextView
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_weight="0.5"
                 android:id="@+id/tvUnRealizedPnLValue"
                 style="@style/risk_capacity_value"
                 android:text="0"
                 />
             <TextView
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_weight="0.5"
                 android:id="@+id/tvUnRealizedPnLText"
                 style="@style/risk_capacity_text"/>
         </LinearLayout>

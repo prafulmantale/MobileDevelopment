@@ -41,12 +41,12 @@ public class PositionStatusView extends View {
     private Bitmap pointerImage;
 
     private float topMargin = 30f;
-    private float barWidth = getResources().getDimensionPixelSize(R.dimen.position_view_bar_width);
-    private float barHeight = getResources().getDimensionPixelSize(R.dimen.position_view_bar_height);
-    private float centerBarHeight = getResources().getDimensionPixelSize(R.dimen.position_view_center_bar_height);
-    private float barMargin = getResources().getDimensionPixelSize(R.dimen.position_view_bar_margin);
+    private float barWidth;// = getResources().getDimensionPixelSize(R.dimen.position_view_bar_width);
+    private float barHeight;// = getResources().getDimensionPixelSize(R.dimen.position_view_bar_height);
+    private float centerBarHeight;// = getResources().getDimensionPixelSize(R.dimen.position_view_center_bar_height);
+    private float barMargin;// = getResources().getDimensionPixelSize(R.dimen.position_view_bar_margin);
 
-    private float circleRadius = getResources().getDimensionPixelSize(R.dimen.position_view_circle_radius);
+    private float circleRadius;// = getResources().getDimensionPixelSize(R.dimen.position_view_circle_radius);
 
     private Paint dashPaint;
 
@@ -79,6 +79,17 @@ public class PositionStatusView extends View {
     }
 
     private void init(){
+
+        if(isInEditMode()){
+            return;
+        }
+
+        barWidth = getResources().getDimensionPixelSize(R.dimen.position_view_bar_width);
+        barHeight = getResources().getDimensionPixelSize(R.dimen.position_view_bar_height);
+        centerBarHeight = getResources().getDimensionPixelSize(R.dimen.position_view_center_bar_height);
+        barMargin = getResources().getDimensionPixelSize(R.dimen.position_view_bar_margin);
+
+        circleRadius = getResources().getDimensionPixelSize(R.dimen.position_view_circle_radius);
 
         width = getMeasuredWidth();
         blankPaint = new Paint();
@@ -132,6 +143,10 @@ public class PositionStatusView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+        if(isInEditMode()){
+            return;
+        }
 
         float left = width/2;
         drawCenterBar(canvas, left);

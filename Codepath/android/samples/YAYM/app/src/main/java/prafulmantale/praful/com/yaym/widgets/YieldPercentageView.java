@@ -60,6 +60,10 @@ public class YieldPercentageView extends View {
     }
 
     private void init(){
+        if(isInEditMode()){
+            return;
+        }
+
         final Resources resources = getResources();
         float density = resources.getDisplayMetrics().density;
 

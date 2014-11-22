@@ -36,8 +36,8 @@ public class GaugeViewEx extends View {
 
     private int center;
 
-    private int meterWidth = getResources().getDimensionPixelSize(R.dimen.gauge_view_meter_width);
-    private int innerWidth = getResources().getDimensionPixelSize(R.dimen.gause_view_inner_gap) + meterWidth;
+    private int meterWidth;// = getResources().getDimensionPixelSize(R.dimen.gauge_view_meter_width);
+    private int innerWidth;// = getResources().getDimensionPixelSize(R.dimen.gause_view_inner_gap) + meterWidth;
 
     private Paint textPaint;
     private Paint textPaintProfit;
@@ -71,6 +71,10 @@ public class GaugeViewEx extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
+        if(isInEditMode()){
+            return;
+        }
+
         float newangle = (float)(angle * Math.PI / 180);
         float startX = center;
         float startY = 0.79f* height - 1;
@@ -79,7 +83,7 @@ public class GaugeViewEx extends View {
 
 
         //Outer rect
-        if(currentPnL>= 0) {
+        if(currentPnL >= 0) {
             canvas.drawArc(outerRect, 180, 60, true, outerCirclePaintBlank);
             canvas.drawArc(outerRect, 240, 120, true, outerCirclePaintProfit);
         }
@@ -107,6 +111,12 @@ public class GaugeViewEx extends View {
     }
 
     private void init(){
+
+        if(isInEditMode()){
+            return;
+        }
+        meterWidth = getResources().getDimensionPixelSize(R.dimen.gauge_view_meter_width);
+        innerWidth = getResources().getDimensionPixelSize(R.dimen.gause_view_inner_gap) + meterWidth;
 
         outerCirclePaintBlank = new Paint(Paint.ANTI_ALIAS_FLAG);
         outerCirclePaintBlank.setColor(getResources().getColor(R.color.pnl_blank));

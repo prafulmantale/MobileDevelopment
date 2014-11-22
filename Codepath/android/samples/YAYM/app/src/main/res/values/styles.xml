@@ -27,7 +27,7 @@
     </style>
 
     <style name="positions_header">
-        <item name="android:textColor">@color/listview_positions_header_text</item>
+        <item name="android:textColor">@color/positions_header_text</item>
         <item name="android:textSize">@dimen/position_header_textSize</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>

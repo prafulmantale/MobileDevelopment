@@ -3,7 +3,7 @@
     android:shape="rectangle" android:padding="10dp"
     >
 
-    <solid android:color="@color/listview_positions_header_background"/>
+    <solid android:color="@color/positions_header_background"/>
     <!--<gradient-->
         <!--android:angle="270"-->
         <!--android:centerColor="#ff5a5d5a"-->
