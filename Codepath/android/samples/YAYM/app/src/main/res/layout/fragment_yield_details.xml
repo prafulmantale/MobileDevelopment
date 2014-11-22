@@ -152,6 +152,15 @@
                 android:layout_height="match_parent"
                 android:text="EUR/USD"
                 android:gravity="center"/>
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="prafulmantale.praful.com.yaym.fragments.ChartsFragment"
+                android:id="@+id/fragmentCharts"
+                android:layout_below="@id/tvYDCurrencyPair"
+                tools:layout="@layout/fragment_charts"
+                android:layout_marginTop="10dp"/>
         </RelativeLayout>
     </RelativeLayout>
     </ScrollView>
