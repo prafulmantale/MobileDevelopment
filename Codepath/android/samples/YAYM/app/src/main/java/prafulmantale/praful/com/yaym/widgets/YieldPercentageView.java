@@ -86,6 +86,9 @@ public class YieldPercentageView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
+        if(isInEditMode()){
+            return;
+        }
         // Draw the arcs
         canvas.drawArc(arcRect, startAngle, sweepAngle, false, arcPaint);
         canvas.drawArc(arcRect, startAngle, progressSweep, false,progressPaint);
