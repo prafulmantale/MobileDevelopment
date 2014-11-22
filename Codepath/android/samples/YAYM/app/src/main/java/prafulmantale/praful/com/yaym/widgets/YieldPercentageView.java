@@ -1,4 +1,4 @@
-package prafulmantale.praful.com.positionscale;
+package prafulmantale.praful.com.yaym.widgets;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+
+import prafulmantale.praful.com.yaym.R;
 
 /**
  * Created by prafulmantale on 11/18/14.
@@ -20,7 +22,7 @@ public class YieldPercentageView extends View {
     private Paint progressPaint;
     private Paint textPaint;
 
-    private RectF  arcRect = new RectF();;
+    private RectF arcRect = new RectF();;
     private int arcRadius;
 
     private float progressSweep;
@@ -61,7 +63,7 @@ public class YieldPercentageView extends View {
         final Resources resources = getResources();
         float density = resources.getDisplayMetrics().density;
 
-        int arcColor = Color.GRAY;
+        int arcColor = getResources().getColor(R.color.risk_capacity_arc_blank);
         int progressColor = Color.BLUE;
 
         progressWidth = (int)(progressWidth * density);
@@ -80,7 +82,8 @@ public class YieldPercentageView extends View {
         progressPaint.setStrokeWidth(progressWidth);
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setColor(Color.RED);
+        textPaint.setColor(getResources().getColor(R.color.risk_capacity_title));
+        textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(12 * density);
     }
 
@@ -94,12 +97,8 @@ public class YieldPercentageView extends View {
         canvas.drawArc(arcRect, arcStart, progressSweep, false,
                 progressPaint);
 
-        canvas.drawText("0%", (width/2), (height/2)* getResources().getDisplayMetrics().density, textPaint);
-    }
-
-    @Override
-    public void setPadding(int left, int top, int right, int bottom) {
-        super.setPadding(2, 2, 2, 2);
+        //canvas.drawText("0%", (width/2), (height/2)* getResources().getDisplayMetrics().density, textPaint);
+        canvas.drawText("0%", arcRect.centerX(), arcRect.centerY() + 4, textPaint);
     }
 
     @Override
@@ -117,9 +116,9 @@ public class YieldPercentageView extends View {
 
         translateX = (int)(width * 0.5f);
         translateY = (int)(height * 0.5f);
-        arcDiameter = min - maxPadding;
+        arcDiameter = min - maxPadding - 12;
 
-        arcRadius = (arcDiameter/2) - 8;
+        arcRadius = (arcDiameter/2);
         top = (height / 2) - arcRadius;
         left = (width/2) - arcRadius;
 

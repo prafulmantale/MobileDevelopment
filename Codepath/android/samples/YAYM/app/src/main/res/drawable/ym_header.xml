@@ -3,11 +3,12 @@
     android:shape="rectangle" android:padding="10dp"
     >
 
-    <gradient
-        android:angle="270"
-        android:centerColor="#ff5a5d5a"
-        android:centerY="0.5"
-        android:endColor="#ff747674"
-        android:startColor="#ff9d9e9d" />
+    <solid android:color="@color/listview_positions_header_background"/>
+    <!--<gradient-->
+        <!--android:angle="270"-->
+        <!--android:centerColor="#ff5a5d5a"-->
+        <!--android:centerY="0.5"-->
+        <!--android:endColor="#ff747674"-->
+        <!--android:startColor="#ff9d9e9d" />-->
 
 </shape>

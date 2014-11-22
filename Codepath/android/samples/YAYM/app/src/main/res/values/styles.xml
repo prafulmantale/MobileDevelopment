@@ -6,4 +6,31 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="risk_capacity_value">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:textColor">@color/risk_capacity_value</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center_horizontal|bottom</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
+    <style name="risk_capacity_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:textColor">@color/risk_capacity_text</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">3</item>
+    </style>
+
+    <style name="positions_header">
+        <item name="android:textColor">@color/listview_positions_header_text</item>
+        <item name="android:textSize">@dimen/position_header_textSize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
 </resources>

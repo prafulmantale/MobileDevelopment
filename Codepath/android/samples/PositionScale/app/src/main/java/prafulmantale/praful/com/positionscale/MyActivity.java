@@ -47,7 +47,7 @@ public class MyActivity extends Activity {
 //        ps.setBars(count);
 //        count ++;
 
-        gv.setAngle(count);
+       // gv.setAngle(count);
         count+=-10;
 
     }

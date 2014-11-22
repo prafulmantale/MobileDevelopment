@@ -46,5 +46,8 @@
     <color name="risk_capacity_value">#86BEFF</color>
     <color name="risk_capacity_text">#9A9A9A</color>
     <color name="risk_capacity_background">#262D33</color>
-    <color name="risk_capacity_title">#fffff</color>
+    <color name="risk_capacity_title">#ffffff</color>
+
+    <color name="listview_positions_header_background">#EAEAEA</color>
+    <color name="listview_positions_header_text">#333</color>
 </resources>
