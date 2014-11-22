@@ -230,7 +230,7 @@ public class PositionStatusView extends View {
         else {
             int count = 0;
             while(count < 34){
-                
+
                 if(count < normalCount) {
                     canvas.drawRect(right - left, topMargin, right, topMargin + barHeight, normalPaint);
                 }

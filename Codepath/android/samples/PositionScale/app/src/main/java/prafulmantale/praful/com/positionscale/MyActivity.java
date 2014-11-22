@@ -11,7 +11,7 @@ public class MyActivity extends Activity {
 
     PlasticLinearLayout pll;
     PositionScale ps;
-    GaugeView gv;
+    YieldPercentageView gv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_my);
         pll = (PlasticLinearLayout)findViewById(R.id.pll);
        // ps = (PositionScale)findViewById(R.id.ps);
-        gv = (GaugeView)findViewById(R.id.gv);
+        gv = (YieldPercentageView)findViewById(R.id.gv);
     }
 
 

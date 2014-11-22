@@ -40,5 +40,11 @@
     <color name="pnl_loss">#e42217</color>
     <color name="pnl_text_color">#707070</color>
     <color name="pnl_meter_line">#c0d0e0</color>
-    
+
+    <color name="risk_capacity_arc_blank">#464646</color>
+    <color name="risk_capacity_percentage">#ffffff</color>
+    <color name="risk_capacity_value">#86BEFF</color>
+    <color name="risk_capacity_text">#9A9A9A</color>
+    <color name="risk_capacity_background">#262D33</color>
+    <color name="risk_capacity_title">#fffff</color>
 </resources>
