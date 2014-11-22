@@ -4,13 +4,18 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -21,6 +26,7 @@ import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
+import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.models.LoginRequest;
 
@@ -35,6 +41,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     private ProgressDialog progressDialog;
     private RadioGroup serverGroup;
     private YMApplication application;
+    private CheckBox cbRememberMe;
 
 
     @Override
@@ -44,7 +51,83 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
 
         initialize();
         initializeActionBar();
+
+        updateFromPreferences();
+
         setupListeners();
+    }
+
+    private void updateFromPreferences() {
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String org = null;
+        String userName = null;
+        String password = null;
+        boolean rememberMe = false;
+        String server = null;
+
+        if(pref != null){
+
+            rememberMe = pref.getBoolean(AppConstants.PREF_KEY_REMEMBER_ME, rememberMe);
+            cbRememberMe.setChecked(rememberMe);
+            if(rememberMe){
+                org = pref.getString(AppConstants.PREF_KEY_USER_ORG, org);
+                userName = pref.getString(AppConstants.PREF_KEY_USER_NAME, userName);
+                password = pref.getString(AppConstants.PREF_KEY_USER_PASSWORD, password);
+                server = pref.getString(AppConstants.PREF_KEY_SERVER, server);
+            }
+        }
+
+        if(org != null){
+            etOrg.setText(org);
+        }
+
+        if(userName != null){
+            etUserName.setText(userName);
+        }
+
+        if(password != null){
+            etPassword.setText(password);
+        }
+
+        if(server != null){
+            RadioButton demo3 = (RadioButton)findViewById(R.id.demo3Server);
+            RadioButton demo = (RadioButton)findViewById(R.id.demoServer);
+            if(server.equals(getString(R.string.server_demo3))){
+                demo3.setChecked(true);
+                application.setYmServer(getString(R.string.server_demo3));
+            }
+
+            if(server.equals(getString(R.string.server_demo))){
+                demo.setChecked(true);
+                application.setYmServer(getString(R.string.server_demo));
+            }
+        }
+    }
+
+    private void savePreferences(){
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        SharedPreferences.Editor editor = prefs.edit();
+        boolean rememberMe = cbRememberMe.isChecked();
+        editor.putBoolean(AppConstants.PREF_KEY_REMEMBER_ME, rememberMe);
+
+        if(rememberMe == false) {
+            editor.remove(AppConstants.PREF_KEY_USER_ORG);
+            editor.remove(AppConstants.PREF_KEY_USER_NAME);
+            editor.remove(AppConstants.PREF_KEY_USER_PASSWORD);
+            editor.remove(AppConstants.PREF_KEY_SERVER);
+        }
+        else{
+            editor.putString(AppConstants.PREF_KEY_USER_ORG, etOrg.getText().toString());
+            editor.putString(AppConstants.PREF_KEY_USER_NAME, etUserName.getText().toString());
+            editor.putString(AppConstants.PREF_KEY_USER_PASSWORD, etPassword.getText().toString());
+            editor.putString(AppConstants.PREF_KEY_SERVER, application.getYmServer());
+        }
+
+        editor.commit();
     }
 
     private void setupListeners() {
@@ -56,6 +139,15 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
                 }
                 if(checkedId == R.id.demoServer){
                     application.setYmServer(getString(R.string.server_demo));
+                }
+            }
+        });
+
+        cbRememberMe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked == false){
+                    savePreferences(); //Immediately clear everything
                 }
             }
         });
@@ -81,6 +173,8 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
         tvCopyright.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
 
         serverGroup = (RadioGroup)findViewById(R.id.rgServerGroup);
+
+        cbRememberMe = (CheckBox)findViewById(R.id.cbRemember);
 
     }
 
@@ -108,7 +202,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
 
     public void doLogin(View view){
 
-        YMApplication application = (YMApplication)getApplication();
+        savePreferences();
         application.getClient().login(this, new NetworkResponseHandler(this, APIRequest.LOGIN), getLoginRequest());
         progressDialog = ProgressDialog.show(this, "", getString(R.string.login_progress_message));
     }

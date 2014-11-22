@@ -46,12 +46,16 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
 
     public void setYmServer(String ymServer) {
         this.ymServer = ymServer;
-        if(ymServer == getString(R.string.server_demo3)) {
+        if(ymServer.equals(getString(R.string.server_demo3))){
             appBaseUrl = "https://demo3.ym.integral.net/fxi/";
         }
-        if(ymServer == getString(R.string.server_demo)){
+        if(ymServer.equals(getString(R.string.server_demo))){
             appBaseUrl = "https://demo.ym.integral.net/fxi/";
         }
+    }
+
+    public String getYmServer() {
+        return ymServer;
     }
 
     public static String getAppBaseUrl() {
