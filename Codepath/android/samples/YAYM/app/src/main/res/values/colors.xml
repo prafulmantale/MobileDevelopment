@@ -53,4 +53,13 @@
 
     <color name="positions_header_background">#EAEAEA</color>
     <color name="positions_header_text">#333</color>
+
+    <color name="chart_duration_border_color">#265089</color>
+    <color name="chart_pnl_bar">#5791D6</color>
+    <color name="chart_rate_bar">#265089</color>
+    <color name="chart_volume_bar">#A4B6CA</color>
+    <color name="chart_yield_circle">#265089</color>
+    <color name="chart_yield_line">#859FC1</color>
+    <color name="chart_current_pnl">#D4E7FB</color>
+
 </resources>

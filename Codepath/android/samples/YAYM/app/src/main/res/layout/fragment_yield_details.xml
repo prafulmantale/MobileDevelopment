@@ -1,17 +1,22 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="5dp"
+    android:background="@color/yeild_details_header_background"
     >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/riskcapacity"
+        android:id="@+id/llYieldDetailsHeader"
         android:showDividers="middle"
-        android:background="@color/yeild_details_header_background"
+
         android:divider="@drawable/yield_details_header_divider"
         android:dividerPadding="5dp"
         android:orientation="horizontal"
@@ -101,7 +106,52 @@
                 android:id="@+id/tvUnRealizedPnLText"
                 style="@style/yield_details_text"/>
         </LinearLayout>
-
     </LinearLayout>
 
+        <RelativeLayout
+            android:id="@+id/rlConfigDetails"
+            android:layout_below="@+id/llYieldDetailsHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:id="@+id/tvChartDurationOneMinute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1m"
+                android:textSize="12sp"
+                android:textColor="@color/risk_capacity_text"
+                android:background="@drawable/char_duration_border"/>
+            <TextView
+                android:id="@+id/tvChartDurationFifteenMinute"
+                android:layout_toRightOf="@id/tvChartDurationOneMinute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15m"
+                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/risk_capacity_text"
+                android:background="@drawable/char_duration_border"/>
+            <TextView
+                android:id="@+id/tvChartDurationOneHour"
+                android:layout_toRightOf="@id/tvChartDurationFifteenMinute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1h"
+                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/risk_capacity_text"
+                android:background="@drawable/char_duration_border"/>
+            <TextView
+                android:id="@+id/tvYDCurrencyPair"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="EUR/USD"
+                android:gravity="center"/>
+        </RelativeLayout>
     </RelativeLayout>
+    </ScrollView>
