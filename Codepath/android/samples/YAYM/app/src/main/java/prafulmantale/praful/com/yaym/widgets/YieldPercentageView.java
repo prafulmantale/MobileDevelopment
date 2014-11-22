@@ -29,20 +29,13 @@ public class YieldPercentageView extends View {
     private int startAngle = 135;
     private int sweepAngle = 270;
     private int max = 100;
-    private int rotation = 0;
 
     private int progressWidth = 8;
-
-    private int translateX;
-    private int translateY;
-
-    private int arcWidth = 2;
-
-    private final int angleOffset = 0;
 
     private int height;
     private int width;
 
+    private String percentageDisplay = "0%";
 
     public YieldPercentageView(Context context) {
         super(context);
@@ -77,7 +70,6 @@ public class YieldPercentageView extends View {
         arcPaint.setAntiAlias(true);
         arcPaint.setStyle(Paint.Style.STROKE);
         arcPaint.setStrokeWidth(progressWidth);
-        //mArcPaint.setAlpha(45);
 
         progressPaint = new Paint();
         progressPaint.setColor(progressColor);
@@ -95,14 +87,9 @@ public class YieldPercentageView extends View {
     protected void onDraw(Canvas canvas) {
 
         // Draw the arcs
-        final int arcStart = startAngle + angleOffset + rotation;
-        final int arcSweep = sweepAngle;
-        canvas.drawArc(arcRect, arcStart, arcSweep, false, arcPaint);
-        canvas.drawArc(arcRect, arcStart, progressSweep, false,
-                progressPaint);
-
-        //canvas.drawText("0%", (width/2), (height/2)* getResources().getDisplayMetrics().density, textPaint);
-        canvas.drawText("0%", arcRect.centerX(), arcRect.centerY() + 4, textPaint);
+        canvas.drawArc(arcRect, startAngle, sweepAngle, false, arcPaint);
+        canvas.drawArc(arcRect, startAngle, progressSweep, false,progressPaint);
+        canvas.drawText(percentageDisplay, arcRect.centerX(), arcRect.centerY() + 4, textPaint);
     }
 
     @Override
@@ -117,23 +104,29 @@ public class YieldPercentageView extends View {
         float left = 0;
         int arcDiameter = 0;
 
-
-        translateX = (int)(width * 0.5f);
-        translateY = (int)(height * 0.5f);
         arcDiameter = min - maxPadding - 12;
 
         arcRadius = (arcDiameter/2);
         top = (height / 2) - arcRadius;
         left = (width/2) - arcRadius;
 
-
         arcRect.set(left, top, left + arcDiameter, top + arcDiameter);
-
-        int arcStart = (int)progressSweep + startAngle + rotation + 90;
-//        mThumbXPos = (int) (arcRadius * Math.cos(Math.toRadians(arcStart)));
-//        mThumbYPos = (int) (arcRadius * Math.sin(Math.toRadians(arcStart)));
-
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
 
+    public void setYieldPercentage(double percentage, String percentageDisplay){
+        if(percentage > 100){
+            percentage = 100;
+            percentageDisplay = "100";
+        }
+        if(percentage < 0){
+            percentage = 0;
+            percentageDisplay = "0";
+        }
+
+        this.percentageDisplay = percentageDisplay + "%";
+        progressSweep = (float) (270 * percentage / max);
+
+        invalidate();
     }
 }

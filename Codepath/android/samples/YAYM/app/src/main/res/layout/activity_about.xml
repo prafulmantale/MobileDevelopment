@@ -1,0 +1,43 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context="prafulmantale.praful.com.yaym.activities.AboutActivity">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:id="@+id/tvAbout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about"
+            android:layout_margin="10dp"
+            />
+        
+        <TextView
+            android:id="@+id/tvLink"
+            android:layout_below="@id/tvAbout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:text="http://www.integral.com"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:id="@+id/tvVersion"
+            android:layout_below="@id/tvLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.0"
+            android:gravity="right"
+            android:layout_margin="10dp"
+            android:textColor="@color/grey"/>
+
+        </RelativeLayout>
+</ScrollView>

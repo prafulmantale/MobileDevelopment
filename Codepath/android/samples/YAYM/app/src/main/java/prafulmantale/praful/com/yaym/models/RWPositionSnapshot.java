@@ -73,8 +73,10 @@ public class RWPositionSnapshot {
 
     private double volume;
     private double volumeInUSD;
+    private String volumeInUSDDisplay;
 
     private double yield;
+    private String yieldDisplay;
 
     private boolean isItemSelected;
 
@@ -315,6 +317,14 @@ public class RWPositionSnapshot {
         this.volumeInUSD = volumeInUSD;
     }
 
+    public String getVolumeInUSDDisplay() {
+        return volumeInUSDDisplay;
+    }
+
+    public void setVolumeInUSDDisplay(String volumeInUSDDisplay) {
+        this.volumeInUSDDisplay = volumeInUSDDisplay;
+    }
+
     public double getYield() {
         return yield;
     }
@@ -323,6 +333,13 @@ public class RWPositionSnapshot {
         this.yield = yield;
     }
 
+    public String getYieldDisplay() {
+        return yieldDisplay;
+    }
+
+    public void setYieldDisplay(String yieldDisplay) {
+        this.yieldDisplay = yieldDisplay;
+    }
 
     public boolean isItemSelected() {
         return isItemSelected;

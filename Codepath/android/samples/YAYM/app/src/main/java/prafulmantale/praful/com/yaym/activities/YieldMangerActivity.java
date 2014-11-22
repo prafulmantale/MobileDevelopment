@@ -27,6 +27,7 @@ import java.util.List;
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.adapters.SnapshotAdapter;
 import prafulmantale.praful.com.yaym.application.YMApplication;
+import prafulmantale.praful.com.yaym.caches.RWSummaryCache;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
@@ -35,7 +36,9 @@ import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
+import prafulmantale.praful.com.yaym.models.RWSummary;
 import prafulmantale.praful.com.yaym.services.RWPollService;
+import prafulmantale.praful.com.yaym.widgets.YieldPercentageView;
 
 
 public class YieldMangerActivity extends Activity implements NetworkResponseListener{
@@ -52,6 +55,12 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     private YMApplication application;
     private ProgressDialog progressDialog;
 
+    private YieldPercentageView yieldPercentageView;
+    private TextView tvYieldValue;
+    private TextView tvVolumeValue;
+    private TextView tvRelaizedPnLValue;
+    private TextView tvUnrealizedPnLValue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,13 +68,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
         progressDialog = ProgressDialog.show(this, "", getString(R.string.loading_progress_message));
         initialize();
-        initializeActionBar();
-
-        if(savedInstanceState == null){
-//            snapshots = new ArrayList<RWPositionSnapshot>();
-//            adapter = new SnapshotAdapter(getBaseContext());
-//            lvPositions.setAdapter(adapter);
-        }
+//        initializeActionBar();
 
         getRules();
         setupListeners();
@@ -118,6 +121,20 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         tvUnRelPnLText.setText(Html.fromHtml(getString(R.string.risk_capacity_unrealized_pnl_usd_text)));
         tvUnRelPnLText.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf"));
 
+        tvYieldValue = (TextView)findViewById(R.id.tvYieldValue);
+        tvYieldValue.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf"));
+
+
+        tvVolumeValue = (TextView)findViewById(R.id.tvVolumeValue);
+        tvVolumeValue.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf"));
+
+        tvRelaizedPnLValue = (TextView)findViewById(R.id.tvRealizedPnLValue);
+        tvRelaizedPnLValue.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf"));
+
+        tvUnrealizedPnLValue = (TextView)findViewById(R.id.tvUnRealizedPnLValue);
+        tvUnrealizedPnLValue.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf"));
+
+        yieldPercentageView = (YieldPercentageView)findViewById(R.id.ypv);
 
         //lvPositions.addHeaderView(headerView);
         //lvPositions.setHeaderDividersEnabled(true);
@@ -207,7 +224,7 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.yield_manger, menu);
+        getMenuInflater().inflate(R.menu.yield_manger, menu);
         return true;
     }
 
@@ -217,9 +234,17 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.menuSettings:
+                return true;
+            case R.id.menuAbout:
+                startActivity(new Intent(this, AboutActivity.class));
+                overridePendingTransition(R.anim.slide_in_from_top, R.anim.slide_out_from_top);
+                return true;
+            default:
+                break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -262,6 +287,9 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 
         @Override
         public void onReceive(Context context, Intent intent) {
+
+            updateRiskCapacity();
+
             List<RWPositionSnapshot> list = SnapshotCache.getInstance().getSnapshots();
             adapter.updateViews(lvPositions, list);
 
@@ -273,4 +301,19 @@ public class YieldMangerActivity extends Activity implements NetworkResponseList
 //            }
         }
     };
+
+    private void updateRiskCapacity(){
+        RWSummary rwSummary = RWSummaryCache.getInstance().getRWSummary();
+
+        if(rwSummary == null){
+            return;
+        }
+
+        yieldPercentageView.setYieldPercentage(rwSummary.getNetRiskPercentage(), rwSummary.getNetRiskPercentageDisplay());
+
+        tvYieldValue.setText(rwSummary.getYieldDisplay());
+        tvVolumeValue.setText(rwSummary.getVolumeDisplay());
+        tvRelaizedPnLValue.setText(rwSummary.getRealizedPnLDisplay());
+        tvUnrealizedPnLValue.setText(rwSummary.getUnrealizedPnlDisplay());
+    }
 }

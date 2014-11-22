@@ -23,6 +23,12 @@ public class RWSummary {
     private double totalMaxLimit;
     private double totalAccumulation;
 
+    private String netRiskPercentageDisplay;
+    private String yieldDisplay;
+    private String volumeDisplay;
+    private String realizedPnLDisplay;
+    private String unrealizedPnlDisplay;
+
 
     public double getNetRiskPercentage() {
         return netRiskPercentage;
@@ -88,15 +94,65 @@ public class RWSummary {
         this.totalAccumulation = totalAccumulation;
     }
 
+    public String getNetRiskPercentageDisplay() {
+        return netRiskPercentageDisplay;
+    }
+
+    public void setNetRiskPercentageDisplay(String netRiskPercentageDisplay) {
+        this.netRiskPercentageDisplay = netRiskPercentageDisplay;
+    }
+
+    public String getYieldDisplay() {
+        return yieldDisplay;
+    }
+
+    public void setYieldDisplay(String yieldDisplay) {
+        this.yieldDisplay = yieldDisplay;
+    }
+
+    public String getVolumeDisplay() {
+        return volumeDisplay;
+    }
+
+    public void setVolumeDisplay(String volumeDisplay) {
+        this.volumeDisplay = volumeDisplay;
+    }
+
+    public String getRealizedPnLDisplay() {
+        return realizedPnLDisplay;
+    }
+
+    public void setRealizedPnLDisplay(String realizedPnLDisplay) {
+        this.realizedPnLDisplay = realizedPnLDisplay;
+    }
+
+    public String getUnrealizedPnlDisplay() {
+        return unrealizedPnlDisplay;
+    }
+
+    public void setUnrealizedPnlDisplay(String unrealizedPnlDisplay) {
+        this.unrealizedPnlDisplay = unrealizedPnlDisplay;
+    }
+
     public static RWSummary fromJSON(JSONObject jsonObject){
         RWSummary summary = new RWSummary();
 
         try {
             summary.netRiskPercentage = jsonObject.getDouble("nrp");
+            summary.netRiskPercentageDisplay = jsonObject.getString("nrp");
+
             summary.yield = jsonObject.getDouble("yld");
+            summary.yieldDisplay = jsonObject.getString("yld");
+
             summary.volume = jsonObject.getDouble("vol");
+            summary.volumeDisplay = jsonObject.getString("vol");
+
             summary.realizedPnL = jsonObject.getDouble("rpnl");
+            summary.realizedPnLDisplay = jsonObject.getString("rpnl");
+
             summary.unrealizedPnL = jsonObject.getDouble("upnl");
+            summary.unrealizedPnlDisplay = jsonObject.getString("upnl");
+
             summary.pnL = jsonObject.getDouble("pnl");
             summary.totalMaxLimit = jsonObject.getDouble("tlim");
             summary.totalAccumulation = jsonObject.getDouble("tacc");

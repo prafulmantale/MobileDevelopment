@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import prafulmantale.praful.com.yaym.application.YMApplication;
+import prafulmantale.praful.com.yaym.caches.RWSummaryCache;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
@@ -112,6 +113,7 @@ public class RWPollService extends Service {
 
                         JSONObject summary = obj.getJSONObject("summary");
                         RWSummary rwSummary = RWSummary.fromJSON(summary);
+                        RWSummaryCache.getInstance().setRWSummary(rwSummary);
                     }
                     catch (JSONException ex){
                         Log.d(TAG, "Excption while extracting Snapshots");
