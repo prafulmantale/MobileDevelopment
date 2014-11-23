@@ -1,5 +1,9 @@
 package prafulmantale.praful.com.yaym.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +14,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.activities.MainActivity;
+import prafulmantale.praful.com.yaym.caches.SnapshotCache;
+import prafulmantale.praful.com.yaym.helpers.AppConstants;
+import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 
 /**
  * Created by prafulmantale on 11/22/14.
@@ -21,12 +29,17 @@ public class YieldDetailsFragment extends Fragment {
     private TextView tvVolumeValue;
     private TextView tvRelaizedPnLValue;
     private TextView tvUnrealizedPnLValue;
+    private TextView tvCurrencyPair;
+
+    private String selectedCurrencyPair;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //Non view initializations
+        selectedCurrencyPair = MainActivity.selectedCurrencyPair;
     }
 
     @Override
@@ -37,6 +50,22 @@ public class YieldDetailsFragment extends Fragment {
         initializeViews(view);
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        getActivity().registerReceiver(marketDataReceiver, new IntentFilter(AppConstants.RW_SNAPSHOT_RECEIVED));
+
+        selectedCurrencyPair = MainActivity.selectedCurrencyPair;
+
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+
+        getActivity().unregisterReceiver(marketDataReceiver);
+        super.onStop();
     }
 
     private void initializeViews(View view){
@@ -70,5 +99,25 @@ public class YieldDetailsFragment extends Fragment {
         tvUnrealizedPnLValue = (TextView)view.findViewById(R.id.tvUnRealizedPnLValue);
         tvUnrealizedPnLValue.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/OpenSans-Regular.ttf"));
 
+        tvCurrencyPair = (TextView)view.findViewById(R.id.tvYDCurrencyPair);
+        tvCurrencyPair.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/OpenSans-Regular.ttf"));
     }
+
+    private void updateData(){
+        RWPositionSnapshot snapshot = SnapshotCache.getInstance().getSnapshot(selectedCurrencyPair);
+        tvCurrencyPair.setText(snapshot.getCurrencyPair());
+        tvYieldValue.setText(snapshot.getYieldDisplay());
+        tvVolumeValue.setText(snapshot.getVolumeInUSDDisplay());
+        tvRelaizedPnLValue.setText(snapshot.getRealizedPnLInUSDDisplay());
+        tvUnrealizedPnLValue.setText(snapshot.getUnrealizedPnLDisplay());
+
+    }
+
+
+    BroadcastReceiver marketDataReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+             updateData();
+        }
+    };
 }

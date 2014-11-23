@@ -31,6 +31,8 @@ public class AppConstants {
     public static final String PREF_KEY_SERVER = "server";
     public static final String PREF_KEY_REMEMBER_ME = "remember";
 
+    public static final String INTENT_KEY_CCYPAIR = "ccypair";
+
 
     public static class HandlerMessageIds{
         public static int INVALID = -1;

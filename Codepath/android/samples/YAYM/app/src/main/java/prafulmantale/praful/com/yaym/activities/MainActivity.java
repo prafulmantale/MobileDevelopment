@@ -6,13 +6,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.helpers.AppConstants;
 
 public class MainActivity extends FragmentActivity {
 
+    public static String selectedCurrencyPair;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(getIntent() != null) {
+            selectedCurrencyPair = getIntent().getStringExtra(AppConstants.INTENT_KEY_CCYPAIR);
+        }
     }
 
     @Override

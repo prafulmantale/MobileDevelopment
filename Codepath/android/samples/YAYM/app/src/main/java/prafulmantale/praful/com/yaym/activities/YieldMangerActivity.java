@@ -161,7 +161,10 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
         lvPositions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(YieldMangerActivity.this, MainActivity.class));
+
+                Intent intent = new Intent(YieldMangerActivity.this, MainActivity.class);
+                intent.putExtra(AppConstants.INTENT_KEY_CCYPAIR, RulesCache.getInstance().getCurrencyPairsList().get(position));
+                startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_from_left);
             }
         });
@@ -228,7 +231,7 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
     protected void onPause() {
         super.onPause();
         pause = true;
-        stopPollService();
+//        stopPollService();
     }
 
     @Override
