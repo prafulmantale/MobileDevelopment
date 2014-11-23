@@ -34,7 +34,6 @@ import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.fragments.FrequencySettingsFragment;
-import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
@@ -72,7 +71,6 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
         initialize();
 //        initializeActionBar();
 
-        getRules();
         setupListeners();
     }
 
@@ -197,12 +195,6 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
         super.onResume();
         pause = false;
         startPollService();
-    }
-
-
-
-    private void getRules(){
-        application.getClient().getRWRules(new NetworkResponseHandler(this, APIRequest.RULES));
     }
 
     @Override

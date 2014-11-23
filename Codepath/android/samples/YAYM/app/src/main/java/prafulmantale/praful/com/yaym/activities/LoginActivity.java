@@ -7,7 +7,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,20 +21,27 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.application.YMApplication;
+import prafulmantale.praful.com.yaym.asynctasks.HttpPostAsyncTask;
+import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
 import prafulmantale.praful.com.yaym.enums.RequestStatus;
-import prafulmantale.praful.com.yaym.handlers.NetworkResponseHandler;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.models.LoginRequest;
 
 
 public class LoginActivity extends Activity  implements NetworkResponseListener{
+
+    private static final String TAG = LoginActivity.class.getSimpleName();
 
     private EditText etOrg;
     private EditText etUserName;
@@ -42,6 +52,8 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     private RadioGroup serverGroup;
     private YMApplication application;
     private CheckBox cbRememberMe;
+
+    private LoginRequest loginRequest = null;
 
 
     @Override
@@ -203,8 +215,12 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     public void doLogin(View view){
 
         savePreferences();
-        application.getClient().login(this, new NetworkResponseHandler(this, APIRequest.LOGIN), getLoginRequest());
-        progressDialog = ProgressDialog.show(this, "", getString(R.string.login_progress_message));
+        loginRequest = getLoginRequest();
+        new HttpPostAsyncTask(handler, YMApplication.getLoginUrl(),
+                AppConstants.HandlerMessageIds.LOGIN, loginRequest.toJSONObject())
+                .execute();
+//        application.getClient().login(this, new NetworkResponseHandler(this, APIRequest.LOGIN), getLoginRequest());
+//        progressDialog = ProgressDialog.show(this, "", getString(R.string.login_progress_message));
     }
 
     @Override
@@ -254,5 +270,64 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void getRiskRules(){
+
+        JSONObject params = new JSONObject();
+        try {
+            params.put(AppConstants.PARAM_KEY_ORG, loginRequest.getOrganization());
+            params.put(AppConstants.PARAM_KEY_NAMESPACE, loginRequest.getOrganization());
+        }
+        catch (JSONException jex){
+            Log.e(TAG, "Exception in getRiskRules: " + jex.getMessage());
+            jex.printStackTrace();
+        }
+
+        new HttpPostAsyncTask(handler, YMApplication.getRiskRulesUrl(),
+                AppConstants.HandlerMessageIds.RULE, getLoginRequest().toJSONObject())
+                .execute();
+    }
+
+    private Handler handler = new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+
+            String response = (String)msg.obj;
+            System.out.println("Response: " + response);
+
+            if(response != null){
+                if(response.equals(AppConstants.STATUS_FAILURE)){
+                    Toast.makeText(getApplicationContext(), R.string.error_cannot_connect_to_server, Toast.LENGTH_LONG).show();
+
+                    return;
+                }
+
+                try {
+                    JSONObject data = new JSONObject(response);
+
+                    if(msg.what == AppConstants.HandlerMessageIds.LOGIN){
+
+                        if(data.get(AppConstants.STATUS_TEXT).equals(AppConstants.STATUS_OK)){
+
+                            Log.d(TAG, "Login is successful");
+                            getRiskRules();
+                        }
+                    }
+
+                    if(msg.what == AppConstants.HandlerMessageIds.RULE){
+
+                        Log.d(TAG, "Risk Rules received");
+                        RulesCache.getInstance().updateCache(data);
+                        showMain();
+                    }
+                }
+                catch (JSONException jex){
+                    Log.e(TAG, "Exception in handleMessage: " + jex.getMessage());
+                    jex.printStackTrace();
+                }
+            }
+        }
+    };
 }
 

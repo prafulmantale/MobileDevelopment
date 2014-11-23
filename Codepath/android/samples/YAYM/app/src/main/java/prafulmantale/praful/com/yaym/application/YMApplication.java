@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import com.loopj.android.http.PersistentCookieStore;
 
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.helpers.Utils;
 import prafulmantale.praful.com.yaym.networking.RestClient;
 
 /**
@@ -24,6 +25,9 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
 
     private RestClient client;
     private PersistentCookieStore cookieStore;
+
+    private static final String LOGIN_URL = "admin/auth/login";
+    private static final String RULES_URL = "rw/riskwarehouse/rule";
 
     @Override
     public void onCreate() {
@@ -60,5 +64,13 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
 
     public static String getAppBaseUrl() {
         return appBaseUrl;
+    }
+
+    public static String getLoginUrl(){
+       return Utils.getAPIUrl(getAppBaseUrl(), LOGIN_URL);
+    }
+
+    public static String getRiskRulesUrl(){
+        return Utils.getAPIUrl(getAppBaseUrl(), RULES_URL);
     }
 }

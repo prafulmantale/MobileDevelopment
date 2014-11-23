@@ -3,9 +3,8 @@ package prafulmantale.praful.com.yaym.asynctasks;
 import android.os.AsyncTask;
 import android.os.Message;
 
-import org.apache.http.HttpResponse;
-import org.json.JSONObject;
-
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.logging.Handler;
 
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
@@ -16,13 +15,11 @@ import prafulmantale.praful.com.yaym.helpers.AppConstants;
 public class HttpGetAsyncTask extends AsyncTask<String, Void, String> {
 
     private static final String TAG = HttpGetAsyncTask.class.getSimpleName();
-    private JSONObject data;
     private Handler handler;
     private String uri;
     private int what = -1;
 
-    public HttpGetAsyncTask(JSONObject data, Handler handler, String uri, int what) {
-        this.data = data;
+    public HttpGetAsyncTask(Handler handler, String uri, int what) {
         this.handler = handler;
         this.uri = uri;
         this.what = what;
@@ -36,7 +33,9 @@ public class HttpGetAsyncTask extends AsyncTask<String, Void, String> {
 
         try{
 
-            HttpResponse httpResponse = null;
+            URL url = new URL(this.uri);
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+
 
 
         }

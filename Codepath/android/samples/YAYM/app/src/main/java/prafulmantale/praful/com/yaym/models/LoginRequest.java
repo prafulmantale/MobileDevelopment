@@ -7,8 +7,6 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.KeyPair;
-
 /**
  * Created by prafulmantale on 10/9/14.
  */
@@ -85,6 +83,23 @@ public class LoginRequest {
         }
 
         return jsonObject.toString();
+    }
+
+    public JSONObject toJSONObject(){
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put(KEY_USER, getUserName());
+            jsonObject.put(KEY_PASS, getPassword());
+            jsonObject.put(KEY_ORG, getOrganization());
+        }
+        catch (JSONException ex){
+
+            Log.d(TAG, "Exception while converting object to JSON");
+            return null;
+        }
+
+        return jsonObject;
     }
 
 
