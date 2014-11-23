@@ -12,8 +12,6 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -30,6 +28,7 @@ import org.json.JSONObject;
 
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.application.YMApplication;
+import prafulmantale.praful.com.yaym.asynctasks.HttpGetAsyncTask;
 import prafulmantale.praful.com.yaym.asynctasks.HttpPostAsyncTask;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.enums.APIRequest;
@@ -219,8 +218,6 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
         new HttpPostAsyncTask(handler, YMApplication.getLoginUrl(),
                 AppConstants.HandlerMessageIds.LOGIN, loginRequest.toJSONObject())
                 .execute();
-//        application.getClient().login(this, new NetworkResponseHandler(this, APIRequest.LOGIN), getLoginRequest());
-//        progressDialog = ProgressDialog.show(this, "", getString(R.string.login_progress_message));
     }
 
     @Override
@@ -251,40 +248,9 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
         return new LoginRequest(org, userName, password);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void getRiskRules(){
-
-        JSONObject params = new JSONObject();
-        try {
-            params.put(AppConstants.PARAM_KEY_ORG, loginRequest.getOrganization());
-            params.put(AppConstants.PARAM_KEY_NAMESPACE, loginRequest.getOrganization());
-        }
-        catch (JSONException jex){
-            Log.e(TAG, "Exception in getRiskRules: " + jex.getMessage());
-            jex.printStackTrace();
-        }
-
-        new HttpPostAsyncTask(handler, YMApplication.getRiskRulesUrl(),
-                AppConstants.HandlerMessageIds.RULE, getLoginRequest().toJSONObject())
+        new HttpGetAsyncTask(handler, YMApplication.getRiskRulesUrl(loginRequest),
+                AppConstants.HandlerMessageIds.RULE)
                 .execute();
     }
 
@@ -296,7 +262,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
             String response = (String)msg.obj;
             System.out.println("Response: " + response);
 
-            if(response != null){
+            if(response != null && response.isEmpty() == false){
                 if(response.equals(AppConstants.STATUS_FAILURE)){
                     Toast.makeText(getApplicationContext(), R.string.error_cannot_connect_to_server, Toast.LENGTH_LONG).show();
 

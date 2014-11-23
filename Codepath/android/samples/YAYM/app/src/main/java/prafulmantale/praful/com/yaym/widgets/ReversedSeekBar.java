@@ -1,4 +1,4 @@
-package prafulmantale.praful.com.yaym.helpers;
+package prafulmantale.praful.com.yaym.widgets;
 
 import android.content.Context;
 import android.graphics.Canvas;

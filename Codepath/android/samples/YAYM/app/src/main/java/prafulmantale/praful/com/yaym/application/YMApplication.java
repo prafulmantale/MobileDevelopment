@@ -6,8 +6,13 @@ import android.content.SharedPreferences;
 
 import com.loopj.android.http.PersistentCookieStore;
 
+import java.net.CookieHandler;
+import java.net.CookieManager;
+
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.helpers.Utils;
+import prafulmantale.praful.com.yaym.models.LoginRequest;
 import prafulmantale.praful.com.yaym.networking.RestClient;
 
 /**
@@ -35,6 +40,8 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
 
         cookieStore = new PersistentCookieStore(this);
         client = new RestClient(cookieStore);
+        CookieManager cookieManager = new CookieManager();
+        CookieHandler.setDefault(cookieManager);
     }
 
     public RestClient getClient(){
@@ -70,7 +77,11 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
        return Utils.getAPIUrl(getAppBaseUrl(), LOGIN_URL);
     }
 
-    public static String getRiskRulesUrl(){
-        return Utils.getAPIUrl(getAppBaseUrl(), RULES_URL);
+    public static String getRiskRulesUrl(LoginRequest request){
+        String url = Utils.getAPIUrl(getAppBaseUrl(), RULES_URL);
+        url += "?" + AppConstants.PARAM_KEY_ORG + "=" + request.getOrganization()
+                + "&" + AppConstants.PARAM_KEY_NAMESPACE + "=" + request.getOrganization();
+
+        return url;
     }
 }
