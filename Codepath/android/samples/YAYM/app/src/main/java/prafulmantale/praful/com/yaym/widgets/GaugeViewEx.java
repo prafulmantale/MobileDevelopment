@@ -21,15 +21,13 @@ public class GaugeViewEx extends View {
     private Paint outerCirclePaintLoss;
     private Paint meterLinePaint;
 
-    private RectF outerRect;
-    private RectF meterRect;
+    private RectF outerRect = new RectF();
+    private RectF meterRect = new RectF();
 
     private Paint needlePaint;
 
     private int width;
     private int height;
-
-    private int center;
 
     private int meterWidth;// = getResources().getDimensionPixelSize(R.dimen.gauge_view_meter_width);
     private int innerWidth;// = getResources().getDimensionPixelSize(R.dimen.gause_view_inner_gap) + meterWidth;
@@ -52,15 +50,17 @@ public class GaugeViewEx extends View {
 
     public GaugeViewEx(Context context) {
         super(context);
-
+        init();
     }
 
     public GaugeViewEx(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public GaugeViewEx(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
     @Override
@@ -71,8 +71,8 @@ public class GaugeViewEx extends View {
         }
 
         float newangle = (float)(angle * Math.PI / 180);
-        float startX = center;
-        float startY = 0.79f* height - 1;
+        float startX = outerRect.centerX();
+        float startY = outerRect.centerY();
 
         float endX   = startX + (float)(meterRect.height()/2 * Math.sin(newangle));
         float endY   = startY + (float)(meterRect.height()/2 * Math.cos(newangle));
@@ -94,8 +94,8 @@ public class GaugeViewEx extends View {
         canvas.drawCircle(startX, startY, 4, needlePaint);
         canvas.drawLine(startX, startY, endX, endY, needlePaint);
 
-        canvas.drawText(lossThresholdText, outerRect.left - 5, height - height/6, textPaintLoss);
-        canvas.drawText(profitThresholdText, outerRect.right + 5, height - height/6, textPaintProfit);
+        canvas.drawText(lossThresholdText, outerRect.left - 20, startY, textPaintLoss);
+        canvas.drawText(profitThresholdText, outerRect.right + 20, startY, textPaintProfit);
         canvas.drawText(currentPnLText, startX, startY + 20, textPaint);
     }
 
@@ -146,16 +146,6 @@ public class GaugeViewEx extends View {
         textPaintLoss.setTextAlign(Paint.Align.RIGHT);
         textPaintLoss.setTextSize(getResources().getDimensionPixelSize(R.dimen.gauge_view_lossvalue_fontsize));
 
-
-        float outerRectLeft = width/4;
-        float outerRectTop = height/16;
-        float outerRectRight = outerRectLeft + width - (outerRectLeft * 2);
-        float outerRectHeight = (float)height*1.5f;
-        center = width/2;
-
-        outerRect = new RectF(outerRectLeft, outerRectTop, outerRectRight, outerRectHeight);
-        meterRect = new RectF(outerRectLeft +innerWidth, outerRectTop + innerWidth, outerRectRight - innerWidth, outerRectHeight - innerWidth);
-
         currentPnLText = "0.0";
         profitThresholdText = "00";
         lossThresholdText = "00";
@@ -168,9 +158,22 @@ public class GaugeViewEx extends View {
         width = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
         height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
 
-        setMeasuredDimension(width, height);
+        final int min = Math.min(width, height);
+        final int maxPadding = Math.max(Math.max(getPaddingBottom(), getPaddingTop()), Math.max(getPaddingLeft(), getPaddingRight()));
 
-        init();
+        float top = 0;
+        float left = 0;
+        int arcDiameter = 0;
+
+        arcDiameter = min - maxPadding -12;
+        float arcRadius = (arcDiameter/2);
+        top = (height / 2) - arcRadius;
+        left = (width/2) - arcRadius;
+
+        outerRect.set(left, top + top, left + arcDiameter, top + arcDiameter);
+        meterRect = new RectF(left +innerWidth, top + innerWidth, outerRect.right - innerWidth, outerRect.bottom - innerWidth);
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     public void setLossThreshold(int lossThreshold, String lossThresholdText){
