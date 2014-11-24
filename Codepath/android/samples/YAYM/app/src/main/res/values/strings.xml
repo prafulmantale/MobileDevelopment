@@ -28,10 +28,10 @@
     <string name="server_demo3">demo3</string>
 
     <string name="risk_capacity_title">Risk Capacity</string>
-    <string name="risk_capacity_yield_usd_mio_text"><![CDATA[Yield<br/>(USD/Mio)]]></string>
-    <string name="risk_capacity_volume_usd_thousand_text">Volume<br />(USD\'000)</string>
-    <string name="risk_capacity_realized_pnl_usd_text">Realized <br />P&amp;L<br />(USD)</string>
-    <string name="risk_capacity_unrealized_pnl_usd_text">Unrealized <br />P&amp;L<br />(USD)</string>
+    <string name="risk_capacity_yield_usd_mio_text"><![CDATA[Yield<br/>($/Mio)]]></string>
+    <string name="risk_capacity_volume_usd_thousand_text"><![CDATA[Volume<br />($\'000)]]></string>
+    <string name="risk_capacity_realized_pnl_usd_text"><![CDATA[Realized <br />P&amp;L ($)]]></string>
+    <string name="risk_capacity_unrealized_pnl_usd_text"><![CDATA[Unrealized P&amp;L ($)]]></string>
     <string name="data_update_title">CELLULAR RATE UPDATE FREQUENCY</string>
     <string name="data_update_warning">Please note that using this application over cellular data networks may incur additional charges from your network provider. Manage data usage by selecting the appropriate value.</string>
     <string name="pref_frequency">Frequency</string>
