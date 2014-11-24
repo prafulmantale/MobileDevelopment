@@ -215,6 +215,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
 
         savePreferences();
         loginRequest = getLoginRequest();
+
         new HttpPostAsyncTask(handler, YMApplication.getLoginUrl(),
                 AppConstants.HandlerMessageIds.LOGIN, loginRequest.toJSONObject())
                 .execute();
@@ -277,6 +278,7 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
                         if(data.get(AppConstants.STATUS_TEXT).equals(AppConstants.STATUS_OK)){
 
                             Log.d(TAG, "Login is successful");
+
                             getRiskRules();
                         }
                     }

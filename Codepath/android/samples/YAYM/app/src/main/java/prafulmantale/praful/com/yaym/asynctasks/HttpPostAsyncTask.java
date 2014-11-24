@@ -83,6 +83,10 @@ public class HttpPostAsyncTask extends AsyncTask<String, Void, String> {
             handler.sendMessage(response);
         }
 
+        if(isSuccess && what == AppConstants.HandlerMessageIds.LOGIN){
+            //Store cookies
+        }
+
         return isSuccess ? AppConstants.STATUS_SUCCESS : AppConstants.STATUS_FAILURE;
     }
 

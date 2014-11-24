@@ -50,7 +50,6 @@ public class HttpGetAsyncTask extends AsyncTask<String, Void, String> {
             connection.setRequestMethod("GET");
 
             responseString = readStream(connection);
-
             isSuccess = true;
         }
         catch (MalformedURLException mfex){

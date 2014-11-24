@@ -67,7 +67,7 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yield_manger);
 
-        progressDialog = ProgressDialog.show(this, "", getString(R.string.loading_progress_message));
+//        progressDialog = ProgressDialog.show(this, "", getString(R.string.loading_progress_message));
         initialize();
 //        initializeActionBar();
 
@@ -79,6 +79,8 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
 
         registerReceiver(marketDataReceiver,
                 new IntentFilter(AppConstants.RW_SNAPSHOT_RECEIVED));
+
+        startPollService();
 
         super.onStart();
     }
@@ -214,7 +216,7 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
                 progressDialog.dismiss();
             }
 
-            startPollService();
+
         }
     }
 

@@ -31,8 +31,11 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
     private RestClient client;
     private PersistentCookieStore cookieStore;
 
+    private static LoginRequest loginRequest;
+
     private static final String LOGIN_URL = "admin/auth/login";
     private static final String RULES_URL = "rw/riskwarehouse/rule";
+    private static final String SNAPSHOt_URL = "rw/riskwarehouse/snapshot";
 
     @Override
     public void onCreate() {
@@ -81,6 +84,15 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
         String url = Utils.getAPIUrl(getAppBaseUrl(), RULES_URL);
         url += "?" + AppConstants.PARAM_KEY_ORG + "=" + request.getOrganization()
                 + "&" + AppConstants.PARAM_KEY_NAMESPACE + "=" + request.getOrganization();
+
+        loginRequest = request;
+
+        return url;
+    }
+
+    public static String getRWSnapshotUrl(){
+        String url = Utils.getAPIUrl(getAppBaseUrl(), SNAPSHOt_URL);
+        url += "?" + AppConstants.PARAM_KEY_ORG + "=" + loginRequest.getOrganization();
 
         return url;
     }
