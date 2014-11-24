@@ -6,9 +6,13 @@ import android.os.Message;
 import android.util.Log;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
@@ -43,7 +47,13 @@ public class HttpGetAsyncTask extends AsyncTask<String, Void, String> {
         DefaultHttpClient client = null;
 
         try{
-            client = new DefaultHttpClient();
+
+            HttpParams httpParams = new BasicHttpParams();
+            HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
+            HttpConnectionParams.setSoTimeout(httpParams, 5000);
+
+            client = new DefaultHttpClient(httpParams);
+
 
             if (YMApplication.appCookies != null) {
                 for (Cookie ck : YMApplication.appCookies) {
@@ -59,7 +69,11 @@ public class HttpGetAsyncTask extends AsyncTask<String, Void, String> {
                 responseString = EntityUtils.toString(httpResp.getEntity());
             }
 
-            isSuccess = true;
+            int statusCode = httpResp.getStatusLine().getStatusCode();
+
+            if(statusCode == HttpStatus.SC_OK) {
+                isSuccess = true;
+            }
         }
         catch (MalformedURLException mfex){
             Log.e(TAG, "Exception: " + mfex.getMessage());

@@ -6,9 +6,13 @@ import android.os.Message;
 import android.util.Log;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
@@ -49,7 +53,12 @@ public class HttpPostAsyncTask extends AsyncTask<String, Void, String> {
 
         try{
 
-            client = new DefaultHttpClient();
+            HttpParams httpParams = new BasicHttpParams();
+            HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
+            HttpConnectionParams.setSoTimeout(httpParams, 5000);
+
+            client = new DefaultHttpClient(httpParams);
+
             HttpPost post = new HttpPost(uri);
             post.setHeader(HTTP.CONTENT_TYPE, "application/json");
 
@@ -61,7 +70,11 @@ public class HttpPostAsyncTask extends AsyncTask<String, Void, String> {
                 responseString = EntityUtils.toString(httpResponse.getEntity());
             }
 
-            isSuccess = true;
+           int statusCode = httpResponse.getStatusLine().getStatusCode();
+
+            if(statusCode == HttpStatus.SC_OK){
+                isSuccess = true;
+            }
         }
         catch (MalformedURLException mfex){
             Log.e(TAG, "Exception: " + mfex.getMessage());
