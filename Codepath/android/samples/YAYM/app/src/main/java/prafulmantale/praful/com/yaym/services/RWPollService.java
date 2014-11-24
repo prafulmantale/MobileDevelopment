@@ -129,6 +129,15 @@ public class RWPollService extends Service {
             pollInterval = interval * 1000;
         }
 
+
+
+//       handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                fetchData();
+//            }
+//        }, pollInterval);
+
         Timer timer = new Timer();
 
         timer.schedule(new TimerTask() {

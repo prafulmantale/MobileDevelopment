@@ -1,0 +1,19 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/etSmartEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="35dp"/>
+    />
+    <Button
+        android:id="@+id/btnClearContent"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/ic_content_clear"/>
+</RelativeLayout>
