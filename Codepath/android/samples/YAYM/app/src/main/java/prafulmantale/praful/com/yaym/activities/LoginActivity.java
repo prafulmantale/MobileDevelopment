@@ -32,6 +32,7 @@ import prafulmantale.praful.com.yaym.asynctasks.HttpGetAsyncTask;
 import prafulmantale.praful.com.yaym.asynctasks.HttpPostAsyncTask;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
+import prafulmantale.praful.com.yaym.helpers.NetworkUtils;
 import prafulmantale.praful.com.yaym.models.LoginRequest;
 
 
@@ -209,6 +210,11 @@ public class LoginActivity extends Activity{
     }
 
     public void doLogin(View view){
+
+        if(!NetworkUtils.isNetworkAvailable(getBaseContext())){
+            Toast.makeText(getApplicationContext(), R.string.error_cannot_connect_to_server, Toast.LENGTH_LONG).show();
+            return;
+        }
 
         progressDialog = ProgressDialog.show(this, "", getString(R.string.login_progress_message));
 
