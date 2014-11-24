@@ -2,7 +2,6 @@ package prafulmantale.praful.com.yaym.activities;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,29 +20,23 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.adapters.SnapshotAdapter;
-import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.caches.RWSummaryCache;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
-import prafulmantale.praful.com.yaym.enums.APIRequest;
-import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.fragments.FrequencySettingsFragment;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
-import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.models.RWSummary;
 import prafulmantale.praful.com.yaym.services.RWPollService;
 import prafulmantale.praful.com.yaym.widgets.YieldPercentageView;
 
 
-public class YieldMangerActivity extends FragmentActivity implements NetworkResponseListener{
+public class YieldMangerActivity extends FragmentActivity{
 
     private static final String TAG = YieldMangerActivity.class.getSimpleName();
 
@@ -53,9 +46,6 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
     private RWPositionSnapshot prevSelectedSnapshot;
 //    private SwipeRefreshLayout swipeRefreshLayout;
     private boolean swipedToRefresh = false;
-
-    private YMApplication application;
-    private ProgressDialog progressDialog;
 
     private YieldPercentageView yieldPercentageView;
     private TextView tvYieldValue;
@@ -68,7 +58,6 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yield_manger);
 
-//        progressDialog = ProgressDialog.show(this, "", getString(R.string.loading_progress_message));
         initialize();
 //        initializeActionBar();
 
@@ -94,8 +83,6 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
     }
 
     private void initialize(){
-
-        application = (YMApplication)getApplication();
 
         lvPositions = (ListView)findViewById(R.id.lvPositionsList);
         View headerView = findViewById(R.id.lvHeader);//((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_positions_header, null, false);
@@ -137,9 +124,6 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
         tvUnrealizedPnLValue.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf"));
 
         yieldPercentageView = (YieldPercentageView)findViewById(R.id.ypv);
-
-        //lvPositions.addHeaderView(headerView);
-        //lvPositions.setHeaderDividersEnabled(true);
 
 //        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
 //        swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
@@ -199,37 +183,12 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
     @Override
     protected void onResume() {
         super.onResume();
-        pause = false;
         startPollService();
     }
 
     @Override
-    public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject) {
-
-        if(APIRequest.RULES == requestType){
-            if(status == RequestStatus.SUCCESS) {
-                JSONObject obj = (JSONObject) responseObject;
-                RulesCache.getInstance().updateCache(obj);
-            }
-
-            snapshots = new ArrayList<RWPositionSnapshot>();
-            adapter = new SnapshotAdapter(getBaseContext());
-            lvPositions.setAdapter(adapter);
-
-            if(progressDialog != null){
-                progressDialog.dismiss();
-            }
-
-
-        }
-    }
-
-    static boolean pause;
-    @Override
     protected void onPause() {
         super.onPause();
-        pause = true;
-//        stopPollService();
     }
 
     @Override
@@ -315,7 +274,6 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
             updateRiskCapacity();
 
             List<RWPositionSnapshot> list = SnapshotCache.getInstance().getSnapshots();
-            Log.d(TAG, "UPDATING VIEWS...........");
             adapter.updateViews(lvPositions, list);
 
 //            if(swipedToRefresh) {

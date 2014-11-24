@@ -31,14 +31,11 @@ import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.asynctasks.HttpGetAsyncTask;
 import prafulmantale.praful.com.yaym.asynctasks.HttpPostAsyncTask;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
-import prafulmantale.praful.com.yaym.enums.APIRequest;
-import prafulmantale.praful.com.yaym.enums.RequestStatus;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
-import prafulmantale.praful.com.yaym.interfaces.NetworkResponseListener;
 import prafulmantale.praful.com.yaym.models.LoginRequest;
 
 
-public class LoginActivity extends Activity  implements NetworkResponseListener{
+public class LoginActivity extends Activity{
 
     private static final String TAG = LoginActivity.class.getSimpleName();
 
@@ -213,24 +210,20 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
 
     public void doLogin(View view){
 
-        savePreferences();
-        loginRequest = getLoginRequest();
+        progressDialog = ProgressDialog.show(this, "", getString(R.string.login_progress_message));
 
-        YMApplication.appCookies = null;
+        try {
 
-        new HttpPostAsyncTask(handler, YMApplication.getLoginUrl(),
-                AppConstants.HandlerMessageIds.LOGIN, loginRequest.toJSONObject())
-                .execute();
-    }
+            savePreferences();
+            loginRequest = getLoginRequest();
 
-    @Override
-    public void OnNetworkResponseReceived(RequestStatus status, APIRequest requestType, Object responseObject) {
-        System.out.println("OnNetworkResponseReceived: " + status + "|" + requestType);
-        if(requestType == APIRequest.LOGIN){
-            if(RequestStatus.SUCCESS == status){
-                showMain();
-            }
+            YMApplication.appCookies = null;
 
+            new HttpPostAsyncTask(handler, YMApplication.getLoginUrl(),
+                    AppConstants.HandlerMessageIds.LOGIN, loginRequest.toJSONObject())
+                    .execute();
+
+        }catch (Exception ex){
             if(progressDialog != null){
                 progressDialog.dismiss();
             }
@@ -238,6 +231,10 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
     }
 
     private void showMain(){
+        if(progressDialog != null){
+            progressDialog.dismiss();
+        }
+
         Intent intent = new Intent(this, YieldMangerActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_from_left);
@@ -263,10 +260,14 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
         public void handleMessage(Message msg) {
 
             String response = (String)msg.obj;
-            System.out.println("Response: " + response);
 
             if(response != null && response.isEmpty() == false){
                 if(response.equals(AppConstants.STATUS_FAILURE)){
+
+                    if(progressDialog != null){
+                        progressDialog.dismiss();
+                    }
+
                     Toast.makeText(getApplicationContext(), R.string.error_cannot_connect_to_server, Toast.LENGTH_LONG).show();
 
                     return;
