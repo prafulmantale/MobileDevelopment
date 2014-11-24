@@ -5,18 +5,18 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.zip.GZIPInputStream;
 
+import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 
 /**
@@ -45,23 +45,21 @@ public class HttpPostAsyncTask extends AsyncTask<String, Void, String> {
         boolean isSuccess = false;
         Message response = new Message();
         String responseString = null;
+        DefaultHttpClient client = null;
 
-        HttpURLConnection connection = null;
         try{
-            URL url = new URL(uri);
-            connection = (HttpURLConnection)url.openConnection();
 
-            connection.setRequestProperty("Content-Type", "application/json");
+            client = new DefaultHttpClient();
+            HttpPost post = new HttpPost(uri);
+            post.setHeader(HTTP.CONTENT_TYPE, "application/json");
 
-            connection.setDoOutput(true);
-            connection.setChunkedStreamingMode(0);
+            StringEntity entity = new StringEntity(data.toString());
+            post.setEntity(entity);
 
-            DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-            out.writeBytes(data.toString());
-            out.flush();
-            out.close();
-
-            responseString = readStream(connection);
+            HttpResponse httpResponse = client.execute(post);
+            if (httpResponse.getEntity() != null) {
+                responseString = EntityUtils.toString(httpResponse.getEntity());
+            }
 
             isSuccess = true;
         }
@@ -74,8 +72,9 @@ public class HttpPostAsyncTask extends AsyncTask<String, Void, String> {
             ioex.printStackTrace();
         }
         finally {
-            if(connection != null){
-                connection.disconnect();
+
+            if(client != null){
+                client.getConnectionManager().closeExpiredConnections();
             }
 
             response.what = what;
@@ -84,53 +83,9 @@ public class HttpPostAsyncTask extends AsyncTask<String, Void, String> {
         }
 
         if(isSuccess && what == AppConstants.HandlerMessageIds.LOGIN){
-            //Store cookies
+            YMApplication.appCookies = client.getCookieStore().getCookies();
         }
 
         return isSuccess ? AppConstants.STATUS_SUCCESS : AppConstants.STATUS_FAILURE;
-    }
-
-    private String readStream(HttpURLConnection connection){
-
-        String inputLine = null;
-        StringBuffer response = new StringBuffer();
-        BufferedReader in = null;
-
-
-        try{
-            InputStream inputStream = connection.getInputStream();
-
-            if(connection.getHeaderField("Content-Encoding") != null &&
-                    connection.getHeaderField("Content-Encoding").equalsIgnoreCase("gzip")){
-
-                GZIPInputStream gzipInputStream = new GZIPInputStream(inputStream);
-                InputStreamReader reader = new InputStreamReader(gzipInputStream);
-
-                in = new BufferedReader(reader);
-            }
-            else{
-                in = new BufferedReader(new InputStreamReader(inputStream));
-            }
-
-            while ((inputLine = in.readLine()) != null){
-                response.append(inputLine);
-            }
-        }
-        catch (IOException ioex){
-            Log.e(TAG, "Exception: " + ioex.getMessage());
-            ioex.printStackTrace();
-        }
-        finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-            }
-            catch (IOException ioExp){
-                Log.e(TAG, "Exception: " + ioExp.getMessage());
-            }
-        }
-
-        return response.toString();
     }
 }

@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:text="EUR/USD"
+        android:text="-"
         android:id="@+id/tvCcyPair_ratecontrol"
         android:textColor="#ffff"
         android:layout_gravity="center_horizontal"
@@ -34,7 +34,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="1.32"
+        android:text=""
         android:id="@+id/tvRate_BigFigure"
         android:textColor="#ffC1C1C1"
         android:background="@drawable/rate_rounded_text_style"
@@ -44,7 +44,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="99"
+            android:text="--"
             android:id="@+id/tvRate_Pips"
             android:textColor="#ffC1C1C1"
             android:background="@drawable/rate_rounded_text_style"
@@ -54,7 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="88"
+            android:text=""
             android:id="@+id/tvRate_halfPips"
             android:textColor="#ffC1C1C1"
             android:background="@drawable/rate_rounded_text_style"

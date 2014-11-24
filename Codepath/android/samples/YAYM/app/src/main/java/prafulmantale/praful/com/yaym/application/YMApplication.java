@@ -6,8 +6,11 @@ import android.content.SharedPreferences;
 
 import com.loopj.android.http.PersistentCookieStore;
 
+import org.apache.http.cookie.Cookie;
+
 import java.net.CookieHandler;
 import java.net.CookieManager;
+import java.util.List;
 
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
@@ -36,6 +39,8 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
     private static final String LOGIN_URL = "admin/auth/login";
     private static final String RULES_URL = "rw/riskwarehouse/rule";
     private static final String SNAPSHOt_URL = "rw/riskwarehouse/snapshot";
+
+    public static List<Cookie> appCookies;
 
     @Override
     public void onCreate() {

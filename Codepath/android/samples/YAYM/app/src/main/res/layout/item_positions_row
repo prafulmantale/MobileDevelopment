@@ -27,7 +27,7 @@
     <prafulmantale.praful.com.yaym.widgets.GaugeViewEx
         android:id="@+id/gvPnLGauge"
         android:layout_width="170dp"
-        android:layout_height="80dp"
+        android:layout_height="90dp"
         android:layout_alignParentRight="true"
         android:layout_margin="2dp"
         />

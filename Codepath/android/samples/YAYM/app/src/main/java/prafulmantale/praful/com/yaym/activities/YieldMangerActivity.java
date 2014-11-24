@@ -12,6 +12,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -76,13 +77,12 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
 
     @Override
     protected void onStart() {
+        super.onStart();
 
         registerReceiver(marketDataReceiver,
                 new IntentFilter(AppConstants.RW_SNAPSHOT_RECEIVED));
 
         startPollService();
-
-        super.onStart();
     }
 
     @Override
@@ -146,6 +146,10 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
 //                android.R.color.holo_green_light,
 //                android.R.color.holo_orange_light,
 //                android.R.color.holo_red_light);
+
+        snapshots = new ArrayList<RWPositionSnapshot>();
+        adapter = new SnapshotAdapter(getBaseContext());
+        lvPositions.setAdapter(adapter);
 
     }
 
@@ -229,6 +233,12 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopPollService();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.yield_manger, menu);
@@ -305,6 +315,7 @@ public class YieldMangerActivity extends FragmentActivity implements NetworkResp
             updateRiskCapacity();
 
             List<RWPositionSnapshot> list = SnapshotCache.getInstance().getSnapshots();
+            Log.d(TAG, "UPDATING VIEWS...........");
             adapter.updateViews(lvPositions, list);
 
 //            if(swipedToRefresh) {

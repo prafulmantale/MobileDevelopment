@@ -148,6 +148,9 @@ public class SnapshotAdapter extends BaseAdapter {
 
         String ccyPair = ccyPairsList.get(position);
         RWPositionSnapshot snapshot = SnapshotCache.getInstance().getSnapshot(ccyPair);
+
+        viewHolder.tvCcyPair.setText(ccyPair);
+
         updateViewForCurrencyPair(snapshot, convertView);
 
         float initialTranslation = (mLastPosition <= position ? 500f : -500f);

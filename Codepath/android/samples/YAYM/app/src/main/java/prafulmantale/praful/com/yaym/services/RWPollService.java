@@ -45,6 +45,7 @@ public class RWPollService extends Service {
     @Override
     public void onCreate() {
 
+        Log.d(TAG, "onCreate");
         HandlerThread thread = new HandlerThread("RWPollService", Process.THREAD_PRIORITY_BACKGROUND);
         thread.start();
 
@@ -55,6 +56,7 @@ public class RWPollService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        Log.d(TAG, "onStartCommand");
         fetchData();
 
         return START_STICKY;
@@ -63,6 +65,7 @@ public class RWPollService extends Service {
     @Override
     public void onDestroy() {
 
+        Log.d(TAG, "onDestroy");
         if(handler != null){
             handler.removeCallbacksAndMessages(null);
             handler = null;
@@ -108,7 +111,8 @@ public class RWPollService extends Service {
     }
 
     private void fetchData(){
-        new HttpGetAsyncTask(handler, YMApplication.getRWSnapshotUrl(), AppConstants.HandlerMessageIds.SNAPSHOT);
+
+        new HttpGetAsyncTask(handler, YMApplication.getRWSnapshotUrl(), AppConstants.HandlerMessageIds.SNAPSHOT).execute();
     }
 
     private void scheduleNextRefresh() {

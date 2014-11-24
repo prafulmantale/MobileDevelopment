@@ -216,6 +216,8 @@ public class LoginActivity extends Activity  implements NetworkResponseListener{
         savePreferences();
         loginRequest = getLoginRequest();
 
+        YMApplication.appCookies = null;
+
         new HttpPostAsyncTask(handler, YMApplication.getLoginUrl(),
                 AppConstants.HandlerMessageIds.LOGIN, loginRequest.toJSONObject())
                 .execute();
