@@ -1,0 +1,248 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    tools:context="prafulmantale.praful.com.yaym.activities.LoginActivity"
+    android:background="@android:color/white">
+
+
+    <RelativeLayout
+        android:id="@+id/rlCenter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drop_shadow"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivLogo"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ym_logo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:scaleType="fitCenter"
+            android:background="@drawable/bottom_border_black"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            />
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivLogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout"
+
+            android:layout_marginBottom="5dp">
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivLogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            android:padding="2dp">
+
+            <com.beardedhen.androidbootstrap.FontAwesomeText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                fontawesometext:fa_icon="fa-bank"
+                android:background="@drawable/item_back_icons"
+                android:id="@+id/bankIcon"
+                android:layout_marginLeft="25dp"
+                android:textSize="10sp"
+                android:textAlignment="center"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:paddingTop="6dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etOrganization"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/login_hint_org"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="5dp"
+                android:padding="5dp"
+                android:textSize="@dimen/login_input_text_size"
+                android:background="@drawable/loginscreen_edit_text_style"
+                android:textColorHint="#999999"
+                android:textColor="#000000"
+                />
+            </LinearLayout>
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivLogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal"
+            android:padding="2dp">
+
+            <com.beardedhen.androidbootstrap.FontAwesomeText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                fontawesometext:fa_icon="fa-user"
+                android:background="@drawable/item_back_icons"
+                android:id="@+id/userIcon"
+                android:layout_marginLeft="25dp"
+                android:textSize="@dimen/login_input_text_size"
+                android:textAlignment="center"
+                android:paddingTop="4dp"
+                android:paddingRight="4dp"
+                android:paddingLeft="4dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etUserName"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/login_hint_username"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="5dp"
+                android:textSize="@dimen/login_input_text_size"
+                android:background="@drawable/loginscreen_edit_text_style"
+                android:textColorHint="#999999"
+                android:padding="5dp"
+                android:textColor="#000"
+                />
+            </LinearLayout>
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivLogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal"
+            android:padding="2dp">
+
+            <com.beardedhen.androidbootstrap.FontAwesomeText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                fontawesometext:fa_icon="fa-lock"
+                android:background="@drawable/item_back_icons"
+                android:id="@+id/lockIcon"
+                android:layout_marginLeft="25dp"
+                android:textSize="@dimen/login_input_text_size"
+                android:textAlignment="center"
+                android:paddingTop="4dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="4dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/etPassword"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/login_hint_password"
+                android:layout_marginRight="5dp"
+                android:textSize="@dimen/login_input_text_size"
+                android:background="@drawable/loginscreen_edit_text_style"
+                android:textColorHint="#999999"
+                android:padding="5dp"
+                android:textColor="#000"
+                />
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/rgServerGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal">
+                <RadioButton
+                    android:id="@+id/demoServer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:singleLine="true"
+                    android:text="@string/server_demo"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/demo3Server"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:singleLine="true"
+                    android:text="@string/server_demo3"
+                    android:checked="false"/>
+
+                </RadioGroup>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="25dp"
+                >
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_remember_me"
+                    android:id="@+id/cbRemember"
+                    android:layout_weight="0.5"
+                    android:layout_alignParentLeft="true"/>
+
+
+                <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/login_button_text"
+                bootstrapbutton:bb_type="primary"
+                android:layout_gravity="right"
+                android:onClick="doLogin"
+                bootstrapbutton:bb_size="small"
+                bootstrapbutton:bb_roundedCorners="true"
+                android:layout_marginLeft="10dp"
+                    android:layout_alignParentRight="true"
+                />
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/copyright_text"
+        android:id="@+id/tvCopyright"
+        android:layout_below="@+id/rlCenter"
+        android:layout_centerHorizontal="true"
+        android:textColor="#000"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="@dimen/login_copyright_text_size"/>
+</RelativeLayout>
