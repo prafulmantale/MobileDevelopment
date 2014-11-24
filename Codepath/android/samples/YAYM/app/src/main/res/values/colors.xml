@@ -62,4 +62,6 @@
     <color name="chart_yield_line">#859FC1</color>
     <color name="chart_current_pnl">#D4E7FB</color>
 
+    <color name="drawer_text_color_default">#C1C1C1</color>
+
 </resources>

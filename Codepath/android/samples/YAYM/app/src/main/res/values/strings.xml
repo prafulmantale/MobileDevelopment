@@ -43,6 +43,9 @@
     <string name="seconds_thirty">30 Seconds</string>
     <string name="manual">Manual</string>
 
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
     <string-array name="datefetchoptions_display">
         <item>1 Second</item>
         <item>5 Second</item>
