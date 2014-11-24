@@ -83,8 +83,8 @@ public class GaugeViewEx extends View {
             canvas.drawArc(outerRect, 240, 120, false, outerCirclePaintProfit);
         }
         else{
-            canvas.drawArc(outerRect, 180, 60, true, outerCirclePaintLoss);
-            canvas.drawArc(outerRect, 240, 120, true, outerCirclePaintBlank);
+            canvas.drawArc(outerRect, 180, 60, false, outerCirclePaintLoss);
+            canvas.drawArc(outerRect, 240, 120, false, outerCirclePaintBlank);
         }
 
         //Meter line

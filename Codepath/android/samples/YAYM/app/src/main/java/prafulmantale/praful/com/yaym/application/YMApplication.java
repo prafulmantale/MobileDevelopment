@@ -37,8 +37,11 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
     private static LoginRequest loginRequest;
 
     private static final String LOGIN_URL = "admin/auth/login";
-    private static final String RULES_URL = "rw/riskwarehouse/rule";
-    private static final String SNAPSHOt_URL = "rw/riskwarehouse/snapshot";
+    private static final String RULES_URL = "fxiapi/riskwarehouse/rule";
+    private static final String SNAPSHOt_URL = "fxiapi/riskwarehouse/snapshot";
+
+//    private static final String RULES_URL = "rw/riskwarehouse/rule";
+//    private static final String SNAPSHOt_URL = "rw/riskwarehouse/snapshot";
 
     public static List<Cookie> appCookies;
 
