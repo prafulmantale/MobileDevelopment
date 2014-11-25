@@ -149,13 +149,18 @@ public class RWSummary {
             summary.yieldDisplay = zeroPrecisionFormat.format(summary.yield);
 
             summary.volume = jsonObject.getDouble("vol");
-            summary.volumeDisplay = zeroPrecisionFormat.format(summary.volume/1000);
+            summary.volumeDisplay = zeroPrecisionFormat.format(summary.volume / 1000);
 
             summary.realizedPnL = jsonObject.getDouble("rpnl");
             summary.realizedPnLDisplay = zeroPrecisionFormat.format(summary.realizedPnL);
 
             summary.unrealizedPnL = jsonObject.getDouble("upnl");
-            summary.unrealizedPnlDisplay = zeroPrecisionFormat.format(summary.unrealizedPnL);
+            if(summary.unrealizedPnL < 0){
+                summary.unrealizedPnlDisplay = "(" + zeroPrecisionFormat.format(-summary.unrealizedPnL) + ")";
+            }
+            else {
+                summary.unrealizedPnlDisplay = zeroPrecisionFormat.format(summary.unrealizedPnL);
+            }
 
             summary.pnL = jsonObject.getDouble("pnl");
             summary.totalMaxLimit = jsonObject.getDouble("tlim");

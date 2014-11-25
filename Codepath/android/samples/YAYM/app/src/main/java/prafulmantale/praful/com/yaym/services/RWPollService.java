@@ -17,8 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.application.YMApplication;
@@ -131,21 +129,21 @@ public class RWPollService extends Service {
 
 
 
-//       handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                fetchData();
-//            }
-//        }, pollInterval);
-
-        Timer timer = new Timer();
-
-        timer.schedule(new TimerTask() {
+       handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 fetchData();
             }
         }, pollInterval);
+
+//        Timer timer = new Timer();
+//
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                fetchData();
+//            }
+//        }, pollInterval);
     }
 
     private void processResponse(JSONObject jsonObject) {
