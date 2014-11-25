@@ -30,14 +30,14 @@
     <color name="needle_color">#646464</color>
     <color name="arcsecondarycolor">#41C3EA</color>
 
-    <color name="pos_blank">#dddddd</color>
-    <color name="pos_normal">#3366CC</color>
-    <color name="pos_warning">#FF9900</color>
+    <color name="pos_blank">#D5D5D5</color>
+    <color name="pos_normal">#254BC4</color>
+    <color name="pos_warning">#FF8700</color>
     <color name="pos_danger">#CC3300</color>
 
-    <color name="pnl_blank">#dddddd</color>
-    <color name="pnl_profit">#3d7ab6</color>
-    <color name="pnl_loss">#e42217</color>
+    <color name="pnl_blank">#D5D5D5</color>
+    <color name="pnl_profit">#2E63AA</color>
+    <color name="pnl_loss">#DE0003</color>
     <color name="pnl_text_color">#707070</color>
     <color name="pnl_meter_line">#c0d0e0</color>
 

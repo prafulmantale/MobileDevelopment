@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>00898C3A-9467-417D-9400-58C702FDC9A4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>YAYAM</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DC9F0EE304AFE16C304C1378D9391350F3C52859</key>
+		<string>https://github.com/prafulmantale/MobileDevelopment.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>IOSApps/YAYAM/YAYAM.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DC9F0EE304AFE16C304C1378D9391350F3C52859</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/prafulmantale/MobileDevelopment.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DC9F0EE304AFE16C304C1378D9391350F3C52859</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DC9F0EE304AFE16C304C1378D9391350F3C52859</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MobileDevelopment</string>
+		</dict>
+	</array>
+</dict>
+</plist>
