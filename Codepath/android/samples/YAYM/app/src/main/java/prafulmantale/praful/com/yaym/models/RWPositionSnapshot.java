@@ -10,6 +10,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import prafulmantale.praful.com.yaym.helpers.Utils;
+
 /**
  * Created by prafulmantale on 10/8/14.
  */
@@ -397,10 +399,10 @@ public class RWPositionSnapshot {
             rwPositionSnapshot.realizedPnL = jsonObject.getDouble("rPNL");
             rwPositionSnapshot.realizedPnLInUSD = jsonObject.getDouble("rPNLInUSD");
             if(rwPositionSnapshot.realizedPnLInUSD < 0){
-                rwPositionSnapshot.realizedPnLInUSDDisplay = accumulationFormat.format(-rwPositionSnapshot.realizedPnLInUSD);
+                rwPositionSnapshot.realizedPnLInUSDDisplay = Utils.zeroPrecisionFormat.format(-rwPositionSnapshot.realizedPnLInUSD);
             }
             else {
-                rwPositionSnapshot.realizedPnLInUSDDisplay = accumulationFormat.format(rwPositionSnapshot.realizedPnLInUSD);
+                rwPositionSnapshot.realizedPnLInUSDDisplay = Utils.zeroPrecisionFormat.format(rwPositionSnapshot.realizedPnLInUSD);
             }
 
             // "uPNL":-27.81593336894006,"uPNLInUSD":-24.57,"totalPNL":5366.52,"totalPNLUSD":4740.78,"skewEnabled":false,"skewSpread":0.0,
@@ -448,7 +450,10 @@ public class RWPositionSnapshot {
             rwPositionSnapshot.skewedOfferRate = jsonObject.getDouble("skewedOfferRate");
             rwPositionSnapshot.volume = jsonObject.getDouble("volume");
             rwPositionSnapshot.volumeInUSD = jsonObject.getDouble("volumeInUSD");
+            rwPositionSnapshot.volumeInUSDDisplay = Utils.zeroPrecisionFormat.format(rwPositionSnapshot.volumeInUSD / 1000);
+
             rwPositionSnapshot.yield = jsonObject.getDouble("yield");
+            rwPositionSnapshot.yieldDisplay = Utils.zeroPrecisionFormat.format(rwPositionSnapshot.yield);
 
         }
         catch (JSONException ex){

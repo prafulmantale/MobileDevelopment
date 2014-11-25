@@ -5,7 +5,7 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
+import prafulmantale.praful.com.yaym.helpers.Utils;
 
 /**
  * Created by prafulmantale on 10/8/14.
@@ -16,7 +16,7 @@ public class RWSummary {
 
     //"summary":{"nrp":3.2,"yld":123.3,"vol":5.086220669E8,"rpnl":62767.24,"upnl":-49.86,"pnl":62717.38,"tlim":3103007.5,"tacc":98979.13}
 
-    private static final DecimalFormat zeroPrecisionFormat = new DecimalFormat("##,###");
+
 
     private double netRiskPercentage;
     private double yield;
@@ -143,23 +143,23 @@ public class RWSummary {
 
         try {
             summary.netRiskPercentage = jsonObject.getDouble("nrp");
-            summary.netRiskPercentageDisplay = zeroPrecisionFormat.format(summary.netRiskPercentage);
+            summary.netRiskPercentageDisplay = Utils.zeroPrecisionFormat.format(summary.netRiskPercentage);
 
             summary.yield = jsonObject.getDouble("yld");
-            summary.yieldDisplay = zeroPrecisionFormat.format(summary.yield);
+            summary.yieldDisplay = Utils.zeroPrecisionFormat.format(summary.yield);
 
             summary.volume = jsonObject.getDouble("vol");
-            summary.volumeDisplay = zeroPrecisionFormat.format(summary.volume / 1000);
+            summary.volumeDisplay = Utils.zeroPrecisionFormat.format(summary.volume / 1000);
 
             summary.realizedPnL = jsonObject.getDouble("rpnl");
-            summary.realizedPnLDisplay = zeroPrecisionFormat.format(summary.realizedPnL);
+            summary.realizedPnLDisplay = Utils.zeroPrecisionFormat.format(summary.realizedPnL);
 
             summary.unrealizedPnL = jsonObject.getDouble("upnl");
             if(summary.unrealizedPnL < 0){
-                summary.unrealizedPnlDisplay = "(" + zeroPrecisionFormat.format(-summary.unrealizedPnL) + ")";
+                summary.unrealizedPnlDisplay = "(" + Utils.zeroPrecisionFormat.format(-summary.unrealizedPnL) + ")";
             }
             else {
-                summary.unrealizedPnlDisplay = zeroPrecisionFormat.format(summary.unrealizedPnL);
+                summary.unrealizedPnlDisplay = Utils.zeroPrecisionFormat.format(summary.unrealizedPnL);
             }
 
             summary.pnL = jsonObject.getDouble("pnl");
