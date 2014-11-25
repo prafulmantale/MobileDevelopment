@@ -5,6 +5,8 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by prafulmantale on 10/8/14.
  */
@@ -13,6 +15,8 @@ public class RWSummary {
     private static final String TAG = RWSummary.class.getName();
 
     //"summary":{"nrp":3.2,"yld":123.3,"vol":5.086220669E8,"rpnl":62767.24,"upnl":-49.86,"pnl":62717.38,"tlim":3103007.5,"tacc":98979.13}
+
+    private static final DecimalFormat zeroPrecisionFormat = new DecimalFormat("##,###");
 
     private double netRiskPercentage;
     private double yield;
@@ -139,19 +143,19 @@ public class RWSummary {
 
         try {
             summary.netRiskPercentage = jsonObject.getDouble("nrp");
-            summary.netRiskPercentageDisplay = jsonObject.getString("nrp");
+            summary.netRiskPercentageDisplay = zeroPrecisionFormat.format(summary.netRiskPercentage);
 
             summary.yield = jsonObject.getDouble("yld");
-            summary.yieldDisplay = jsonObject.getString("yld");
+            summary.yieldDisplay = zeroPrecisionFormat.format(summary.yield);
 
             summary.volume = jsonObject.getDouble("vol");
-            summary.volumeDisplay = jsonObject.getString("vol");
+            summary.volumeDisplay = zeroPrecisionFormat.format(summary.volume/1000);
 
             summary.realizedPnL = jsonObject.getDouble("rpnl");
-            summary.realizedPnLDisplay = jsonObject.getString("rpnl");
+            summary.realizedPnLDisplay = zeroPrecisionFormat.format(summary.realizedPnL);
 
             summary.unrealizedPnL = jsonObject.getDouble("upnl");
-            summary.unrealizedPnlDisplay = jsonObject.getString("upnl");
+            summary.unrealizedPnlDisplay = zeroPrecisionFormat.format(summary.unrealizedPnL);
 
             summary.pnL = jsonObject.getDouble("pnl");
             summary.totalMaxLimit = jsonObject.getDouble("tlim");

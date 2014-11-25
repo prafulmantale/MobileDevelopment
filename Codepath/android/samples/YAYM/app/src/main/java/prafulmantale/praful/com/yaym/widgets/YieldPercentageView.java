@@ -3,7 +3,6 @@ package prafulmantale.praful.com.yaym.widgets;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -61,7 +60,7 @@ public class YieldPercentageView extends View {
         float density = resources.getDisplayMetrics().density;
 
         int arcColor = getResources().getColor(R.color.risk_capacity_arc_blank);
-        int progressColor = Color.BLUE;
+        int progressColor = getResources().getColor(R.color.risk_capacity_progress);
 
         progressWidth = (int)(progressWidth * density);
 

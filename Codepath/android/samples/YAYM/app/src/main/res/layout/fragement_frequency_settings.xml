@@ -43,7 +43,7 @@
             android:id="@+id/rbOneSecond"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/second_one"
+            android:text="@string/second_two"
             />
 
         <RadioButton

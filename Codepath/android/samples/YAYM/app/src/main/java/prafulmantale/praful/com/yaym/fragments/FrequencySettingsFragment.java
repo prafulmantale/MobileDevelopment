@@ -57,7 +57,7 @@ public class FrequencySettingsFragment extends DialogFragment{
             frequency = pref.getInt(AppConstants.PREF_KEY_FREQUENCY, frequency);
         }
 
-        if(frequency == 1){
+        if(frequency == 2){
             ((RadioButton)view.findViewById(R.id.rbOneSecond)).setChecked(true);
         }
         else if(frequency == 5){
@@ -86,7 +86,7 @@ public class FrequencySettingsFragment extends DialogFragment{
                 int newFreq = -10;
                 switch (checkedId){
                     case R.id.rbOneSecond:
-                        newFreq = 1;
+                        newFreq = 2;
                         break;
                     case R.id.rbFiveSecond:
                         newFreq = 5;

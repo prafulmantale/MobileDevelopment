@@ -117,7 +117,7 @@ public class RWPollService extends Service {
 
     private void scheduleNextRefresh() {
 
-        long pollInterval = 300;
+        long pollInterval = 2000;
 
         if(NetworkUtils.isConnectedToProvider(getApplicationContext())){
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);

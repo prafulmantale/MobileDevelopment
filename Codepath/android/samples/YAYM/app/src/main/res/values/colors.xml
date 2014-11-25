@@ -47,6 +47,7 @@
     <color name="risk_capacity_text">#9A9A9A</color>
     <color name="risk_capacity_background">#262D33</color>
     <color name="risk_capacity_title">#ffffff</color>
+    <color name="risk_capacity_progress">#8CB3E2</color>
 
     <color name="yeild_details_header_background">#fff</color>
     <color name="yeild_details_header_value">#333</color>
