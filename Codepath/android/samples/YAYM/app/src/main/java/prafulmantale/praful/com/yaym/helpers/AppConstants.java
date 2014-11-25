@@ -12,6 +12,10 @@ public class AppConstants {
     public static final String PARAM_KEY_ORG = "org";
     public static final String PARAM_KEY_NAMESPACE = "namespace";
     public static final String PARAM_KEY_CCYPAIR = "ccyPair";
+    public static final String PARAM_KEY_INSTRUMENT = "instrument";
+    public static final String PARAM_KEY_PERIOD = "period";
+    public static final String PARAM_KEY_COUNT = "count";
+
 
     public static final String TEXT_ALL = "ALL";
 

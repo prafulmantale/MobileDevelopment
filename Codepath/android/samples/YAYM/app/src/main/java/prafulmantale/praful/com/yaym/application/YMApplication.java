@@ -40,6 +40,18 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
     private static final String RULES_URL = "fxiapi/riskwarehouse/rule";
     private static final String SNAPSHOt_URL = "fxiapi/riskwarehouse/snapshot";
 
+    //Historical data
+    //fxiapi/riskwarehouse/historicalData?ccyPair=EUR/USD&org=YMSBADemo&_=1416895669041
+    private static final String HISTORICAL_DATA_URL = "xiapi/riskwarehouse/historicalData";
+
+    //Rate data
+    //fxiapi/historicaldata/quoteHistory?instrument=EUR/USD&period=HOUR&count=1440&_=1416895669040
+    private static final String RATE_DATA_URL = "fxiapi/historicaldata/quoteHistory";
+
+    //Reference data
+    //fxiapi/refdata/supportedCcypairs?_=1416895669037
+    private static final String REF_DATA_URL = "fxiapi/refdata/supportedCcypairs";
+
 //    private static final String RULES_URL = "rw/riskwarehouse/rule";
 //    private static final String SNAPSHOt_URL = "rw/riskwarehouse/snapshot";
 
@@ -104,4 +116,40 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
 
         return url;
     }
+
+    public static String getRefDataUrl(){
+
+        String url = Utils.getAPIUrl(getAppBaseUrl(), REF_DATA_URL);
+
+        return url;
+    }
+
+    //fxiapi/historicaldata/quoteHistory?instrument=EUR/USD&period=HOUR&count=1440&_=1416895669040
+    public static String getRateDataUrl(String ccyPair){
+
+        String url = Utils.getAPIUrl(getAppBaseUrl(), HISTORICAL_DATA_URL);
+
+        url += "?" + AppConstants.PARAM_KEY_INSTRUMENT + "=" + ccyPair
+                + "&" + AppConstants.PARAM_KEY_PERIOD + "=HOUR"
+                + "&" + AppConstants.PARAM_KEY_COUNT + "=24";
+
+
+        return url;
+    }
+
+    //Historical data
+    //fxiapi/riskwarehouse/historicalData?ccyPair=EUR/USD&org=YMSBADemo&_=1416895669041
+
+    public static String getHistoricalDataUrl(String ccyPair){
+
+        String url = Utils.getAPIUrl(getAppBaseUrl(), HISTORICAL_DATA_URL);
+
+        url += "?" + AppConstants.PARAM_KEY_CCYPAIR + "=" + ccyPair
+                + "&" + AppConstants.PARAM_KEY_ORG + loginRequest.getOrganization();
+
+        return url;
+    }
+
+
+
 }
