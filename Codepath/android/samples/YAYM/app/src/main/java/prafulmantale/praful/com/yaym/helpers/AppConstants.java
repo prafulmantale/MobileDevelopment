@@ -44,5 +44,8 @@ public class AppConstants {
         public static int LOGOUT = 6000;
         public static int RULE = 5001;
         public static int SNAPSHOT = 5002;
+        public static int REFDATA = 5003;
+        public static int HISTDATA = 5004;
+        public static int RATEDATA = 5005;
     }
 }

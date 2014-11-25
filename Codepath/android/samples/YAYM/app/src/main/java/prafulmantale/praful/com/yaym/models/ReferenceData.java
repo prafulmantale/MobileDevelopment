@@ -6,8 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by prafulmantale on 11/24/14.
@@ -106,12 +106,12 @@ public class ReferenceData {
         return data;
     }
 
-    public static List<ReferenceData> fromJSON(JSONArray jsonArray){
+    public static Map<String, ReferenceData> fromJSON(JSONArray jsonArray){
 
-        List<ReferenceData> list = new ArrayList<ReferenceData>();
+        Map<String, ReferenceData> map = new HashMap<String, ReferenceData>();
 
         if(jsonArray == null){
-            return list;
+            return map;
         }
 
         int len = jsonArray.length();
@@ -138,9 +138,9 @@ public class ReferenceData {
                 continue;
             }
 
-            list.add(data);
+            map.put(data.instrument, data);
         }
 
-        return list;
+        return map;
     }
 }

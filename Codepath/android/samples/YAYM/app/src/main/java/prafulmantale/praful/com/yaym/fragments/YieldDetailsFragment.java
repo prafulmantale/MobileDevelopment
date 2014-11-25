@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,8 @@ import android.widget.TextView;
 
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.activities.MainActivity;
+import prafulmantale.praful.com.yaym.application.YMApplication;
+import prafulmantale.praful.com.yaym.asynctasks.HttpGetAsyncTask;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
@@ -24,6 +29,7 @@ import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
  */
 public class YieldDetailsFragment extends Fragment {
 
+    private static final String TAG = YieldDetailsFragment.class.getSimpleName();
 
     private TextView tvYieldValue;
     private TextView tvVolumeValue;
@@ -40,6 +46,8 @@ public class YieldDetailsFragment extends Fragment {
 
         //Non view initializations
         selectedCurrencyPair = MainActivity.selectedCurrencyPair;
+
+
     }
 
     @Override
@@ -57,6 +65,9 @@ public class YieldDetailsFragment extends Fragment {
         getActivity().registerReceiver(marketDataReceiver, new IntentFilter(AppConstants.RW_SNAPSHOT_RECEIVED));
 
         selectedCurrencyPair = MainActivity.selectedCurrencyPair;
+
+        getHistoricalData();
+        getRateData();
 
         super.onStart();
     }
@@ -118,6 +129,25 @@ public class YieldDetailsFragment extends Fragment {
         @Override
         public void onReceive(Context context, Intent intent) {
              updateData();
+        }
+    };
+
+    private void getHistoricalData(){
+        new HttpGetAsyncTask(handler, YMApplication.getHistoricalDataUrl(selectedCurrencyPair), AppConstants.HandlerMessageIds.HISTDATA).execute();
+    }
+
+    private void getRateData(){
+        new HttpGetAsyncTask(handler, YMApplication.getRateDataUrl(selectedCurrencyPair), AppConstants.HandlerMessageIds.RATEDATA).execute();
+    }
+
+    private Handler handler = new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+
+            String response = (String)msg.obj;
+
+            Log.d(TAG, "Response Message: .... \r\n" + response);
         }
     };
 }

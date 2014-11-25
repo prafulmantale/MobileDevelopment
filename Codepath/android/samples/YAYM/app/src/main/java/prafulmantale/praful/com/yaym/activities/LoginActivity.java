@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,6 +31,7 @@ import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.asynctasks.HttpGetAsyncTask;
 import prafulmantale.praful.com.yaym.asynctasks.HttpPostAsyncTask;
+import prafulmantale.praful.com.yaym.caches.RefDataCache;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.helpers.NetworkUtils;
@@ -260,12 +262,20 @@ public class LoginActivity extends Activity{
                 .execute();
     }
 
+    private void getRefData(){
+        new HttpGetAsyncTask(handler, YMApplication.getRefDataUrl(),
+                AppConstants.HandlerMessageIds.REFDATA)
+                .execute();
+    }
+
     private Handler handler = new Handler(){
 
         @Override
         public void handleMessage(Message msg) {
 
             String response = (String)msg.obj;
+
+            Log.d(TAG, "Response Message: .... \r\n" + response);
 
             if(response != null && response.isEmpty() == false){
                 if(response.equals(AppConstants.STATUS_FAILURE)){
@@ -280,10 +290,10 @@ public class LoginActivity extends Activity{
                 }
 
                 try {
-                    JSONObject data = new JSONObject(response);
+
 
                     if(msg.what == AppConstants.HandlerMessageIds.LOGIN){
-
+                        JSONObject data = new JSONObject(response);
                         if(data.get(AppConstants.STATUS_TEXT).equals(AppConstants.STATUS_OK)){
 
                             Log.d(TAG, "Login is successful");
@@ -293,9 +303,16 @@ public class LoginActivity extends Activity{
                     }
 
                     if(msg.what == AppConstants.HandlerMessageIds.RULE){
-
+                        JSONObject data = new JSONObject(response);
                         Log.d(TAG, "Risk Rules received");
                         RulesCache.getInstance().updateCache(data);
+                        getRefData();
+                    }
+
+                    if(msg.what == AppConstants.HandlerMessageIds.REFDATA){
+
+                        Log.d(TAG, "Reference data received");
+                        RefDataCache.getInstance().updateCache(new JSONArray(response));
                         showMain();
                     }
                 }

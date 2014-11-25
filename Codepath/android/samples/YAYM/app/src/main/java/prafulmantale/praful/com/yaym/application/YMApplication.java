@@ -42,7 +42,7 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
 
     //Historical data
     //fxiapi/riskwarehouse/historicalData?ccyPair=EUR/USD&org=YMSBADemo&_=1416895669041
-    private static final String HISTORICAL_DATA_URL = "xiapi/riskwarehouse/historicalData";
+    private static final String HISTORICAL_DATA_URL = "fxiapi/riskwarehouse/historicalData";
 
     //Rate data
     //fxiapi/historicaldata/quoteHistory?instrument=EUR/USD&period=HOUR&count=1440&_=1416895669040
@@ -127,7 +127,7 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
     //fxiapi/historicaldata/quoteHistory?instrument=EUR/USD&period=HOUR&count=1440&_=1416895669040
     public static String getRateDataUrl(String ccyPair){
 
-        String url = Utils.getAPIUrl(getAppBaseUrl(), HISTORICAL_DATA_URL);
+        String url = Utils.getAPIUrl(getAppBaseUrl(), RATE_DATA_URL);
 
         url += "?" + AppConstants.PARAM_KEY_INSTRUMENT + "=" + ccyPair
                 + "&" + AppConstants.PARAM_KEY_PERIOD + "=HOUR"
@@ -139,17 +139,13 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
 
     //Historical data
     //fxiapi/riskwarehouse/historicalData?ccyPair=EUR/USD&org=YMSBADemo&_=1416895669041
-
     public static String getHistoricalDataUrl(String ccyPair){
 
         String url = Utils.getAPIUrl(getAppBaseUrl(), HISTORICAL_DATA_URL);
 
         url += "?" + AppConstants.PARAM_KEY_CCYPAIR + "=" + ccyPair
-                + "&" + AppConstants.PARAM_KEY_ORG + loginRequest.getOrganization();
+                + "&" + AppConstants.PARAM_KEY_ORG + "=" +loginRequest.getOrganization();
 
         return url;
     }
-
-
-
 }
