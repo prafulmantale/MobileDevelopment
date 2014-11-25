@@ -46,7 +46,6 @@
         <!--/>-->
 
     <prafulmantale.praful.com.yaym.widgets.PositionStatusView
-        android:layout_marginTop="10dp"
         android:id="@+id/psView"
         android:layout_width="match_parent"
         android:layout_height="70dp"

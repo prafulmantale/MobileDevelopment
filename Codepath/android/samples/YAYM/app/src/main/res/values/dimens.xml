@@ -21,6 +21,7 @@
     <dimen name="position_view_long_value_size">12sp</dimen>
     <dimen name="position_view_short_value_size">12sp</dimen>
     <dimen name="position_view_circle_radius">4dp</dimen>
+    <dimen name="position_view_top_margin">30dp</dimen>
 
     <dimen name="position_header_textSize">12sp</dimen>
 

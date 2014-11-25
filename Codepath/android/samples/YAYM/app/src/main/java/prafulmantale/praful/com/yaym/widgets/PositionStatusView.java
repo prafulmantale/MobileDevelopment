@@ -88,6 +88,7 @@ public class PositionStatusView extends View {
         barHeight = getResources().getDimensionPixelSize(R.dimen.position_view_bar_height);
         centerBarHeight = getResources().getDimensionPixelSize(R.dimen.position_view_center_bar_height);
         barMargin = getResources().getDimensionPixelSize(R.dimen.position_view_bar_margin);
+        topMargin = getResources().getDimensionPixelSize(R.dimen.position_view_top_margin);
 
         circleRadius = getResources().getDimensionPixelSize(R.dimen.position_view_circle_radius);
 
