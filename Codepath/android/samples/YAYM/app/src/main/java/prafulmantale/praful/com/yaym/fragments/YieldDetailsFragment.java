@@ -66,6 +66,7 @@ public class YieldDetailsFragment extends Fragment {
 
         selectedCurrencyPair = MainActivity.selectedCurrencyPair;
 
+        updateData();
         getHistoricalData();
         getRateData();
 
@@ -121,7 +122,6 @@ public class YieldDetailsFragment extends Fragment {
         tvVolumeValue.setText(snapshot.getVolumeInUSDDisplay());
         tvRelaizedPnLValue.setText(snapshot.getRealizedPnLInUSDDisplay());
         tvUnrealizedPnLValue.setText(snapshot.getUnrealizedPnLDisplay());
-
     }
 
 
