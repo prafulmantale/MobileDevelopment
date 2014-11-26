@@ -2,7 +2,6 @@ package prafulmantale.praful.com.yaym.adapters;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,16 +42,10 @@ public class SnapshotAdapter extends BaseAdapter {
             ccyPairRate = convertView.findViewById(R.id.itemCcyPairRate);
 
             tvCcyPair = (TextView)ccyPairRate.findViewById(R.id.tvCcyPair_ratecontrol);
-            tvCcyPair.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Bold.ttf"));
             tvBigFigure = (TextView)ccyPairRate.findViewById(R.id.tvRate_BigFigure);
-            tvBigFigure.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Bold.ttf"));
             tvPips = (TextView)ccyPairRate.findViewById(R.id.tvRate_Pips);
-            tvPips.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Bold.ttf"));
             tvHalfPips = (TextView)ccyPairRate.findViewById(R.id.tvRate_halfPips);
-            tvHalfPips.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Bold.ttf"));
-
             gaugeView = (GaugeViewEx)convertView.findViewById(R.id.gvPnLGauge);
-
             positionStatusView = (PositionStatusView)convertView.findViewById(R.id.psView);
         }
 
