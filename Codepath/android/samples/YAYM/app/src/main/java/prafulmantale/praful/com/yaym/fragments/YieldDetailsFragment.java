@@ -14,11 +14,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.activities.MainActivity;
 import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.asynctasks.HttpGetAsyncTask;
+import prafulmantale.praful.com.yaym.caches.HistoricalDataCache;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
@@ -133,6 +138,40 @@ public class YieldDetailsFragment extends Fragment {
             String response = (String)msg.obj;
 
             Log.d(TAG, "Response Message: .... \r\n" + response);
+
+            if(response != null && response.isEmpty() == false){
+                if(response.equals(AppConstants.STATUS_FAILURE)){
+
+                    Toast.makeText(getActivity(), R.string.error_cannot_connect_to_server, Toast.LENGTH_LONG).show();
+
+                    return;
+                }
+
+                try {
+
+
+                    if(msg.what == AppConstants.HandlerMessageIds.HISTDATA){
+                        JSONObject data = new JSONObject(response);
+                        if(data.get(AppConstants.STATUS_TEXT).equals(AppConstants.STATUS_OK)){
+
+                            Log.d(TAG, "Historical data received is successful");
+
+                            HistoricalDataCache.getInstance().updateCache(data.getJSONArray("sampleSnapshotList"));
+                            ChartsFragment fragment = (ChartsFragment)getFragmentManager().findFragmentById(R.id.fragmentCharts);
+
+                            if(fragment != null){
+                                fragment.update();
+                            }
+
+                        }
+                    }
+
+                }
+                catch (JSONException jex){
+                    Log.e(TAG, "Exception in handleMessage: " + jex.getMessage());
+                    jex.printStackTrace();
+                }
+            }
         }
     };
 }

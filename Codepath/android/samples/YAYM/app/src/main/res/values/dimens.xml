@@ -25,4 +25,8 @@
 
     <dimen name="position_header_textSize">12sp</dimen>
 
+    <dimen name="chart_bar_margin">4dp</dimen>
+    <dimen name="chart_side_margin">25dp</dimen>
+    <dimen name="chart_bar_top_margin">2dp</dimen>
+
 </resources>
