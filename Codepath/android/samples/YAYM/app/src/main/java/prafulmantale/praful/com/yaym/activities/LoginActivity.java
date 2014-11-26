@@ -18,7 +18,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -46,7 +45,6 @@ public class LoginActivity extends Activity{
     private EditText etUserName;
     private EditText etPassword;
     private BootstrapButton btnLogin;
-    private TextView tvCopyright;
     private ProgressDialog progressDialog;
     private RadioGroup serverGroup;
     private YMApplication application;
@@ -179,14 +177,8 @@ public class LoginActivity extends Activity{
         etPassword.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
 
         btnLogin = (BootstrapButton)findViewById(R.id.btnLogin);
-
-        tvCopyright = (TextView) findViewById(R.id.tvCopyright);
-        tvCopyright.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
-
         serverGroup = (RadioGroup)findViewById(R.id.rgServerGroup);
-
         cbRememberMe = (CheckBox)findViewById(R.id.cbRemember);
-
     }
 
     private void initializeActionBar(){

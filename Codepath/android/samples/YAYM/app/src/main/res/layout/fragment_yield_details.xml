@@ -1,5 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -28,20 +29,23 @@
             android:orientation="vertical"
             android:weightSum="1"
             android:layout_gravity="center">
-            <TextView
+            <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="0.4"
                 android:id="@+id/tvYieldValue"
                 style="@style/yield_details_value"
                 android:text="0"
+                custom:typeface="fonts/OpenSans-Regular.ttf"
                 />
-            <TextView
+            <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="0.6"
                 android:id="@+id/tvYeildText"
-                style="@style/yield_details_text"/>
+                style="@style/yield_details_text"
+                custom:typeface="fonts/OpenSans-Regular.ttf"
+                />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -49,20 +53,23 @@
             android:layout_weight="0.25"
             android:orientation="vertical"
             android:weightSum="1">
-            <TextView
+            <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="0.4"
                 android:id="@+id/tvVolumeValue"
                 style="@style/yield_details_value"
                 android:text="0"
+                custom:typeface="fonts/OpenSans-Regular.ttf"
                 />
-            <TextView
+            <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="0.6"
                 android:id="@+id/tvVolumeText"
-                style="@style/yield_details_text"/>
+                style="@style/yield_details_text"
+                custom:typeface="fonts/OpenSans-Regular.ttf"
+                />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -70,20 +77,23 @@
             android:layout_weight="0.25"
             android:orientation="vertical"
             android:weightSum="1">
-            <TextView
+            <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="0.4"
                 android:id="@+id/tvRealizedPnLValue"
                 style="@style/yield_details_value"
                 android:text="0"
+                custom:typeface="fonts/OpenSans-Regular.ttf"
                 />
-            <TextView
+            <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="0.6"
                 android:id="@+id/tvRealizedPnLText"
-                style="@style/yield_details_text"/>
+                style="@style/yield_details_text"
+                custom:typeface="fonts/OpenSans-Regular.ttf"
+                />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -91,20 +101,23 @@
             android:layout_weight="0.2"
             android:orientation="vertical"
             android:weightSum="1">
-            <TextView
+            <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="0.4"
                 android:id="@+id/tvUnRealizedPnLValue"
                 style="@style/yield_details_value"
                 android:text="0"
+                custom:typeface="fonts/OpenSans-Regular.ttf"
                 />
-            <TextView
+            <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="0.6"
                 android:id="@+id/tvUnRealizedPnLText"
-                style="@style/yield_details_text"/>
+                style="@style/yield_details_text"
+                custom:typeface="fonts/OpenSans-Regular.ttf"
+                />
         </LinearLayout>
     </LinearLayout>
 
@@ -116,7 +129,7 @@
             android:layout_marginTop="5dp"
             >
 
-            <TextView
+            <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:layout_marginLeft="15dp"
                 android:id="@+id/tvChartDurationOneMinute"
                 android:layout_width="wrap_content"
@@ -124,8 +137,9 @@
                 android:text="1m"
                 android:textSize="12sp"
                 android:textColor="@color/risk_capacity_text"
-                android:background="@drawable/char_duration_border"/>
-            <TextView
+                android:background="@drawable/char_duration_border"
+                custom:typeface="fonts/OpenSans-Regular.ttf"/>
+            <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:id="@+id/tvChartDurationFifteenMinute"
                 android:layout_toRightOf="@id/tvChartDurationOneMinute"
                 android:layout_width="wrap_content"
@@ -134,8 +148,10 @@
                 android:layout_marginLeft="5dp"
                 android:textSize="12sp"
                 android:textColor="@color/risk_capacity_text"
-                android:background="@drawable/char_duration_border"/>
-            <TextView
+                android:background="@drawable/char_duration_border"
+                custom:typeface="fonts/OpenSans-Regular.ttf"
+                />
+            <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:id="@+id/tvChartDurationOneHour"
                 android:layout_toRightOf="@id/tvChartDurationFifteenMinute"
                 android:layout_width="wrap_content"
@@ -144,14 +160,18 @@
                 android:layout_marginLeft="5dp"
                 android:textSize="12sp"
                 android:textColor="@color/risk_capacity_text"
-                android:background="@drawable/char_duration_border"/>
-            <TextView
+                android:background="@drawable/char_duration_border"
+                custom:typeface="fonts/OpenSans-Regular.ttf"
+                />
+            <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:id="@+id/tvYDCurrencyPair"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="EUR/USD"
-                android:gravity="center"/>
+                android:gravity="center"
+                custom:typeface="fonts/OpenSans-Regular.ttf"
+                />
 
             <fragment
                 android:layout_width="match_parent"

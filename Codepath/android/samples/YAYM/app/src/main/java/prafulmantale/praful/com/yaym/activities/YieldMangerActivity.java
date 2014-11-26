@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
@@ -86,41 +85,22 @@ public class YieldMangerActivity extends FragmentActivity{
         lvPositions = (ListView)findViewById(R.id.lvPositionsList);
         View headerView = findViewById(R.id.lvHeader);//((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_positions_header, null, false);
 
-        TextView tvCcyPair = (TextView)headerView.findViewById(R.id.tvCurrencyPair_header);
-        TextView tvPositionsStatus = (TextView)headerView.findViewById(R.id.tvPosition_header);
-        TextView tvUnrealizedPnL = (TextView)headerView.findViewById(R.id.tvUnrealizedPnl_header);
-        tvCcyPair.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf"));
-        tvPositionsStatus.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf"));
-        tvUnrealizedPnL.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf"));
-
         TextView tvYieldText = (TextView)findViewById(R.id.tvYeildText);
         tvYieldText.setText(Html.fromHtml(getString(R.string.risk_capacity_yield_usd_mio_text)));
-        tvYieldText.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf"));
 
         TextView tvVolumeText = (TextView)findViewById(R.id.tvVolumeText);
         tvVolumeText.setText(Html.fromHtml(getString(R.string.risk_capacity_volume_usd_thousand_text)));
-        tvVolumeText.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf"));
 
         TextView tvRelPnLText = (TextView)findViewById(R.id.tvRealizedPnLText);
         tvRelPnLText.setText(Html.fromHtml(getString(R.string.risk_capacity_realized_pnl_usd_text)));
-        tvRelPnLText.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf"));
 
         TextView tvUnRelPnLText = (TextView)findViewById(R.id.tvUnRealizedPnLText);
         tvUnRelPnLText.setText(Html.fromHtml(getString(R.string.risk_capacity_unrealized_pnl_usd_text)));
-        tvUnRelPnLText.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf"));
 
         tvYieldValue = (TextView)findViewById(R.id.tvYieldValue);
-        tvYieldValue.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf"));
-
-
         tvVolumeValue = (TextView)findViewById(R.id.tvVolumeValue);
-        tvVolumeValue.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf"));
-
         tvRelaizedPnLValue = (TextView)findViewById(R.id.tvRealizedPnLValue);
-        tvRelaizedPnLValue.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf"));
-
         tvUnrealizedPnLValue = (TextView)findViewById(R.id.tvUnRealizedPnLValue);
-        tvUnrealizedPnLValue.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf"));
 
         yieldPercentageView = (YieldPercentageView)findViewById(R.id.ypv);
 
