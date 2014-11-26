@@ -58,6 +58,7 @@
     <color name="chart_duration_border_color">#265089</color>
     <color name="chart_pnl_bar">#5791D6</color>
     <color name="chart_rate_bar">#265089</color>
+    <color name="chart_rate_border">#737373</color>
     <color name="chart_volume_bar">#A4B6CA</color>
     <color name="chart_yield_circle">#265089</color>
     <color name="chart_yield_line">#859FC1</color>

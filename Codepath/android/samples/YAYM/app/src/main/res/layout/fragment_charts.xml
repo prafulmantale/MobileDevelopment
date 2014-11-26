@@ -15,16 +15,24 @@
 
     <prafulmantale.praful.com.yaym.widgets.LineChart
         android:id="@+id/lineChart"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="#fff"/>
+        />
+
+    <prafulmantale.praful.com.yaym.widgets.OHLCChart
+        android:id="@+id/ohlcChart"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        />
 
     <prafulmantale.praful.com.yaym.widgets.BarChart
         android:id="@+id/barChart"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#fff"/>
+        />
 </LinearLayout>
 
     </ScrollView>

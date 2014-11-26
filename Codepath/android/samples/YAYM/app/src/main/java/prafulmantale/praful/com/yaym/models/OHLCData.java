@@ -25,13 +25,14 @@ public class OHLCData {
     public OHLCData() {
     }
 
-    public static OHLCData fromJSON(JSONArray jsonArray){
+    public static OHLCData fromJSON(String jsonArray){
 
         if(jsonArray == null){
             return null;
         }
 
-        int len = jsonArray.length();
+        String []arr = jsonArray.split(",");
+        int len = arr.length;
 
         if(len < 6){
             return null;
@@ -40,13 +41,13 @@ public class OHLCData {
         OHLCData data = new OHLCData();
 
         try {
-            data.timestamp = jsonArray.getLong(0);
-            data.open = jsonArray.getDouble(1);
-            data.close = jsonArray.getDouble(2);
-            data.high = jsonArray.getDouble(3);
-            data.low = jsonArray.getDouble(4);
+            data.timestamp = Long.parseLong(arr[0]);
+            data.open = Double.parseDouble(arr[1]);
+            data.close = Double.parseDouble(arr[2]);
+            data.high = Double.parseDouble(arr[3]);
+            data.low = Double.parseDouble(arr[4]);
         }
-        catch (JSONException jex){
+        catch (Exception jex){
 
             data = null;
 
@@ -68,10 +69,10 @@ public class OHLCData {
 
         for(int i = 0; i < len; i++){
 
-            JSONArray array = null;
+            String array = null;
 
             try {
-                array = jsonArray.getJSONArray(i);
+                array = jsonArray.getString(i);
             }
             catch (JSONException jex){
                 Log.e(TAG, "Exception while extracting json array from json array: " + jex.getMessage());

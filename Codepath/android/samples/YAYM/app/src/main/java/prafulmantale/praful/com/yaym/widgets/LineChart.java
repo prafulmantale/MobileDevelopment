@@ -96,7 +96,7 @@ public class LineChart extends View {
 
             float cx = left + barwidth/2;
             float cy = top - getBarHeight(i, perUnit) + barwidth/2;
-            float  radius = barwidth/2;
+            float  radius = barwidth/4;
 
             if(i > 0){
                 canvas.drawLine(cx, cy, prevX, prevY, linePaint);

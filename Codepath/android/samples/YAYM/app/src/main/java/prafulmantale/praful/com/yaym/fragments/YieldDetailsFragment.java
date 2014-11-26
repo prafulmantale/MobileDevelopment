@@ -24,6 +24,7 @@ import prafulmantale.praful.com.yaym.activities.MainActivity;
 import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.asynctasks.HttpGetAsyncTask;
 import prafulmantale.praful.com.yaym.caches.HistoricalDataCache;
+import prafulmantale.praful.com.yaym.caches.RateDataCache;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
@@ -130,6 +131,23 @@ public class YieldDetailsFragment extends Fragment {
         new HttpGetAsyncTask(handler, YMApplication.getRateDataUrl(selectedCurrencyPair), AppConstants.HandlerMessageIds.RATEDATA).execute();
     }
 
+    private void update(int what){
+
+        ChartsFragment fragment = (ChartsFragment)getFragmentManager().findFragmentById(R.id.fragmentCharts);
+
+        if(fragment == null){
+            return;
+        }
+
+        if(what == AppConstants.HandlerMessageIds.RATEDATA){
+            fragment.updateRateData();
+        }
+
+        if(what == AppConstants.HandlerMessageIds.HISTDATA){
+            fragment.updateHistoricalData();
+        }
+    }
+
     private Handler handler = new Handler(){
 
         @Override
@@ -137,7 +155,7 @@ public class YieldDetailsFragment extends Fragment {
 
             String response = (String)msg.obj;
 
-            Log.d(TAG, "Response Message: .... \r\n" + response);
+           // Log.d(TAG, "Response Message: .... \r\n" + response);
 
             if(response != null && response.isEmpty() == false){
                 if(response.equals(AppConstants.STATUS_FAILURE)){
@@ -157,14 +175,21 @@ public class YieldDetailsFragment extends Fragment {
                             Log.d(TAG, "Historical data received is successful");
 
                             HistoricalDataCache.getInstance().updateCache(data.getJSONArray("sampleSnapshotList"));
-                            ChartsFragment fragment = (ChartsFragment)getFragmentManager().findFragmentById(R.id.fragmentCharts);
-
-                            if(fragment != null){
-                                fragment.update();
-                            }
-
                         }
                     }
+
+                    if(msg.what == AppConstants.HandlerMessageIds.RATEDATA){
+
+                        JSONObject data = new JSONObject(response);
+                        if(data.get(AppConstants.STATUS_TEXT).equals(AppConstants.STATUS_OK)){
+
+                            Log.d(TAG, "Rate data received...");
+
+                            RateDataCache.getInstance().updateCache(data);
+                        }
+                    }
+
+                    update(msg.what);
 
                 }
                 catch (JSONException jex){
