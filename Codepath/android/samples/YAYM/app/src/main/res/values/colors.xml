@@ -33,7 +33,7 @@
     <color name="pos_blank">#D5D5D5</color>
     <color name="pos_normal">#254BC4</color>
     <color name="pos_warning">#FF8700</color>
-    <color name="pos_danger">#CC3300</color>
+    <color name="pos_danger">#C11E00</color>
 
     <color name="pnl_blank">#D5D5D5</color>
     <color name="pnl_profit">#2E63AA</color>
