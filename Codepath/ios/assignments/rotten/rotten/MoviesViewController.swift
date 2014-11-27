@@ -26,7 +26,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         var url = "https://api.instagram.com/v1/media/search?lat=48.858844&lng=2.294351&access_token=1494410638.1fb234f.fa70833370b9413a855979b011090de8"
         
-        var request = NSURLRequest(URL: NSURL(string: url))
+        var request = NSURLRequest(URL: NSURL(string: url)!)
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()){(response : NSURLResponse!, data:  NSData!, error : NSError!) -> Void in
             
