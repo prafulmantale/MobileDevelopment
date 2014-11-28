@@ -145,12 +145,6 @@ public class OHLCChart extends View {
         return barwidth;
     }
 
-    private float getBarHeight(int index, float perUnit){
-
-        double val = dataSource[index].getHigh() - dataSource[index].getLow();
-        return (float)(perUnit * val);
-    }
-
     private float getRectBottom(int index, float perUnit){
         double open = dataSource[index].getOpen();
         double close = dataSource[index].getClose();
