@@ -125,6 +125,12 @@ public class LineChart extends View {
             return;
         }
 
+        if(dataSource.length < 24){
+            System.out.println("Needs to handle properly");
+
+            return;
+        }
+
         this.dataSource = dataSource;
         maxVolume = dataSource[0];
         for(int i = 1; i < dataSource.length; i ++){

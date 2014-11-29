@@ -26,6 +26,7 @@ public class OHLCChart extends View {
     private int topMargin;
     private double maxRate;
     private double minRate = 0;
+    private int step;
 
     private OHLCData []dataSource;
 
@@ -113,11 +114,25 @@ public class OHLCChart extends View {
 
         canvas.drawText("Rate", left + 3, 10, labelPaint);
         canvas.drawText("0", left + 3, getMeasuredHeight() - 2, labelPaint);
+
+        if(step > 0 ) {
+            float y = top / step;
+
+            for(int i = 0; i < step - 1; i++) {
+                canvas.drawLine(sideMargin, y * (i + 1), left, y * (i + 1), horizontalBorderPaint);
+            }
+        }
     }
 
     public void setDataSource(String ccyPair, OHLCData[] dataSource){
 
         if(dataSource == null || dataSource.length == 0){
+            return;
+        }
+
+        if(dataSource.length < 24){
+            System.out.println("Needs to handle properly");
+
             return;
         }
 
@@ -138,6 +153,7 @@ public class OHLCChart extends View {
         RateChartProperties rateChartProperties = RateChartProperties.newInstance(ccyPair, minRate, maxRate);
         minRate = rateChartProperties.getMinRate();
         maxRate = rateChartProperties.getMaxRate();
+        step = rateChartProperties.getSteps();
 
 
         invalidate();
