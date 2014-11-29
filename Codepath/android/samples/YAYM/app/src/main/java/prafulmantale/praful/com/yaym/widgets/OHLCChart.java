@@ -8,6 +8,7 @@ import android.view.View;
 
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.models.OHLCData;
+import prafulmantale.praful.com.yaym.models.RateChartProperties;
 
 /**
  * Created by prafulmantale on 11/25/14.
@@ -114,7 +115,7 @@ public class OHLCChart extends View {
         canvas.drawText("0", left + 3, getMeasuredHeight() - 2, labelPaint);
     }
 
-    public void setDataSource(OHLCData[] dataSource){
+    public void setDataSource(String ccyPair, OHLCData[] dataSource){
 
         if(dataSource == null || dataSource.length == 0){
             return;
@@ -133,6 +134,11 @@ public class OHLCChart extends View {
                 minRate = dataSource[i].getLow();
             }
         }
+
+        RateChartProperties rateChartProperties = RateChartProperties.newInstance(ccyPair, minRate, maxRate);
+        minRate = rateChartProperties.getMinRate();
+        maxRate = rateChartProperties.getMaxRate();
+
 
         invalidate();
     }

@@ -15,6 +15,7 @@ public class RateProperties {
     private double bigFigure;
     private double pips;
     private double fractionalPips;
+    private double onePipValue;
 
     private String rateDisplay;
     private String bigFigureDisplay;
@@ -74,6 +75,8 @@ public class RateProperties {
         if(fractionalPipsDisplay != null && fractionalPipsDisplay.length() > 0) {
             fractionalPips = Integer.parseInt(fractionalPipsDisplay);
         }
+
+        onePipValue = 1/Math.pow(10, spotPrecision - spotPointsPrecision + 2);
     }
 
 
@@ -109,6 +112,10 @@ public class RateProperties {
         return fractionalPipsDisplay;
     }
 
+    public double getOnePipValue() {
+        return onePipValue;
+    }
+
     @Override
     public String toString() {
         return "RateProperties{" +
@@ -116,6 +123,7 @@ public class RateProperties {
                 ", bigFigure=" + bigFigure +
                 ", pips=" + pips +
                 ", fractionalPips=" + fractionalPips +
+                ", onePipValue=" + onePipValue +
                 ", rateDisplay='" + rateDisplay + '\'' +
                 ", bigFigureDisplay='" + bigFigureDisplay + '\'' +
                 ", pipsDisplay='" + pipsDisplay + '\'' +

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.activities.MainActivity;
 import prafulmantale.praful.com.yaym.caches.HistoricalDataCache;
 import prafulmantale.praful.com.yaym.caches.RateDataCache;
 import prafulmantale.praful.com.yaym.widgets.BarChart;
@@ -45,7 +46,7 @@ public class ChartsFragment extends Fragment{
     }
 
     public void updateRateData(){
-        ohlcChart.setDataSource(RateDataCache.getInstance().getRateData());
+        ohlcChart.setDataSource(MainActivity.selectedCurrencyPair, RateDataCache.getInstance().getRateData());
     }
 
 }

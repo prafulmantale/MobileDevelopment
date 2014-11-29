@@ -7,7 +7,7 @@ public class RateChartProperties {
 
     private double minRate;
     private double maxRate;
-    private double steps;
+    private int steps;
 
     private RateChartProperties(double minRate, double maxRate){
         this.minRate = minRate;
@@ -15,19 +15,50 @@ public class RateChartProperties {
         steps = 0;
     }
 
-    public RateChartProperties newInstance(String ccyPair, double minRate, double maxRate){
+    public static RateChartProperties newInstance(String ccyPair, double minRate, double maxRate){
         RateChartProperties properties = new RateChartProperties (minRate, maxRate);
 
-        properties.update();
+        properties.update(ccyPair);
 
         return properties;
     }
 
-    private void update(){
+    private void update(String ccyPair){
 
-        //Get min big figure
-        //while(newMinRate < minRate) add 25 pips
-        //while(newMaxRate is not greater than maxRate) add 25 pips
-        //steps = (max - min)/25
+        RateProperties rpMin = RateProperties.newInstance(ccyPair, minRate);
+
+        double newMinRate = rpMin.getBigFigure();
+        double prevMinRate = newMinRate;
+        while(newMinRate < minRate){
+            prevMinRate = newMinRate;
+            newMinRate += 25 * rpMin.getOnePipValue();
+        }
+
+        minRate = prevMinRate;
+
+        RateProperties rpMax = RateProperties.newInstance(ccyPair, maxRate);
+
+        double newMaxRate = rpMax.getBigFigure();
+
+        while(newMaxRate < maxRate){
+            newMaxRate += 25 * rpMax.getOnePipValue();
+        }
+
+        maxRate = newMaxRate;
+
+        steps = (int)((maxRate - minRate)/(25 * rpMax.getOnePipValue()));
+
+    }
+
+    public double getMinRate() {
+        return minRate;
+    }
+
+    public double getMaxRate() {
+        return maxRate;
+    }
+
+    public int getSteps() {
+        return steps;
     }
 }
