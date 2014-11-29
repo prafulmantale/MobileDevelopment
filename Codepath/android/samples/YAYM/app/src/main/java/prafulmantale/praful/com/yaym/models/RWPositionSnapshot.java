@@ -83,10 +83,7 @@ public class RWPositionSnapshot {
 
     private boolean isItemSelected;
 
-    private String bigFigure;
-    private String pips;
-    private String halfPips;
-
+    private RateProperties rateProperties;
 
     public String getOrg() {
         return org;
@@ -357,15 +354,15 @@ public class RWPositionSnapshot {
     }
 
     public String getBigFigure() {
-        return bigFigure;
+        return rateProperties.getBigFigureDisplay();
     }
 
     public String getPips() {
-        return pips;
+        return rateProperties.getPipsDisplay();
     }
 
     public String getHalfPips() {
-        return halfPips;
+        return rateProperties.getFractionalPipsDisplay();
     }
 
     public String getUnrealizedPnLDisplay() {
@@ -442,7 +439,7 @@ public class RWPositionSnapshot {
             rwPositionSnapshot.bidRate = jsonObject.getDouble("bidRate");
             rwPositionSnapshot.offerRate = jsonObject.getDouble("offerRate");
             rwPositionSnapshot.midRate = jsonObject.getDouble("midRate");
-            rwPositionSnapshot.updateFormattedRates();
+            rwPositionSnapshot.rateProperties = RateProperties.newInstance(rwPositionSnapshot.currencyPair, rwPositionSnapshot.midRate);
 
             // "skewedBidRate":1.43622,"skewedOfferRate":1.43629,"volume":1.5618E7,"volumeInUSD":1.98871803E7,"yield":238.38,
 
@@ -488,23 +485,6 @@ public class RWPositionSnapshot {
         return list;
     }
 
-    private void  updateFormattedRates ()
-    {
-        String midRateStr = null;
-        if(currencyPair.indexOf("JPY") !=-1)
-        {
-             midRateStr = jpyRateFormat.format(midRate);
-        }
-        else {
-             midRateStr = nonJPYRateFormat.format(midRate);
-        }
-
-        bigFigure = midRateStr.substring(0, midRateStr.length() - 3);
-        pips = midRateStr.substring(bigFigure.length(), bigFigure.length() + 2);
-        halfPips = midRateStr.substring(bigFigure.length() + 2  , bigFigure.length() + 3);
-    }
-
-
     @Override
     public String toString() {
         return "RWPositionSnapshot{" +
@@ -512,10 +492,15 @@ public class RWPositionSnapshot {
                 ", currencyPair='" + currencyPair + '\'' +
                 ", accumulation=" + accumulation +
                 ", accumulationInUSD=" + accumulationInUSD +
+                ", accumulationDisplay='" + accumulationDisplay + '\'' +
+                ", accumulationInUSDDisplay='" + accumulationInUSDDisplay + '\'' +
                 ", realizedPnL=" + realizedPnL +
                 ", realizedPnLInUSD=" + realizedPnLInUSD +
+                ", realizedPnLInUSDDisplay='" + realizedPnLInUSDDisplay + '\'' +
                 ", unrealizedPnL=" + unrealizedPnL +
                 ", unrealizedPnlInUSD=" + unrealizedPnlInUSD +
+                ", unrealizedPnLDisplay='" + unrealizedPnLDisplay + '\'' +
+                ", unrealizedPnLInUSDDisplay='" + unrealizedPnLInUSDDisplay + '\'' +
                 ", totalPnL=" + totalPnL +
                 ", totalPnLInUSD=" + totalPnLInUSD +
                 ", skewEnabled=" + skewEnabled +
@@ -536,7 +521,11 @@ public class RWPositionSnapshot {
                 ", skewedOfferRate=" + skewedOfferRate +
                 ", volume=" + volume +
                 ", volumeInUSD=" + volumeInUSD +
+                ", volumeInUSDDisplay='" + volumeInUSDDisplay + '\'' +
                 ", yield=" + yield +
+                ", yieldDisplay='" + yieldDisplay + '\'' +
+                ", isItemSelected=" + isItemSelected +
+                ", rateProperties=" + rateProperties +
                 '}';
     }
 }
