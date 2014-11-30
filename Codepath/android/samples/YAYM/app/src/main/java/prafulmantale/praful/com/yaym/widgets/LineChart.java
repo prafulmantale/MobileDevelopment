@@ -115,6 +115,12 @@ public class LineChart extends View {
         canvas.drawLine(left, getMeasuredHeight(), sideMargin, getMeasuredHeight(), horizontalBorderPaint);
         canvas.drawLine(sideMargin, getMeasuredHeight(), sideMargin, 0, verticalBorderPaint);
 
+        float y = top / 4;
+
+        for(int i = 1; i <= 3; i++) {
+            canvas.drawLine(sideMargin, y * i, left, y * i, horizontalBorderPaint);
+        }
+
         canvas.drawText("Yield", left + 3, 10, labelPaint);
         canvas.drawText("0M", left + 3, getMeasuredHeight() - 2, labelPaint);
     }

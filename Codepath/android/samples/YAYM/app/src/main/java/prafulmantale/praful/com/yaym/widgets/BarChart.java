@@ -97,6 +97,12 @@ public class BarChart extends View {
         canvas.drawLine(left, getMeasuredHeight(), sideMargin, getMeasuredHeight(), horizontalBorderPaint);
         canvas.drawLine(sideMargin, getMeasuredHeight(), sideMargin, 0, verticalBorderPaint);
 
+        float y = top / 2;
+
+        for(int i = 1; i <= 1; i++) {
+            canvas.drawLine(sideMargin, y * i, left, y * i, horizontalBorderPaint);
+        }
+
         canvas.drawText("Volume", left + 3, 10, labelPaint);
         canvas.drawText("0M", left + 3, getMeasuredHeight() - 2, labelPaint);
     }
