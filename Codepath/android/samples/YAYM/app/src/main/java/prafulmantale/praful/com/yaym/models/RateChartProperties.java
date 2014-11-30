@@ -5,6 +5,8 @@ package prafulmantale.praful.com.yaym.models;
  */
 public class RateChartProperties {
 
+    private static final String TAG = RateChartProperties.class.getSimpleName();
+
     private double minRate;
     private double maxRate;
     private int steps;
