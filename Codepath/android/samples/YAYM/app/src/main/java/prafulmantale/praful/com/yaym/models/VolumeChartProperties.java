@@ -18,6 +18,8 @@ public class VolumeChartProperties {
 
         VolumeChartProperties props = new VolumeChartProperties();
 
+        props.minVolume = Math.floor(inputMaxVolume);
+
         return props;
     }
 }

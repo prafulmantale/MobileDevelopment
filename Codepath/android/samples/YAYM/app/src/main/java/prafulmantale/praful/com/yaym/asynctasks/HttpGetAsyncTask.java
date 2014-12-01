@@ -61,7 +61,7 @@ public class HttpGetAsyncTask extends AsyncTask<String, Void, String> {
                 }
             }
 
-            System.out.println("Sending request to : " + uri);
+//            System.out.println("Sending request to : " + uri);
             HttpGet get = new HttpGet(uri);
             get.setHeader(HTTP.CONTENT_TYPE, "application/json");
             HttpResponse httpResp  = client.execute(get);
@@ -72,7 +72,7 @@ public class HttpGetAsyncTask extends AsyncTask<String, Void, String> {
 
             int statusCode = httpResp.getStatusLine().getStatusCode();
 
-            Log.d(TAG, "Status code ... " + statusCode);
+//            Log.d(TAG, "Status code ... " + statusCode);
 
             if(statusCode == HttpStatus.SC_OK) {
                 isSuccess = true;

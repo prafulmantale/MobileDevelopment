@@ -95,6 +95,10 @@ public class RWPollService extends Service {
                     return;
                 }
 
+                if(response.equals(AppConstants.STATUS_FAILURE)){
+                    return;
+                }
+
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     processResponse(jsonObject);

@@ -122,7 +122,7 @@ public class BarChart extends View {
         this.dataSource = dataSource;
         maxVolume = dataSource[0];
         for(int i = 1; i < dataSource.length; i ++){
-
+            System.out.println("Volume i" + dataSource[i]);
             if(dataSource[i] > maxVolume){
                 maxVolume = dataSource[i];
             }
