@@ -7,8 +7,12 @@ public class VolumeChartProperties {
 
     private static final String TAG = VolumeChartProperties.class.getSimpleName();
 
+    private static final int ONE_MILLION = 1000000;
+    private static final int HUNDRED_THOUSAND = 100000;
+
     private double minVolume;
     private double maxVolume;
+
 
     private VolumeChartProperties(){
 
@@ -18,8 +22,12 @@ public class VolumeChartProperties {
 
         VolumeChartProperties props = new VolumeChartProperties();
 
-        props.minVolume = Math.floor(inputMaxVolume);
-
+        double maxVolumeScaled = inputMaxVolume/ ONE_MILLION;
+        if(maxVolumeScaled < ONE_MILLION){
+            maxVolumeScaled = inputMaxVolume/HUNDRED_THOUSAND;
+        }
+        else{
+        }
         return props;
     }
 }
