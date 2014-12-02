@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6A95F206-5A9D-4049-8943-F7E47EEF2D33</string>
+	<key>IDESourceControlProjectName</key>
+	<string>loginscreen</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DC9F0EE304AFE16C304C1378D9391350F3C52859</key>
+		<string>https://github.com/prafulmantale/MobileDevelopment.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>IOSApps/loginscreen/loginscreen.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DC9F0EE304AFE16C304C1378D9391350F3C52859</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/prafulmantale/MobileDevelopment.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DC9F0EE304AFE16C304C1378D9391350F3C52859</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DC9F0EE304AFE16C304C1378D9391350F3C52859</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MobileDevelopment</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -219,6 +219,7 @@ public class LoginActivity extends Activity{
 
             YMApplication.appCookies = null;
 
+            System.out.println(loginRequest.toJSONObject());
             new HttpPostAsyncTask(handler, YMApplication.getLoginUrl(),
                     AppConstants.HandlerMessageIds.LOGIN, loginRequest.toJSONObject())
                     .execute();

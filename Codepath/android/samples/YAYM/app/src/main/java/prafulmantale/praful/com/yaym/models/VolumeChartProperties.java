@@ -1,5 +1,7 @@
 package prafulmantale.praful.com.yaym.models;
 
+import prafulmantale.praful.com.yaym.helpers.AppConstants;
+
 /**
  * Created by prafulmantale on 11/29/14.
  */
@@ -7,8 +9,7 @@ public class VolumeChartProperties {
 
     private static final String TAG = VolumeChartProperties.class.getSimpleName();
 
-    private static final int ONE_MILLION = 1000000;
-    private static final int HUNDRED_THOUSAND = 100000;
+
 
     private double minVolume;
     private double maxVolume;
@@ -22,9 +23,9 @@ public class VolumeChartProperties {
 
         VolumeChartProperties props = new VolumeChartProperties();
 
-        double maxVolumeScaled = inputMaxVolume/ ONE_MILLION;
-        if(maxVolumeScaled < ONE_MILLION){
-            maxVolumeScaled = inputMaxVolume/HUNDRED_THOUSAND;
+        double maxVolumeScaled = inputMaxVolume/ AppConstants.ONE_MILLION;
+        if(maxVolumeScaled < AppConstants.ONE_MILLION){
+            maxVolumeScaled = inputMaxVolume/AppConstants.HUNDRED_THOUSAND;
         }
         else{
         }

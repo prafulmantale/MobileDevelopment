@@ -37,6 +37,10 @@ public class AppConstants {
 
     public static final String INTENT_KEY_CCYPAIR = "ccypair";
 
+    public static final int ONE_MILLION = 1000000;
+    public static final int HUNDRED_THOUSAND = 100000;
+    public static final int ONE_THOUSAND = 1000;
+
 
     public static class HandlerMessageIds{
         public static int INVALID = -1;

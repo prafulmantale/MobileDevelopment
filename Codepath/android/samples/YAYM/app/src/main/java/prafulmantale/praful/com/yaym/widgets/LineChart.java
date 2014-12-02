@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.models.YieldChartProperties;
 
 /**
  * Created by prafulmantale on 11/25/14.
@@ -26,6 +27,7 @@ public class LineChart extends View {
     private double minVolume = 0;
 
     private double []dataSource;
+    private YieldChartProperties props;
 
     public LineChart(Context context) {
         super(context);
@@ -144,7 +146,16 @@ public class LineChart extends View {
             if(dataSource[i] > maxVolume){
                 maxVolume = dataSource[i];
             }
+
+            if(dataSource[i] < minVolume){
+                minVolume = dataSource[i];
+            }
         }
+
+//        props = YieldChartProperties.newInstance(minVolume, maxVolume);
+//
+//        maxVolume = props.getMaxYield().getAbsoluteValue();
+//        minVolume = props.getMinYield().getAbsoluteValue();
 
         invalidate();
     }
