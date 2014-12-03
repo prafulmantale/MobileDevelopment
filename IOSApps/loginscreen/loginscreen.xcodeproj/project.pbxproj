@@ -19,6 +19,7 @@
 		5166FBA81A2F9EE900675DDB /* RiskSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBA71A2F9EE900675DDB /* RiskSummary.swift */; };
 		5166FBAA1A2FA01100675DDB /* ReferenceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBA91A2FA01100675DDB /* ReferenceData.swift */; };
 		5166FBAC1A2FA17A00675DDB /* RateProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBAB1A2FA17A00675DDB /* RateProperties.swift */; };
+		5166FBAE1A2FA21300675DDB /* PositionSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBAD1A2FA21300675DDB /* PositionSnapshot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		5166FBA71A2F9EE900675DDB /* RiskSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiskSummary.swift; sourceTree = "<group>"; };
 		5166FBA91A2FA01100675DDB /* ReferenceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferenceData.swift; sourceTree = "<group>"; };
 		5166FBAB1A2FA17A00675DDB /* RateProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateProperties.swift; sourceTree = "<group>"; };
+		5166FBAD1A2FA21300675DDB /* PositionSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositionSnapshot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				5166FBA71A2F9EE900675DDB /* RiskSummary.swift */,
 				5166FBA91A2FA01100675DDB /* ReferenceData.swift */,
 				5166FBAB1A2FA17A00675DDB /* RateProperties.swift */,
+				5166FBAD1A2FA21300675DDB /* PositionSnapshot.swift */,
 			);
 			path = loginscreen;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				5166FBAA1A2FA01100675DDB /* ReferenceData.swift in Sources */,
 				5166FBAC1A2FA17A00675DDB /* RateProperties.swift in Sources */,
 				512533EC1A2E559A00277CF0 /* AppDelegate.swift in Sources */,
+				5166FBAE1A2FA21300675DDB /* PositionSnapshot.swift in Sources */,
 				5166FBA81A2F9EE900675DDB /* RiskSummary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
