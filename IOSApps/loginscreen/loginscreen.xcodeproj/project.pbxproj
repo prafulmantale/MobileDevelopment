@@ -20,6 +20,8 @@
 		5166FBAA1A2FA01100675DDB /* ReferenceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBA91A2FA01100675DDB /* ReferenceData.swift */; };
 		5166FBAC1A2FA17A00675DDB /* RateProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBAB1A2FA17A00675DDB /* RateProperties.swift */; };
 		5166FBAE1A2FA21300675DDB /* PositionSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBAD1A2FA21300675DDB /* PositionSnapshot.swift */; };
+		5166FBB01A2FA3FF00675DDB /* HistoricYieldData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBAF1A2FA3FF00675DDB /* HistoricYieldData.swift */; };
+		5166FBB21A2FA44D00675DDB /* OHLCData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBB11A2FA44D00675DDB /* OHLCData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		5166FBA91A2FA01100675DDB /* ReferenceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferenceData.swift; sourceTree = "<group>"; };
 		5166FBAB1A2FA17A00675DDB /* RateProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateProperties.swift; sourceTree = "<group>"; };
 		5166FBAD1A2FA21300675DDB /* PositionSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositionSnapshot.swift; sourceTree = "<group>"; };
+		5166FBAF1A2FA3FF00675DDB /* HistoricYieldData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricYieldData.swift; sourceTree = "<group>"; };
+		5166FBB11A2FA44D00675DDB /* OHLCData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OHLCData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				5166FBA91A2FA01100675DDB /* ReferenceData.swift */,
 				5166FBAB1A2FA17A00675DDB /* RateProperties.swift */,
 				5166FBAD1A2FA21300675DDB /* PositionSnapshot.swift */,
+				5166FBAF1A2FA3FF00675DDB /* HistoricYieldData.swift */,
+				5166FBB11A2FA44D00675DDB /* OHLCData.swift */,
 			);
 			path = loginscreen;
 			sourceTree = "<group>";
@@ -235,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5166FBA41A2F91B200675DDB /* LoginRequest.swift in Sources */,
+				5166FBB21A2FA44D00675DDB /* OHLCData.swift in Sources */,
 				512533EE1A2E559A00277CF0 /* ViewController.swift in Sources */,
 				5166FBA61A2F9DE900675DDB /* RiskRule.swift in Sources */,
 				5166FBAA1A2FA01100675DDB /* ReferenceData.swift in Sources */,
@@ -242,6 +249,7 @@
 				512533EC1A2E559A00277CF0 /* AppDelegate.swift in Sources */,
 				5166FBAE1A2FA21300675DDB /* PositionSnapshot.swift in Sources */,
 				5166FBA81A2F9EE900675DDB /* RiskSummary.swift in Sources */,
+				5166FBB01A2FA3FF00675DDB /* HistoricYieldData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
