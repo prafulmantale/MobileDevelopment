@@ -115,9 +115,9 @@ public class OHLCChart extends View {
         canvas.drawText("Rate", left + 3, 10, labelPaint);
         canvas.drawText("0", left + 3, getMeasuredHeight() - 2, labelPaint);
 
-        float y = top / 4;
+        float y = top / 3;
 
-        for(int i = 1; i <= 3; i++) {
+        for(int i = 1; i <= 2; i++) {
             canvas.drawLine(sideMargin, y * i, left, y * i, horizontalBorderPaint);
         }
     }

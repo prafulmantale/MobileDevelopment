@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
         
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPShouldHandleCookies = true
         
         var response: NSURLResponse?
         var error: NSError?
@@ -39,10 +40,41 @@ class ViewController: UIViewController {
         // look at the response
         if let httpResponse = response as? NSHTTPURLResponse {
             println("HTTP response: \(httpResponse.statusCode) response:\(httpResponse)")
+            getRWSnapShot()
         } else {
             println("No HTTP response")
         }
         
+    }
+    
+    func getRWSnapShot(){
+        var request = NSMutableURLRequest(URL: NSURL(string: "https://demo.ym.integral.net/fxi/fxiapi/riskwarehouse/snapshot?org=YMSBADemo")!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 5)
+        
+        request.HTTPMethod = "GET"
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPShouldHandleCookies = true
+        
+        var response: NSURLResponse?
+        var error: NSError?
+        
+//        NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)
+//        
+//        // look at the response
+//        if let httpResponse = response as? NSHTTPURLResponse {
+//            println("HTTP response: \(httpResponse.statusCode) response:\(httpResponse)")
+//            
+//        } else {
+//            println("No HTTP response")
+//        }
+        
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()){ (response : NSURLResponse!, data : NSData!, error: NSError!) in
+            
+                var obj = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as NSDictionary
+            
+                println("\(obj)")
+            
+            }
     }
     
     

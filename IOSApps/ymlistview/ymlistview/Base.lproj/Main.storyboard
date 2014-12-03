@@ -31,7 +31,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="left" id="t96-Nz-RAX">
-                                                    <rect key="frame" x="68" y="10" width="105" height="66.5"/>
+                                                    <rect key="frame" x="68" y="10" width="425" height="157"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EUR/USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bnE-f6-Obi">

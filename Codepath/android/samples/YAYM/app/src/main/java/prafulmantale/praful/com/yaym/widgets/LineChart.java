@@ -117,9 +117,9 @@ public class LineChart extends View {
         canvas.drawLine(left, getMeasuredHeight(), sideMargin, getMeasuredHeight(), horizontalBorderPaint);
         canvas.drawLine(sideMargin, getMeasuredHeight(), sideMargin, 0, verticalBorderPaint);
 
-        float y = top / 4;
+        float y = top / 3;
 
-        for(int i = 1; i <= 3; i++) {
+        for(int i = 1; i <= 2; i++) {
             canvas.drawLine(sideMargin, y * i, left, y * i, horizontalBorderPaint);
         }
 
