@@ -26,7 +26,7 @@ class LoginRequest{
     
     func getJsonString()->String{
         
-        //let postString = "{\"org\":\"YMSBADemo\",\"user\":\"RWPraful\",\"pass\":\"Test123\"}";
+        //"{\"org\":\"YMSBADemo\",\"user\":\"RWPraful\",\"pass\":\"Test123\"}";
         return "{\"\(orgKey)\":\"\(orgName)\",\"\(userKey)\":\"\(userName)\",\"\(passwordKey)\":\"\(password)\"}"
     }
     
