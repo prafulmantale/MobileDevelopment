@@ -19,13 +19,15 @@ class ViewController: UIViewController {
     
     @IBAction func doLogin(sender: AnyObject) {
         
-        //{"org":"YMSBADemo","user":"RWPraful","pass":"Test123"}
+        let loginRequest = LoginRequest(orgName: "YMSBADemo", userName: "RWPraful", password: "Test123")
         
-//        let request = NSMutableURLRequest(URL: NSURL(String: "https://demo.ym.integral.net/fxi/admin/auth/login"), cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 5)
+        println("login request is : \(loginRequest.getJsonString())")
+        
+        
         var request = NSMutableURLRequest(URL: NSURL(string: "https://demo.ym.integral.net/fxi/admin/auth/login")!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 5)
         
         request.HTTPMethod = "POST"
-        let postString = "{\"org\":\"YMSBADemo\",\"user\":\"RWPraful\",\"pass\":\"Test123\"}";
+        let postString = loginRequest.getJsonString()
         
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
         
@@ -58,15 +60,6 @@ class ViewController: UIViewController {
         var response: NSURLResponse?
         var error: NSError?
         
-//        NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)
-//        
-//        // look at the response
-//        if let httpResponse = response as? NSHTTPURLResponse {
-//            println("HTTP response: \(httpResponse.statusCode) response:\(httpResponse)")
-//            
-//        } else {
-//            println("No HTTP response")
-//        }
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()){ (response : NSURLResponse!, data : NSData!, error: NSError!) in
             

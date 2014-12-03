@@ -14,6 +14,7 @@
 		512533F61A2E559A00277CF0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 512533F41A2E559A00277CF0 /* LaunchScreen.xib */; };
 		512534021A2E559A00277CF0 /* loginscreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512534011A2E559A00277CF0 /* loginscreenTests.swift */; };
 		5125340C1A2E56CC00277CF0 /* ym_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5125340B1A2E56CC00277CF0 /* ym_logo.png */; };
+		5166FBA41A2F91B200675DDB /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBA31A2F91B200675DDB /* LoginRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		512534001A2E559A00277CF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		512534011A2E559A00277CF0 /* loginscreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginscreenTests.swift; sourceTree = "<group>"; };
 		5125340B1A2E56CC00277CF0 /* ym_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ym_logo.png; sourceTree = "<group>"; };
+		5166FBA31A2F91B200675DDB /* LoginRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				5125340B1A2E56CC00277CF0 /* ym_logo.png */,
 				512533F41A2E559A00277CF0 /* LaunchScreen.xib */,
 				512533E91A2E559A00277CF0 /* Supporting Files */,
+				5166FBA31A2F91B200675DDB /* LoginRequest.swift */,
 			);
 			path = loginscreen;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5166FBA41A2F91B200675DDB /* LoginRequest.swift in Sources */,
 				512533EE1A2E559A00277CF0 /* ViewController.swift in Sources */,
 				512533EC1A2E559A00277CF0 /* AppDelegate.swift in Sources */,
 			);
@@ -409,6 +413,7 @@
 				512534071A2E559A00277CF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		512534081A2E559A00277CF0 /* Build configuration list for PBXNativeTarget "loginscreenTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +422,7 @@
 				5125340A1A2E559A00277CF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
