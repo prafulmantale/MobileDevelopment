@@ -22,6 +22,8 @@
 		5166FBAE1A2FA21300675DDB /* PositionSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBAD1A2FA21300675DDB /* PositionSnapshot.swift */; };
 		5166FBB01A2FA3FF00675DDB /* HistoricYieldData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBAF1A2FA3FF00675DDB /* HistoricYieldData.swift */; };
 		5166FBB21A2FA44D00675DDB /* OHLCData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBB11A2FA44D00675DDB /* OHLCData.swift */; };
+		5166FBB61A2FBFA600675DDB /* PositionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBB51A2FBFA600675DDB /* PositionStatusView.swift */; };
+		5166FBB81A2FBFDC00675DDB /* GaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBB71A2FBFDC00675DDB /* GaugeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		5166FBAD1A2FA21300675DDB /* PositionSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositionSnapshot.swift; sourceTree = "<group>"; };
 		5166FBAF1A2FA3FF00675DDB /* HistoricYieldData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricYieldData.swift; sourceTree = "<group>"; };
 		5166FBB11A2FA44D00675DDB /* OHLCData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OHLCData.swift; sourceTree = "<group>"; };
+		5166FBB51A2FBFA600675DDB /* PositionStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositionStatusView.swift; sourceTree = "<group>"; };
+		5166FBB71A2FBFDC00675DDB /* GaugeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GaugeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,8 @@
 				5166FBAD1A2FA21300675DDB /* PositionSnapshot.swift */,
 				5166FBAF1A2FA3FF00675DDB /* HistoricYieldData.swift */,
 				5166FBB11A2FA44D00675DDB /* OHLCData.swift */,
+				5166FBB51A2FBFA600675DDB /* PositionStatusView.swift */,
+				5166FBB71A2FBFDC00675DDB /* GaugeView.swift */,
 			);
 			path = loginscreen;
 			sourceTree = "<group>";
@@ -248,7 +254,9 @@
 				5166FBAC1A2FA17A00675DDB /* RateProperties.swift in Sources */,
 				512533EC1A2E559A00277CF0 /* AppDelegate.swift in Sources */,
 				5166FBAE1A2FA21300675DDB /* PositionSnapshot.swift in Sources */,
+				5166FBB61A2FBFA600675DDB /* PositionStatusView.swift in Sources */,
 				5166FBA81A2F9EE900675DDB /* RiskSummary.swift in Sources */,
+				5166FBB81A2FBFDC00675DDB /* GaugeView.swift in Sources */,
 				5166FBB01A2FA3FF00675DDB /* HistoricYieldData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
