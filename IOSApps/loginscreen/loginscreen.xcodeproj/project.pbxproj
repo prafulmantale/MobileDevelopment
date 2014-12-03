@@ -17,6 +17,7 @@
 		5166FBA41A2F91B200675DDB /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBA31A2F91B200675DDB /* LoginRequest.swift */; };
 		5166FBA61A2F9DE900675DDB /* RiskRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBA51A2F9DE900675DDB /* RiskRule.swift */; };
 		5166FBA81A2F9EE900675DDB /* RiskSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBA71A2F9EE900675DDB /* RiskSummary.swift */; };
+		5166FBAA1A2FA01100675DDB /* ReferenceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBA91A2FA01100675DDB /* ReferenceData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		5166FBA31A2F91B200675DDB /* LoginRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		5166FBA51A2F9DE900675DDB /* RiskRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiskRule.swift; sourceTree = "<group>"; };
 		5166FBA71A2F9EE900675DDB /* RiskSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiskSummary.swift; sourceTree = "<group>"; };
+		5166FBA91A2FA01100675DDB /* ReferenceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferenceData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				5166FBA31A2F91B200675DDB /* LoginRequest.swift */,
 				5166FBA51A2F9DE900675DDB /* RiskRule.swift */,
 				5166FBA71A2F9EE900675DDB /* RiskSummary.swift */,
+				5166FBA91A2FA01100675DDB /* ReferenceData.swift */,
 			);
 			path = loginscreen;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				5166FBA41A2F91B200675DDB /* LoginRequest.swift in Sources */,
 				512533EE1A2E559A00277CF0 /* ViewController.swift in Sources */,
 				5166FBA61A2F9DE900675DDB /* RiskRule.swift in Sources */,
+				5166FBAA1A2FA01100675DDB /* ReferenceData.swift in Sources */,
 				512533EC1A2E559A00277CF0 /* AppDelegate.swift in Sources */,
 				5166FBA81A2F9EE900675DDB /* RiskSummary.swift in Sources */,
 			);
