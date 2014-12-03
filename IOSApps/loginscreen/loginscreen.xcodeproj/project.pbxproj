@@ -15,6 +15,8 @@
 		512534021A2E559A00277CF0 /* loginscreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512534011A2E559A00277CF0 /* loginscreenTests.swift */; };
 		5125340C1A2E56CC00277CF0 /* ym_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5125340B1A2E56CC00277CF0 /* ym_logo.png */; };
 		5166FBA41A2F91B200675DDB /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBA31A2F91B200675DDB /* LoginRequest.swift */; };
+		5166FBA61A2F9DE900675DDB /* RiskRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBA51A2F9DE900675DDB /* RiskRule.swift */; };
+		5166FBA81A2F9EE900675DDB /* RiskSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5166FBA71A2F9EE900675DDB /* RiskSummary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		512534011A2E559A00277CF0 /* loginscreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginscreenTests.swift; sourceTree = "<group>"; };
 		5125340B1A2E56CC00277CF0 /* ym_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ym_logo.png; sourceTree = "<group>"; };
 		5166FBA31A2F91B200675DDB /* LoginRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		5166FBA51A2F9DE900675DDB /* RiskRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiskRule.swift; sourceTree = "<group>"; };
+		5166FBA71A2F9EE900675DDB /* RiskSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiskSummary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,8 @@
 				512533F41A2E559A00277CF0 /* LaunchScreen.xib */,
 				512533E91A2E559A00277CF0 /* Supporting Files */,
 				5166FBA31A2F91B200675DDB /* LoginRequest.swift */,
+				5166FBA51A2F9DE900675DDB /* RiskRule.swift */,
+				5166FBA71A2F9EE900675DDB /* RiskSummary.swift */,
 			);
 			path = loginscreen;
 			sourceTree = "<group>";
@@ -221,7 +227,9 @@
 			files = (
 				5166FBA41A2F91B200675DDB /* LoginRequest.swift in Sources */,
 				512533EE1A2E559A00277CF0 /* ViewController.swift in Sources */,
+				5166FBA61A2F9DE900675DDB /* RiskRule.swift in Sources */,
 				512533EC1A2E559A00277CF0 /* AppDelegate.swift in Sources */,
+				5166FBA81A2F9EE900675DDB /* RiskSummary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
