@@ -16,8 +16,31 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var loginPanel: UIView!
     
+    @IBOutlet weak var loadingActivityView: UIActivityIndicatorView!
+    
+    @IBAction func onTap(sender: UITapGestureRecognizer) {
+        
+        view.endEditing(true)
+    }
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
     
     @IBAction func doLogin(sender: AnyObject) {
+        
+        loadingActivityView.startAnimating()
+        loginButton.selected = true
+        
+        delay(2, closure: { () -> () in
+            self.loadingActivityView.stopAnimating()
+            self.loginButton.selected = false
+            })
         
         let loginRequest = LoginRequest(orgName: "YMSBADemo", userName: "RWPraful", password: "Test123")
         

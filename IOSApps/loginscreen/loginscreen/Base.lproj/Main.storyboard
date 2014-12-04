@@ -36,7 +36,7 @@
                                         <rect key="frame" x="20" y="139" width="227" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                     </textField>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DXh-lB-B8h">
                                         <rect key="frame" x="190" y="232" width="57" height="30"/>
@@ -46,6 +46,9 @@
                                         <state key="normal" title="Log In">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="doLogin:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="njY-48-brQ"/>
@@ -73,19 +76,48 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="iwT-n0-ly7">
+                                <rect key="frame" x="142" y="420" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="El7-bD-Pl7" appends="YES" id="tlU-kR-66n"/>
+                        </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="M0y-2S-vyC"/>
+                    <navigationItem key="navigationItem" id="Z93-8T-hao"/>
                     <connections>
+                        <outlet property="loadingActivityView" destination="iwT-n0-ly7" id="gQB-ej-cYJ"/>
                         <outlet property="loginButton" destination="DXh-lB-B8h" id="SII-sQ-8J7"/>
                         <outlet property="loginContainer" destination="kh9-bI-dsS" id="1IK-ld-INk"/>
                         <outlet property="loginPanel" destination="cy2-rq-2a7" id="Rzx-jj-8yv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="El7-bD-Pl7">
+                    <connections>
+                        <action selector="onTap:" destination="vXZ-lx-hvc" id="Lcz-ab-pXP"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1298" y="344"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="OBu-J6-9kn">
+            <objects>
+                <viewController id="wK2-wk-ZGF" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ynw-Ly-QML">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TrD-3R-r8B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1729" y="576"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uE5-oJ-XQi">
