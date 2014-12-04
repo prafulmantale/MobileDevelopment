@@ -16,7 +16,15 @@ class MoviesTableViewCell: UITableViewCell {
     @IBOutlet weak var labelOne: UILabel!
     
     @IBOutlet weak var rv: UIView!
+    var pv : PositionStatusView!
+    var position : Double = 0
    
+    @IBAction func onButton(sender: UIButton) {
+        
+        pv.setCurrentPosition(position)
+        position -= 10
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,7 +37,7 @@ class MoviesTableViewCell: UITableViewCell {
         
         addSubview(line)
         
-        var pv = PositionStatusView(frame : CGRect(x : 10, y:100, width:frame.size.width, height : 30))
+        pv = PositionStatusView(frame : CGRect(x : 10, y:100, width:frame.size.width, height : 30))
         pv.backgroundColor = UIColor.clearColor()
         
         addSubview(pv)
