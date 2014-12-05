@@ -96,7 +96,7 @@ public class GaugeViewEx extends View {
 
         canvas.drawText(lossThresholdText, outerRect.left - 20, startY, textPaintLoss);
         canvas.drawText(profitThresholdText, outerRect.right + 20, startY, textPaintProfit);
-        canvas.drawText(currentPnLText, startX, startY + 20, textPaint);
+        canvas.drawText(currentPnLText, startX, startY + textPaint.getTextSize(), textPaint);
     }
 
     private void init(){
@@ -165,7 +165,7 @@ public class GaugeViewEx extends View {
         float left = 0;
         int arcDiameter = 0;
 
-        arcDiameter = min - maxPadding -12;
+        arcDiameter = min - maxPadding - 20;
         float arcRadius = (arcDiameter/2);
         top = (height / 2) - arcRadius;
         left = (width/2) - arcRadius;

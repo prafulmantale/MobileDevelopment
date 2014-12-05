@@ -106,7 +106,7 @@ public class YieldPercentageView extends View {
         float left = 0;
         int arcDiameter = 0;
 
-        arcDiameter = min - maxPadding - 12;
+        arcDiameter = min - maxPadding - 20;
 
         arcRadius = (arcDiameter/2);
         top = (height / 2) - arcRadius;
