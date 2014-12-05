@@ -66,6 +66,7 @@ public class LoginActivity extends Activity{
     private RelativeLayout rlWelcomeMessage;
     private TextView tvCopyright;
     private Typeface typeface;
+    private RelativeLayout containerPanel;
 
 
 
@@ -180,6 +181,8 @@ public class LoginActivity extends Activity{
 
     private void initialize(){
 
+        containerPanel = (RelativeLayout)findViewById(R.id.containerPanel);
+
         typeface =Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
 
         TextView tvAppName = (TextView)findViewById(R.id.tvAppName);
@@ -226,6 +229,7 @@ public class LoginActivity extends Activity{
                 rlCenter.setVisibility(View.VISIBLE);
                 rlWelcomeMessage.setVisibility(View.GONE);
                 tvCopyright.setVisibility(View.VISIBLE);
+                containerPanel.setBackgroundColor(getResources().getColor(R.color.white));
             }
 
             @Override
