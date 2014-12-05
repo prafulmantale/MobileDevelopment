@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -235,6 +237,17 @@ public class YieldMangerActivity extends FragmentActivity{
 
         AlertDialog dialog = builder.create();
         dialog.show();
+
+        Typeface face=Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
+
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        textView.setTypeface(face);
+
+        Button yesButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        yesButton.setTypeface(face);
+
+        Button noButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        noButton.setTypeface(face);
     }
 
     private void startPollService(){

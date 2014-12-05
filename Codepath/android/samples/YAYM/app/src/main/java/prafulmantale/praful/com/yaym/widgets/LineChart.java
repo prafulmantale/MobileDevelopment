@@ -3,6 +3,7 @@ package prafulmantale.praful.com.yaym.widgets;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -28,6 +29,7 @@ public class LineChart extends View {
 
     private double []dataSource;
     private YieldChartProperties props;
+    private Typeface textTypeface;
 
     public LineChart(Context context) {
         super(context);
@@ -49,6 +51,7 @@ public class LineChart extends View {
 
     private void init(){
 
+        textTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
         circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         circlePaint.setColor(getResources().getColor(R.color.chart_yield_circle));
         circlePaint.setStyle(Paint.Style.FILL);
@@ -71,6 +74,7 @@ public class LineChart extends View {
         labelPaint.setColor(getResources().getColor(R.color.chart_label_text));
         labelPaint.setStyle(Paint.Style.STROKE);
         labelPaint.setStrokeWidth(1);
+        labelPaint.setTypeface(textTypeface);
 
         sideMargin = getResources().getDimensionPixelSize(R.dimen.chart_side_margin);
         marginBetweenBars = getResources().getDimensionPixelSize(R.dimen.chart_bar_margin);

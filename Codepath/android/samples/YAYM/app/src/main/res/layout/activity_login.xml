@@ -255,43 +255,43 @@
         custom:typeface="fonts/Roboto-Thin.ttf"
         android:visibility="gone"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/llSignUpBar"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:background="#ffdddddd"
-        android:gravity="center"
-        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
         android:layout_alignParentBottom="true">
 
-        <Button
-            style="@style/SignButtons"
+        <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/btnSignUp"
-            android:text="@string/request_demo_button_text"
-            android:textColor="@android:color/white"
-            android:layout_gravity="bottom"
-            android:background="@drawable/signup_button_style"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/request_demo_button_text"
+            bootstrapbutton:bb_type="primary"
+
+            bootstrapbutton:bb_size="small"
+            bootstrapbutton:bb_roundedCorners="true"
+            android:layout_marginLeft="10dp"
+
+            />
 
         <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/btnLoginWelcom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
             android:text="@string/login_button_text"
             bootstrapbutton:bb_type="primary"
-            android:layout_gravity="right"
+            android:layout_gravity="center_horizontal"
             android:onClick="showLogin"
-            bootstrapbutton:bb_size="medium"
+            bootstrapbutton:bb_size="small"
             bootstrapbutton:bb_roundedCorners="true"
             android:layout_marginLeft="10dp"
             android:layout_alignParentRight="true"
             />
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -304,11 +304,12 @@
         android:id="@+id/rlWelcomeMessage"
         >
     <TextView
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/product_name"
-        android:id="@+id/textView"
+        android:id="@+id/tvAppName"
         android:textStyle="normal"
         android:textSize="30sp"
         android:padding="1dp"
@@ -318,17 +319,18 @@
         android:layout_marginTop="43dp" />
 
     <TextView
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/product_usp"
-        android:id="@+id/textView2"
+        android:id="@+id/tvAppUSP"
         android:textStyle="normal"
-        android:gravity="center"
+        android:gravity="left"
         android:padding="1dp"
         android:textSize="20sp"
         android:textColor="@color/app_usp_color"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/tvAppName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="35dp" />

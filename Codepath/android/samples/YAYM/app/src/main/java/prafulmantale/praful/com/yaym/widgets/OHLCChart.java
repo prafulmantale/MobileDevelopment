@@ -3,6 +3,7 @@ package prafulmantale.praful.com.yaym.widgets;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -29,6 +30,7 @@ public class OHLCChart extends View {
     private int step;
 
     private OHLCData []dataSource;
+    private Typeface textTypeface;
 
     public OHLCChart(Context context) {
         super(context);
@@ -49,6 +51,8 @@ public class OHLCChart extends View {
     }
 
     private void init(){
+
+        textTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
 
         barPaintUp = new Paint(Paint.ANTI_ALIAS_FLAG);
         barPaintUp.setColor(getResources().getColor(R.color.chart_rate_border));
@@ -72,6 +76,7 @@ public class OHLCChart extends View {
         labelPaint.setColor(getResources().getColor(R.color.chart_label_text));
         labelPaint.setStyle(Paint.Style.STROKE);
         labelPaint.setStrokeWidth(1);
+        labelPaint.setTypeface(textTypeface);
 
         sideMargin = getResources().getDimensionPixelSize(R.dimen.chart_side_margin);
         marginBetweenBars = getResources().getDimensionPixelSize(R.dimen.chart_bar_margin);

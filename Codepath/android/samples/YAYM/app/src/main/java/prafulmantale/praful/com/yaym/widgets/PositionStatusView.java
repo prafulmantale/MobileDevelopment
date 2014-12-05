@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -65,6 +66,8 @@ public class PositionStatusView extends View {
     private String currentPosText;
 
     private boolean isPositionLong = true;
+    private Typeface textTypeface;
+
 
     public PositionStatusView(Context context) {
         super(context);
@@ -92,6 +95,8 @@ public class PositionStatusView extends View {
 
         circleRadius = getResources().getDimensionPixelSize(R.dimen.position_view_circle_radius);
 
+        textTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
+
         width = getMeasuredWidth();
         blankPaint = new Paint();
         blankPaint.setColor(getResources().getColor(R.color.pos_blank));
@@ -109,16 +114,19 @@ public class PositionStatusView extends View {
         textPaint.setColor(Color.BLACK);
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.position_view_current_value_size));
+        textPaint.setTypeface(textTypeface);
 
         textPaintMaxShort = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaintMaxShort.setColor(Color.BLACK);
         textPaintMaxShort.setTextAlign(Paint.Align.LEFT);
         textPaintMaxShort.setTextSize(getResources().getDimensionPixelSize(R.dimen.position_view_current_value_size));
+        textPaintMaxShort.setTypeface(textTypeface);
 
         textPaintMaxLong = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaintMaxLong.setColor(Color.BLACK);
         textPaintMaxLong.setTextAlign(Paint.Align.RIGHT);
         textPaintMaxLong.setTextSize(getResources().getDimensionPixelSize(R.dimen.position_view_current_value_size));
+        textPaintMaxLong.setTypeface(textTypeface);
 
         centerCircleColor = new Paint(Paint.ANTI_ALIAS_FLAG);
         centerCircleColor.setColor(getResources().getColor(R.color.pos_blank));

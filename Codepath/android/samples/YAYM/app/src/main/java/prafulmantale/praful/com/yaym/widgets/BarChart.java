@@ -3,6 +3,7 @@ package prafulmantale.praful.com.yaym.widgets;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -25,6 +26,7 @@ public class BarChart extends View {
     private double minVolume = 0;
 
     private double []dataSource;
+    private Typeface textTypeface;
 
 
     public BarChart(Context context) {
@@ -47,6 +49,8 @@ public class BarChart extends View {
 
     private void init(){
 
+        textTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
+
         barPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         barPaint.setColor(getResources().getColor(R.color.chart_volume_bar));
         barPaint.setStyle(Paint.Style.FILL);
@@ -65,6 +69,7 @@ public class BarChart extends View {
         labelPaint.setColor(getResources().getColor(R.color.chart_label_text));
         labelPaint.setStyle(Paint.Style.STROKE);
         labelPaint.setStrokeWidth(1);
+        labelPaint.setTypeface(textTypeface);
 
         sideMargin = getResources().getDimensionPixelSize(R.dimen.chart_side_margin);
         marginBetweenBars = getResources().getDimensionPixelSize(R.dimen.chart_bar_margin);

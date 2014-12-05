@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -35,6 +36,8 @@ public class YieldPercentageView extends View {
     private int width;
 
     private String percentageDisplay = "0%";
+    private Typeface textTypeface;
+
 
     public YieldPercentageView(Context context) {
         super(context);
@@ -64,6 +67,8 @@ public class YieldPercentageView extends View {
 
         progressWidth = (int)(progressWidth * density);
 
+        textTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
+
         arcPaint = new Paint();
         arcPaint.setColor(arcColor);
         arcPaint.setAntiAlias(true);
@@ -80,6 +85,7 @@ public class YieldPercentageView extends View {
         textPaint.setColor(getResources().getColor(R.color.risk_capacity_title));
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(12 * density);
+        textPaint.setTypeface(textTypeface);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -47,6 +48,7 @@ public class GaugeViewEx extends View {
     private String currentPnLText;
 
     private float angle = 210;
+    private Typeface textTypeface;
 
     public GaugeViewEx(Context context) {
         super(context);
@@ -107,6 +109,8 @@ public class GaugeViewEx extends View {
         meterWidth = getResources().getDimensionPixelSize(R.dimen.gauge_view_meter_width);
         innerWidth = getResources().getDimensionPixelSize(R.dimen.gause_view_inner_gap) + meterWidth;
 
+        textTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
+
         outerCirclePaintBlank = new Paint(Paint.ANTI_ALIAS_FLAG);
         outerCirclePaintBlank.setColor(getResources().getColor(R.color.pnl_blank));
         outerCirclePaintBlank.setStyle(Paint.Style.STROKE);
@@ -135,16 +139,18 @@ public class GaugeViewEx extends View {
         textPaint.setColor(getResources().getColor(R.color.pnl_text_color));
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.gauge_view_currentvalue_fontsize));
-
+        textPaint.setTypeface(textTypeface);
 
         textPaintProfit = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaintProfit.setColor(getResources().getColor(R.color.pnl_text_color));
         textPaintProfit.setTextSize(getResources().getDimensionPixelSize(R.dimen.gauge_view_profitvalue_fontsize));
+        textPaintProfit.setTypeface(textTypeface);
 
         textPaintLoss = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaintLoss.setColor(getResources().getColor(R.color.pnl_text_color));
         textPaintLoss.setTextAlign(Paint.Align.RIGHT);
         textPaintLoss.setTextSize(getResources().getDimensionPixelSize(R.dimen.gauge_view_lossvalue_fontsize));
+        textPaintLoss.setTypeface(textTypeface);
 
         currentPnLText = "0.0";
         profitThresholdText = "00";

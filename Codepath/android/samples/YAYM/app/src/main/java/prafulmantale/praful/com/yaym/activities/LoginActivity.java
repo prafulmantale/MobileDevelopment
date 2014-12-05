@@ -20,10 +20,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -62,9 +62,10 @@ public class LoginActivity extends Activity{
     private Animation fadeOutAnimation;
     private Animation fadeInAnimation;
 
-    private LinearLayout llSignUpBar;
+    private RelativeLayout llSignUpBar;
     private RelativeLayout rlCenter;
     private RelativeLayout rlWelcomeMessage;
+    private TextView tvCopyright;
 
 
 
@@ -179,6 +180,14 @@ public class LoginActivity extends Activity{
 
     private void initialize(){
 
+        Typeface typeface =Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
+
+        TextView tvAppName = (TextView)findViewById(R.id.tvAppName);
+        tvAppName.setTypeface(typeface);
+
+        TextView tvAppUSP = (TextView)findViewById(R.id.tvAppUSP);
+        tvAppUSP.setTypeface(typeface);
+
         application = (YMApplication)getApplication();
 
         //??Read from shared preferences. Once user makes changes save them
@@ -193,20 +202,30 @@ public class LoginActivity extends Activity{
 
         btnLogin = (BootstrapButton)findViewById(R.id.btnLogin);
         serverGroup = (RadioGroup)findViewById(R.id.rgServerGroup);
+
+        RadioButton rbDemo = (RadioButton)findViewById(R.id.demoServer);
+        rbDemo.setTypeface(typeface);
+
+        RadioButton rbDemo3 = (RadioButton)findViewById(R.id.demo3Server);
+        rbDemo3.setTypeface(typeface);
+
         cbRememberMe = (CheckBox)findViewById(R.id.cbRemember);
+        cbRememberMe.setTypeface(typeface);
 
         fadeInAnimation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_in);
         fadeOutAnimation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_out);
 
-        llSignUpBar = (LinearLayout)findViewById(R.id.llSignUpBar);
+        llSignUpBar = (RelativeLayout)findViewById(R.id.llSignUpBar);
         rlCenter = (RelativeLayout)findViewById(R.id.rlCenter);
         rlWelcomeMessage = (RelativeLayout)findViewById(R.id.rlWelcomeMessage);
+        tvCopyright = (TextView)findViewById(R.id.tvCopyright);
 
         fadeInAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-              rlCenter.setVisibility(View.VISIBLE);
+                rlCenter.setVisibility(View.VISIBLE);
                 rlWelcomeMessage.setVisibility(View.GONE);
+                tvCopyright.setVisibility(View.VISIBLE);
             }
 
             @Override
