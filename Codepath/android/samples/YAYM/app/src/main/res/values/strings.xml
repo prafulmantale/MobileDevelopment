@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="product_name">FX Yield Manager</string>
+    <string name="product_usp">Increase your yield, lower your risk, make markets for your customers</string>
     <string name="app_name">YAYM</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

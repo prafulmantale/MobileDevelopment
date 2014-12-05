@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="app_usp_color">#80B8FB</color>
     <color name="primary">#ed8179</color> 
     <color name="secondary">#4e40b3</color>    
     <color name="medium">#955d99</color>

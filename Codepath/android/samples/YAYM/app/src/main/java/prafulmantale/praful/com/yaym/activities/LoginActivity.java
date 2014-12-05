@@ -322,6 +322,9 @@ public class LoginActivity extends Activity{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+        if(getCurrentFocus() == null || getCurrentFocus().getWindowToken() == null){
+            return super.onTouchEvent(event);
+        }
         InputMethodManager manager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 
         manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
