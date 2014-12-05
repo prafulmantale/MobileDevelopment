@@ -14,12 +14,16 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -53,6 +57,15 @@ public class LoginActivity extends Activity{
     private CheckBox cbRememberMe;
 
     private LoginRequest loginRequest = null;
+
+
+    private Animation fadeOutAnimation;
+    private Animation fadeInAnimation;
+
+    private LinearLayout llSignUpBar;
+    private RelativeLayout rlCenter;
+    private RelativeLayout rlWelcomeMessage;
+
 
 
     @Override
@@ -181,6 +194,48 @@ public class LoginActivity extends Activity{
         btnLogin = (BootstrapButton)findViewById(R.id.btnLogin);
         serverGroup = (RadioGroup)findViewById(R.id.rgServerGroup);
         cbRememberMe = (CheckBox)findViewById(R.id.cbRemember);
+
+        fadeInAnimation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_in);
+        fadeOutAnimation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_out);
+
+        llSignUpBar = (LinearLayout)findViewById(R.id.llSignUpBar);
+        rlCenter = (RelativeLayout)findViewById(R.id.rlCenter);
+        rlWelcomeMessage = (RelativeLayout)findViewById(R.id.rlWelcomeMessage);
+
+        fadeInAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+              rlCenter.setVisibility(View.VISIBLE);
+                rlWelcomeMessage.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        fadeOutAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                llSignUpBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 
     private void initializeActionBar(){
@@ -330,6 +385,15 @@ public class LoginActivity extends Activity{
         manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
         return true;
+    }
+
+
+    public void showLogin(View view){
+
+        if(view.getId() == R.id.btnLoginWelcom){
+            llSignUpBar.startAnimation(fadeOutAnimation);
+            rlCenter.startAnimation(fadeInAnimation);
+        }
     }
 }
 

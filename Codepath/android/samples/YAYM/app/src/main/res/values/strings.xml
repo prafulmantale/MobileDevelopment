@@ -8,6 +8,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">Yield Manager</string>
     <string name="login_button_text">Log in</string>
+    <string name="request_demo_button_text">Request a Demo</string>
     <string name="copyright_text">© Integral Development Corp. 2014</string>
     <string name="login_progress_message">Logging in ...</string>
     <string name="loading_progress_message">Loading...</string>
