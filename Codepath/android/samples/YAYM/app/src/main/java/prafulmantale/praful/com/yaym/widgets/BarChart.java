@@ -89,7 +89,7 @@ public class BarChart extends View {
 
         for(int i = 0; i < 24; i++){
 
-            canvas.drawRect(left, top, left + barwidth, top - getBarHeight(i, perUnit), barPaint);
+            canvas.drawRect(left, top - getBarHeight(i, perUnit), left + barwidth, top, barPaint);
             left+= marginBetweenBars + barwidth;
         }
 
