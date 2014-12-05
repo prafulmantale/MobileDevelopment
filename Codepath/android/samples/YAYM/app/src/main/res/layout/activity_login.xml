@@ -271,10 +271,10 @@
             android:layout_height="wrap_content"
             android:text="@string/request_demo_button_text"
             bootstrapbutton:bb_type="primary"
-
-            bootstrapbutton:bb_size="small"
+            bootstrapbutton:bb_size="medium"
             bootstrapbutton:bb_roundedCorners="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
 
             />
 
@@ -286,9 +286,9 @@
             bootstrapbutton:bb_type="primary"
             android:layout_gravity="center_horizontal"
             android:onClick="showLogin"
-            bootstrapbutton:bb_size="small"
+            bootstrapbutton:bb_size="medium"
             bootstrapbutton:bb_roundedCorners="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_alignParentRight="true"
             />
     </RelativeLayout>

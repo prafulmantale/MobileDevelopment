@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -260,22 +259,23 @@ public class LoginActivity extends Activity{
     private void initializeActionBar(){
 
         ActionBar actionBar = getActionBar();
+        actionBar.hide();
 
-        View view = getLayoutInflater().inflate(R.layout.action_bar_title, null);
-
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
-                ActionBar.LayoutParams.MATCH_PARENT,
-                Gravity.CENTER);
-
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setHomeButtonEnabled(false);
-        actionBar.setCustomView(view, params);
-        actionBar.setDisplayShowHomeEnabled(true);
-
-        //Hack to hide the home icon -- Otherwise the action bar was getting displayed on top of Tabs
-        View homeIcon = findViewById(android.R.id.home);
-        ((View) homeIcon.getParent()).setVisibility(View.GONE);
+//        View view = getLayoutInflater().inflate(R.layout.action_bar_title, null);
+//
+//        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
+//                ActionBar.LayoutParams.MATCH_PARENT,
+//                Gravity.CENTER);
+//
+//        actionBar.setDisplayShowCustomEnabled(true);
+//        actionBar.setDisplayShowTitleEnabled(false);
+//        actionBar.setHomeButtonEnabled(false);
+//        actionBar.setCustomView(view, params);
+//        actionBar.setDisplayShowHomeEnabled(true);
+//
+//        //Hack to hide the home icon -- Otherwise the action bar was getting displayed on top of Tabs
+//        View homeIcon = findViewById(android.R.id.home);
+//        ((View) homeIcon.getParent()).setVisibility(View.GONE);
 
     }
 
