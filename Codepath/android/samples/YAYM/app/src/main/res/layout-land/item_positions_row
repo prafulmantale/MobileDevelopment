@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:background="@drawable/list_view_item_border"
+    android:layout_marginTop="2dp"
+    android:weightSum="1"
+    >
+
+    <include
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        layout="@layout/item_ccypair_rate"
+        android:id="@+id/itemCcyPairRate"
+        android:layout_weight="0.15"
+        />
+
+    <prafulmantale.praful.com.yaym.widgets.PositionStatusView
+        android:id="@+id/psView"
+        android:layout_width="0dp"
+        android:layout_weight="0.60"
+        android:layout_height="70dp"
+        android:layout_marginBottom="2dp"
+        android:layout_toLeftOf="@id/itemCcyPairRate"/>
+
+    <prafulmantale.praful.com.yaym.widgets.GaugeViewEx
+        android:id="@+id/gvPnLGauge"
+        android:layout_width="0dp"
+        android:layout_weight="0.25"
+        android:layout_height="90dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="0dp"
+        android:layout_marginTop="0dp"
+        />
+</LinearLayout>
