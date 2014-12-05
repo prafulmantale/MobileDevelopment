@@ -65,6 +65,7 @@ public class LoginActivity extends Activity{
     private RelativeLayout rlCenter;
     private RelativeLayout rlWelcomeMessage;
     private TextView tvCopyright;
+    private Typeface typeface;
 
 
 
@@ -159,7 +160,7 @@ public class LoginActivity extends Activity{
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(checkedId == R.id.demo3Server){
-                   application.setYmServer(getString(R.string.server_demo3));
+                    application.setYmServer(getString(R.string.server_demo3));
                 }
                 if(checkedId == R.id.demoServer){
                     application.setYmServer(getString(R.string.server_demo));
@@ -179,7 +180,7 @@ public class LoginActivity extends Activity{
 
     private void initialize(){
 
-        Typeface typeface =Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
+        typeface =Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
 
         TextView tvAppName = (TextView)findViewById(R.id.tvAppName);
         tvAppName.setTypeface(typeface);
@@ -287,6 +288,9 @@ public class LoginActivity extends Activity{
         }
 
         progressDialog = ProgressDialog.show(this, "", getString(R.string.login_progress_message));
+
+        TextView tvPDMessage = (TextView)progressDialog.findViewById(android.R.id.message);
+        tvPDMessage.setTypeface(typeface);
 
         try {
 
