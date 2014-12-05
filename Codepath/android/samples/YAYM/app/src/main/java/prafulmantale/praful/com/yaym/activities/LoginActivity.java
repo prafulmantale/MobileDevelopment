@@ -12,7 +12,9 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -316,5 +318,15 @@ public class LoginActivity extends Activity{
             }
         }
     };
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        InputMethodManager manager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+
+        manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+        return true;
+    }
 }
 
