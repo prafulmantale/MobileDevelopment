@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,6 +13,7 @@
         android:layout_margin="10dp"
         android:gravity="left"
         android:textSize="14sp"
+        custom:typeface="fonts/OpenSans-Regular.ttf"
         />
     <View
         android:id="@+id/center_divider_horizontal"
@@ -24,7 +26,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="25dp"
         />
-    <TextView
+    <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
         android:id="@+id/tvSelectFrequencyTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,6 +34,7 @@
         android:layout_margin="10dp"
         android:gravity="left"
         android:textSize="16sp"
+        custom:typeface="fonts/OpenSans-Regular.ttf"
         />
     <RadioGroup
         android:id="@+id/rgUpdateFrequency"
@@ -39,48 +42,54 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
-        <RadioButton
+        <prafulmantale.praful.com.yaym.widgets.TypefacedRadioButton
             android:id="@+id/rbOneSecond"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/second_two"
+            custom:typeface="fonts/OpenSans-Regular.ttf"
             />
 
-        <RadioButton
+        <prafulmantale.praful.com.yaym.widgets.TypefacedRadioButton
             android:id="@+id/rbFiveSecond"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/seconds_five"
+            custom:typeface="fonts/OpenSans-Regular.ttf"
             />
 
-        <RadioButton
+        <prafulmantale.praful.com.yaym.widgets.TypefacedRadioButton
             android:id="@+id/rbFifteenSecond"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/seconds_fifteen"
+            custom:typeface="fonts/OpenSans-Regular.ttf"
             />
 
-        <RadioButton
+        <prafulmantale.praful.com.yaym.widgets.TypefacedRadioButton
             android:id="@+id/rbThirtySecond"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/seconds_thirty"
+            custom:typeface="fonts/OpenSans-Regular.ttf"
             />
-        <RadioButton
+        <prafulmantale.praful.com.yaym.widgets.TypefacedRadioButton
             android:id="@+id/rbManual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/manual"
+            custom:typeface="fonts/OpenSans-Regular.ttf"
             />
 
     </RadioGroup>
 
-    <TextView
+    <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
         android:id="@+id/tvDataWarning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/data_update_warning"
         android:layout_margin="10dp"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        custom:typeface="fonts/OpenSans-Regular.ttf"/>
 
 </LinearLayout>
