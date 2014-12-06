@@ -1,4 +1,4 @@
-package prafulmantale.praful.com.yaym;
+package prafulmantale.praful.com.yaym.activities;
 
 import android.app.Activity;
 import android.os.Bundle;

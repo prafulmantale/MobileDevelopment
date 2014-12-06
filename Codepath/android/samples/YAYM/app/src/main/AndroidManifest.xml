@@ -17,11 +17,11 @@
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <service android:name=".services.RWPollService" />
@@ -43,11 +43,21 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
-            android:parentActivityName=".activities.YieldMangerActivity">
+            android:parentActivityName=".activities.YieldMangerActivity" >
         </activity>
         <activity
-            android:name=".RequestDemoActivity"
+            android:name=".activities.RequestDemoActivity"
             android:label="@string/title_activity_request_demo" >
+        </activity>
+        <activity
+            android:name=".activities.SplashScreenActivity"
+            android:label="@string/title_activity_splash_screen"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
