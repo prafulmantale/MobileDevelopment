@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
@@ -25,6 +24,7 @@ import java.util.List;
 
 import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.adapters.SnapshotAdapter;
+import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.caches.RWSummaryCache;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
@@ -52,6 +52,8 @@ public class YieldMangerActivity extends FragmentActivity{
     private TextView tvVolumeValue;
     private TextView tvRelaizedPnLValue;
     private TextView tvUnrealizedPnLValue;
+
+    private YMApplication application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,8 @@ public class YieldMangerActivity extends FragmentActivity{
     }
 
     private void initialize(){
+
+        application = (YMApplication)getApplication();
 
         lvPositions = (ListView)findViewById(R.id.lvPositionsList);
         View headerView = findViewById(R.id.lvHeader);//((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_positions_header, null, false);
@@ -239,16 +243,14 @@ public class YieldMangerActivity extends FragmentActivity{
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        Typeface face=Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
-
         TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-        textView.setTypeface(face);
+        textView.setTypeface(application.getTypeface());
 
         Button yesButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        yesButton.setTypeface(face);
+        yesButton.setTypeface(application.getTypeface());
 
         Button noButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-        noButton.setTypeface(face);
+        noButton.setTypeface(application.getTypeface());
     }
 
     private void startPollService(){

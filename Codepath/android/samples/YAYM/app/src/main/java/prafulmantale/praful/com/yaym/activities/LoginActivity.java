@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -68,7 +67,6 @@ public class LoginActivity extends Activity{
     private RelativeLayout rlCenter;
     private RelativeLayout rlWelcomeMessage;
     private TextView tvCopyright;
-    private Typeface typeface;
     private RelativeLayout containerPanel;
     private Button launchLogin;
     private Button btnSignup;
@@ -263,48 +261,24 @@ public class LoginActivity extends Activity{
 
         containerPanel = (RelativeLayout)findViewById(R.id.containerPanel);
 
-        typeface =Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
-
-        TextView tvAppName = (TextView)findViewById(R.id.tvAppName);
-        tvAppName.setTypeface(typeface);
-
-        TextView tvAppUSP = (TextView)findViewById(R.id.tvAppUSP);
-        tvAppUSP.setTypeface(typeface);
-
-        launchLogin = (Button)findViewById(R.id.btnLoginWelcom);
-        launchLogin.setTypeface(typeface);
-
-        btnSignup = (Button)findViewById(R.id.btnSignUp);
-        btnSignup.setTypeface(typeface);
-
-        btnCancel = (Button)findViewById(R.id.btnCancel);
-        btnCancel.setTypeface(typeface);
-
         application = (YMApplication)getApplication();
 
-        //??Read from shared preferences. Once user makes changes save them
+        launchLogin = (Button)findViewById(R.id.btnLoginWelcom);
+        btnSignup = (Button)findViewById(R.id.btnSignUp);
+        btnCancel = (Button)findViewById(R.id.btnCancel);
+
         application.setYmServer(getString(R.string.server_demo));
 
         etOrg = (EditText)findViewById(R.id.etOrganization);
-        etOrg.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
         etUserName = (EditText)findViewById(R.id.etUserName);
-        etUserName.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
         etPassword = (EditText)findViewById(R.id.etPassword);
-        etPassword.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
 
         btnLogin = (Button)findViewById(R.id.btnLogin);
-        btnLogin.setTypeface(typeface);
 
         serverGroup = (RadioGroup)findViewById(R.id.rgServerGroup);
 
-        RadioButton rbDemo = (RadioButton)findViewById(R.id.demoServer);
-        rbDemo.setTypeface(typeface);
-
-        RadioButton rbDemo3 = (RadioButton)findViewById(R.id.demo3Server);
-        rbDemo3.setTypeface(typeface);
-
         cbRememberMe = (CheckBox)findViewById(R.id.cbRemember);
-        cbRememberMe.setTypeface(typeface);
+        cbRememberMe.setTypeface(application.getTypeface());
 
         fadeInAnimationLoginPanel = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_in);
         fadeOutAnimationLoginPanel = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_out);
@@ -353,7 +327,7 @@ public class LoginActivity extends Activity{
         progressDialog = ProgressDialog.show(this, "", getString(R.string.login_progress_message));
 
         TextView tvPDMessage = (TextView)progressDialog.findViewById(android.R.id.message);
-        tvPDMessage.setTypeface(typeface);
+        tvPDMessage.setTypeface(application.getTypeface());
 
         try {
 

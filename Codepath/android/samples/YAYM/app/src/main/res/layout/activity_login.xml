@@ -50,128 +50,131 @@
 
             android:layout_marginBottom="5dp">
 
-        <LinearLayout
-            android:background="@android:color/white"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivLogo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            android:padding="2dp">
-
-            <com.beardedhen.androidbootstrap.FontAwesomeText
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                fontawesometext:fa_icon="fa-bank"
-                android:background="@drawable/item_back_icons"
-                android:id="@+id/bankIcon"
-                android:layout_marginLeft="25dp"
-                android:textSize="10sp"
-                android:textAlignment="center"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:paddingBottom="4dp"
-                android:paddingTop="6dp"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:background="@android:color/white"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/etOrganization"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/login_hint_org"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="5dp"
-                android:padding="5dp"
-                android:textSize="@dimen/login_input_text_size"
-                android:background="@drawable/loginscreen_edit_text_style"
-                android:textColorHint="#999999"
-                android:textColor="#000000"
-                android:singleLine="true"
-                android:imeOptions="actionNext"
-                />
+                android:layout_below="@+id/ivLogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <com.beardedhen.androidbootstrap.FontAwesomeText
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    fontawesometext:fa_icon="fa-bank"
+                    android:background="@drawable/item_back_icons"
+                    android:id="@+id/bankIcon"
+                    android:layout_marginLeft="25dp"
+                    android:textSize="10sp"
+                    android:textAlignment="center"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingTop="6dp"
+                    />
+
+                <prafulmantale.praful.com.yaym.widgets.TypefacedEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/etOrganization"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="@string/login_hint_org"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="5dp"
+                    android:textSize="@dimen/login_input_text_size"
+                    android:background="@drawable/loginscreen_edit_text_style"
+                    android:textColorHint="#999999"
+                    android:textColor="#000000"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
+                    custom:typeface="fonts/OpenSans-Regular.ttf"
+                    />
             </LinearLayout>
-        <LinearLayout
-            android:background="@android:color/white"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivLogo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="3dp"
-            android:orientation="horizontal"
-            android:padding="2dp">
-
-            <com.beardedhen.androidbootstrap.FontAwesomeText
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                fontawesometext:fa_icon="fa-user"
-                android:background="@drawable/item_back_icons"
-                android:id="@+id/userIcon"
-                android:layout_marginLeft="25dp"
-                android:textSize="@dimen/login_input_text_size"
-                android:textAlignment="center"
-                android:paddingTop="4dp"
-                android:paddingRight="4dp"
-                android:paddingLeft="4dp"
-                />
-            <EditText
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:background="@android:color/white"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/etUserName"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/login_hint_username"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="5dp"
-                android:textSize="@dimen/login_input_text_size"
-                android:background="@drawable/loginscreen_edit_text_style"
-                android:textColorHint="#999999"
-                android:padding="5dp"
-                android:textColor="#000"
-                android:singleLine="true"
-                android:imeOptions="actionNext"
-                />
+                android:layout_below="@+id/ivLogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <com.beardedhen.androidbootstrap.FontAwesomeText
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    fontawesometext:fa_icon="fa-user"
+                    android:background="@drawable/item_back_icons"
+                    android:id="@+id/userIcon"
+                    android:layout_marginLeft="25dp"
+                    android:textSize="@dimen/login_input_text_size"
+                    android:textAlignment="center"
+                    android:paddingTop="4dp"
+                    android:paddingRight="4dp"
+                    android:paddingLeft="4dp"
+                    />
+                <prafulmantale.praful.com.yaym.widgets.TypefacedEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/etUserName"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="@string/login_hint_username"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="5dp"
+                    android:textSize="@dimen/login_input_text_size"
+                    android:background="@drawable/loginscreen_edit_text_style"
+                    android:textColorHint="#999999"
+                    android:padding="5dp"
+                    android:textColor="#000"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
+                    custom:typeface="fonts/OpenSans-Regular.ttf"
+                    />
             </LinearLayout>
 
-        <LinearLayout
-            android:background="@android:color/white"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivLogo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="3dp"
-            android:orientation="horizontal"
-            android:padding="2dp">
-
-            <com.beardedhen.androidbootstrap.FontAwesomeText
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                fontawesometext:fa_icon="fa-lock"
-                android:background="@drawable/item_back_icons"
-                android:id="@+id/lockIcon"
-                android:layout_marginLeft="25dp"
-                android:textSize="@dimen/login_input_text_size"
-                android:textAlignment="center"
-                android:paddingTop="4dp"
-                android:paddingRight="5dp"
-                android:paddingLeft="4dp"
-                />
-            <EditText
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:background="@android:color/white"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:id="@+id/etPassword"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/login_hint_password"
-                android:layout_marginRight="5dp"
-                android:textSize="@dimen/login_input_text_size"
-                android:background="@drawable/loginscreen_edit_text_style"
-                android:textColorHint="#999999"
-                android:padding="5dp"
-                android:textColor="#000"
-                android:singleLine="true"
-                android:imeOptions="actionDone"
-                />
+                android:layout_below="@+id/ivLogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <com.beardedhen.androidbootstrap.FontAwesomeText
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    fontawesometext:fa_icon="fa-lock"
+                    android:background="@drawable/item_back_icons"
+                    android:id="@+id/lockIcon"
+                    android:layout_marginLeft="25dp"
+                    android:textSize="@dimen/login_input_text_size"
+                    android:textAlignment="center"
+                    android:paddingTop="4dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="4dp"
+                    />
+                <prafulmantale.praful.com.yaym.widgets.TypefacedEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:id="@+id/etPassword"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="@string/login_hint_password"
+                    android:layout_marginRight="5dp"
+                    android:textSize="@dimen/login_input_text_size"
+                    android:background="@drawable/loginscreen_edit_text_style"
+                    android:textColorHint="#999999"
+                    android:padding="5dp"
+                    android:textColor="#000"
+                    android:singleLine="true"
+                    android:imeOptions="actionDone"
+                    custom:typeface="fonts/OpenSans-Regular.ttf"
+                    />
             </LinearLayout>
 
             <RadioGroup
@@ -182,25 +185,27 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="15dp"
                 android:gravity="center_horizontal">
-                <RadioButton
+                <prafulmantale.praful.com.yaym.widgets.TypefacedRadioButton
                     android:id="@+id/demoServer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:singleLine="true"
                     android:text="@string/server_demo"
-                    android:checked="true"/>
+                    android:checked="true"
+                    custom:typeface="fonts/OpenSans-Regular.ttf"/>
 
-                <RadioButton
+                <prafulmantale.praful.com.yaym.widgets.TypefacedRadioButton
                     android:id="@+id/demo3Server"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:singleLine="true"
                     android:text="@string/server_demo3"
-                    android:checked="false"/>
+                    android:checked="false"
+                    custom:typeface="fonts/OpenSans-Regular.ttf"/>
 
-                </RadioGroup>
+            </RadioGroup>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -213,7 +218,7 @@
                 android:layout_gravity="center_horizontal"
                 >
 
-                <Button
+                <prafulmantale.praful.com.yaym.widgets.TypefacedButton
                     android:id="@+id/btnCancel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -226,21 +231,23 @@
                     android:layout_alignParentRight="true"
                     android:textSize="14sp"
                     android:textColor="@android:color/white"
+                    custom:typeface="fonts/OpenSans-Regular.ttf"
                     />
-                <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:background="@drawable/launch_login_style"
-                android:text="@string/login_button_text"
-                android:layout_gravity="right"
-                android:onClick="doLogin"
-                android:layout_marginLeft="10dp"
-                android:layout_alignParentRight="true"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                 />
+                <prafulmantale.praful.com.yaym.widgets.TypefacedButton
+                    android:id="@+id/btnLogin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:background="@drawable/launch_login_style"
+                    android:text="@string/login_button_text"
+                    android:layout_gravity="right"
+                    android:onClick="doLogin"
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    custom:typeface="fonts/OpenSans-Regular.ttf"
+                    />
 
             </LinearLayout>
 
@@ -281,7 +288,7 @@
         android:layout_alignParentBottom="true"
         android:weightSum="1">
 
-        <Button
+        <prafulmantale.praful.com.yaym.widgets.TypefacedButton
             android:id="@+id/btnSignUp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -292,10 +299,11 @@
             android:background="@drawable/register_button_style"
             android:layout_weight="0.5"
             android:textSize="14sp"
+            custom:typeface="fonts/OpenSans-Regular.ttf"
             />
 
 
-        <Button
+        <prafulmantale.praful.com.yaym.widgets.TypefacedButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/btnLoginWelcom"
@@ -308,6 +316,7 @@
             android:onClick="showLogin"
             android:textSize="14sp"
             android:layout_weight="0.5"
+            custom:typeface="fonts/OpenSans-Regular.ttf"
             />
     </LinearLayout>
 
@@ -321,36 +330,39 @@
         android:layout_marginLeft="25dp"
         android:id="@+id/rlWelcomeMessage"
         >
-    <TextView
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/product_name"
-        android:id="@+id/tvAppName"
-        android:textStyle="normal"
-        android:textSize="30sp"
-        android:padding="1dp"
-        android:textColor="@android:color/white"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="43dp" />
+        <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/product_name"
+            android:id="@+id/tvAppName"
+            android:textStyle="normal"
+            android:textSize="30sp"
+            android:padding="1dp"
+            android:textColor="@android:color/white"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="43dp"
+            custom:typeface="fonts/OpenSans-Regular.ttf"/>
 
-    <TextView
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/product_usp"
-        android:id="@+id/tvAppUSP"
-        android:textStyle="normal"
-        android:gravity="left"
-        android:padding="1dp"
-        android:textSize="20sp"
-        android:textColor="@color/app_usp_color"
-        android:layout_below="@+id/tvAppName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="35dp" />
-        </RelativeLayout>
+        <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/product_usp"
+            android:id="@+id/tvAppUSP"
+            android:textStyle="normal"
+            android:gravity="left"
+            android:padding="1dp"
+            android:textSize="20sp"
+            android:textColor="@color/app_usp_color"
+            android:layout_below="@+id/tvAppName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="35dp"
+            custom:typeface="fonts/OpenSans-Regular.ttf"
+            />
+    </RelativeLayout>
 </RelativeLayout>
