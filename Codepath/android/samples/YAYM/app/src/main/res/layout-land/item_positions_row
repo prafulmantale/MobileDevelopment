@@ -6,6 +6,8 @@
     android:background="@drawable/list_view_item_border"
     android:layout_marginTop="2dp"
     android:weightSum="1"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
     >
 
     <include
@@ -15,6 +17,7 @@
         layout="@layout/item_ccypair_rate"
         android:id="@+id/itemCcyPairRate"
         android:layout_weight="0.15"
+        android:layout_centerVertical="true"
         />
 
     <prafulmantale.praful.com.yaym.widgets.PositionStatusView
@@ -23,7 +26,8 @@
         android:layout_weight="0.60"
         android:layout_height="70dp"
         android:layout_marginBottom="2dp"
-        android:layout_toLeftOf="@id/itemCcyPairRate"/>
+        android:layout_centerVertical="true"
+        />
 
     <prafulmantale.praful.com.yaym.widgets.GaugeViewEx
         android:id="@+id/gvPnLGauge"
@@ -33,5 +37,6 @@
         android:layout_alignParentRight="true"
         android:layout_margin="0dp"
         android:layout_marginTop="0dp"
+        android:layout_centerVertical="true"
         />
 </LinearLayout>

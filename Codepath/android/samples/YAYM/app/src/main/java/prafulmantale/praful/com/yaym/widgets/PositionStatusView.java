@@ -178,8 +178,8 @@ public class PositionStatusView extends View {
 
     private void drawDots(Canvas canvas, float left, float right){
 
-        dashPath.moveTo(left, topMargin + barHeight + 4);
-        dashPath.lineTo(right, topMargin + barHeight + 4);
+        dashPath.moveTo(left, topMargin + barHeight + 8);
+        dashPath.lineTo(right, topMargin + barHeight + 8);
         dashPath.close();
         canvas.drawPath(dashPath, dashPaint);
     }
