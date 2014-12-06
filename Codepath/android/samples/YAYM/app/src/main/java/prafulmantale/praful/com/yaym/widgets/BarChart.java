@@ -49,6 +49,10 @@ public class BarChart extends View {
 
     private void init(){
 
+        if(isInEditMode()){
+            return;
+        }
+
         textTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
 
         barPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -79,6 +83,10 @@ public class BarChart extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+        if(isInEditMode()){
+            return;
+        }
 
         if(dataSource == null || dataSource.length == 0){
             return;

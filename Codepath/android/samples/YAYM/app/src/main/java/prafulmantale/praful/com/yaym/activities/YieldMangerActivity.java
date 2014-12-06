@@ -59,7 +59,7 @@ public class YieldMangerActivity extends FragmentActivity{
         setContentView(R.layout.activity_yield_manger);
 
         initialize();
-//        initializeActionBar();
+        initializeActionBar();
 
         setupListeners();
     }
@@ -142,6 +142,7 @@ public class YieldMangerActivity extends FragmentActivity{
     private void initializeActionBar(){
 
         ActionBar actionBar = getActionBar();
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_style));
 
         View view = getLayoutInflater().inflate(R.layout.action_bar_title, null);
 

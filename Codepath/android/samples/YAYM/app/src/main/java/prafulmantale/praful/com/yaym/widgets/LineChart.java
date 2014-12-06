@@ -51,6 +51,10 @@ public class LineChart extends View {
 
     private void init(){
 
+        if(isInEditMode()){
+            return;
+        }
+
         textTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
         circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         circlePaint.setColor(getResources().getColor(R.color.chart_yield_circle));
@@ -84,6 +88,10 @@ public class LineChart extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+        if(isInEditMode()){
+            return;
+        }
 
         if(dataSource == null || dataSource.length == 0){
             return;

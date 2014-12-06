@@ -3,19 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:layout_gravity="center"
     android:background="#ffffff"
-    android:gravity="center"
     >
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/ivBackbutton"
+        android:src="@drawable/ic_back_button"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:src="@drawable/ym_logo"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         />
 </RelativeLayout>

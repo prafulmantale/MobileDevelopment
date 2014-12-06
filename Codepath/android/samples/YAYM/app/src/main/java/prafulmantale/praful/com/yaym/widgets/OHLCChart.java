@@ -52,6 +52,10 @@ public class OHLCChart extends View {
 
     private void init(){
 
+        if(isInEditMode()){
+            return;
+        }
+
         textTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
 
         barPaintUp = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -85,6 +89,10 @@ public class OHLCChart extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+        if(isInEditMode()){
+            return;
+        }
 
         if(dataSource == null || dataSource.length == 0){
             return;
