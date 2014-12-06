@@ -6,7 +6,6 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -151,28 +150,28 @@ public class SnapshotAdapter extends BaseAdapter {
 
         updateViewForCurrencyPair(snapshot, convertView);
 
-//        float initialTranslation = (mLastPosition <= position ? 500f : -500f);
-//
-//        convertView.setTranslationY(initialTranslation);
-//        convertView.animate()
-//                .setInterpolator(new DecelerateInterpolator(1.0f))
-//                .translationY(0f)
-//                .setDuration(300l)
-//                .setListener(null);
+        float initialTranslation = (mLastPosition <= position ? 500f : -500f);
+
+        convertView.setTranslationY(initialTranslation);
+        convertView.animate()
+                .setInterpolator(new DecelerateInterpolator(1.0f))
+                .translationY(0f)
+                .setDuration(300l)
+                .setListener(null);
 
         //Gplus
 
-        convertView.setTranslationX(0.0F);
-        convertView.setTranslationY(convertView.getHeight());
-        convertView.setRotationX(45.0F);
-        convertView.setScaleX(0.7F);
-        convertView.setScaleY(0.55F);
-
-        ViewPropertyAnimator localViewPropertyAnimator =
-                convertView.animate().rotationX(0.0F).rotationY(0.0F).translationX(0).translationY(0).setDuration(500).scaleX(
-                        1.0F).scaleY(1.0F).setInterpolator(interpolator);
-
-        localViewPropertyAnimator.setStartDelay(0).start();
+//        convertView.setTranslationX(0.0F);
+//        convertView.setTranslationY(convertView.getHeight());
+//        convertView.setRotationX(45.0F);
+//        convertView.setScaleX(0.7F);
+//        convertView.setScaleY(0.55F);
+//
+//        ViewPropertyAnimator localViewPropertyAnimator =
+//                convertView.animate().rotationX(0.0F).rotationY(0.0F).translationX(0).translationY(0).setDuration(500).scaleX(
+//                        1.0F).scaleY(1.0F).setInterpolator(interpolator);
+//
+//        localViewPropertyAnimator.setStartDelay(0).start();
 
         // Keep track of the last position we loaded
         mLastPosition = position;

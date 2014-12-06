@@ -202,7 +202,7 @@
 
                 </RadioGroup>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -210,34 +210,48 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginLeft="25dp"
+                android:layout_gravity="center_horizontal"
                 >
 
-                <CheckBox
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/login_remember_me"
-                    android:id="@+id/cbRemember"
-                    android:layout_weight="0.5"
-                    android:layout_alignParentLeft="true"/>
-
-
-                <com.beardedhen.androidbootstrap.BootstrapButton
+                    android:layout_weight="0.3"
+                    android:background="@drawable/cancel_button_style"
+                    android:text="@string/cancel_button_text"
+                    android:layout_gravity="right"
+                    android:onClick="hideLogin"
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignParentRight="true"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white"
+                    />
+                <Button
                 android:id="@+id/btnLogin"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.3"
+                android:background="@drawable/launch_login_style"
                 android:text="@string/login_button_text"
-                bootstrapbutton:bb_type="primary"
                 android:layout_gravity="right"
                 android:onClick="doLogin"
-                bootstrapbutton:bb_size="small"
-                bootstrapbutton:bb_roundedCorners="true"
                 android:layout_marginLeft="10dp"
-                    android:layout_alignParentRight="true"
-                />
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                 />
 
-            </RelativeLayout>
+            </LinearLayout>
 
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_remember_me"
+                android:id="@+id/cbRemember"
+                android:layout_alignParentLeft="true"
+                android:visibility="visible"
+                android:layout_marginLeft="25dp"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -256,7 +270,7 @@
         custom:typeface="fonts/Roboto-Thin.ttf"
         android:visibility="gone"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/llSignUpBar"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -264,35 +278,38 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:background="@android:color/transparent"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:weightSum="1">
 
-        <com.beardedhen.androidbootstrap.BootstrapButton
+        <Button
             android:id="@+id/btnSignUp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/request_demo_button_text"
-            bootstrapbutton:bb_type="primary"
-            bootstrapbutton:bb_size="medium"
-            bootstrapbutton:bb_roundedCorners="true"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-
-            />
-
-        <com.beardedhen.androidbootstrap.BootstrapButton
-            android:id="@+id/btnLoginWelcom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_button_text"
-            bootstrapbutton:bb_type="primary"
-            android:layout_gravity="center_horizontal"
-            android:onClick="showLogin"
-            bootstrapbutton:bb_size="medium"
-            bootstrapbutton:bb_roundedCorners="true"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@drawable/register_button_style"
+            android:layout_weight="0.5"
+            android:textSize="14sp"
             />
-    </RelativeLayout>
+
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLoginWelcom"
+            android:text="@string/login_button_text"
+            android:background="@drawable/launch_login_style"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:textColor="@android:color/white"
+            android:layout_alignParentRight="true"
+            android:onClick="showLogin"
+            android:textSize="14sp"
+            android:layout_weight="0.5"
+            />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

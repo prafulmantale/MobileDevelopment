@@ -16,16 +16,16 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.beardedhen.androidbootstrap.BootstrapButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +49,7 @@ public class LoginActivity extends Activity{
     private EditText etOrg;
     private EditText etUserName;
     private EditText etPassword;
-    private BootstrapButton btnLogin;
+    private Button btnLogin;
     private ProgressDialog progressDialog;
     private RadioGroup serverGroup;
     private YMApplication application;
@@ -58,15 +58,21 @@ public class LoginActivity extends Activity{
     private LoginRequest loginRequest = null;
 
 
-    private Animation fadeOutAnimation;
-    private Animation fadeInAnimation;
+    private Animation fadeOutAnimationSignUpBar;
+    private Animation fadeInAnimationSignUpBar;
 
-    private RelativeLayout llSignUpBar;
+    private Animation fadeOutAnimationLoginPanel;
+    private Animation fadeInAnimationLoginPanel;
+
+    private LinearLayout llSignUpBar;
     private RelativeLayout rlCenter;
     private RelativeLayout rlWelcomeMessage;
     private TextView tvCopyright;
     private Typeface typeface;
     private RelativeLayout containerPanel;
+    private Button launchLogin;
+    private Button btnSignup;
+    private Button btnCancel;
 
 
 
@@ -177,57 +183,12 @@ public class LoginActivity extends Activity{
                 }
             }
         });
-    }
 
-    private void initialize(){
-
-        containerPanel = (RelativeLayout)findViewById(R.id.containerPanel);
-
-        typeface =Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
-
-        TextView tvAppName = (TextView)findViewById(R.id.tvAppName);
-        tvAppName.setTypeface(typeface);
-
-        TextView tvAppUSP = (TextView)findViewById(R.id.tvAppUSP);
-        tvAppUSP.setTypeface(typeface);
-
-        application = (YMApplication)getApplication();
-
-        //??Read from shared preferences. Once user makes changes save them
-        application.setYmServer(getString(R.string.server_demo));
-
-        etOrg = (EditText)findViewById(R.id.etOrganization);
-        etOrg.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
-        etUserName = (EditText)findViewById(R.id.etUserName);
-        etUserName.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
-        etPassword = (EditText)findViewById(R.id.etPassword);
-        etPassword.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
-
-        btnLogin = (BootstrapButton)findViewById(R.id.btnLogin);
-        serverGroup = (RadioGroup)findViewById(R.id.rgServerGroup);
-
-        RadioButton rbDemo = (RadioButton)findViewById(R.id.demoServer);
-        rbDemo.setTypeface(typeface);
-
-        RadioButton rbDemo3 = (RadioButton)findViewById(R.id.demo3Server);
-        rbDemo3.setTypeface(typeface);
-
-        cbRememberMe = (CheckBox)findViewById(R.id.cbRemember);
-        cbRememberMe.setTypeface(typeface);
-
-        fadeInAnimation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_in);
-        fadeOutAnimation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_out);
-
-        llSignUpBar = (RelativeLayout)findViewById(R.id.llSignUpBar);
-        rlCenter = (RelativeLayout)findViewById(R.id.rlCenter);
-        rlWelcomeMessage = (RelativeLayout)findViewById(R.id.rlWelcomeMessage);
-        tvCopyright = (TextView)findViewById(R.id.tvCopyright);
-
-        fadeInAnimation.setAnimationListener(new Animation.AnimationListener() {
+        fadeInAnimationLoginPanel.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                rlCenter.setVisibility(View.VISIBLE);
                 rlWelcomeMessage.setVisibility(View.GONE);
+                rlCenter.setVisibility(View.VISIBLE);
                 tvCopyright.setVisibility(View.VISIBLE);
                 containerPanel.setBackgroundColor(getResources().getColor(R.color.white));
             }
@@ -243,7 +204,44 @@ public class LoginActivity extends Activity{
             }
         });
 
-        fadeOutAnimation.setAnimationListener(new Animation.AnimationListener() {
+        fadeOutAnimationLoginPanel.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                rlCenter.setVisibility(View.GONE);
+                tvCopyright.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        fadeInAnimationSignUpBar.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                llSignUpBar.setVisibility(View.VISIBLE);
+                rlWelcomeMessage.setVisibility(View.VISIBLE);
+                containerPanel.setBackgroundDrawable(getResources().getDrawable(R.drawable.welcome_backgroud));
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        fadeOutAnimationSignUpBar.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
 
@@ -259,6 +257,67 @@ public class LoginActivity extends Activity{
 
             }
         });
+    }
+
+    private void initialize(){
+
+        containerPanel = (RelativeLayout)findViewById(R.id.containerPanel);
+
+        typeface =Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
+
+        TextView tvAppName = (TextView)findViewById(R.id.tvAppName);
+        tvAppName.setTypeface(typeface);
+
+        TextView tvAppUSP = (TextView)findViewById(R.id.tvAppUSP);
+        tvAppUSP.setTypeface(typeface);
+
+        launchLogin = (Button)findViewById(R.id.btnLoginWelcom);
+        launchLogin.setTypeface(typeface);
+
+        btnSignup = (Button)findViewById(R.id.btnSignUp);
+        btnSignup.setTypeface(typeface);
+
+        btnCancel = (Button)findViewById(R.id.btnCancel);
+        btnCancel.setTypeface(typeface);
+
+        application = (YMApplication)getApplication();
+
+        //??Read from shared preferences. Once user makes changes save them
+        application.setYmServer(getString(R.string.server_demo));
+
+        etOrg = (EditText)findViewById(R.id.etOrganization);
+        etOrg.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
+        etUserName = (EditText)findViewById(R.id.etUserName);
+        etUserName.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
+        etPassword = (EditText)findViewById(R.id.etPassword);
+        etPassword.setTypeface(Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Roboto-Thin.ttf"));
+
+        btnLogin = (Button)findViewById(R.id.btnLogin);
+        btnLogin.setTypeface(typeface);
+
+        serverGroup = (RadioGroup)findViewById(R.id.rgServerGroup);
+
+        RadioButton rbDemo = (RadioButton)findViewById(R.id.demoServer);
+        rbDemo.setTypeface(typeface);
+
+        RadioButton rbDemo3 = (RadioButton)findViewById(R.id.demo3Server);
+        rbDemo3.setTypeface(typeface);
+
+        cbRememberMe = (CheckBox)findViewById(R.id.cbRemember);
+        cbRememberMe.setTypeface(typeface);
+
+        fadeInAnimationLoginPanel = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_in);
+        fadeOutAnimationLoginPanel = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_out);
+
+        fadeInAnimationSignUpBar = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_in);
+        fadeOutAnimationSignUpBar = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_out);
+
+        llSignUpBar = (LinearLayout)findViewById(R.id.llSignUpBar);
+        rlCenter = (RelativeLayout)findViewById(R.id.rlCenter);
+        rlWelcomeMessage = (RelativeLayout)findViewById(R.id.rlWelcomeMessage);
+        tvCopyright = (TextView)findViewById(R.id.tvCopyright);
+
+
     }
 
     private void initializeActionBar(){
@@ -418,9 +477,14 @@ public class LoginActivity extends Activity{
     public void showLogin(View view){
 
         if(view.getId() == R.id.btnLoginWelcom){
-            llSignUpBar.startAnimation(fadeOutAnimation);
-            rlCenter.startAnimation(fadeInAnimation);
+            llSignUpBar.startAnimation(fadeOutAnimationSignUpBar);
+            rlCenter.startAnimation(fadeInAnimationLoginPanel);
         }
+    }
+
+    public void hideLogin(View view){
+        rlCenter.startAnimation(fadeOutAnimationLoginPanel);
+        llSignUpBar.startAnimation(fadeInAnimationSignUpBar);
     }
 }
 

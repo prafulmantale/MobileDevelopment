@@ -12,9 +12,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name=".activities.YieldMangerActivity"
-            >
+        <activity android:name=".activities.YieldMangerActivity" >
         </activity>
         <activity
             android:name=".activities.LoginActivity"
@@ -45,6 +43,10 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name=".RequestDemoActivity"
+            android:label="@string/title_activity_request_demo" >
         </activity>
     </application>
 
