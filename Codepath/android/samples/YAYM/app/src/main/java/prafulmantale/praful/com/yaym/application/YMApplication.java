@@ -3,6 +3,7 @@ package prafulmantale.praful.com.yaym.application;
 import android.app.Application;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 
 import com.loopj.android.http.PersistentCookieStore;
 
@@ -57,6 +58,8 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
 
     public static List<Cookie> appCookies;
 
+    private Typeface typeface;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -65,6 +68,8 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
         client = new RestClient(cookieStore);
         CookieManager cookieManager = new CookieManager();
         CookieHandler.setDefault(cookieManager);
+
+        typeface = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf");
     }
 
     public RestClient getClient(){
@@ -147,5 +152,9 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
                 + "&" + AppConstants.PARAM_KEY_ORG + "=" +loginRequest.getOrganization();
 
         return url;
+    }
+
+    public Typeface getTypeface() {
+        return typeface;
     }
 }

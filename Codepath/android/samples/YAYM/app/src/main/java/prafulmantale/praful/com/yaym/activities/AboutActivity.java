@@ -5,10 +5,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 
 import prafulmantale.praful.com.yaym.R;
 
 public class AboutActivity extends Activity {
+
+    private ImageView ivBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,16 @@ public class AboutActivity extends Activity {
         //Hack to hide the home icon -- Otherwise the action bar was getting displayed on top of Tabs
         View homeIcon = findViewById(android.R.id.home);
         ((View) homeIcon.getParent()).setVisibility(View.GONE);
+
+        ivBackButton = (ImageView)findViewById(R.id.ivBackbutton);
+        ivBackButton.setVisibility(View.VISIBLE);
+
+        ivBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
