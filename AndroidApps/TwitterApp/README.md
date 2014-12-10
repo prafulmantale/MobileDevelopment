@@ -43,7 +43,7 @@ Walkthrough of all user stories:
 
 
 
-![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/Codepath/android/assignments/TwitterApp/TwitterApp_2.gif)
+![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/AndroidApps/TwitterApp/TwitterApp_2.gif)
 
 Required: Build a simple Twitter client that supports viewing a Twitter timeline and composing a new tweet. 
 
