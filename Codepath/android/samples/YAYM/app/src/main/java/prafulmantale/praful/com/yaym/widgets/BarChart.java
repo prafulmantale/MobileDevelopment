@@ -75,7 +75,7 @@ public class BarChart extends View {
         labelPaint.setStrokeWidth(1);
         labelPaint.setTypeface(textTypeface);
 
-        sideMargin = 10;//getResources().getDimensionPixelSize(R.dimen.chart_side_margin);
+        sideMargin = getResources().getDimensionPixelSize(R.dimen.chart_side_margin);
         marginBetweenBars = getResources().getDimensionPixelSize(R.dimen.chart_bar_margin);
         topMargin = getResources().getDimensionPixelSize(R.dimen.chart_bar_top_margin);
         minVolume = 0;
