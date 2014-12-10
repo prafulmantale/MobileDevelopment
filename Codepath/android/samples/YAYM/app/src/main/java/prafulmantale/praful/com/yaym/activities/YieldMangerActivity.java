@@ -187,6 +187,13 @@ public class YieldMangerActivity extends FragmentActivity{
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.yield_manger, menu);
+        MenuItem mi =  menu.getItem(0);
+        View view = mi.getActionView();
+
+        System.out.println("mi view: " + mi.toString());
+        if(view instanceof TextView){
+            ((TextView) view).setTypeface(application.getTypeface());
+        }
         return true;
     }
 

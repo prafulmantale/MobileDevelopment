@@ -1,6 +1,5 @@
 package prafulmantale.praful.com.yaym.activities;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -296,8 +295,8 @@ public class LoginActivity extends Activity{
 
     private void initializeActionBar(){
 
-        ActionBar actionBar = getActionBar();
-        actionBar.hide();
+//        ActionBar actionBar = getActionBar();
+//        actionBar.hide();
 
 //        View view = getLayoutInflater().inflate(R.layout.action_bar_title, null);
 //
