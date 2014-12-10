@@ -36,4 +36,4 @@ Notes:
 
 Walkthrough of all user stories:
 
-![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/Codepath/android/assignments/InstagramViewer/Instagram%20Viewer.gif)
+![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/AndroidApps/InstagramViewer/Instagram%20Viewer.gif)
