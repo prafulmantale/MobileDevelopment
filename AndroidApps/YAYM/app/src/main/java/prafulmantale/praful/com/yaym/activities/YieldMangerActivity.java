@@ -138,7 +138,7 @@ public class YieldMangerActivity extends FragmentActivity{
                 Intent intent = new Intent(YieldMangerActivity.this, MainActivity.class);
                 intent.putExtra(AppConstants.INTENT_KEY_CCYPAIR, RulesCache.getInstance().getCurrencyPairsList().get(position));
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_from_left);
+                overridePendingTransition(R.anim.slide_in_from_right, R.anim.stay);
             }
         });
     }

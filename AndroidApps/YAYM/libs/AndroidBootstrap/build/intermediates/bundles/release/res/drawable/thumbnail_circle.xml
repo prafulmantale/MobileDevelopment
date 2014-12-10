@@ -4,4 +4,4 @@
         android:shape="oval">
         <solid android:color="@color/bthumbnail_placeholder"/>
     </shape>
-<!-- From: file:/Users/prafulmantale/MobileDevelopment/Codepath/android/samples/YAYM/libs/AndroidBootstrap/res/drawable/thumbnail_circle.xml -->
+<!-- From: file:/Users/prafulmantale/MobileDevelopment/AndroidApps/YAYM/libs/AndroidBootstrap/res/drawable/thumbnail_circle.xml -->

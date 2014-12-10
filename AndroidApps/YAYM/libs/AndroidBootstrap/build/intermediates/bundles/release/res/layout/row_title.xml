@@ -13,4 +13,4 @@
     	android:id="@+id/lblTitle"
     	android:gravity="left"
         />
-</LinearLayout><!-- From: file:/Users/prafulmantale/MobileDevelopment/Codepath/android/samples/YAYM/libs/AndroidBootstrap/res/layout/row_title.xml -->
+</LinearLayout><!-- From: file:/Users/prafulmantale/MobileDevelopment/AndroidApps/YAYM/libs/AndroidBootstrap/res/layout/row_title.xml -->
