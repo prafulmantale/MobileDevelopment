@@ -23,4 +23,4 @@ Notes:
 
 Walkthrough of all user stories:
 
-![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/Codepath/android/assignments/ImageFinder/ImageFinder.gif)
+![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/AndroidApps/ImageFinder/ImageFinder.gif)
