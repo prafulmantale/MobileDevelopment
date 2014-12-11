@@ -7,9 +7,13 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.math.BigDecimal;
+
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.caches.RefDataCache;
 import prafulmantale.praful.com.yaym.models.OHLCData;
-import prafulmantale.praful.com.yaym.models.RateChartProperties;
+import prafulmantale.praful.com.yaym.models.RateProperties;
+import prafulmantale.praful.com.yaym.models.ReferenceData;
 
 /**
  * Created by prafulmantale on 11/25/14.
@@ -106,7 +110,7 @@ public class OHLCChart extends View {
         float top = getMeasuredHeight() - topMargin;
         int barwidth = getBarWidth();
 
-        float perUnit = ((float)getMeasuredHeight() - topMargin - bottomMargin)/(10000 * (float)(rateChartProperties.getMaxRate() - rateChartProperties.getMinRate()));
+        float perUnit = ((float)getMeasuredHeight() - topMargin - bottomMargin)/(10000 * (float)(rateChartProperties.maxRate - rateChartProperties.minRate));
 
         for(int i = 0; i < 24; i++){
             float bottom =  bottomMargin + getRectBottom(i, perUnit);
@@ -129,15 +133,15 @@ public class OHLCChart extends View {
         canvas.drawLine(left, getMeasuredHeight() - bottomMargin, leftMargin, getMeasuredHeight() - bottomMargin, horizontalBorderPaint);
         canvas.drawLine(leftMargin, getMeasuredHeight() - bottomMargin, leftMargin, topMargin, verticalBorderPaint);
 
-        canvas.drawText(rateChartProperties.getScale()[3], left + 10, topMargin, labelPaint);
-        canvas.drawText(rateChartProperties.getScale()[0], left + 10, getMeasuredHeight() - bottomMargin, labelPaint);
+        canvas.drawText(rateChartProperties.scale[3], left + 10, topMargin, labelPaint);
+        canvas.drawText(rateChartProperties.scale[0], left + 10, getMeasuredHeight() - bottomMargin, labelPaint);
 
         float y = (top - bottomMargin) / 3;
 
         for(int i = 1; i <= 2; i++) {
             float yLoc = top - (y * i);
             canvas.drawLine(leftMargin, yLoc, left, yLoc, horizontalBorderPaint);
-            canvas.drawText(rateChartProperties.getScale()[i], left + 10, yLoc, labelPaint);
+            canvas.drawText(rateChartProperties.scale[i], left + 10, yLoc, labelPaint);
         }
     }
 
@@ -167,10 +171,7 @@ public class OHLCChart extends View {
             }
         }
 
-        rateChartProperties = RateChartProperties.newInstance(ccyPair, minRate, maxRate);
-
-
-        System.out.println("Min Rate: " + rateChartProperties.getMinRate() + "   Max Rate: " + rateChartProperties.getMaxRate());
+        rateChartProperties = new RateChartProperties(ccyPair, minRate, maxRate);
 
         invalidate();
     }
@@ -188,35 +189,99 @@ public class OHLCChart extends View {
         double close = dataSource[index].getClose();
 
         if(open > close){
-            return (float)(perUnit * 10000 * (rateChartProperties.getMaxRate() - close));
+            return (float)(perUnit * 10000 * (rateChartProperties.maxRate - close));
         }
         else{
-            return (float)(perUnit * 10000 * (rateChartProperties.getMaxRate() - open));
+            return (float)(perUnit * 10000 * (rateChartProperties.maxRate - open));
         }
-
     }
 
     private float getRectTop(int index, float perUnit){
         double open = dataSource[index].getOpen() ;
         double close = dataSource[index].getClose();
         if(open > close){
-            return  (float)(perUnit * 10000 * (rateChartProperties.getMaxRate()-open));
+            return  (float)(perUnit * 10000 * (rateChartProperties.maxRate - open));
         }
         else{
-            return (float)(perUnit * 10000 * (rateChartProperties.getMaxRate() - close));
+            return (float)(perUnit * 10000 * (rateChartProperties.maxRate - close));
         }
-
     }
 
     private float getHighY(int index, float perUnit){
 
         double high = dataSource[index].getHigh() ;
-        return  (float)(perUnit * 10000 * (rateChartProperties.getMaxRate() - high));
+        return  (float)(perUnit * 10000 * (rateChartProperties.maxRate - high));
     }
 
     private float getLowY(int index, float perUnit){
 
         double low = dataSource[index].getLow() ;
-        return  (float)(perUnit * 10000 * (rateChartProperties.getMaxRate() - low));
+        return  (float)(perUnit * 10000 * (rateChartProperties.maxRate - low));
+    }
+
+    private class RateChartProperties {
+
+        private double minRate;
+        private double maxRate;
+        private final int pipStep = 5;
+        private String[] scale;
+        private String ccyPair;
+
+        public RateChartProperties(String ccyPair, double minRate, double maxRate) {
+            this.minRate = minRate;
+            this.maxRate = maxRate;
+            scale = new String[4];
+
+            update(ccyPair);
+        }
+
+        private void update(String ccyPair) {
+
+            RateProperties rpMin = RateProperties.newInstance(ccyPair, minRate);
+
+            double newMinRate = rpMin.getBigFigure();
+            while (newMinRate < minRate) {
+                newMinRate += 25 * rpMin.getOnePipValue();
+            }
+
+            while (newMinRate > minRate) {
+                newMinRate = newMinRate - (pipStep * rpMin.getOnePipValue());
+            }
+            if (newMinRate == minRate) {
+                newMinRate = newMinRate - (5 * rpMin.getOnePipValue());
+            }
+            minRate = newMinRate;
+
+            double newMaxRate = minRate;
+
+            int counter = 0;
+            double pipMultiplier = 0;
+            while (newMaxRate < maxRate) {
+                pipMultiplier = ((25 + (pipStep * counter)) * rpMin.getOnePipValue());
+                newMaxRate = minRate + pipMultiplier * 3;
+                counter++;
+            }
+
+            if (newMaxRate == maxRate) {
+                newMaxRate = newMaxRate + (5 * rpMin.getOnePipValue());
+            }
+            maxRate = newMaxRate;
+
+            ReferenceData refData = RefDataCache.getInstance().getReferenceData(ccyPair);
+            BigDecimal bmin = new BigDecimal(minRate).setScale(refData.getSpotPrecision(), BigDecimal.ROUND_HALF_UP);
+            BigDecimal bmax = new BigDecimal(maxRate).setScale(refData.getSpotPrecision(), BigDecimal.ROUND_HALF_UP);
+
+            minRate = bmin.doubleValue();
+            maxRate = bmax.doubleValue();
+
+            String dispRate = RateProperties.newInstance(ccyPair, minRate).getRateDisplay();
+            scale[0] = dispRate.substring(0, dispRate.length() - 1);
+            dispRate = RateProperties.newInstance(ccyPair, minRate + pipMultiplier).getRateDisplay();
+            scale[1] = dispRate.substring(0, dispRate.length() - 1);
+            dispRate = RateProperties.newInstance(ccyPair, minRate + (2 * pipMultiplier)).getRateDisplay();
+            scale[2] = dispRate.substring(0, dispRate.length() - 1);
+            dispRate = RateProperties.newInstance(ccyPair, maxRate).getRateDisplay();
+            scale[3] = dispRate.substring(0, dispRate.length() - 1);
+        }
     }
 }
