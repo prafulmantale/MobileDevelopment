@@ -8,6 +8,9 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.enums.UOMSymbol;
+import prafulmantale.praful.com.yaym.helpers.AppConstants;
+import prafulmantale.praful.com.yaym.helpers.UOMNumber;
 
 /**
  * Created by prafulmantale on 11/25/14.
@@ -19,16 +22,17 @@ public class BarChart extends View {
     private Paint horizontalBorderPaint;
     private Paint labelPaint;
 
-    private int sideMargin;
-    private int marginBetweenBars;
+    private int rightMargin;
+    private int leftMargin;
     private int topMargin;
-    private double maxVolume;
-    private double minVolume = 0;
+    private int bottomMargin;
+
+    private int marginBetweenBars;
 
     private double []dataSource;
     private Typeface textTypeface;
 
-
+    private VolumeChartProperties properties;
     public BarChart(Context context) {
         super(context);
 
@@ -71,14 +75,12 @@ public class BarChart extends View {
 
         labelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         labelPaint.setColor(getResources().getColor(R.color.chart_label_text));
-        labelPaint.setStyle(Paint.Style.STROKE);
-        labelPaint.setStrokeWidth(1);
+        labelPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        labelPaint.setStrokeWidth(0.5f);
         labelPaint.setTypeface(textTypeface);
+        labelPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.chart_scale_label_text_size));
 
-        sideMargin = getResources().getDimensionPixelSize(R.dimen.chart_side_margin);
         marginBetweenBars = getResources().getDimensionPixelSize(R.dimen.chart_bar_margin);
-        topMargin = getResources().getDimensionPixelSize(R.dimen.chart_bar_top_margin);
-        minVolume = 0;
     }
 
     @Override
@@ -92,13 +94,16 @@ public class BarChart extends View {
             return;
         }
 
-        float left = marginBetweenBars + sideMargin;
-        float top = getMeasuredHeight() - 1;
+        leftMargin = getMeasuredWidth()/6;
+        rightMargin = getMeasuredWidth()/6;
+        topMargin = getMeasuredHeight()/8;
+        bottomMargin = getMeasuredHeight()/8;
+
+        float left = marginBetweenBars + leftMargin;
+        float top = getMeasuredHeight() - topMargin;
         int barwidth = getBarWidth();
 
-        float perUnit = ((float)getMeasuredHeight() - ((float)getMeasuredHeight()/20))/(float)maxVolume;
-
-
+        float perUnit = ((float)getMeasuredHeight() - topMargin - bottomMargin)/(float)properties.maxVolume;
 
         for(int i = 0; i < 24; i++){
 
@@ -106,19 +111,22 @@ public class BarChart extends View {
             left+= marginBetweenBars + barwidth;
         }
 
-        canvas.drawLine(sideMargin, 0, left, 0, horizontalBorderPaint);
-        canvas.drawLine(left, 0, left, getMeasuredHeight(), verticalBorderPaint);
-        canvas.drawLine(left, getMeasuredHeight(), sideMargin, getMeasuredHeight(), horizontalBorderPaint);
-        canvas.drawLine(sideMargin, getMeasuredHeight(), sideMargin, 0, verticalBorderPaint);
+        canvas.drawLine(leftMargin, topMargin, left, topMargin, horizontalBorderPaint);
+        canvas.drawLine(left, topMargin, left, getMeasuredHeight() - bottomMargin, verticalBorderPaint);
+        canvas.drawLine(left, getMeasuredHeight() - bottomMargin, leftMargin, getMeasuredHeight() - bottomMargin, horizontalBorderPaint);
+        canvas.drawLine(leftMargin, getMeasuredHeight() - bottomMargin, leftMargin, topMargin, verticalBorderPaint);
 
-        float y = top / 2;
+        float y = (top - bottomMargin) / 2;
 
         for(int i = 1; i <= 1; i++) {
-            canvas.drawLine(sideMargin, y * i, left, y * i, horizontalBorderPaint);
+            float yLoc = bottomMargin +  (y * i);
+            canvas.drawLine(leftMargin, yLoc, left, yLoc, horizontalBorderPaint);
+            canvas.drawText(properties.midDisplayValue, left + 10, yLoc, labelPaint);
+
         }
 
-        canvas.drawText("Volume", left + 3, 10, labelPaint);
-        canvas.drawText("0M", left + 3, getMeasuredHeight() - 2, labelPaint);
+        canvas.drawText(properties.displayMaxVolume, left + 10, topMargin, labelPaint);
+        canvas.drawText(properties.displayMinVolume, left + 10, getMeasuredHeight() - bottomMargin, labelPaint);
     }
 
     public void setDataSource(double [] dataSource){
@@ -134,27 +142,21 @@ public class BarChart extends View {
         }
 
         this.dataSource = dataSource;
-        maxVolume = dataSource[0];
-        minVolume = dataSource[0];
+        double maxVolume = dataSource[0];
         for(int i = 1; i < dataSource.length; i ++){
-            System.out.println("Volume i" + dataSource[i]);
             if(dataSource[i] > maxVolume){
                 maxVolume = dataSource[i];
             }
-
-            if(dataSource[i] < minVolume){
-                minVolume = dataSource[i];
-            }
         }
 
-
+        properties = new VolumeChartProperties(maxVolume);
 
         invalidate();
     }
 
     private int getBarWidth(){
-        int width = getMeasuredWidth() - (2 * sideMargin) - (2 * marginBetweenBars);
-        int barwidth = width - (22 * marginBetweenBars);
+        int width = getMeasuredWidth() - (leftMargin + rightMargin);
+        int barwidth = width - (24 * marginBetweenBars);
         barwidth = barwidth/(dataSource.length);
 
         return barwidth;
@@ -164,5 +166,37 @@ public class BarChart extends View {
 
         double val = dataSource[index];
         return (float)(perUnit * val);
+    }
+
+    private class VolumeChartProperties {
+
+        private double maxVolume;
+        private String displayMaxVolume;
+        private String midDisplayValue;
+        private String displayMinVolume;
+
+        public VolumeChartProperties (double inputMaxVolume){
+
+            UOMNumber uomn = new UOMNumber(inputMaxVolume);
+            int vol = (int)uomn.getFormattedValue() + 1;
+
+            if(vol % 2 != 0){
+                vol = vol + 1;
+            }
+
+            if(uomn.getUomSymbol() == UOMSymbol.K){
+                vol = vol * AppConstants.ONE_THOUSAND;
+            }
+            else{
+                vol = vol * AppConstants.ONE_MILLION;
+            }
+
+            maxVolume = vol;
+            UOMNumber mid = new UOMNumber(vol/2);
+            displayMaxVolume = new UOMNumber(vol).getDisplayValue();
+            midDisplayValue = mid.getDisplayValue();
+            displayMinVolume = "0" + mid.getUomSymbol();
+
+        }
     }
 }
