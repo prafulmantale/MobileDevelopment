@@ -177,8 +177,8 @@ public class OHLCChart extends View {
     }
 
     private int getBarWidth(){
-        int width = getMeasuredWidth() - (leftMargin + rightMargin) - (2 * marginBetweenBars);
-        int barwidth = width - (22 * marginBetweenBars);
+        int width = getMeasuredWidth() - (leftMargin + rightMargin);
+        int barwidth = width - (24 * marginBetweenBars);
         barwidth = barwidth/(dataSource.length);
 
         return barwidth;
