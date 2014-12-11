@@ -17,21 +17,21 @@
         android:id="@+id/lineChart"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="180dp"
         />
 
     <prafulmantale.praful.com.yaym.widgets.Charts.OHLCChart
         android:id="@+id/ohlcChart"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="180dp"
         />
 
     <prafulmantale.praful.com.yaym.widgets.Charts.BarChart
         android:id="@+id/barChart"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="120dp"
         />
 </LinearLayout>
 
