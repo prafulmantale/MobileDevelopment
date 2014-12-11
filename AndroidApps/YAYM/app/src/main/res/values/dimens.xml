@@ -29,4 +29,6 @@
     <dimen name="chart_side_margin">25dp</dimen>
     <dimen name="chart_bar_top_margin">2dp</dimen>
 
+    <dimen name="chart_scale_label_text_size">12sp</dimen>
+
 </resources>

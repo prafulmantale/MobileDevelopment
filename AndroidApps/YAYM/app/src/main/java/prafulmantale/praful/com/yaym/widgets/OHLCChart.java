@@ -22,15 +22,15 @@ public class OHLCChart extends View {
     private Paint horizontalBorderPaint;
     private Paint labelPaint;
 
-    private int sideMargin;
-    private int marginBetweenBars;
+    private int rightMargin;
+    private int leftMargin;
     private int topMargin;
-    private double maxRate;
-    private double minRate = 0;
-    private int step;
+    private int bottomMargin;
+    private int marginBetweenBars;
 
     private OHLCData []dataSource;
     private Typeface textTypeface;
+    private RateChartProperties rateChartProperties = null;
 
     public OHLCChart(Context context) {
         super(context);
@@ -78,13 +78,12 @@ public class OHLCChart extends View {
 
         labelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         labelPaint.setColor(getResources().getColor(R.color.chart_label_text));
-        labelPaint.setStyle(Paint.Style.STROKE);
-        labelPaint.setStrokeWidth(1);
+        labelPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        labelPaint.setStrokeWidth(0.5f);
         labelPaint.setTypeface(textTypeface);
+        labelPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.chart_scale_label_text_size));
 
-        sideMargin = getResources().getDimensionPixelSize(R.dimen.chart_side_margin);
         marginBetweenBars = getResources().getDimensionPixelSize(R.dimen.chart_bar_margin);
-        topMargin = getResources().getDimensionPixelSize(R.dimen.chart_bar_top_margin);
     }
 
     @Override
@@ -98,15 +97,20 @@ public class OHLCChart extends View {
             return;
         }
 
-        float left = marginBetweenBars + sideMargin;
-        float top = getMeasuredHeight() - 1;
+        leftMargin = getMeasuredWidth()/6;
+        rightMargin = getMeasuredWidth()/6;
+        topMargin = getMeasuredHeight()/8;
+        bottomMargin = getMeasuredHeight()/8;
+
+        float left = marginBetweenBars + leftMargin;
+        float top = getMeasuredHeight() - topMargin;
         int barwidth = getBarWidth();
 
-        float perUnit = ((float)getMeasuredHeight() - ((float)getMeasuredHeight()/20))/(10000 * (float)(maxRate - minRate));
+        float perUnit = ((float)getMeasuredHeight() - topMargin - bottomMargin)/(10000 * (float)(rateChartProperties.getMaxRate() - rateChartProperties.getMinRate()));
 
         for(int i = 0; i < 24; i++){
-            float bottom = getRectBottom(i, perUnit);
-            float rectTop = getRectTop(i, perUnit);
+            float bottom =  bottomMargin + getRectBottom(i, perUnit);
+            float rectTop = topMargin + getRectTop(i, perUnit);
 
 
             if(dataSource[i].getOpen()> dataSource[i].getClose()) {
@@ -114,24 +118,26 @@ public class OHLCChart extends View {
             }
             canvas.drawRect(left, rectTop, left + barwidth, bottom, barPaintUp);
 
-            canvas.drawLine(left + barwidth/2, rectTop, left + barwidth/2, getHighY(i, perUnit), barPaintUp);
-            canvas.drawLine(left + barwidth/2, bottom, left + barwidth/2, getLowY(i, perUnit), barPaintUp);
+            canvas.drawLine(left + barwidth/2, rectTop, left + barwidth/2, topMargin + getHighY(i, perUnit), barPaintUp);
+            canvas.drawLine(left + barwidth/2, bottom, left + barwidth/2, bottomMargin + getLowY(i, perUnit), barPaintUp);
 
             left+= marginBetweenBars + barwidth;
         }
 
-        canvas.drawLine(sideMargin, 0, left, 0, horizontalBorderPaint);
-        canvas.drawLine(left, 0, left, getMeasuredHeight(), verticalBorderPaint);
-        canvas.drawLine(left, getMeasuredHeight(), sideMargin, getMeasuredHeight(), horizontalBorderPaint);
-        canvas.drawLine(sideMargin, getMeasuredHeight(), sideMargin, 0, verticalBorderPaint);
+        canvas.drawLine(leftMargin, topMargin, left, topMargin, horizontalBorderPaint);
+        canvas.drawLine(left, topMargin, left, getMeasuredHeight() - bottomMargin, verticalBorderPaint);
+        canvas.drawLine(left, getMeasuredHeight() - bottomMargin, leftMargin, getMeasuredHeight() - bottomMargin, horizontalBorderPaint);
+        canvas.drawLine(leftMargin, getMeasuredHeight() - bottomMargin, leftMargin, topMargin, verticalBorderPaint);
 
-        canvas.drawText("Rate", left + 3, 10, labelPaint);
-        canvas.drawText("0", left + 3, getMeasuredHeight() - 2, labelPaint);
+        canvas.drawText(rateChartProperties.getScale()[3], left + 10, topMargin, labelPaint);
+        canvas.drawText(rateChartProperties.getScale()[0], left + 10, getMeasuredHeight() - bottomMargin, labelPaint);
 
-        float y = top / 3;
+        float y = (top - bottomMargin) / 3;
 
         for(int i = 1; i <= 2; i++) {
-            canvas.drawLine(sideMargin, y * i, left, y * i, horizontalBorderPaint);
+            float yLoc = top - (y * i);
+            canvas.drawLine(leftMargin, yLoc, left, yLoc, horizontalBorderPaint);
+            canvas.drawText(rateChartProperties.getScale()[i], left + 10, yLoc, labelPaint);
         }
     }
 
@@ -148,8 +154,8 @@ public class OHLCChart extends View {
         }
 
         this.dataSource = dataSource;
-        minRate = dataSource[0].getLow();
-        maxRate = dataSource[0].getHigh();
+        double minRate = dataSource[0].getLow();
+        double maxRate = dataSource[0].getHigh();
         for(int i = 1; i < dataSource.length; i ++){
 
             if(dataSource[i].getHigh() > maxRate){
@@ -161,17 +167,16 @@ public class OHLCChart extends View {
             }
         }
 
-        RateChartProperties rateChartProperties = RateChartProperties.newInstance(ccyPair, minRate, maxRate);
-        minRate = rateChartProperties.getMinRate();
-        maxRate = rateChartProperties.getMaxRate();
-        step = rateChartProperties.getSteps();
+        rateChartProperties = RateChartProperties.newInstance(ccyPair, minRate, maxRate);
 
+
+        System.out.println("Min Rate: " + rateChartProperties.getMinRate() + "   Max Rate: " + rateChartProperties.getMaxRate());
 
         invalidate();
     }
 
     private int getBarWidth(){
-        int width = getMeasuredWidth() - (2 * sideMargin) - (2 * marginBetweenBars);
+        int width = getMeasuredWidth() - (leftMargin + rightMargin) - (2 * marginBetweenBars);
         int barwidth = width - (22 * marginBetweenBars);
         barwidth = barwidth/(dataSource.length);
 
@@ -183,10 +188,10 @@ public class OHLCChart extends View {
         double close = dataSource[index].getClose();
 
         if(open > close){
-            return (float)(perUnit * 10000 * (maxRate - close));
+            return (float)(perUnit * 10000 * (rateChartProperties.getMaxRate() - close));
         }
         else{
-            return (float)(perUnit * 10000 * (maxRate - open));
+            return (float)(perUnit * 10000 * (rateChartProperties.getMaxRate() - open));
         }
 
     }
@@ -195,10 +200,10 @@ public class OHLCChart extends View {
         double open = dataSource[index].getOpen() ;
         double close = dataSource[index].getClose();
         if(open > close){
-            return  (float)(perUnit * 10000 * (maxRate-open));
+            return  (float)(perUnit * 10000 * (rateChartProperties.getMaxRate()-open));
         }
         else{
-            return (float)(perUnit * 10000 * (maxRate - close));
+            return (float)(perUnit * 10000 * (rateChartProperties.getMaxRate() - close));
         }
 
     }
@@ -206,12 +211,12 @@ public class OHLCChart extends View {
     private float getHighY(int index, float perUnit){
 
         double high = dataSource[index].getHigh() ;
-        return  (float)(perUnit * 10000 * (maxRate - high));
+        return  (float)(perUnit * 10000 * (rateChartProperties.getMaxRate() - high));
     }
 
     private float getLowY(int index, float perUnit){
 
         double low = dataSource[index].getLow() ;
-        return  (float)(perUnit * 10000 * (maxRate - low));
+        return  (float)(perUnit * 10000 * (rateChartProperties.getMaxRate() - low));
     }
 }

@@ -54,6 +54,7 @@ public class RateProperties {
         format.setMinimumFractionDigits(spotPrecision);
 
         String strRate = format.format(rate);
+        rateDisplay = strRate;
         int len = strRate.length();
 
         bigFigureDisplay = strRate.substring(0, len - spotPointsPrecision);
