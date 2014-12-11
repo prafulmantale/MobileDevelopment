@@ -32,6 +32,7 @@
     <color name="pnl_profit">#2E63AA</color>
     <color name="pnl_loss">#DE0003</color>
     <color name="pnl_text_color">#707070</color>
+    <color name="pnl_current_text_color">#333</color>
     <color name="pnl_meter_line">#c0d0e0</color>
 
     <color name="risk_capacity_arc_blank">#464646</color>

@@ -136,7 +136,7 @@ public class GaugeViewEx extends View {
         needlePaint.setStrokeWidth(1f);
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setColor(getResources().getColor(R.color.pnl_text_color));
+        textPaint.setColor(getResources().getColor(R.color.pnl_current_text_color));
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.gauge_view_currentvalue_fontsize));
         textPaint.setTypeface(textTypeface);
