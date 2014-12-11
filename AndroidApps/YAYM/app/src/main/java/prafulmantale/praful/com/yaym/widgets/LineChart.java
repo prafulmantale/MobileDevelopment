@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import prafulmantale.praful.com.yaym.R;
-import prafulmantale.praful.com.yaym.models.YieldChartProperties;
+import prafulmantale.praful.com.yaym.helpers.UOMNumber;
 
 /**
  * Created by prafulmantale on 11/25/14.
@@ -184,5 +184,33 @@ public class LineChart extends View {
 
         double val = dataSource[index];
         return (float)(perUnit * val);
+    }
+
+    private class YieldChartProperties {
+
+        private UOMNumber minYield;
+        private UOMNumber maxYield;
+
+
+        public YieldChartProperties (double inputMinYield, double inputMaxYield){
+
+            UOMNumber minUN = new UOMNumber(inputMinYield);
+
+            int min = (int)minUN.getFormattedValue();
+            if(min % 2 != 0){
+                min = min - 1;
+            }
+
+            props.minYield = new UOMNumber(min);
+
+            UOMNumber maxUN = new UOMNumber(inputMaxYield);
+            int max = (int)maxUN.getFormattedValue() + 1;
+
+            if(max % 2 != 0){
+                max = max + 1;
+            }
+
+            props.maxYield = new UOMNumber(max);
+        }
     }
 }
