@@ -208,7 +208,11 @@ public class LineChart extends View {
                 newMin = newMin - 10;
             }
 
+            if(newMin == (int)inputMinYield){
+                newMin = newMin - 5;
+            }
             minYield = newMin;
+
             minYieldDisplay = String.valueOf(newMin);
 
             int newMax = (int)minYield;
@@ -216,7 +220,7 @@ public class LineChart extends View {
             int counter = 1;
             int multiplier = 0;
             while (newMax < inputMaxYield) {
-                multiplier = 10 * counter;
+                multiplier = 5 * counter;
                 newMax = newMin + multiplier * 3;
                 counter++;
             }
