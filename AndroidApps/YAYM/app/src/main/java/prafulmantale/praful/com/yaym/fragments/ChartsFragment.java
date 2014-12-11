@@ -10,9 +10,9 @@ import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.activities.MainActivity;
 import prafulmantale.praful.com.yaym.caches.HistoricalDataCache;
 import prafulmantale.praful.com.yaym.caches.RateDataCache;
-import prafulmantale.praful.com.yaym.widgets.BarChart;
-import prafulmantale.praful.com.yaym.widgets.LineChart;
-import prafulmantale.praful.com.yaym.widgets.OHLCChart;
+import prafulmantale.praful.com.yaym.widgets.Charts.BarChart;
+import prafulmantale.praful.com.yaym.widgets.Charts.LineChart;
+import prafulmantale.praful.com.yaym.widgets.Charts.OHLCChart;
 
 /**
  * Created by prafulmantale on 11/22/14.
