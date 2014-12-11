@@ -126,9 +126,15 @@
             android:layout_below="@+id/llYieldDetailsHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             >
 
+            <LinearLayout
+                android:id="@+id/llChartConfig"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                >
             <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:layout_marginLeft="15dp"
                 android:id="@+id/tvChartDurationOneMinute"
@@ -137,8 +143,11 @@
                 android:text="1m"
                 android:textSize="12sp"
                 android:textColor="@color/risk_capacity_text"
-                android:background="@drawable/char_duration_border"
-                custom:typeface="fonts/OpenSans-Regular.ttf"/>
+                android:background="@drawable/chart_duration_selector"
+                custom:typeface="fonts/OpenSans-Regular.ttf"
+                android:clickable="true"
+
+                />
             <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:id="@+id/tvChartDurationFifteenMinute"
                 android:layout_toRightOf="@id/tvChartDurationOneMinute"
@@ -148,8 +157,9 @@
                 android:layout_marginLeft="5dp"
                 android:textSize="12sp"
                 android:textColor="@color/risk_capacity_text"
-                android:background="@drawable/char_duration_border"
+                android:background="@drawable/chart_duration_selector"
                 custom:typeface="fonts/OpenSans-Regular.ttf"
+                android:clickable="true"
                 />
             <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:id="@+id/tvChartDurationOneHour"
@@ -160,25 +170,29 @@
                 android:layout_marginLeft="5dp"
                 android:textSize="12sp"
                 android:textColor="@color/risk_capacity_text"
-                android:background="@drawable/char_duration_border"
+                android:background="@drawable/chart_duration_selector"
                 custom:typeface="fonts/OpenSans-Regular.ttf"
+                android:clickable="true"
+
                 />
             <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:id="@+id/tvYDCurrencyPair"
                 android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="EUR/USD"
                 android:gravity="center"
                 custom:typeface="fonts/OpenSans-Regular.ttf"
                 />
 
+            </LinearLayout>
+
             <fragment
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:name="prafulmantale.praful.com.yaym.fragments.ChartsFragment"
                 android:id="@+id/fragmentCharts"
-                android:layout_below="@id/tvYDCurrencyPair"
+                android:layout_below="@id/llChartConfig"
                 tools:layout="@layout/fragment_charts"
                 android:layout_marginTop="10dp"/>
         </RelativeLayout>

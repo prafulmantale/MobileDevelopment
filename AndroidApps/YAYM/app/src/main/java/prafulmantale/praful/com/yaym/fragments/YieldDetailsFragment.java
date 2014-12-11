@@ -44,6 +44,10 @@ public class YieldDetailsFragment extends Fragment {
 
     private String selectedCurrencyPair;
 
+    private TextView tvOneMinute;
+    private TextView tvFifteenMinute;
+    private TextView tvOneHour;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,8 +55,6 @@ public class YieldDetailsFragment extends Fragment {
 
         //Non view initializations
         selectedCurrencyPair = MainActivity.selectedCurrencyPair;
-
-
     }
 
     @Override
@@ -61,8 +63,53 @@ public class YieldDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_yield_details, container, false);
 
         initializeViews(view);
+        setupListeners();
 
         return view;
+    }
+
+    private void setupListeners() {
+        tvOneHour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setSelected(true);
+                tvOneHour.setTextColor(getResources().getColor(R.color.white));
+
+                tvOneMinute.setSelected(false);
+                tvOneMinute.setTextColor(getResources().getColor(R.color.risk_capacity_text));
+
+                tvFifteenMinute.setSelected(false);
+                tvFifteenMinute.setTextColor(getResources().getColor(R.color.risk_capacity_text));
+            }
+        });
+
+        tvOneMinute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setSelected(true);
+                tvOneMinute.setTextColor(getResources().getColor(R.color.white));
+
+                tvOneHour.setSelected(false);
+                tvOneHour.setTextColor(getResources().getColor(R.color.risk_capacity_text));
+
+                tvFifteenMinute.setSelected(false);
+                tvFifteenMinute.setTextColor(getResources().getColor(R.color.risk_capacity_text));
+            }
+        });
+
+        tvFifteenMinute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setSelected(true);
+                tvFifteenMinute.setTextColor(getResources().getColor(R.color.white));
+
+                tvOneHour.setSelected(false);
+                tvOneHour.setTextColor(getResources().getColor(R.color.risk_capacity_text));
+
+                tvOneMinute.setSelected(false);
+                tvOneMinute.setTextColor(getResources().getColor(R.color.risk_capacity_text));
+            }
+        });
     }
 
     @Override
@@ -104,6 +151,12 @@ public class YieldDetailsFragment extends Fragment {
         tvRelaizedPnLValue = (TextView)view.findViewById(R.id.tvRealizedPnLValue);
         tvUnrealizedPnLValue = (TextView)view.findViewById(R.id.tvUnRealizedPnLValue);
         tvCurrencyPair = (TextView)view.findViewById(R.id.tvYDCurrencyPair);
+
+        tvOneMinute = (TextView)view.findViewById(R.id.tvChartDurationOneMinute);
+        tvFifteenMinute = (TextView)view.findViewById(R.id.tvChartDurationFifteenMinute);
+        tvOneHour = (TextView)view.findViewById(R.id.tvChartDurationOneHour);
+        tvOneHour.setSelected(true);
+        tvOneHour.setTextColor(getResources().getColor(R.color.white));
     }
 
     private void updateData(){
@@ -133,7 +186,14 @@ public class YieldDetailsFragment extends Fragment {
 
     private void update(int what){
 
-        ChartsFragment fragment = (ChartsFragment)getFragmentManager().findFragmentById(R.id.fragmentCharts);
+        ChartsFragment fragment = null;
+
+        try {
+            fragment = (ChartsFragment) getFragmentManager().findFragmentById(R.id.fragmentCharts);
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
 
         if(fragment == null){
             return;
