@@ -246,7 +246,7 @@
                     android:layout_alignParentRight="true"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
-                    custom:typeface="fonts/OpenSans-Regular.ttf"
+                    custom:typeface="fonts/OpenSans-Bold.ttf"
                     />
 
             </LinearLayout>
