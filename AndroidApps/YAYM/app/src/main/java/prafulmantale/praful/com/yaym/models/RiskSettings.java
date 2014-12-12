@@ -142,7 +142,7 @@ public class RiskSettings {
             if(policy == null || policy.getName() == null || policy.getName().isEmpty()){
                 continue;
             }
-            
+
             lookupCache.put(policy.getName(), policy);
         }
     }
