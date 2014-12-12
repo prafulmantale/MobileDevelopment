@@ -70,6 +70,7 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
         CookieHandler.setDefault(cookieManager);
 
         typeface = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf");
+        appBaseUrl = "https://demo.ym.integral.net/fxi/";
     }
 
     public RestClient getClient(){

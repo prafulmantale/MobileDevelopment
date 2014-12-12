@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -54,6 +55,7 @@ public class YieldMangerActivity extends FragmentActivity{
     private TextView tvUnrealizedPnLValue;
 
     private YMApplication application;
+    private ImageView ivDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +160,10 @@ public class YieldMangerActivity extends FragmentActivity{
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setHomeButtonEnabled(false);
         actionBar.setCustomView(view, params);
-        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(false);
+
+        ivDrawer = (ImageView)view.findViewById(R.id.ivDrawer);
+        ivDrawer.setVisibility(View.VISIBLE);
 
         //Hack to hide the home icon -- Otherwise the action bar was getting displayed on top of Tabs
         View homeIcon = findViewById(android.R.id.home);
@@ -186,14 +191,14 @@ public class YieldMangerActivity extends FragmentActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.yield_manger, menu);
-        MenuItem mi =  menu.getItem(0);
-        View view = mi.getActionView();
-
-        System.out.println("mi view: " + mi.toString());
-        if(view instanceof TextView){
-            ((TextView) view).setTypeface(application.getTypeface());
-        }
+//        getMenuInflater().inflate(R.menu.yield_manger, menu);
+//        MenuItem mi =  menu.getItem(0);
+//        View view = mi.getActionView();
+//
+//        System.out.println("mi view: " + mi.toString());
+//        if(view instanceof TextView){
+//            ((TextView) view).setTypeface(application.getTypeface());
+//        }
         return true;
     }
 
