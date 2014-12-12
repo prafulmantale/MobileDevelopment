@@ -7,7 +7,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by prafulmantale on 12/12/14.
@@ -23,6 +25,7 @@ public class RiskSettings {
     private String reportingCurrencyPair;
     private List<String> supportedCcyPairs;
     private List<RiskPolicy> riskPolicies;
+    private Map<String, RiskPolicy> lookupCache;
 
     private RiskSettings() {
         orgName = "";
@@ -30,6 +33,7 @@ public class RiskSettings {
         reportingCurrencyPair = "";
         supportedCcyPairs = new ArrayList<String>();
         riskPolicies = new ArrayList<RiskPolicy>();
+        lookupCache = new HashMap<String, RiskPolicy>();
     }
 
     public String getOrgName() {
@@ -123,9 +127,40 @@ public class RiskSettings {
             JSONArray policies = jsonObject.getJSONArray("riskPolicies");
             settings.riskPolicies = RiskPolicy.fromJSONArray(policies);
 
+            settings.updateCache();
+
         }
         catch (JSONException ex){
             Log.e(TAG, "Exception while extracting settings");
         }
+    }
+
+    private void updateCache(){
+        lookupCache.clear();
+
+        for(RiskPolicy policy : riskPolicies){
+            if(policy == null || policy.getName() == null || policy.getName().isEmpty()){
+                continue;
+            }
+            
+            lookupCache.put(policy.getName(), policy);
+        }
+    }
+
+    /*
+     *  Returns the RiskPolicy for the given policyName
+     *   If policy is not present returns null
+     */
+    public RiskPolicy getRiskPolicy(String policyName){
+
+        if(policyName == null || policyName.isEmpty()){
+            return null;
+        }
+
+        if(lookupCache.containsKey(policyName)){
+            return lookupCache.get(policyName);
+        }
+
+        return null;
     }
 }

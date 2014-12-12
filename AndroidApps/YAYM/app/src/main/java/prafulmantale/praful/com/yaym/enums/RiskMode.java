@@ -5,7 +5,7 @@ package prafulmantale.praful.com.yaym.enums;
  */
 public enum RiskMode {
 
-    Auto,
-    Manual,
-    Off
+    AUTO,
+    MANUAL,
+    OFF
 }
