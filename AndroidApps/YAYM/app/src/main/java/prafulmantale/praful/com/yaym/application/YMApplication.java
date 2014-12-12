@@ -107,11 +107,11 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
     }
 
     public static String getRiskRulesUrl(LoginRequest request){
+        loginRequest = request;
+
         String url = Utils.getAPIUrl(getAppBaseUrl(), RULES_URL);
         url += "?" + AppConstants.PARAM_KEY_ORG + "=" + request.getOrganization()
                 + "&" + AppConstants.PARAM_KEY_NAMESPACE + "=" + request.getOrganization();
-
-        loginRequest = request;
 
         return url;
     }

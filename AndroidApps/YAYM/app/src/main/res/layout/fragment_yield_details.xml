@@ -128,7 +128,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             >
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:text=""
+                android:background="@drawable/horizontal_dashed_divider"
+                android:layerType="software"
+                />
             <LinearLayout
                 android:id="@+id/llChartConfig"
                 android:layout_width="match_parent"
