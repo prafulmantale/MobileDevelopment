@@ -9,6 +9,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import prafulmantale.praful.com.yaym.helpers.AppConstants;
+
 /**
  * Created by prafulmantale on 12/12/14.
  */
@@ -87,6 +89,9 @@ public class RiskPolicy {
             riskPolicy.name = jsonObject.getString("policyName");
             riskPolicy.displayName = jsonObject.getString("policyDisplayName");
             riskPolicy.notes = jsonObject.getString("notes");
+            if(riskPolicy.notes.equals(AppConstants.NULL_STR)){
+                riskPolicy.notes = "";
+            }
         } catch (JSONException ex) {
             Log.e(TAG, "Exception while extracting RiskPolicy from JSON");
             ex.printStackTrace();

@@ -27,6 +27,7 @@ public class AppConstants {
     public static final String STATUS_TEXT = "status";
     public static final String STATUS_OK = "OK";
 
+    public static final String NULL_STR = "null";
 
     public static final String PREF_KEY_FREQUENCY = "freq";
     public static final String PREF_KEY_USER_NAME = "uname";
