@@ -50,6 +50,7 @@ public class CcyPairSettingsFragment extends Fragment {
         tvSelected.setSelected(true);
 
         tvAvailable = (TextView)view.findViewById(R.id.tvAvailableCcyPairs);
+        tvAvailable.setTextColor(getResources().getColor(R.color.grey));
 
         lvCcyPairs = (ListView)view.findViewById(R.id.lvCcypairlist);
         lvCcyPairs.setAdapter(adapter);
@@ -62,6 +63,8 @@ public class CcyPairSettingsFragment extends Fragment {
             public void onClick(View view) {
                 tvAvailable.setSelected(true);
                 tvSelected.setSelected(false);
+                tvAvailable.setTextColor(getResources().getColor(R.color.black));
+                tvSelected.setTextColor(getResources().getColor(R.color.grey));
                 setAvailableAdapter();
                 lvCcyPairs.setAdapter(adapter);
             }
@@ -72,6 +75,8 @@ public class CcyPairSettingsFragment extends Fragment {
             public void onClick(View view) {
                 tvSelected.setSelected(true);
                 tvAvailable.setSelected(false);
+                tvAvailable.setTextColor(getResources().getColor(R.color.grey));
+                tvSelected.setTextColor(getResources().getColor(R.color.black));
                 setSelectedAdapter();
                 lvCcyPairs.setAdapter(adapter);
             }

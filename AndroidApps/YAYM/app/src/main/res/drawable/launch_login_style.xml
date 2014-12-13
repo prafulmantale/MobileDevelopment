@@ -8,7 +8,7 @@
                 android:startColor="#4197ee"
                 android:endColor="#79bbff"/>
             <stroke android:color="#ff288199" android:width="0dp"/>
-            <corners android:radius="2dp"/>
+            <corners android:radius="5dp"/>
             <padding    android:bottom="0dp"
                         android:left="15dp"
                         android:right="15dp"
@@ -23,7 +23,7 @@
                 android:startColor="#3c77b3"
                 android:endColor="#006699"/>
             <stroke android:color="#ff288199" android:width="0dp"/>
-            <corners android:radius="2dp"/>
+            <corners android:radius="5dp"/>
             <padding    android:bottom="0dp"
                 android:left="15dp"
                 android:right="15dp"
