@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffEAEAEA">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        >
+
+        <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_ccypair_selected"
+            android:gravity="center"
+            android:id="@+id/tvSelectedCcyPairs"
+            android:clickable="true"
+            custom:typeface="fonts/OpenSans-Bold.ttf"
+            android:padding="5dp"
+            android:background="@drawable/ccpair_settings_tab_style"
+            />
+
+        <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_ccypair_available"
+            android:gravity="center"
+            android:id="@+id/tvAvailableCcyPairs"
+            android:clickable="true"
+            custom:typeface="fonts/OpenSans-Bold.ttf"
+            android:padding="5dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/ccpair_settings_tab_style"/>
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lvCcypairlist"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"/>
 
 </LinearLayout>

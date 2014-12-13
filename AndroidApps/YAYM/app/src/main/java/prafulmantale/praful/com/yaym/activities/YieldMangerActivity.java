@@ -165,6 +165,13 @@ public class YieldMangerActivity extends FragmentActivity{
         ivDrawer = (ImageView)view.findViewById(R.id.ivDrawer);
         ivDrawer.setVisibility(View.VISIBLE);
 
+        ivDrawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(YieldMangerActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
         //Hack to hide the home icon -- Otherwise the action bar was getting displayed on top of Tabs
         View homeIcon = findViewById(android.R.id.home);
         ((View) homeIcon.getParent()).setVisibility(View.GONE);
