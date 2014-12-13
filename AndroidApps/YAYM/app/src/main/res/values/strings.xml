@@ -75,4 +75,8 @@
     <string name="req_demo_lastname">Last Name</string>
     <string name="title_activity_splash_screen">Yield Manager</string>
 
+    <string name="volume_chart_title">Volume Chart</string>
+    <string name="yield_chart_title">Yield Chart</string>
+    <string name="rate_chart_title">Rate Chart</string>
+
 </resources>

@@ -30,5 +30,6 @@
     <dimen name="chart_bar_top_margin">2dp</dimen>
 
     <dimen name="chart_scale_label_text_size">12sp</dimen>
+    <dimen name="chart_title_label_text_size">14sp</dimen>
 
 </resources>

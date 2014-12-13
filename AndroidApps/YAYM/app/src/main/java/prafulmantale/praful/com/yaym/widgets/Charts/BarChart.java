@@ -1,13 +1,13 @@
 package prafulmantale.praful.com.yaym.widgets.Charts;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.view.View;
 
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.caches.HistoricalDataCache;
 import prafulmantale.praful.com.yaym.enums.UOMSymbol;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.helpers.UOMNumber;
@@ -15,72 +15,41 @@ import prafulmantale.praful.com.yaym.helpers.UOMNumber;
 /**
  * Created by prafulmantale on 11/25/14.
  */
-public class BarChart extends View {
+public class BarChart extends ChartView {
 
     private Paint barPaint;
-    private Paint verticalBorderPaint;
-    private Paint horizontalBorderPaint;
-    private Paint labelPaint;
-
-    private int rightMargin;
-    private int leftMargin;
-    private int topMargin;
-    private int bottomMargin;
-
-    private int marginBetweenBars;
-
     private double []dataSource;
-    private Typeface textTypeface;
-
     private VolumeChartProperties properties;
+
     public BarChart(Context context) {
         super(context);
-
-        init();
     }
 
     public BarChart(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        init();
     }
 
     public BarChart(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
-        init();
     }
 
-    private void init(){
+    @Override
+    protected void init(){
 
         if(isInEditMode()){
             return;
         }
 
-        textTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
+        super.init();
+
+        Resources resources = getResources();
+
 
         barPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         barPaint.setColor(getResources().getColor(R.color.chart_volume_bar));
         barPaint.setStyle(Paint.Style.FILL);
 
-        verticalBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        verticalBorderPaint.setColor(getResources().getColor(R.color.chart_vertical_line));
-        verticalBorderPaint.setStyle(Paint.Style.STROKE);
-        verticalBorderPaint.setStrokeWidth(1);
-
-        horizontalBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        horizontalBorderPaint.setColor(getResources().getColor(R.color.char_horizontal_line));
-        horizontalBorderPaint.setStyle(Paint.Style.STROKE);
-        horizontalBorderPaint.setStrokeWidth(1);
-
-        labelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        labelPaint.setColor(getResources().getColor(R.color.chart_label_text));
-        labelPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        labelPaint.setStrokeWidth(0.5f);
-        labelPaint.setTypeface(textTypeface);
-        labelPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.chart_scale_label_text_size));
-
-        marginBetweenBars = getResources().getDimensionPixelSize(R.dimen.chart_bar_margin);
+        title = resources.getString(R.string.volume_chart_title);
     }
 
     @Override
@@ -94,7 +63,7 @@ public class BarChart extends View {
             return;
         }
 
-        leftMargin = getMeasuredWidth()/6;
+        leftMargin = 0;//getMeasuredWidth()/6;
         rightMargin = getMeasuredWidth()/6;
         topMargin = getMeasuredHeight()/8;
         bottomMargin = getMeasuredHeight()/8;
@@ -105,9 +74,18 @@ public class BarChart extends View {
 
         float perUnit = ((float)getMeasuredHeight() - topMargin - bottomMargin)/(float)properties.maxVolume;
 
+        int hrCounter = 1;
         for(int i = 0; i < 24; i++){
 
             canvas.drawRect(left, top - getBarHeight(i, perUnit), left + barwidth, top, barPaint);
+
+            if(i == hrCounter) {
+
+                canvas.drawLine(left + barwidth/2, getMeasuredHeight() - bottomMargin, left + barwidth/2, getMeasuredHeight() - bottomMargin + 20, barPaint);
+                canvas.drawText(HistoricalDataCache.getInstance().getTimeStamps()[i], left - (labelPaint.getTextSize()/2) , 20 + getMeasuredHeight() - bottomMargin + labelPaint.getTextSize(), labelPaint);
+                hrCounter += 4;
+            }
+
             left+= marginBetweenBars + barwidth;
         }
 
@@ -127,6 +105,8 @@ public class BarChart extends View {
 
         canvas.drawText(properties.displayMaxVolume, left + 10, topMargin, labelPaint);
         canvas.drawText(properties.displayMinVolume, left + 10, getMeasuredHeight() - bottomMargin, labelPaint);
+
+        canvas.drawText(title, (getMeasuredWidth() - leftMargin - rightMargin)/2 - titlePaint.getTextSize(), topMargin - 15, titlePaint);
     }
 
     public void setDataSource(double [] dataSource){

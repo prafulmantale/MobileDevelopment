@@ -7,7 +7,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import prafulmantale.praful.com.yaym.helpers.Utils;
 
 /**
  * Created by prafulmantale on 11/24/14.
@@ -25,6 +28,7 @@ public class HistoricYieldData {
     private double doneVolume;
     private double currentYield;
     private long timestamp;
+    private  String displayTimestamp;
 
     public HistoricYieldData() {
     }
@@ -69,6 +73,14 @@ public class HistoricYieldData {
         this.timestamp = timestamp;
     }
 
+    public String getDisplayTimestamp() {
+        return displayTimestamp;
+    }
+
+    public void setDisplayTimestamp(String displayTimestamp) {
+        this.displayTimestamp = displayTimestamp;
+    }
+
     public static HistoricYieldData fromJSON(JSONObject jsonObject){
 
         if(jsonObject == null){
@@ -83,6 +95,8 @@ public class HistoricYieldData {
             data.doneVolume = jsonObject.getDouble("dVol");
             data.currentYield = jsonObject.getDouble("cyield");
             data.timestamp = jsonObject.getLong("ts");
+
+            data.displayTimestamp = Utils.scaleTimeFormat.format(new Date(data.timestamp));
         }
         catch (JSONException jex){
             data = null;

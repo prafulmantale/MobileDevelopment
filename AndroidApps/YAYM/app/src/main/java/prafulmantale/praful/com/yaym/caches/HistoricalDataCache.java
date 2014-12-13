@@ -21,6 +21,7 @@ public class HistoricalDataCache {
     private List<HistoricYieldData> cache;
     private double []volumes;
     private double []yields;
+    private String []timeStamps;
 
     public HistoricalDataCache() {
         cache = new ArrayList<HistoricYieldData>();
@@ -40,6 +41,7 @@ public class HistoricalDataCache {
             cache = HistoricYieldData.fromJSON(jsonArray);
             volumes = new double[cache.size()];
             yields = new double[cache.size()];
+            timeStamps = new String[cache.size()];
 
             for(int i = 0; i < cache.size(); i ++){
                 volumes[i] = cache.get(i).getDoneVolume();
@@ -47,9 +49,8 @@ public class HistoricalDataCache {
 
             for(int i = 0; i < cache.size(); i ++){
                 yields[i] = cache.get(i).getCurrentYield();
+                timeStamps[i] = cache.get(i).getDisplayTimestamp();
             }
-
-
 
         }
         catch(Exception ex){
@@ -63,5 +64,9 @@ public class HistoricalDataCache {
 
     public double[] getYields() {
         return yields;
+    }
+
+    public String[] getTimeStamps() {
+        return timeStamps;
     }
 }

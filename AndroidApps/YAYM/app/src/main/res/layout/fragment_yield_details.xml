@@ -139,7 +139,7 @@
                 android:id="@+id/llChartConfig"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 >
             <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
                 android:layout_marginLeft="15dp"
@@ -187,7 +187,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="EUR/USD"
-                android:gravity="center"
+                android:gravity="center_vertical"
+                android:paddingLeft="32dp"
                 custom:typeface="fonts/OpenSans-Regular.ttf"
                 />
 
@@ -200,7 +201,7 @@
                 android:id="@+id/fragmentCharts"
                 android:layout_below="@id/llChartConfig"
                 tools:layout="@layout/fragment_charts"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="5dp"/>
         </RelativeLayout>
     </RelativeLayout>
     </ScrollView>

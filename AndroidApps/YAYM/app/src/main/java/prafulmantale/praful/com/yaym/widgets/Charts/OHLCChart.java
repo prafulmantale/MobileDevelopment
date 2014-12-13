@@ -3,9 +3,7 @@ package prafulmantale.praful.com.yaym.widgets.Charts;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.view.View;
 
 import java.math.BigDecimal;
 
@@ -18,49 +16,34 @@ import prafulmantale.praful.com.yaym.models.ReferenceData;
 /**
  * Created by prafulmantale on 11/25/14.
  */
-public class OHLCChart extends View {
+public class OHLCChart extends ChartView {
 
     private Paint barPaintUp;
     private Paint barPaintDown;
-    private Paint verticalBorderPaint;
-    private Paint horizontalBorderPaint;
-    private Paint labelPaint;
-
-    private int rightMargin;
-    private int leftMargin;
-    private int topMargin;
-    private int bottomMargin;
-    private int marginBetweenBars;
 
     private OHLCData []dataSource;
-    private Typeface textTypeface;
     private RateChartProperties rateChartProperties = null;
 
     public OHLCChart(Context context) {
         super(context);
-
-        init();
     }
 
     public OHLCChart(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        init();
     }
 
     public OHLCChart(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
-        init();
     }
 
-    private void init(){
+    @Override
+    protected void init(){
 
         if(isInEditMode()){
             return;
         }
 
-        textTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
+        super.init();
 
         barPaintUp = new Paint(Paint.ANTI_ALIAS_FLAG);
         barPaintUp.setColor(getResources().getColor(R.color.chart_rate_border));
@@ -70,24 +53,7 @@ public class OHLCChart extends View {
         barPaintDown.setColor(getResources().getColor(R.color.chart_rate_bar));
         barPaintDown.setStyle(Paint.Style.FILL);
 
-        verticalBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        verticalBorderPaint.setColor(getResources().getColor(R.color.chart_vertical_line));
-        verticalBorderPaint.setStyle(Paint.Style.STROKE);
-        verticalBorderPaint.setStrokeWidth(1);
-
-        horizontalBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        horizontalBorderPaint.setColor(getResources().getColor(R.color.char_horizontal_line));
-        horizontalBorderPaint.setStyle(Paint.Style.STROKE);
-        horizontalBorderPaint.setStrokeWidth(1);
-
-        labelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        labelPaint.setColor(getResources().getColor(R.color.chart_label_text));
-        labelPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        labelPaint.setStrokeWidth(0.5f);
-        labelPaint.setTypeface(textTypeface);
-        labelPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.chart_scale_label_text_size));
-
-        marginBetweenBars = getResources().getDimensionPixelSize(R.dimen.chart_bar_margin);
+        title = getResources().getString(R.string.rate_chart_title);
     }
 
     @Override
@@ -101,7 +67,7 @@ public class OHLCChart extends View {
             return;
         }
 
-        leftMargin = getMeasuredWidth()/6;
+        leftMargin = 0;//getMeasuredWidth()/6;
         rightMargin = getMeasuredWidth()/6;
         topMargin = getMeasuredHeight()/8;
         bottomMargin = getMeasuredHeight()/8;
@@ -112,6 +78,7 @@ public class OHLCChart extends View {
 
         float perUnit = ((float)getMeasuredHeight() - topMargin - bottomMargin)/(10000 * (float)(rateChartProperties.maxRate - rateChartProperties.minRate));
 
+        int hrCounter = 1;
         for(int i = 0; i < 24; i++){
             float bottom =  bottomMargin + getRectBottom(i, perUnit);
             float rectTop = topMargin + getRectTop(i, perUnit);
@@ -124,6 +91,13 @@ public class OHLCChart extends View {
 
             canvas.drawLine(left + barwidth/2, rectTop, left + barwidth/2, topMargin + getHighY(i, perUnit), barPaintUp);
             canvas.drawLine(left + barwidth/2, bottom, left + barwidth/2, bottomMargin + getLowY(i, perUnit), barPaintUp);
+
+            if(i == hrCounter) {
+
+                canvas.drawLine(left + barwidth/2, getMeasuredHeight() - bottomMargin, left + barwidth/2, getMeasuredHeight() - bottomMargin + 20, barPaintUp);
+                canvas.drawText(dataSource[i].getDisplayTimestamp(), left - (labelPaint.getTextSize()/2) , 20 + getMeasuredHeight() - bottomMargin + labelPaint.getTextSize(), labelPaint);
+                hrCounter += 4;
+            }
 
             left+= marginBetweenBars + barwidth;
         }
@@ -143,6 +117,8 @@ public class OHLCChart extends View {
             canvas.drawLine(leftMargin, yLoc, left, yLoc, horizontalBorderPaint);
             canvas.drawText(rateChartProperties.scale[i], left + 10, yLoc, labelPaint);
         }
+
+        canvas.drawText(title, (getMeasuredWidth() - leftMargin - rightMargin)/2 - titlePaint.getTextSize(), topMargin - 15, titlePaint);
     }
 
     public void setDataSource(String ccyPair, OHLCData[] dataSource){

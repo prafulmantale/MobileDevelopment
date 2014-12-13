@@ -6,7 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import prafulmantale.praful.com.yaym.helpers.Utils;
 
 /**
  * Created by prafulmantale on 11/24/14.
@@ -21,6 +24,7 @@ public class OHLCData {
     private double close;
     private double high;
     private double low;
+    private String displayTimestamp;
 
     public OHLCData() {
     }
@@ -46,6 +50,8 @@ public class OHLCData {
             data.close = Double.parseDouble(arr[2]);
             data.high = Double.parseDouble(arr[3]);
             data.low = Double.parseDouble(arr[4]);
+
+            data.displayTimestamp = Utils.scaleTimeFormat.format(new Date(data.timestamp));
         }
         catch (Exception jex){
 
@@ -133,5 +139,13 @@ public class OHLCData {
 
     public void setLow(double low) {
         this.low = low;
+    }
+
+    public String getDisplayTimestamp() {
+        return displayTimestamp;
+    }
+
+    public void setDisplayTimestamp(String displayTimestamp) {
+        this.displayTimestamp = displayTimestamp;
     }
 }
