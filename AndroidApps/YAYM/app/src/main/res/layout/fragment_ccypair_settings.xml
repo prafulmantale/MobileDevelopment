@@ -29,6 +29,7 @@
             custom:typeface="fonts/OpenSans-Bold.ttf"
             android:padding="5dp"
             android:background="@drawable/ccpair_settings_tab_style"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             />
 
         <prafulmantale.praful.com.yaym.widgets.TypefacedTextView
@@ -42,7 +43,9 @@
             custom:typeface="fonts/OpenSans-Bold.ttf"
             android:padding="5dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/ccpair_settings_tab_style"/>
+            android:background="@drawable/ccpair_settings_tab_style"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
     </LinearLayout>
 
     <ListView
@@ -52,6 +55,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="5dp"
-        android:background="@color/white"/>
+        android:background="@color/white"
+        android:dividerHeight="5dp"/>
 
 </LinearLayout>
