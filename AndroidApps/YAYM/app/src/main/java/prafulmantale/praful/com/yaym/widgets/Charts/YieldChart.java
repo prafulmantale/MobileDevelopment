@@ -11,7 +11,7 @@ import prafulmantale.praful.com.yaym.caches.HistoricalDataCache;
 /**
  * Created by prafulmantale on 11/25/14.
  */
-public class LineChart extends ChartView {
+public class YieldChart extends ChartView {
 
     private Paint circlePaint;
     private Paint linePaint;
@@ -19,15 +19,15 @@ public class LineChart extends ChartView {
     private double []dataSource;
     private YieldChartProperties props;
 
-    public LineChart(Context context) {
+    public YieldChart(Context context) {
         super(context);
     }
 
-    public LineChart(Context context, AttributeSet attrs) {
+    public YieldChart(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public LineChart(Context context, AttributeSet attrs, int defStyleAttr) {
+    public YieldChart(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

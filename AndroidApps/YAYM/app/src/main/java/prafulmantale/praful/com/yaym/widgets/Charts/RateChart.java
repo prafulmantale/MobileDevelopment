@@ -16,7 +16,7 @@ import prafulmantale.praful.com.yaym.models.ReferenceData;
 /**
  * Created by prafulmantale on 11/25/14.
  */
-public class OHLCChart extends ChartView {
+public class RateChart extends ChartView {
 
     private Paint barPaintUp;
     private Paint barPaintDown;
@@ -24,15 +24,15 @@ public class OHLCChart extends ChartView {
     private OHLCData []dataSource;
     private RateChartProperties rateChartProperties = null;
 
-    public OHLCChart(Context context) {
+    public RateChart(Context context) {
         super(context);
     }
 
-    public OHLCChart(Context context, AttributeSet attrs) {
+    public RateChart(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public OHLCChart(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RateChart(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

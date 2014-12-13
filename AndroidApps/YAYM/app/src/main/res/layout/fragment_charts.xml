@@ -13,21 +13,21 @@
     android:weightSum="1">
 
 
-    <prafulmantale.praful.com.yaym.widgets.Charts.LineChart
+    <prafulmantale.praful.com.yaym.widgets.Charts.YieldChart
         android:id="@+id/lineChart"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         />
 
-    <prafulmantale.praful.com.yaym.widgets.Charts.OHLCChart
+    <prafulmantale.praful.com.yaym.widgets.Charts.RateChart
         android:id="@+id/ohlcChart"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         />
 
-    <prafulmantale.praful.com.yaym.widgets.Charts.BarChart
+    <prafulmantale.praful.com.yaym.widgets.Charts.VolumeChart
         android:id="@+id/barChart"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"

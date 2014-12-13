@@ -15,21 +15,21 @@ import prafulmantale.praful.com.yaym.helpers.UOMNumber;
 /**
  * Created by prafulmantale on 11/25/14.
  */
-public class BarChart extends ChartView {
+public class VolumeChart extends ChartView {
 
     private Paint barPaint;
     private double []dataSource;
     private VolumeChartProperties properties;
 
-    public BarChart(Context context) {
+    public VolumeChart(Context context) {
         super(context);
     }
 
-    public BarChart(Context context, AttributeSet attrs) {
+    public VolumeChart(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public BarChart(Context context, AttributeSet attrs, int defStyleAttr) {
+    public VolumeChart(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
