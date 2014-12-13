@@ -84,6 +84,7 @@ public class LoginActivity extends Activity{
         updateFromPreferences();
 
         setupListeners();
+
     }
 
     private void updateFromPreferences() {
@@ -448,11 +449,8 @@ public class LoginActivity extends Activity{
 
 
     public void showLogin(View view){
-
-        if(view.getId() == R.id.btnLoginWelcom){
             llSignUpBar.startAnimation(fadeOutAnimationSignUpBar);
             rlCenter.startAnimation(fadeInAnimationLoginPanel);
-        }
     }
 
     public void hideLogin(View view){
