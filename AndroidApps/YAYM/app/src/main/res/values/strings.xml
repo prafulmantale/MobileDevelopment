@@ -80,5 +80,14 @@
     <string name="settings_ccypair_selected">Selected</string>
     <string name="settings_ccypair_available">Available</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    
+    <string-array name="nav_drawer_menu_items">
+        <item>Dashboard</item>
+        <item>Risk Warehouse</item>
+        <item>Currency Pairs</item>
+        <item>Risk Policies</item>
+        <item>Customers</item>
+        <item>Routing Rules</item>
+    </string-array>
 
 </resources>
