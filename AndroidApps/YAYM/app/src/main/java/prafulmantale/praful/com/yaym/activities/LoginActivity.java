@@ -353,7 +353,7 @@ public class LoginActivity extends Activity{
             progressDialog.dismiss();
         }
 
-        Intent intent = new Intent(this, YieldMangerActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_from_left);
     }

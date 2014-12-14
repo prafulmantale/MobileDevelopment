@@ -67,7 +67,7 @@
 
     <color name="drawer_background">#2B3239</color>
     <color name="drawer_divider">#47535E</color>
-    <color name="drawer_item_text">#BEBEBE</color>
+    <color name="drawer_item_text">#CCCCCC</color>
     <color name="drawer_item_text_highlighted">#ffffff</color>
     <color name="drawer_user_details_text">#262D33</color>
 </resources>
