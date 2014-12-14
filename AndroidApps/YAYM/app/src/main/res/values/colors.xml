@@ -66,6 +66,7 @@
     <color name="cancel_button">#B0C4DE</color>
 
     <color name="drawer_background">#2B3239</color>
+    <color name="drawer_background_selected">#ff991b20</color>
     <color name="drawer_divider">#47535E</color>
     <color name="drawer_item_text">#CCCCCC</color>
     <color name="drawer_item_text_highlighted">#ffffff</color>
