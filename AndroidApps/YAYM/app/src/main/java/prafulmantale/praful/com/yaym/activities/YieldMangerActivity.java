@@ -44,7 +44,6 @@ public class YieldMangerActivity extends FragmentActivity{
     private ListView lvPositions;
     private SnapshotAdapter adapter;
     private List<RWPositionSnapshot> snapshots;
-    private RWPositionSnapshot prevSelectedSnapshot;
 //    private SwipeRefreshLayout swipeRefreshLayout;
     private boolean swipedToRefresh = false;
 

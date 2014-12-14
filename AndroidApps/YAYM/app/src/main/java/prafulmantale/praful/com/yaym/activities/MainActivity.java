@@ -1,5 +1,6 @@
 package prafulmantale.praful.com.yaym.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -24,6 +25,7 @@ import prafulmantale.praful.com.yaym.fragments.CcyPairSettingsFragment;
 import prafulmantale.praful.com.yaym.fragments.DashboardFragment;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.models.NavigationDrawerItem;
+import prafulmantale.praful.com.yaym.services.RWPollService;
 
 public class MainActivity extends FragmentActivity {
 
@@ -258,5 +260,25 @@ public class MainActivity extends FragmentActivity {
         super.onConfigurationChanged(newConfig);
 
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        startPollService();
+    }
+
+    private void startPollService(){
+        startService(new Intent(this, RWPollService.class));
+    }
+
+    private void stopPollService(){
+        stopService(new Intent(this, RWPollService.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopPollService();
+        super.onDestroy();
     }
 }
