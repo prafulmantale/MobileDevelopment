@@ -7,6 +7,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
@@ -27,7 +28,7 @@ import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.models.NavigationDrawerItem;
 import prafulmantale.praful.com.yaym.services.RWPollService;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity{
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -125,6 +126,7 @@ public class MainActivity extends FragmentActivity {
         Fragment fragment = null;
         FragmentManager fragmentManager = getSupportFragmentManager();
         String tag = null;
+        boolean newInstance = false;
         switch (position){
 
             case 0 :
@@ -133,6 +135,7 @@ public class MainActivity extends FragmentActivity {
                 if(fragment == null){
                     Log.d(TAG, "Dashboard fragment created");
                     fragment = new DashboardFragment();
+                    newInstance = true;
                 }
                 break;
 
@@ -142,6 +145,7 @@ public class MainActivity extends FragmentActivity {
                 if(fragment == null){
                     Log.d(TAG, "Ccy Pair Settting fragment created");
                     fragment = new CcyPairSettingsFragment();
+                    newInstance = true;
                 }
                 break;
             case 3 :
@@ -155,10 +159,21 @@ public class MainActivity extends FragmentActivity {
         }
 
         if(fragment != null){
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.frameContainer, fragment, tag)
-                    .commit();
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+//            getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.frameContainer, fragment, tag)
+//                    .commit();
+
+            //if(newInstance){
+                //transaction.add(fragment, tag);
+                transaction.replace(R.id.frameContainer, fragment, tag);
+                transaction.addToBackStack(tag);
+            //}
+
+            transaction.commit();
 
             lvDrawerItems.setItemChecked(position, true);
             lvDrawerItems.setSelection(position);
