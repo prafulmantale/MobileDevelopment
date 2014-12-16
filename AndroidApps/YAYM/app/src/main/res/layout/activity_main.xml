@@ -1,4 +1,4 @@
-<android.support.v4.widget.DrawerLayout
+<prafulmantale.praful.com.yaym.helpers.FragmentNavigationDrawer
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
@@ -25,4 +25,4 @@
         >
     </ListView>
 
-</android.support.v4.widget.DrawerLayout>
+</prafulmantale.praful.com.yaym.helpers.FragmentNavigationDrawer>

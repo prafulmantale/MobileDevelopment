@@ -3,30 +3,17 @@ package prafulmantale.praful.com.yaym.activities;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import prafulmantale.praful.com.yaym.R;
-import prafulmantale.praful.com.yaym.adapters.NavigationListAdapter;
 import prafulmantale.praful.com.yaym.fragments.CcyPairSettingsFragment;
 import prafulmantale.praful.com.yaym.fragments.DashboardFragment;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
+import prafulmantale.praful.com.yaym.helpers.FragmentNavigationDrawer;
 import prafulmantale.praful.com.yaym.interfaces.DashboardActionsListener;
-import prafulmantale.praful.com.yaym.models.NavigationDrawerItem;
 import prafulmantale.praful.com.yaym.services.RWPollService;
 
 public class MainActivity extends FragmentActivity implements DashboardActionsListener{
@@ -34,18 +21,8 @@ public class MainActivity extends FragmentActivity implements DashboardActionsLi
     private static final String TAG = MainActivity.class.getSimpleName();
 
     public static String selectedCurrencyPair;
-    private ImageView backButton;
 
-    private DrawerLayout drawerLayout;
-    private ListView lvDrawerItems;
-    private List<NavigationDrawerItem> drawerItems;
-    private NavigationListAdapter adapter;
-    private String [] drawerItemsStrings;
-
-    private CharSequence displayTitle; //title displayed in the Action Bar
-    private CharSequence appTitle;
-
-    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private FragmentNavigationDrawer drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,130 +36,90 @@ public class MainActivity extends FragmentActivity implements DashboardActionsLi
         }
 
         initialize();
-        setupListeners();
 
         if(savedInstanceState == null){
-            displayFragment(0);
+            drawerLayout.selectDrawerItem(0);
         }
     }
 
 
     private void initialize(){
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
+        drawerLayout = (FragmentNavigationDrawer)findViewById(R.id.drawerLayout);
+        drawerLayout.setupDrawerConfiguration((ListView)findViewById(R.id.lvDrawerMenu),
+                R.layout.drawer_item_list,
+                R.id.frameContainer);
 
-        lvDrawerItems = (ListView)findViewById(R.id.lvDrawerMenu);
-        drawerItems = new ArrayList<NavigationDrawerItem>();
-        drawerItemsStrings = getResources().getStringArray(R.array.nav_drawer_menu_items);
-
-        for(String str : drawerItemsStrings){
-            drawerItems.add(new NavigationDrawerItem(str));
-        }
-
-        adapter = new NavigationListAdapter(getBaseContext(), drawerItems);
-        lvDrawerItems.setAdapter(adapter);
-
-        appTitle = displayTitle = getTitle();
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
-
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_action_drawer,
-                R.string.app_name, R.string.app_name){
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle(appTitle);
-                invalidateOptionsMenu();
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                getActionBar().setTitle(displayTitle);
-                invalidateOptionsMenu();
-            }
-        };
-
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        drawerLayout.addNavigationItem("Dashboard", "Dashboard", DashboardFragment.class);
+        drawerLayout.addNavigationItem("Risk Warehouse", "Risk Warehouse", null);
+        drawerLayout.addNavigationItem("        Currency Pairs", "Currency Pairs", CcyPairSettingsFragment.class);
+        drawerLayout.addNavigationItem("        Risk Policies", "Risk Policies", CcyPairSettingsFragment.class);
+        drawerLayout.addNavigationItem("Customers", "Customers", null);
+        drawerLayout.addNavigationItem("        Routing Rules", "Routing Rules", CcyPairSettingsFragment.class);
     }
 
-    private void setupListeners(){
 
-        lvDrawerItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
-                //Risk Warehouse and Customers
-                if(position == 1 || position == 4){
-                    return;
-                }
-
-                displayFragment(position);
-            }
-        });
-    }
-
-    private void displayFragment(int position){
-
-        Fragment fragment = null;
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        String tag = null;
-        boolean newInstance = false;
-        switch (position){
-
-            case 0 :
-                tag = "dashboard";
-                fragment = fragmentManager.findFragmentByTag(tag);
-                if(fragment == null){
-                    Log.d(TAG, "Dashboard fragment created");
-                    fragment = new DashboardFragment();
-                    newInstance = true;
-                }
-                break;
-
-            case 2 :
-                tag = "ccypairsettings";
-                fragment = fragmentManager.findFragmentByTag(tag);
-                if(fragment == null){
-                    Log.d(TAG, "Ccy Pair Settting fragment created");
-                    fragment = new CcyPairSettingsFragment();
-                    newInstance = true;
-                }
-                break;
-            case 3 :
-                fragment = fragmentManager.findFragmentByTag("riskpolicies");
-                break;
-            case 5:
-                fragment = fragmentManager.findFragmentByTag("routingrules");
-                break;
-            default:
-                break;
-        }
-
-        if(fragment != null){
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.frameContainer, fragment, tag)
-//                    .commit();
-
-            //if(newInstance){
-                //transaction.add(fragment, tag);
-                transaction.replace(R.id.frameContainer, fragment, tag);
-                transaction.addToBackStack(tag);
-            //}
-
-            transaction.commit();
-
-            lvDrawerItems.setItemChecked(position, true);
-            lvDrawerItems.setSelection(position);
-            setTitle(drawerItemsStrings[position]);
-            drawerLayout.closeDrawer(lvDrawerItems);
-        }
-
-    }
+//    private void displayFragment(int position){
+//
+//        Fragment fragment = null;
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        String tag = null;
+//        boolean newInstance = false;
+//        switch (position){
+//
+//            case 0 :
+//                tag = "dashboard";
+//                fragment = fragmentManager.findFragmentByTag(tag);
+//                if(fragment == null){
+//                    Log.d(TAG, "Dashboard fragment created");
+//                    fragment = new DashboardFragment();
+//                    newInstance = true;
+//                }
+//                break;
+//
+//            case 2 :
+//                tag = "ccypairsettings";
+//                fragment = fragmentManager.findFragmentByTag(tag);
+//                if(fragment == null){
+//                    Log.d(TAG, "Ccy Pair Settting fragment created");
+//                    fragment = new CcyPairSettingsFragment();
+//                    newInstance = true;
+//                }
+//                break;
+//            case 3 :
+//                fragment = fragmentManager.findFragmentByTag("riskpolicies");
+//                break;
+//            case 5:
+//                fragment = fragmentManager.findFragmentByTag("routingrules");
+//                break;
+//            default:
+//                break;
+//        }
+//
+//        if(fragment != null){
+//
+//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//
+////            getSupportFragmentManager()
+////                    .beginTransaction()
+////                    .replace(R.id.frameContainer, fragment, tag)
+////                    .commit();
+//
+//            //if(newInstance){
+//                //transaction.add(fragment, tag);
+//                transaction.replace(R.id.frameContainer, fragment, tag);
+//                transaction.addToBackStack(tag);
+//            //}
+//
+//            transaction.commit();
+//
+//            lvDrawerItems.setItemChecked(position, true);
+//            lvDrawerItems.setSelection(position);
+//            setTitle(drawerItemsStrings[position]);
+//            drawerLayout.closeDrawer(lvDrawerItems);
+//        }
+//
+//    }
 
     private void initializeActionBar(){
 //        ActionBar actionBar = getActionBar();
@@ -230,7 +167,7 @@ public class MainActivity extends FragmentActivity implements DashboardActionsLi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(actionBarDrawerToggle.onOptionsItemSelected(item)){
+        if(drawerLayout.getDrawerToggle().onOptionsItemSelected(item)){
             return true;
         }
 
@@ -247,7 +184,7 @@ public class MainActivity extends FragmentActivity implements DashboardActionsLi
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-        boolean drawerOpen = drawerLayout.isDrawerOpen(lvDrawerItems);
+        boolean drawerOpen = drawerLayout.isDrawerOpen();
 
         try {
             menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
@@ -259,23 +196,18 @@ public class MainActivity extends FragmentActivity implements DashboardActionsLi
         return super.onPrepareOptionsMenu(menu);
     }
 
-    @Override
-    public void setTitle(CharSequence title) {
-        this.displayTitle = title;
-        getActionBar().setTitle(displayTitle);
-    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        actionBarDrawerToggle.syncState();
+        drawerLayout.getDrawerToggle().syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        actionBarDrawerToggle.onConfigurationChanged(newConfig);
+        drawerLayout.getDrawerToggle().onConfigurationChanged(newConfig);
     }
 
     @Override
