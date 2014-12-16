@@ -7,6 +7,7 @@
         android:id="@+id/tvDrawerItem"
         custom:typeface="fonts/OpenSans-Regular.ttf"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:textColor="@color/drawer_item_text"
         android:background="@color/drawer_background"
     android:textSize="14sp"

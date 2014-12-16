@@ -25,10 +25,11 @@ import prafulmantale.praful.com.yaym.adapters.NavigationListAdapter;
 import prafulmantale.praful.com.yaym.fragments.CcyPairSettingsFragment;
 import prafulmantale.praful.com.yaym.fragments.DashboardFragment;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
+import prafulmantale.praful.com.yaym.interfaces.DashboardActionsListener;
 import prafulmantale.praful.com.yaym.models.NavigationDrawerItem;
 import prafulmantale.praful.com.yaym.services.RWPollService;
 
-public class MainActivity extends FragmentActivity{
+public class MainActivity extends FragmentActivity implements DashboardActionsListener{
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -295,5 +296,14 @@ public class MainActivity extends FragmentActivity{
     protected void onDestroy() {
         stopPollService();
         super.onDestroy();
+    }
+
+    @Override
+    public void onDetailsViewRequested(String ccyPair) {
+        selectedCurrencyPair = ccyPair;
+
+        Intent intent = new Intent(this, YieldDetailsActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_from_right, R.anim.stay);
     }
 }

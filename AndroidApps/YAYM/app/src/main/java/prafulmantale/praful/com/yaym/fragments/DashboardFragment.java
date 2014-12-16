@@ -1,5 +1,6 @@
 package prafulmantale.praful.com.yaym.fragments;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +21,9 @@ import prafulmantale.praful.com.yaym.R;
 import prafulmantale.praful.com.yaym.adapters.SnapshotAdapter;
 import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.caches.RWSummaryCache;
+import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
+import prafulmantale.praful.com.yaym.interfaces.DashboardActionsListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.models.RWSummary;
 import prafulmantale.praful.com.yaym.widgets.YieldPercentageView;
@@ -45,6 +48,7 @@ public class DashboardFragment extends Fragment{
     private TextView tvUnrealizedPnLValue;
 
     private YMApplication application;
+    private DashboardActionsListener listener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,6 +110,8 @@ public class DashboardFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                listener.onDetailsViewRequested(RulesCache.getInstance().getCurrencyPairsList().get(position));
+
                 //???
                 //Inform activity that Details fragment needs to be loaded
 
@@ -149,5 +155,12 @@ public class DashboardFragment extends Fragment{
         tvVolumeValue.setText(rwSummary.getVolumeDisplay());
         tvRelaizedPnLValue.setText(rwSummary.getRealizedPnLDisplay());
         tvUnrealizedPnLValue.setText(rwSummary.getUnrealizedPnlDisplay());
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        listener = (DashboardActionsListener)getActivity();
     }
 }

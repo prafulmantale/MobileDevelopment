@@ -89,4 +89,7 @@
         <item>Customers</item>
         <item>Routing Rules</item>
     </string-array>
+
+    <string name="title_activity_yield_details">YieldDetailsActivity</string>
+
 </resources>

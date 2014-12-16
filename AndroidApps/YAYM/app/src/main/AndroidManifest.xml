@@ -66,6 +66,11 @@
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name=".activities.YieldDetailsActivity"
+            android:label="@string/title_activity_yield_details"
+            android:parentActivityName=".activities.MainActivity">
+        </activity>
     </application>
 
 </manifest>
