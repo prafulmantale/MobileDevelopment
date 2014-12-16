@@ -85,7 +85,9 @@ public class FragmentNavigationDrawer extends DrawerLayout {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.slide_in_from_right, R.anim.slide_out_from_left,
                 R.anim.slide_in_from_right, R.anim.slide_out_from_left);
-        transaction.replace(drawerContainerRes, fragment).commit();
+        transaction.replace(drawerContainerRes, fragment, navItem.getTitle());
+        //transaction.addToBackStack(null);
+        transaction.commit();
 
         // Highlight the selected item, update the title, and close the drawer
         lvDrawer.setItemChecked(position, true);

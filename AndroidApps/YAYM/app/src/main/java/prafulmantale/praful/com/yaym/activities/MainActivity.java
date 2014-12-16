@@ -1,14 +1,19 @@
 package prafulmantale.praful.com.yaym.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.fragments.CcyPairSettingsFragment;
 import prafulmantale.praful.com.yaym.fragments.DashboardFragment;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
@@ -23,6 +28,7 @@ public class MainActivity extends FragmentActivity implements DashboardActionsLi
     public static String selectedCurrencyPair;
 
     private FragmentNavigationDrawer drawerLayout;
+    private YMApplication application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,7 @@ public class MainActivity extends FragmentActivity implements DashboardActionsLi
 
     private void initialize(){
 
+        application = (YMApplication)getApplication();
         drawerLayout = (FragmentNavigationDrawer)findViewById(R.id.drawerLayout);
         drawerLayout.setupDrawerConfiguration((ListView)findViewById(R.id.lvDrawerMenu),
                 R.layout.drawer_item_list,
@@ -153,8 +160,45 @@ public class MainActivity extends FragmentActivity implements DashboardActionsLi
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition (R.anim.stay, R.anim.slide_out_from_right);
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+//        if(count == 0){
+//            showLogoutAlert();
+//        }
+//        else {
+            super.onBackPressed();
+            overridePendingTransition(R.anim.stay, R.anim.slide_out_from_right);
+//        }
+    }
+
+    private void showLogoutAlert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.logout_confirm_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.logout_confirm_yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.this.finish();
+                        overridePendingTransition (R.anim.slide_in_from_left, R.anim.slide_out_from_right);
+                    }
+                })
+                .setNegativeButton(R.string.logout_confirm_no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        textView.setTypeface(application.getTypeface());
+
+        Button yesButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        yesButton.setTypeface(application.getTypeface());
+
+        Button noButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        noButton.setTypeface(application.getTypeface());
     }
 
     @Override
