@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -23,6 +24,7 @@ import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.caches.RWSummaryCache;
 import prafulmantale.praful.com.yaym.caches.RulesCache;
 import prafulmantale.praful.com.yaym.caches.SnapshotCache;
+import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.interfaces.DashboardActionsListener;
 import prafulmantale.praful.com.yaym.models.RWPositionSnapshot;
 import prafulmantale.praful.com.yaym.models.RWSummary;
@@ -161,6 +163,22 @@ public class DashboardFragment extends Fragment{
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
+        getActivity().registerReceiver(marketDataReceiver,
+                new IntentFilter(AppConstants.RW_SNAPSHOT_RECEIVED));
+
         listener = (DashboardActionsListener)getActivity();
+    }
+
+    public void refresh(){
+        updateRiskCapacity();
+
+        List<RWPositionSnapshot> list = SnapshotCache.getInstance().getSnapshots();
+        adapter.updateViews(lvPositions, list);
+    }
+
+    @Override
+    public void onDetach() {
+        getActivity().unregisterReceiver(marketDataReceiver);
+        super.onDetach();
     }
 }

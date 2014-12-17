@@ -19,6 +19,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.fragments.DashboardFragment;
 
 /**
  * Created by prafulmantale on 12/15/14.
@@ -30,6 +31,8 @@ public class FragmentNavigationDrawer extends DrawerLayout {
     private ArrayAdapter<String> drawerAdapter;
     private ArrayList<NavigationDrawerItem> drawerNavItems;
     private int drawerContainerRes;
+    private DashboardFragment dashboardFragment;
+    private int prevSelection = -1;
 
     public FragmentNavigationDrawer(Context context) {
         super(context);
@@ -66,12 +69,29 @@ public class FragmentNavigationDrawer extends DrawerLayout {
     }
 
     public void selectDrawerItem(int position) {
+
+        if(prevSelection == position){
+            closeDrawer(lvDrawer);
+            return;
+        }
+
+        prevSelection = position;
+
         // Create a new fragment and specify the planet to show based on
         // position
         NavigationDrawerItem navItem = drawerNavItems.get(position);
         Fragment fragment = null;
         try {
-            fragment = navItem.getFragmentClass().newInstance();
+
+            if(dashboardFragment == null){
+                dashboardFragment = new DashboardFragment();
+            }
+            if(position == 0){
+                fragment = dashboardFragment;
+            }
+            else {
+                fragment = navItem.getFragmentClass().newInstance();
+            }
             Bundle args = navItem.getFragmentArgs();
             if (args != null) {
                 fragment.setArguments(args);
