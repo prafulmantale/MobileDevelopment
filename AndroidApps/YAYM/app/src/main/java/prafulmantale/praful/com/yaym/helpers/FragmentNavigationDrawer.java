@@ -81,12 +81,18 @@ public class FragmentNavigationDrawer extends DrawerLayout {
         }
 
         // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+//                System.out.println("Frgments:" + fragmentManager.getBackStackEntryCount() + "  " + fragmentManager.getFragments());
+            }
+        });
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.slide_in_from_right, R.anim.slide_out_from_left,
                 R.anim.slide_in_from_right, R.anim.slide_out_from_left);
         transaction.replace(drawerContainerRes, fragment, navItem.getTitle());
-        //transaction.addToBackStack(null);
+        transaction.addToBackStack(null);
         transaction.commit();
 
         // Highlight the selected item, update the title, and close the drawer

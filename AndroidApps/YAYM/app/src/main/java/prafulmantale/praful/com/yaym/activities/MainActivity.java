@@ -20,6 +20,8 @@ import prafulmantale.praful.com.yaym.application.YMApplication;
 import prafulmantale.praful.com.yaym.fragments.CcyPairSettingsFragment;
 import prafulmantale.praful.com.yaym.fragments.DashboardFragment;
 import prafulmantale.praful.com.yaym.fragments.FrequencySettingsFragment;
+import prafulmantale.praful.com.yaym.fragments.RiskPoliciesFragment;
+import prafulmantale.praful.com.yaym.fragments.RoutingRulesFragment;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.helpers.FragmentNavigationDrawer;
 import prafulmantale.praful.com.yaym.interfaces.DashboardActionsListener;
@@ -64,9 +66,9 @@ public class MainActivity extends FragmentActivity implements DashboardActionsLi
         drawerLayout.addNavigationItem("Dashboard", "Dashboard", DashboardFragment.class);
         drawerLayout.addNavigationItem("Risk Warehouse", "Risk Warehouse", null);
         drawerLayout.addNavigationItem("        Currency Pairs", "Currency Pairs", CcyPairSettingsFragment.class);
-        drawerLayout.addNavigationItem("        Risk Policies", "Risk Policies", CcyPairSettingsFragment.class);
+        drawerLayout.addNavigationItem("        Risk Policies", "Risk Policies", RiskPoliciesFragment.class);
         drawerLayout.addNavigationItem("Customers", "Customers", null);
-        drawerLayout.addNavigationItem("        Routing Rules", "Routing Rules", CcyPairSettingsFragment.class);
+        drawerLayout.addNavigationItem("        Routing Rules", "Routing Rules", RoutingRulesFragment.class);
     }
 
 
@@ -92,13 +94,13 @@ public class MainActivity extends FragmentActivity implements DashboardActionsLi
     @Override
     public void onBackPressed() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
-//        if(count == 0){
-//            showLogoutAlert();
-//        }
-//        else {
-            super.onBackPressed();
+        if(count == 1){
+            showLogoutAlert();
+        }
+        else {
+            getSupportFragmentManager().popBackStack();
             overridePendingTransition(R.anim.stay, R.anim.slide_out_from_right);
-//        }
+        }
     }
 
     private void showLogoutAlert(){
