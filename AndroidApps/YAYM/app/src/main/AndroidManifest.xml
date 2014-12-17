@@ -68,7 +68,7 @@
         </activity>
         <activity
             android:name=".activities.YieldDetailsActivity"
-            android:label="@string/title_activity_yield_details"
+            android:label=""
             android:parentActivityName=".activities.MainActivity">
         </activity>
     </application>
