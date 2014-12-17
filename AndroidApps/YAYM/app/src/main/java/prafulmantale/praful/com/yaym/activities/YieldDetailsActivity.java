@@ -1,9 +1,13 @@
 package prafulmantale.praful.com.yaym.activities;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import prafulmantale.praful.com.yaym.R;
 
@@ -13,6 +17,42 @@ public class YieldDetailsActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yield_details);
+
+        initializeActionBar();
+    }
+
+    private void initializeActionBar(){
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_style));
+
+        View view = getLayoutInflater().inflate(R.layout.action_bar_title, null);
+
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+
+        actionBar.setDisplayShowCustomEnabled(true);
+//        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setCustomView(view, params);
+        actionBar.setDisplayShowHomeEnabled(true);
+
+
+        //Hack to hide the home icon -- Otherwise the action bar was getting displayed on top of Tabs
+        View homeIcon = findViewById(android.R.id.home);
+        ((View) homeIcon.getParent()).setVisibility(View.GONE);
+
+        ImageView ivBackButton = (ImageView)findViewById(R.id.ivBackbutton);
+        ivBackButton.setVisibility(View.VISIBLE);
+
+        ivBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 
 

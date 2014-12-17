@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -220,7 +219,7 @@ public class YieldDetailsFragment extends Fragment {
             if(response != null && response.isEmpty() == false){
                 if(response.equals(AppConstants.STATUS_FAILURE)){
 
-                    Toast.makeText(getActivity(), R.string.error_cannot_connect_to_server, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), R.string.error_cannot_connect_to_server, Toast.LENGTH_LONG).show();
 
                     return;
                 }
