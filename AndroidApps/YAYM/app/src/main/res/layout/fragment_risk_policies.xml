@@ -1,10 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:id="@+id/spinner"
+        android:entries="@array/nav_drawer_menu_items"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="RISK POLICIES"
-        android:gravity="center"/>
+        android:layout_gravity="center"
+        android:divider="@drawable/yield_details_header_divider"
+        android:dividerPadding="5dp"
+        >
+
+        <ListView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/listView2"
+            android:layout_weight="0.25"
+            android:entries="@array/nav_drawer_menu_items"/>
+
+        <GridView
+            android:layout_width="292dp"
+            android:layout_height="match_parent"
+            android:id="@+id/gridView"
+            android:layout_gravity="right"
+            android:numColumns="2"
+            />
+    </LinearLayout>
+
 </LinearLayout>
