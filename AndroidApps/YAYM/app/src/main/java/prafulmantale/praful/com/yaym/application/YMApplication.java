@@ -14,6 +14,7 @@ import java.net.CookieManager;
 import java.util.List;
 
 import prafulmantale.praful.com.yaym.R;
+import prafulmantale.praful.com.yaym.databases.YMDatabase;
 import prafulmantale.praful.com.yaym.helpers.AppConstants;
 import prafulmantale.praful.com.yaym.helpers.Utils;
 import prafulmantale.praful.com.yaym.models.LoginRequest;
@@ -56,6 +57,8 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
 //    private static final String RULES_URL = "rw/riskwarehouse/rule";
 //    private static final String SNAPSHOt_URL = "rw/riskwarehouse/snapshot";
 
+    private YMDatabase ymDatabase;
+
     public static List<Cookie> appCookies;
 
     private Typeface typeface;
@@ -71,6 +74,8 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
 
         typeface = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf");
         appBaseUrl = "https://demo.ym.integral.net/fxi/";
+
+       ymDatabase = new YMDatabase(this);
     }
 
     public RestClient getClient(){
@@ -157,5 +162,9 @@ public class YMApplication extends Application implements SharedPreferences.OnSh
 
     public Typeface getTypeface() {
         return typeface;
+    }
+
+    public YMDatabase getAppDatabase(){
+        return ymDatabase;
     }
 }

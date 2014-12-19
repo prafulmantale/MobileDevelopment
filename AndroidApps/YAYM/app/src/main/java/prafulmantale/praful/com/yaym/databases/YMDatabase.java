@@ -18,8 +18,6 @@ public class YMDatabase extends SQLiteOpenHelper {
 
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "ym.db";
-    private static final String TABLE_HIST_RATE = "hist_rate";
-    private static final String TABLE_HIST_YIELD = "hist_yield";
 
 
     //CCY_REF_DATA
@@ -28,7 +26,41 @@ public class YMDatabase extends SQLiteOpenHelper {
     private static final String CRD_COLUMN_SPOT_PREC = "sp";
     private static final String CRD_COLUMN_SPOT_POINTS_PREC = "spp";
     private static final String CRD_COLUMN_PIPS_FACTOR = "pf";
+
+    private final String []CRD_COLUMNS = new String[]{CRD_COLUMN_INSTRUMENT, CRD_COLUMN_SPOT_PREC, CRD_COLUMN_SPOT_POINTS_PREC, CRD_COLUMN_PIPS_FACTOR};
     private static final String CRD_SELECT_ALL_QUERY = "SELECT * FROM " + TABLE_CCY_PAIR_REF_DATA;
+
+    //TABLE_HIST_YIELD
+    private static final String TABLE_HIST_YIELD = "hist_yield";
+    private static final String HY_COLUMN_DONE_PNL = "dpnl";
+    private static final String HY_COLUMN_CURRENT_PNL = "cpnl";
+    private static final String HY_COLUMN_VOLUME = "vol";
+    private static final String HY_COLUMN_CURRENT_YILED = "cyld";
+    private static final String HY_COLUMN_TIMESTAMP = "ts";
+    private static final String HY_COLUMN_DISPLAY_TIMESTAMP = "dts";
+
+    private final String [] HY_COLUMNS = new String [] {
+            HY_COLUMN_DONE_PNL, HY_COLUMN_CURRENT_PNL, HY_COLUMN_VOLUME, HY_COLUMN_CURRENT_YILED, HY_COLUMN_TIMESTAMP, HY_COLUMN_DISPLAY_TIMESTAMP
+    };
+
+    private static final String HY_SELECT_ALL_QUERY = "SELECT * FROM " + TABLE_HIST_YIELD;
+
+    //TABLE_HIST_RATE
+    private static final String TABLE_HIST_RATE = "hist_rate";
+    private static final String HR_COLUMN_OPEN = "or";
+    private static final String HR_COLUMN_CLOSE = "oc";
+    private static final String HR_COLUMN_HIGH = "oh";
+    private static final String HR_COLUMN_LOW = "ol";
+    private static final String HR_COLUMN_TIMESTAMP = "ts";
+    private static final String HR_COLUMN_DISPLAY_TIMESTAMP = "dts";
+
+    private final String [] HR_COLUMNS = new String [] {
+            HR_COLUMN_OPEN, HR_COLUMN_CLOSE, HR_COLUMN_HIGH, HR_COLUMN_LOW,
+            HR_COLUMN_TIMESTAMP, HR_COLUMN_DISPLAY_TIMESTAMP
+    };
+
+    private static final String HR_SELECT_ALL_QUERY = "SELECT * FROM " + TABLE_HIST_RATE;
+
 
     public YMDatabase(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -47,7 +79,7 @@ public class YMDatabase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         System.out.println("DB onUpdate...");
-        if(newVersion == 1){
+        if (newVersion == 1) {
 
             //Drop tables
             dropCCyPairRefDataTable(db);
@@ -57,42 +89,56 @@ public class YMDatabase extends SQLiteOpenHelper {
         }
     }
 
-    private void createCCyPairRefDataTable(SQLiteDatabase db){
+    private void createCCyPairRefDataTable(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_CCY_PAIR_REF_DATA + " ("
-                + CRD_COLUMN_INSTRUMENT + " STRING PRIMARY KEY, "
-                + CRD_COLUMN_SPOT_PREC + " INTEGER, "
-                + CRD_COLUMN_SPOT_POINTS_PREC + " INTEGER, "
-                + CRD_COLUMN_PIPS_FACTOR + " INTEGER"
+                + CRD_COLUMNS[0] + " STRING PRIMARY KEY, "
+                + CRD_COLUMNS[1] + " INTEGER, "
+                + CRD_COLUMNS[2] + " INTEGER, "
+                + CRD_COLUMNS[3] + " INTEGER"
                 + ")";
 
         db.execSQL(createTable);
     }
 
-    private void dropCCyPairRefDataTable(SQLiteDatabase db){
+    private void createHistYieldTable(SQLiteDatabase db) {
+
+    }
+
+    private void createHistRateTable(SQLiteDatabase db) {
+
+    }
+
+    private void dropCCyPairRefDataTable(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CCY_PAIR_REF_DATA);
     }
 
-    public void insertCcyPairRefData(List<ReferenceData> referenceDataList){
+    private void dropHistYieldTable(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HIST_YIELD);
+    }
 
-        for(ReferenceData referenceData : referenceDataList){
+    private void dropHistRateTable(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HIST_RATE);
+    }
+
+    public void insertCcyPairRefData(List<ReferenceData> referenceDataList) {
+
+        for (ReferenceData referenceData : referenceDataList) {
             insertCcyPairRefData(referenceData);
         }
 
     }
-    public void insertCcyPairRefData(ReferenceData referenceData){
+
+    public void insertCcyPairRefData(ReferenceData referenceData) {
 
         SQLiteDatabase db = getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(CRD_COLUMN_INSTRUMENT, referenceData.getInstrument());
-        values.put(CRD_COLUMN_SPOT_PREC, referenceData.getSpotPrecision());
-        values.put(CRD_COLUMN_SPOT_POINTS_PREC, referenceData.getSpotPointsPrecision());
-        values.put(CRD_COLUMN_PIPS_FACTOR, (int)referenceData.getPipsFactor());
 
-        db.insert(TABLE_CCY_PAIR_REF_DATA, null, values);
+        db.insert(TABLE_CCY_PAIR_REF_DATA, null, getRefDataContentValues(referenceData));
+
+        db.close();
     }
 
-    public List<ReferenceData> getAllReferenceData(){
+    public List<ReferenceData> getAllReferenceData() {
 
         List<ReferenceData> list = new ArrayList<ReferenceData>();
 
@@ -100,20 +146,93 @@ public class YMDatabase extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(CRD_SELECT_ALL_QUERY, null);
 
-        if(cursor.moveToFirst()){
-            do{
-                ReferenceData referenceData = new ReferenceData();
-
-                referenceData.setInstrument(cursor.getString(0));
-                referenceData.setSpotPrecision(cursor.getInt(1));
-                referenceData.setSpotPointsPrecision(cursor.getInt(2));
-                referenceData.setPipsFactor(cursor.getInt(3));
-                list.add(referenceData);
-                System.out.println("Read from DB: " + referenceData);
-
-            }while (cursor.moveToNext());
+        if (cursor.moveToFirst()) {
+            do {
+                ReferenceData refData = getRefData(cursor);
+                if (refData != null) {
+                    list.add(refData);
+                    System.out.println("Read from DB: " + refData);
+                }
+            } while (cursor.moveToNext());
         }
 
+        db.close();
+
         return list;
+    }
+
+    public ReferenceData getReferenceData(String ccyPair) {
+
+        ReferenceData referenceData = null;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TABLE_CCY_PAIR_REF_DATA,
+                CRD_COLUMNS,
+                CRD_COLUMN_INSTRUMENT + "= ?", new String[]{ccyPair},
+                null, null, null, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            referenceData = getRefData(cursor);
+        }
+
+        db.close();
+        return referenceData;
+    }
+
+    public int updateReferenceData(ReferenceData refData) {
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues contentValues = getRefDataContentValues(refData);
+
+        int result = db.update(TABLE_CCY_PAIR_REF_DATA,
+                contentValues,
+                CRD_COLUMN_INSTRUMENT + " = ?",
+                new String[]{refData.getInstrument()}
+                );
+
+        db.close();
+
+        return result;
+    }
+
+    public void deleteReferenceData(ReferenceData referenceData){
+
+        deleteReferenceData(referenceData.getInstrument());
+    }
+
+    public void deleteReferenceData(String ccyPair){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.delete(TABLE_CCY_PAIR_REF_DATA, CRD_COLUMN_INSTRUMENT + " = ?", new String[]{ccyPair});
+
+        db.close();
+    }
+
+    private ReferenceData getRefData(Cursor cursor) {
+        try {
+            ReferenceData referenceData = new ReferenceData();
+
+            referenceData.setInstrument(cursor.getString(0));
+            referenceData.setSpotPrecision(cursor.getInt(1));
+            referenceData.setSpotPointsPrecision(cursor.getInt(2));
+            referenceData.setPipsFactor(cursor.getInt(3));
+
+            return referenceData;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    private ContentValues getRefDataContentValues(ReferenceData referenceData) {
+
+        ContentValues values = new ContentValues();
+        values.put(CRD_COLUMNS[0], referenceData.getInstrument());
+        values.put(CRD_COLUMNS[1], referenceData.getSpotPrecision());
+        values.put(CRD_COLUMNS[2], referenceData.getSpotPointsPrecision());
+        values.put(CRD_COLUMNS[3], (int) referenceData.getPipsFactor());
+
+        return values;
     }
 }
