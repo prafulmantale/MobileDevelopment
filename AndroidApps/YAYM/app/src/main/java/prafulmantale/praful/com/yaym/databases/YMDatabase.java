@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import prafulmantale.praful.com.yaym.models.HistoricYieldData;
+import prafulmantale.praful.com.yaym.models.OHLCData;
 import prafulmantale.praful.com.yaym.models.ReferenceData;
 
 /**
@@ -40,7 +42,8 @@ public class YMDatabase extends SQLiteOpenHelper {
     private static final String HY_COLUMN_DISPLAY_TIMESTAMP = "dts";
 
     private final String [] HY_COLUMNS = new String [] {
-            HY_COLUMN_DONE_PNL, HY_COLUMN_CURRENT_PNL, HY_COLUMN_VOLUME, HY_COLUMN_CURRENT_YILED, HY_COLUMN_TIMESTAMP, HY_COLUMN_DISPLAY_TIMESTAMP
+            CRD_COLUMN_INSTRUMENT, HY_COLUMN_DONE_PNL, HY_COLUMN_CURRENT_PNL,
+            HY_COLUMN_VOLUME, HY_COLUMN_CURRENT_YILED, HY_COLUMN_TIMESTAMP, HY_COLUMN_DISPLAY_TIMESTAMP
     };
 
     private static final String HY_SELECT_ALL_QUERY = "SELECT * FROM " + TABLE_HIST_YIELD;
@@ -55,7 +58,7 @@ public class YMDatabase extends SQLiteOpenHelper {
     private static final String HR_COLUMN_DISPLAY_TIMESTAMP = "dts";
 
     private final String [] HR_COLUMNS = new String [] {
-            HR_COLUMN_OPEN, HR_COLUMN_CLOSE, HR_COLUMN_HIGH, HR_COLUMN_LOW,
+            CRD_COLUMN_INSTRUMENT, HR_COLUMN_OPEN, HR_COLUMN_CLOSE, HR_COLUMN_HIGH, HR_COLUMN_LOW,
             HR_COLUMN_TIMESTAMP, HR_COLUMN_DISPLAY_TIMESTAMP
     };
 
@@ -225,6 +228,51 @@ public class YMDatabase extends SQLiteOpenHelper {
         }
     }
 
+    private HistoricYieldData getYieldData(Cursor cursor) {
+        try {
+            HistoricYieldData data = new HistoricYieldData();
+
+            int counter = 0;
+            //Set ccypair
+            counter++;
+
+            data.setDonePnL(cursor.getDouble(counter++));
+            data.setCurrentPnL(cursor.getDouble(counter++));
+            data.setDoneVolume(cursor.getDouble(counter++));
+            data.setCurrentYield(cursor.getDouble(counter++));
+            data.setTimestamp(cursor.getLong(counter++));
+            data.setDisplayTimestamp(cursor.getString(counter++));
+
+            return data;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    private OHLCData getOHLCData(Cursor cursor){
+
+        try{
+
+            OHLCData data = new OHLCData();
+
+            int counter = 0;
+            //set ccy pair
+            counter ++;
+
+            data.setOpen(cursor.getDouble(counter++));
+            data.setClose(cursor.getDouble(counter++));
+            data.setHigh(cursor.getDouble(counter++));
+            data.setLow(cursor.getDouble(counter++));
+            data.setTimestamp(cursor.getLong(counter++));
+            data.setDisplayTimestamp(cursor.getString(counter++));
+
+            return data;
+        }
+        catch (Exception ex){
+            return null;
+        }
+    }
+
     private ContentValues getRefDataContentValues(ReferenceData referenceData) {
 
         ContentValues values = new ContentValues();
@@ -232,6 +280,35 @@ public class YMDatabase extends SQLiteOpenHelper {
         values.put(CRD_COLUMNS[1], referenceData.getSpotPrecision());
         values.put(CRD_COLUMNS[2], referenceData.getSpotPointsPrecision());
         values.put(CRD_COLUMNS[3], (int) referenceData.getPipsFactor());
+
+        return values;
+    }
+
+    private ContentValues getYieldContentValues(HistoricYieldData data){
+        ContentValues values = new ContentValues();
+
+        values.put(CRD_COLUMN_INSTRUMENT, "");
+        values.put(HY_COLUMN_DONE_PNL, data.getDonePnL());
+        values.put(HY_COLUMN_CURRENT_PNL, data.getCurrentPnL());
+        values.put(HY_COLUMN_VOLUME, data.getDoneVolume());
+        values.put(HY_COLUMN_CURRENT_YILED, data.getCurrentYield());
+        values.put(HY_COLUMN_TIMESTAMP, data.getTimestamp());
+        values.put(HY_COLUMN_DISPLAY_TIMESTAMP, data.getDisplayTimestamp());
+
+        return values;
+    }
+
+    private ContentValues getRateContentValues(OHLCData data){
+
+        ContentValues values = new ContentValues();
+
+        values.put(CRD_COLUMN_INSTRUMENT, "");
+        values.put(HR_COLUMN_OPEN, data.getOpen());
+        values.put(HR_COLUMN_CLOSE, data.getClose());
+        values.put(HR_COLUMN_HIGH, data.getHigh());
+        values.put(HR_COLUMN_LOW, data.getLow());
+        values.put(HR_COLUMN_TIMESTAMP, data.getTimestamp());
+        values.put(HR_COLUMN_DISPLAY_TIMESTAMP, data.getDisplayTimestamp());
 
         return values;
     }
