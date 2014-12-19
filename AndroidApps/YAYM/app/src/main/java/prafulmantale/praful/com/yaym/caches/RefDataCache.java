@@ -61,4 +61,9 @@ public class RefDataCache {
         Collections.sort(list);
         return list;
     }
+
+    public List<ReferenceData> getAllReferenceData(){
+
+        return new ArrayList<ReferenceData>(cache.values());
+    }
 }

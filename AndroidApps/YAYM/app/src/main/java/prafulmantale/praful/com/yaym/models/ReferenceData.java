@@ -143,4 +143,16 @@ public class ReferenceData {
 
         return map;
     }
+
+    @Override
+    public String toString() {
+        return "ReferenceData{" +
+                "instrument='" + instrument + '\'' +
+                ", spotPrecision=" + spotPrecision +
+                ", spotPointsPrecision=" + spotPointsPrecision +
+                ", forwardPointsPrecision=" + forwardPointsPrecision +
+                ", pipsFactor=" + pipsFactor +
+                ", spotValueDate='" + spotValueDate + '\'' +
+                '}';
+    }
 }
