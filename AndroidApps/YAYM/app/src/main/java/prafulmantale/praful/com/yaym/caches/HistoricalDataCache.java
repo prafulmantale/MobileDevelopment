@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
+import prafulmantale.praful.com.yaym.activities.MainActivity;
 import prafulmantale.praful.com.yaym.models.HistoricYieldData;
 
 /**
@@ -38,7 +39,7 @@ public class HistoricalDataCache {
         }
         try {
 
-            cache = HistoricYieldData.fromJSON(jsonArray);
+            cache = HistoricYieldData.fromJSON(jsonArray, MainActivity.selectedCurrencyPair);
             volumes = new double[cache.size()];
             yields = new double[cache.size()];
             timeStamps = new String[cache.size()];

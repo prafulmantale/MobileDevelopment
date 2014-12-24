@@ -233,9 +233,7 @@ public class YMDatabase extends SQLiteOpenHelper {
             HistoricYieldData data = new HistoricYieldData();
 
             int counter = 0;
-            //Set ccypair
-            counter++;
-
+            data.setInstrument(cursor.getString(counter));
             data.setDonePnL(cursor.getDouble(counter++));
             data.setCurrentPnL(cursor.getDouble(counter++));
             data.setDoneVolume(cursor.getDouble(counter++));
@@ -256,9 +254,8 @@ public class YMDatabase extends SQLiteOpenHelper {
             OHLCData data = new OHLCData();
 
             int counter = 0;
-            //set ccy pair
-            counter ++;
 
+            data.setInstrument(cursor.getString(counter++));
             data.setOpen(cursor.getDouble(counter++));
             data.setClose(cursor.getDouble(counter++));
             data.setHigh(cursor.getDouble(counter++));
@@ -287,7 +284,7 @@ public class YMDatabase extends SQLiteOpenHelper {
     private ContentValues getYieldContentValues(HistoricYieldData data){
         ContentValues values = new ContentValues();
 
-        values.put(CRD_COLUMN_INSTRUMENT, "");
+        values.put(CRD_COLUMN_INSTRUMENT, data.getInstrument());
         values.put(HY_COLUMN_DONE_PNL, data.getDonePnL());
         values.put(HY_COLUMN_CURRENT_PNL, data.getCurrentPnL());
         values.put(HY_COLUMN_VOLUME, data.getDoneVolume());
@@ -302,7 +299,7 @@ public class YMDatabase extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
 
-        values.put(CRD_COLUMN_INSTRUMENT, "");
+        values.put(CRD_COLUMN_INSTRUMENT, data.getInstrument());
         values.put(HR_COLUMN_OPEN, data.getOpen());
         values.put(HR_COLUMN_CLOSE, data.getClose());
         values.put(HR_COLUMN_HIGH, data.getHigh());

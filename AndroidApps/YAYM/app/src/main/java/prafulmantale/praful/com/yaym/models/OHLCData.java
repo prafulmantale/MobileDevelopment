@@ -19,6 +19,7 @@ public class OHLCData {
     private static final String TAG = OHLCData.class.getSimpleName();
 
     //"1416812400000,1.23946,1.23978,1.24057,1.23899,3343699968"
+    private String instrument;
     private long timestamp;
     private double open;
     private double close;
@@ -29,7 +30,7 @@ public class OHLCData {
     public OHLCData() {
     }
 
-    public static OHLCData fromJSON(String jsonArray){
+    public static OHLCData fromJSON(String jsonArray, String ccyPair){
 
         if(jsonArray == null){
             return null;
@@ -45,6 +46,7 @@ public class OHLCData {
         OHLCData data = new OHLCData();
 
         try {
+            data.instrument = ccyPair;
             data.timestamp = Long.parseLong(arr[0]);
             data.open = Double.parseDouble(arr[1]);
             data.close = Double.parseDouble(arr[2]);
@@ -64,7 +66,7 @@ public class OHLCData {
         return data;
     }
 
-    public static List<OHLCData> fromJSONList(JSONArray jsonArray){
+    public static List<OHLCData> fromJSONList(JSONArray jsonArray, String ccyPair){
         List<OHLCData> list = new ArrayList<OHLCData>();
 
         if(jsonArray == null){
@@ -89,7 +91,7 @@ public class OHLCData {
                 continue;
             }
 
-            OHLCData data = fromJSON(array);
+            OHLCData data = fromJSON(array, ccyPair);
 
             if(data == null){
                 continue;
@@ -99,6 +101,14 @@ public class OHLCData {
         }
 
         return list;
+    }
+
+    public String getInstrument() {
+        return instrument;
+    }
+
+    public void setInstrument(String instrument) {
+        this.instrument = instrument;
     }
 
     public long getTimestamp() {

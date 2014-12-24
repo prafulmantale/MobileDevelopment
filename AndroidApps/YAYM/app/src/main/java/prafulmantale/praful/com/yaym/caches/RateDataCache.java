@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import prafulmantale.praful.com.yaym.activities.MainActivity;
 import prafulmantale.praful.com.yaym.models.OHLCData;
 
 /**
@@ -38,7 +39,7 @@ public class RateDataCache {
         try {
 
             JSONArray jsonArray = jsonObject.getJSONArray("records");
-            cache = OHLCData.fromJSONList(jsonArray);
+            cache = OHLCData.fromJSONList(jsonArray, MainActivity.selectedCurrencyPair);
 
             rateData = new OHLCData[cache.size()];
 
