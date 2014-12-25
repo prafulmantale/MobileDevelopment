@@ -1,26 +1,18 @@
-Required: Build a Google Image Search app which allows a user to select search filters and paginate results infinitely 
+Application: Yiled Managemente dashboard 
 
-Required: 
-		User can enter a search query that will display a grid of image results from the Google Image API.
-		User can click on "settings" which allows selection of advanced search options to filter results
-		User can configure advanced search filters such as:
-			Size (small, medium, large, extra-large)
-			Color filter (black, blue, brown, gray, green, etc...)
-			Type (faces, photo, clip art, line art)
-			Site (espn.com)
-		Subsequent searches will have any filters applied to the search results
-		User can tap on any image in results to see the image full-screen
-		User can scroll down “infinitely” to continue loading more image results (up to 8 pages)
-
-Optional:
-
-	Use the ActionBar SearchView
-	Check if internet is available
-		
+Stories: 
+		User should be able to login to Yield manager server.
+		User should be able to see the Yield dashboard
+		User should be able to view Historical Rate, Yield and Volume charts
+		User should be able to configure the update frequency when connected to provider
+		User should be able to view the about dialog
+		User should be able to configure Curency pair and other settings
+	 
 Notes:
-	Total time spent 10-12 Hrs.
-
+		Created custom views to show the position progress bars and proift/loss guage views.
+		Used SQLite data base to store the historical data and queried only the incremental data
+		
 
 Walkthrough of all user stories:
 
-![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/AndroidApps/ImageFinder/ImageFinder.gif)
+![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/AndroidApps/YAYM/YieldManager.gif)
