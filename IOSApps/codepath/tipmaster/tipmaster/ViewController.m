@@ -15,6 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalAmountLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
 - (IBAction)onTap:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *tipPercentageLabel;
+@property (weak, nonatomic) IBOutlet UISlider *tipPercentageSlider;
+- (IBAction)onTipPercentageChanged:(id)sender;
 
 - (void)updateValues;
 - (IBAction)onBillChanged:(id)sender;
@@ -40,12 +43,32 @@
     [self updateValues];
 }
 
+- (IBAction)onTipPercentageChanged:(id)sender {
+    
+    UISlider *slider = sender;
+    
+    slider.value = (int)slider.value;
+    
+    [self updateValues];
+    
+}
+
 - (void)updateValues{
     float billAmount = [self.tipAmountField.text floatValue];
     
     NSArray *tipValues = @[@(0.18),@(0.2),@(0.22)];
     
     float tipAmount = billAmount * [tipValues[self.segmentControl.selectedSegmentIndex] floatValue ];
+    
+    float newTipAmount = billAmount * self.tipPercentageSlider.value;
+    tipAmount = newTipAmount/100;
+    
+    NSString *percLabel = [@"(" stringByAppendingString: [NSString stringWithFormat:@"%.0f", self.tipPercentageSlider.value]];
+    
+    percLabel = [percLabel stringByAppendingString:@"%"];
+    percLabel = [percLabel stringByAppendingString:@")"];
+    
+    self.tipPercentageLabel.text = percLabel;
     
     float totalAmount = billAmount + tipAmount;
     
