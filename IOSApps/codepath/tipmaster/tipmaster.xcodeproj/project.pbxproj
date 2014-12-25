@@ -22,6 +22,9 @@
 		51A442FE1A4B67E000CE458D /* tipmasterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A442FD1A4B67E000CE458D /* tipmasterTests.m */; };
 		51A4430A1A4B6A3B00CE458D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A443081A4B6A3B00CE458D /* SettingsViewController.m */; };
 		51A4430B1A4B6A3B00CE458D /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51A443091A4B6A3B00CE458D /* SettingsViewController.xib */; };
+		51B981531A4CC713002C3F74 /* heardred.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B981521A4CC713002C3F74 /* heardred.png */; };
+		51B981551A4CC854002C3F74 /* brokenheart.gif in Resources */ = {isa = PBXBuildFile; fileRef = 51B981541A4CC854002C3F74 /* brokenheart.gif */; };
+		51B981571A4CC88E002C3F74 /* brokenheart.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B981561A4CC88E002C3F74 /* brokenheart.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,9 @@
 		51A443071A4B6A3B00CE458D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		51A443081A4B6A3B00CE458D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		51A443091A4B6A3B00CE458D /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		51B981521A4CC713002C3F74 /* heardred.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heardred.png; sourceTree = "<group>"; };
+		51B981541A4CC854002C3F74 /* brokenheart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = brokenheart.gif; sourceTree = "<group>"; };
+		51B981561A4CC88E002C3F74 /* brokenheart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brokenheart.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +110,9 @@
 				51A442E91A4B67E000CE458D /* ViewController.m */,
 				51A442EB1A4B67E000CE458D /* Main.storyboard */,
 				51A442EE1A4B67E000CE458D /* Images.xcassets */,
+				51B981561A4CC88E002C3F74 /* brokenheart.png */,
+				51B981541A4CC854002C3F74 /* brokenheart.gif */,
+				51B981521A4CC713002C3F74 /* heardred.png */,
 				51634E411A4C9DFB000B5CDF /* bg_gr.jpg */,
 				51634E3F1A4C99B3000B5CDF /* bg_grey.jpeg */,
 				51634E3D1A4C98AD000B5CDF /* og_bg.jpg */,
@@ -227,11 +236,14 @@
 			files = (
 				51634E3A1A4BF48C000B5CDF /* bg1.jpg in Resources */,
 				51634E421A4C9DFB000B5CDF /* bg_gr.jpg in Resources */,
+				51B981531A4CC713002C3F74 /* heardred.png in Resources */,
+				51B981571A4CC88E002C3F74 /* brokenheart.png in Resources */,
 				51634E381A4BF409000B5CDF /* bg.png in Resources */,
 				51634E3C1A4C97A2000B5CDF /* og_title.jpeg in Resources */,
 				51A442ED1A4B67E000CE458D /* Main.storyboard in Resources */,
 				51A442F21A4B67E000CE458D /* LaunchScreen.xib in Resources */,
 				51634E401A4C99B3000B5CDF /* bg_grey.jpeg in Resources */,
+				51B981551A4CC854002C3F74 /* brokenheart.gif in Resources */,
 				51A442EF1A4B67E000CE458D /* Images.xcassets in Resources */,
 				51634E3E1A4C98AD000B5CDF /* og_bg.jpg in Resources */,
 				51A4430B1A4B6A3B00CE458D /* SettingsViewController.xib in Resources */,

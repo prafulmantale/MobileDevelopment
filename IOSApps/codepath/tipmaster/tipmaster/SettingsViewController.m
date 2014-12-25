@@ -9,6 +9,9 @@
 #import "SettingsViewController.h"
 
 @interface SettingsViewController ()
+@property (weak, nonatomic) IBOutlet UIView *excellentView;
+@property (weak, nonatomic) IBOutlet UIView *satsfactoryView;
+@property (weak, nonatomic) IBOutlet UIView *wtfView;
 
 @end
 
@@ -18,6 +21,12 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
+    
+//    self.excellentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
+//    
+//    self.satsfactoryView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
+//    
+//    self.wtfView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
 }
 
 - (void)didReceiveMemoryWarning {
