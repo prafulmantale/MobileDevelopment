@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51634E381A4BF409000B5CDF /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 51634E371A4BF409000B5CDF /* bg.png */; };
+		51634E3A1A4BF48C000B5CDF /* bg1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 51634E391A4BF48C000B5CDF /* bg1.jpg */; };
+		51634E3C1A4C97A2000B5CDF /* og_title.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 51634E3B1A4C97A2000B5CDF /* og_title.jpeg */; };
+		51634E3E1A4C98AD000B5CDF /* og_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 51634E3D1A4C98AD000B5CDF /* og_bg.jpg */; };
+		51634E401A4C99B3000B5CDF /* bg_grey.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 51634E3F1A4C99B3000B5CDF /* bg_grey.jpeg */; };
+		51634E421A4C9DFB000B5CDF /* bg_gr.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 51634E411A4C9DFB000B5CDF /* bg_gr.jpg */; };
 		51A442E41A4B67E000CE458D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A442E31A4B67E000CE458D /* main.m */; };
 		51A442E71A4B67E000CE458D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A442E61A4B67E000CE458D /* AppDelegate.m */; };
 		51A442EA1A4B67E000CE458D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A442E91A4B67E000CE458D /* ViewController.m */; };
@@ -29,6 +35,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		51634E371A4BF409000B5CDF /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		51634E391A4BF48C000B5CDF /* bg1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg1.jpg; sourceTree = "<group>"; };
+		51634E3B1A4C97A2000B5CDF /* og_title.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = og_title.jpeg; sourceTree = "<group>"; };
+		51634E3D1A4C98AD000B5CDF /* og_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = og_bg.jpg; sourceTree = "<group>"; };
+		51634E3F1A4C99B3000B5CDF /* bg_grey.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_grey.jpeg; sourceTree = "<group>"; };
+		51634E411A4C9DFB000B5CDF /* bg_gr.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_gr.jpg; sourceTree = "<group>"; };
 		51A442DE1A4B67E000CE458D /* tipmaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tipmaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51A442E21A4B67E000CE458D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51A442E31A4B67E000CE458D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -92,6 +104,12 @@
 				51A442E91A4B67E000CE458D /* ViewController.m */,
 				51A442EB1A4B67E000CE458D /* Main.storyboard */,
 				51A442EE1A4B67E000CE458D /* Images.xcassets */,
+				51634E411A4C9DFB000B5CDF /* bg_gr.jpg */,
+				51634E3F1A4C99B3000B5CDF /* bg_grey.jpeg */,
+				51634E3D1A4C98AD000B5CDF /* og_bg.jpg */,
+				51634E3B1A4C97A2000B5CDF /* og_title.jpeg */,
+				51634E391A4BF48C000B5CDF /* bg1.jpg */,
+				51634E371A4BF409000B5CDF /* bg.png */,
 				51A442F01A4B67E000CE458D /* LaunchScreen.xib */,
 				51A442E11A4B67E000CE458D /* Supporting Files */,
 				51A443071A4B6A3B00CE458D /* SettingsViewController.h */,
@@ -207,9 +225,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51634E3A1A4BF48C000B5CDF /* bg1.jpg in Resources */,
+				51634E421A4C9DFB000B5CDF /* bg_gr.jpg in Resources */,
+				51634E381A4BF409000B5CDF /* bg.png in Resources */,
+				51634E3C1A4C97A2000B5CDF /* og_title.jpeg in Resources */,
 				51A442ED1A4B67E000CE458D /* Main.storyboard in Resources */,
 				51A442F21A4B67E000CE458D /* LaunchScreen.xib in Resources */,
+				51634E401A4C99B3000B5CDF /* bg_grey.jpeg in Resources */,
 				51A442EF1A4B67E000CE458D /* Images.xcassets in Resources */,
+				51634E3E1A4C98AD000B5CDF /* og_bg.jpg in Resources */,
 				51A4430B1A4B6A3B00CE458D /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,6 +448,7 @@
 				51A443031A4B67E000CE458D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		51A443041A4B67E000CE458D /* Build configuration list for PBXNativeTarget "tipmasterTests" */ = {
 			isa = XCConfigurationList;
@@ -432,6 +457,7 @@
 				51A443061A4B67E000CE458D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
