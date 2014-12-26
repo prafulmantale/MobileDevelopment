@@ -29,6 +29,14 @@
 - (void)updateSplitValues;
 @property (weak, nonatomic) IBOutlet UIView *splitView;
 @property (weak, nonatomic) IBOutlet UIView *tipView;
+@property (weak, nonatomic) IBOutlet UILabel *yourShareLabel;
+
+@property float totalAmount;
+
+@property (weak, nonatomic) IBOutlet UILabel *spiltCountLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *yourShareTextLabel;
+
 
 @end
 
@@ -36,6 +44,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+//    self.navigationController.navigationBar.translucent = NO;
+
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"title.jpg"]];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
     
@@ -46,8 +62,8 @@
     self.splitView.layer.shadowRadius = 5;
     self.splitView.layer.shadowOpacity = 0.3;
     self.splitView.layer.shadowOffset = CGSizeMake(-8, 10);
-//    self.splitView.layer.borderColor = [UIColor whiteColor].CGColor;
-//    self.splitView.layer.borderWidth = 0.0f;
+    //    self.splitView.layer.borderColor = [UIColor whiteColor].CGColor;
+    //    self.splitView.layer.borderWidth = 0.0f;
     
     //self.tipView.layer.cornerRadius = 8;
     self.tipView.clipsToBounds = true;
@@ -55,9 +71,9 @@
     self.tipView.layer.shadowRadius = 5;
     self.tipView.layer.shadowOpacity = 0.3;
     self.tipView.layer.shadowOffset = CGSizeMake(-8, 10);
-//    self.tipView.layer.borderWidth = 0.0f;
-//    self.tipView.layer.borderColor = [UIColor whiteColor].CGColor;
-
+    //    self.tipView.layer.borderWidth = 0.0f;
+    //    self.tipView.layer.borderColor = [UIColor whiteColor].CGColor;
+    
     
     [self updateValues];
 }
@@ -95,11 +111,13 @@
     
     self.tipPercentageLabel.text = percLabel;
     
-    float totalAmount = billAmount + tipAmount;
+    self.totalAmount = billAmount + tipAmount;
     
     self.tipAmountLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
     
-    self.totalAmountLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
+    self.totalAmountLabel.text = [NSString stringWithFormat:@"$%0.2f", self.totalAmount];
+    
+    [self updateSplitValues];
 }
 
 - (IBAction)onBillChanged:(id)sender {
@@ -117,6 +135,27 @@
 }
 
 - (void)updateSplitValues{
+    
+    if(self.splitSlider.value < 2){
+        [self.yourShareTextLabel setHidden:true];
+        [self.yourShareLabel setHidden:true];
+        self.spiltCountLabel.text = nil;
+    }
+    else{
+        
+        [self.yourShareTextLabel setHidden:false];
+        [self.yourShareLabel setHidden:false];
+        
+        float yourShare = self.totalAmount/self.splitSlider.value;
+        
+        self.yourShareLabel.text = [NSString stringWithFormat:@"$%0.2f", yourShare];
+        
+        NSString *splitCount = [@"(" stringByAppendingString: [NSString stringWithFormat:@"%.0f", self.splitSlider.value]];
+        
+        splitCount = [splitCount stringByAppendingString:@")"];
+        
+        self.spiltCountLabel.text = splitCount;
+    }
     
 }
 @end

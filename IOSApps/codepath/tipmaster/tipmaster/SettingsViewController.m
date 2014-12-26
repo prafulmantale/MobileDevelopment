@@ -13,6 +13,24 @@
 @property (weak, nonatomic) IBOutlet UIView *satsfactoryView;
 @property (weak, nonatomic) IBOutlet UIView *wtfView;
 
+@property (weak, nonatomic) IBOutlet UISlider *excellentSlider;
+
+- (IBAction)onExcellentSettingChanged:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *excellentSettingsLabel;
+
+@property (weak, nonatomic) IBOutlet UISlider *satisfactorySlider;
+
+- (IBAction)onSatisfactorySettingChanged:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *satisfactorySettingsLabel;
+@property (weak, nonatomic) IBOutlet UISlider *badSlider;
+- (IBAction)onBadSettingsChanged:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *badSettingsLabel;
+
+-(void)updateValues;
+
 @end
 
 @implementation SettingsViewController
@@ -27,6 +45,8 @@
 //    self.satsfactoryView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
 //    
 //    self.wtfView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
+    
+    [self updateValues];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,4 +64,26 @@
 }
 */
 
+- (IBAction)onExcellentSettingChanged:(id)sender {
+    self.excellentSlider.value = (int)self.excellentSlider.value;
+    [self updateValues];
+}
+- (IBAction)onSatisfactorySettingChanged:(id)sender {
+    self.satisfactorySlider.value = (int)self.satisfactorySlider.value;
+    [self updateValues];
+}
+- (IBAction)onBadSettingsChanged:(id)sender {
+    self.badSlider.value = (int)self.badSlider.value;
+    [self updateValues];
+}
+
+- (void)updateValues{
+    
+    self.excellentSettingsLabel.text = [[NSString stringWithFormat:@"%.0f", self.excellentSlider.value] stringByAppendingString:@"%"];
+    
+    self.satisfactorySettingsLabel.text = [[NSString stringWithFormat:@"%.0f", self.satisfactorySlider.value] stringByAppendingString:@"%"];
+    
+    self.badSettingsLabel.text = [[NSString stringWithFormat:@"%0.0f", self.badSlider.value] stringByAppendingString: @"%"];
+    
+}
 @end
