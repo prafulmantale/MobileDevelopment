@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import "constants.h"
 
 @interface SettingsViewController ()
 @property (weak, nonatomic) IBOutlet UIView *excellentView;
@@ -31,6 +32,9 @@
 
 -(void)updateValues;
 
+- (void)persistSettings;
+- (void)loadSettings;
+
 @end
 
 @implementation SettingsViewController
@@ -40,12 +44,13 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
     
-//    self.excellentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
-//    
-//    self.satsfactoryView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
-//    
-//    self.wtfView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
+    //    self.excellentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
+    //
+    //    self.satsfactoryView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
+    //
+    //    self.wtfView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_gr.jpg"]];
     
+    [self loadSettings];
     [self updateValues];
 }
 
@@ -55,14 +60,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)onExcellentSettingChanged:(id)sender {
     self.excellentSlider.value = (int)self.excellentSlider.value;
@@ -86,4 +91,40 @@
     self.badSettingsLabel.text = [[NSString stringWithFormat:@"%0.0f", self.badSlider.value] stringByAppendingString: @"%"];
     
 }
+
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    [self persistSettings];
+}
+
+- (void)persistSettings{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setInteger:self.excellentSlider.value forKey: keyExcellentServiceTip];
+    
+    [defaults setInteger:self.satisfactorySlider.value forKey:keySatisfactoryServiceTip];
+    [defaults setInteger:self.badSlider.value forKey:keyBadServiceTip];
+    
+    [defaults synchronize];//Flush changes to disk
+}
+
+- (void)loadSettings{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if(defaults != nil){
+        
+        self.excellentSlider.value =
+        [defaults integerForKey:keyExcellentServiceTip];
+        
+        self.satisfactorySlider.value =
+        [defaults integerForKey:keySatisfactoryServiceTip];
+        
+        self.badSlider.value =
+        [defaults integerForKey:keyBadServiceTip];
+    }
+}
+
+
 @end

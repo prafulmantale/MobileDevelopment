@@ -49,6 +49,7 @@
 		51A443081A4B6A3B00CE458D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		51A443091A4B6A3B00CE458D /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		51B9815A1A4CF6D2002C3F74 /* title.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = title.jpg; sourceTree = "<group>"; };
+		51B9815E1A4D582B002C3F74 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +104,7 @@
 				51A443071A4B6A3B00CE458D /* SettingsViewController.h */,
 				51A443081A4B6A3B00CE458D /* SettingsViewController.m */,
 				51A443091A4B6A3B00CE458D /* SettingsViewController.xib */,
+				51B9815E1A4D582B002C3F74 /* constants.h */,
 			);
 			path = tipmaster;
 			sourceTree = "<group>";
