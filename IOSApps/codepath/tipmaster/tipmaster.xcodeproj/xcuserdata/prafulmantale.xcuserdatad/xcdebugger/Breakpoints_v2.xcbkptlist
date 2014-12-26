@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tipmaster/ViewController.m"
-            timestampString = "441251305.431402"
+            timestampString = "441279223.346324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>

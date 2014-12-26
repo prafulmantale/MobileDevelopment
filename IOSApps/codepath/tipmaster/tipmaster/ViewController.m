@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "SettingsViewController.h"
+#import "constants.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *tipAmountField;
@@ -36,7 +37,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *spiltCountLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *yourShareTextLabel;
+- (IBAction)onServiceRated:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *serviceRatingControl;
+
+- (void)handleServiceRatingChange;
 
 @end
 
@@ -74,7 +79,7 @@
     //    self.tipView.layer.borderWidth = 0.0f;
     //    self.tipView.layer.borderColor = [UIColor whiteColor].CGColor;
     
-    
+    [self handleServiceRatingChange];
     [self updateValues];
 }
 
@@ -158,4 +163,35 @@
     }
     
 }
+- (IBAction)onServiceRated:(id)sender {
+    
+    [self handleServiceRatingChange];
+    
+    [self updateValues];
+}
+
+- (void)handleServiceRatingChange{
+    
+    int tipPerc = 1;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if(self.serviceRatingControl.selectedSegmentIndex == 1){
+        
+        tipPerc = [defaults integerForKey:keyExcellentServiceTip];
+    }
+    else if(self.serviceRatingControl.selectedSegmentIndex == 2){
+        tipPerc = [defaults integerForKey:keyBadServiceTip];
+    }
+    else{
+        tipPerc = [defaults integerForKey:keySatisfactoryServiceTip];
+    }
+    
+    self.tipPercentageSlider.value = (int)tipPerc;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [self handleServiceRatingChange];
+    [self updateValues];
+}
+
 @end
