@@ -43,7 +43,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" id="g12-Op-4LN">
-                                                <rect key="frame" x="154" y="8" width="126" height="31"/>
+                                                <rect key="frame" x="90" y="8" width="190" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="minimumTrackTintColor" red="0.33083128579999999" green="0.42134948449999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="maximumTrackTintColor" red="1" green="0.21781686180000001" blue="0.38853229900000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -68,7 +68,7 @@
                                         <color key="backgroundColor" red="1" green="0.41960784309999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="Pgd-9h-ZD8">
-                                        <rect key="frame" x="10" y="8" width="300" height="234"/>
+                                        <rect key="frame" x="10" y="0.0" width="300" height="234"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bill Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zcq-iT-pWR">
@@ -116,7 +116,7 @@
                                                 </connections>
                                             </textField>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="100" id="FBg-Wr-tXp">
-                                                <rect key="frame" x="154" y="115" width="126" height="31"/>
+                                                <rect key="frame" x="90" y="115" width="190" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="minimumTrackTintColor" red="0.33083128579999999" green="0.42134948449999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="maximumTrackTintColor" red="1" green="0.21781686180000001" blue="0.38853229900000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -150,7 +150,7 @@
                                                 <rect key="frame" x="16" y="74" width="262" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <segments>
-                                                    <segment title="Ok ok"/>
+                                                    <segment title="Ok Ok"/>
                                                     <segment title="Loved it"/>
                                                     <segment title="Yikes"/>
                                                 </segments>

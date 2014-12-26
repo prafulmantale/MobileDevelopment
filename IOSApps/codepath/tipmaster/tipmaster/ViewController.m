@@ -172,7 +172,7 @@
 
 - (void)handleServiceRatingChange{
     
-    int tipPerc = 1;
+    long tipPerc = 1;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if(self.serviceRatingControl.selectedSegmentIndex == 1){
