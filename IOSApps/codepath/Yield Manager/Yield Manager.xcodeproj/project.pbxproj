@@ -15,6 +15,7 @@
 		51B981881A4E20AD002C3F74 /* Yield_ManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B981871A4E20AD002C3F74 /* Yield_ManagerTests.m */; };
 		51B981931A4E21B0002C3F74 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B981921A4E21B0002C3F74 /* LoginViewController.m */; };
 		51B981951A4E221F002C3F74 /* ym_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B981941A4E221F002C3F74 /* ym_logo.png */; };
+		51B9819A1A4E2EC0002C3F74 /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B981991A4E2EC0002C3F74 /* LoginRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,9 @@
 		51B981911A4E21B0002C3F74 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		51B981921A4E21B0002C3F74 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		51B981941A4E221F002C3F74 /* ym_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ym_logo.png; sourceTree = "<group>"; };
+		51B981981A4E2EC0002C3F74 /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = "<group>"; };
+		51B981991A4E2EC0002C3F74 /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
+		51B9819C1A4E348E002C3F74 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,9 @@
 		51B9816A1A4E20AD002C3F74 /* Yield Manager */ = {
 			isa = PBXGroup;
 			children = (
+				51B9819B1A4E347F002C3F74 /* helpers */,
+				51B981971A4E2E55002C3F74 /* Models */,
+				51B981961A4E2E3E002C3F74 /* View Controllers */,
 				51B9816F1A4E20AD002C3F74 /* AppDelegate.h */,
 				51B981701A4E20AD002C3F74 /* AppDelegate.m */,
 				51B981751A4E20AD002C3F74 /* Main.storyboard */,
@@ -90,8 +97,6 @@
 				51B981941A4E221F002C3F74 /* ym_logo.png */,
 				51B9817A1A4E20AD002C3F74 /* LaunchScreen.xib */,
 				51B9816B1A4E20AD002C3F74 /* Supporting Files */,
-				51B981911A4E21B0002C3F74 /* LoginViewController.h */,
-				51B981921A4E21B0002C3F74 /* LoginViewController.m */,
 			);
 			path = "Yield Manager";
 			sourceTree = "<group>";
@@ -120,6 +125,32 @@
 				51B981861A4E20AD002C3F74 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		51B981961A4E2E3E002C3F74 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				51B981911A4E21B0002C3F74 /* LoginViewController.h */,
+				51B981921A4E21B0002C3F74 /* LoginViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		51B981971A4E2E55002C3F74 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				51B981981A4E2EC0002C3F74 /* LoginRequest.h */,
+				51B981991A4E2EC0002C3F74 /* LoginRequest.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		51B9819B1A4E347F002C3F74 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				51B9819C1A4E348E002C3F74 /* constants.h */,
+			);
+			name = helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +257,7 @@
 				51B981931A4E21B0002C3F74 /* LoginViewController.m in Sources */,
 				51B981711A4E20AD002C3F74 /* AppDelegate.m in Sources */,
 				51B9816E1A4E20AD002C3F74 /* main.m in Sources */,
+				51B9819A1A4E2EC0002C3F74 /* LoginRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
