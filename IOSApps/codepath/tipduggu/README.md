@@ -18,4 +18,4 @@ Walkthrough of all user stories:
 
 Walkthrough of all user stories:
 
-![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/AndroidApps/ImageFinder/ImageFinder.gif)
+![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/IOSApps/codepath/tipduggu/tipcalculator.gif)
