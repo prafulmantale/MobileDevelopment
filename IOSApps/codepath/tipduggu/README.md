@@ -13,10 +13,10 @@ Optional: Add a light/dark color theme to the settings view. In viewWillAppear, 
 Optional: Animated split amount hide and show
 
 Notes:
-
-
-Walkthrough of all user stories:
-
+    Spent some time trying to figure out how TestFlight works
+    Sepnd time on understanding differrent icons and dimensions
+    
+The app is being beta tested by friends and family :)
 
 Walkthrough of all user stories:
 
