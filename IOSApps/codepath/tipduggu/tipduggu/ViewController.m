@@ -187,6 +187,11 @@ setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}]
     long tipPerc = 1;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
+    if(self.tipAmountField.text == nil ||
+       [self.tipAmountField.text length] == 0){
+        self.tipAmountField.text = [defaults objectForKey:keyLastBillAmount];
+    }
+    
     if(self.serviceRatingControl.selectedSegmentIndex == 1){
         
         tipPerc = [defaults integerForKey:keyExcellentServiceTip];
@@ -204,6 +209,23 @@ setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}]
 - (void)viewWillAppear:(BOOL)animated{
     [self handleServiceRatingChange];
     [self updateValues];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"view did appear");
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"view will disappear");
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setObject:self.tipAmountField.text forKey:keyLastBillAmount];
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    NSLog(@"view did disappear");
 }
 
 @end

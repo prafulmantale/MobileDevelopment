@@ -12,5 +12,6 @@
 #define keyExcellentServiceTip @"excellentServiceTip"
 #define keySatisfactoryServiceTip @"satisfactoryServiceTip"
 #define keyBadServiceTip @"badServiceTip"
+#define keyLastBillAmount @"lastBillAmount"
 
 #endif
