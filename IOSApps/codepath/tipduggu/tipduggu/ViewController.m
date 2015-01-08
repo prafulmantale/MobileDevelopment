@@ -151,9 +151,20 @@ setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}]
     
     self.totalAmount = billAmount + tipAmount;
     
-    self.tipAmountLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
+    NSNumberFormatter *numFormatter = [[NSNumberFormatter alloc] init];
+    [numFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+    //[numFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [numFormatter setLocale:[NSLocale currentLocale]];
     
-    self.totalAmountLabel.text = [NSString stringWithFormat:@"$%0.2f", self.totalAmount];
+    NSString *tipString = [numFormatter stringFromNumber: [NSNumber numberWithFloat: tipAmount]];
+    NSString *totalString = [numFormatter stringFromNumber:[NSNumber numberWithFloat:self.totalAmount]];
+    
+    //self.tipAmountLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
+    self.tipAmountLabel.text = tipString;
+    
+    //self.totalAmountLabel.text = [NSString stringWithFormat:@"$%0.2f", self.totalAmount];
+    self.totalAmountLabel.text = totalString;
     
     [self updateSplitValues];
 }
@@ -161,14 +172,25 @@ setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}]
 - (void)updateSplitValues{
     
     if(self.splitSlider.value < 2){
-        [self.yourShareTextLabel setHidden:true];
-        [self.yourShareLabel setHidden:true];
-        self.spiltCountLabel.text = nil;
+        
+        [UIView animateWithDuration:1.0 animations:^{
+            self.yourShareLabel.alpha = 0.0;
+            self.yourShareTextLabel.alpha = 0.0;
+            self.spiltCountLabel.alpha = 0.0;
+        }];
+//        [self.yourShareTextLabel setHidden:true];
+//        [self.yourShareLabel setHidden:true];
+//        self.spiltCountLabel.text = nil;
     }
     else{
+        [UIView animateWithDuration:1.0 animations:^{
+        self.yourShareLabel.alpha = 1.0;
+        self.yourShareTextLabel.alpha = 1.0;
+        self.spiltCountLabel.alpha = 1.0;
+        }];
         
-        [self.yourShareTextLabel setHidden:false];
-        [self.yourShareLabel setHidden:false];
+//        [self.yourShareTextLabel setHidden:false];
+//        [self.yourShareLabel setHidden:false];
         
         float yourShare = self.totalAmount/self.splitSlider.value;
         
@@ -221,6 +243,7 @@ setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}]
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     [defaults setObject:self.tipAmountField.text forKey:keyLastBillAmount];
+    [defaults synchronize];
     
 }
 
