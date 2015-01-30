@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5130CEB81A736FBB005F2184 /* DashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5130CEB71A736FBB005F2184 /* DashboardController.m */; };
 		518703511A735A5800F8BD47 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 518703501A735A5800F8BD47 /* main.m */; };
 		518703541A735A5800F8BD47 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 518703531A735A5800F8BD47 /* AppDelegate.m */; };
 		518703571A735A5800F8BD47 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 518703561A735A5800F8BD47 /* ViewController.m */; };
@@ -32,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5130CEB61A736FBB005F2184 /* DashboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardController.h; sourceTree = "<group>"; };
+		5130CEB71A736FBB005F2184 /* DashboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardController.m; sourceTree = "<group>"; };
 		5187034B1A735A5800F8BD47 /* Yield Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yield Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5187034F1A735A5800F8BD47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		518703501A735A5800F8BD47 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -164,6 +167,8 @@
 			children = (
 				518703551A735A5800F8BD47 /* ViewController.h */,
 				518703561A735A5800F8BD47 /* ViewController.m */,
+				5130CEB61A736FBB005F2184 /* DashboardController.h */,
+				5130CEB71A736FBB005F2184 /* DashboardController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 				5187037F1A7365A700F8BD47 /* Summary.m in Sources */,
 				518703541A735A5800F8BD47 /* AppDelegate.m in Sources */,
 				518703511A735A5800F8BD47 /* main.m in Sources */,
+				5130CEB81A736FBB005F2184 /* DashboardController.m in Sources */,
 				5187037B1A7362A000F8BD47 /* LoginRequest.m in Sources */,
 				518703851A7365CC00F8BD47 /* RiskRule.m in Sources */,
 				518703821A7365B600F8BD47 /* Snapshot.m in Sources */,
@@ -400,6 +406,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Yield Manager/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -410,6 +417,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Yield Manager/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -468,6 +476,7 @@
 				518703701A735A5800F8BD47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		518703711A735A5800F8BD47 /* Build configuration list for PBXNativeTarget "Yield ManagerTests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +485,7 @@
 				518703731A735A5800F8BD47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

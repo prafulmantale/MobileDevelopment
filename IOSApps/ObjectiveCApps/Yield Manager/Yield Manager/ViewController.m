@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "LoginRequest.h"
 #import "Constants.h"
+#import "DashboardController.h"
 
 @interface ViewController ()
 
@@ -65,9 +66,42 @@
     loginRequest.userName = self.userField.text;
     loginRequest.password = self.passField.text;
     
-    NSLog(@"JSON : %@", loginRequest.getJSON);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:LOGIN_URL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody: [[loginRequest getJSON] dataUsingEncoding:NSUTF8StringEncoding]];
     
+    [request setValue:@"application/json"  forHTTPHeaderField:@"Content-Type"];
     
+    request.HTTPShouldHandleCookies = true;
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        NSLog(@"%@", object);
+        
+        NSString *status = [NSString alloc];
+        status = object[@"status"];
+        NSLog(@"Status : %@", status);
+        if([status  isEqual: @"OK"]){
+            NSLog(@"Login successful");
+            
+            UIStoryboard *mainStoryBoard = self.storyboard;
+            DashboardController *dashboardController = [mainStoryBoard instantiateViewControllerWithIdentifier:@"dashboard"];
+             
+            [self.navigationController pushViewController:dashboardController animated:YES];
+            
+            
+//            [self presentViewController:dashboardController animated:true completion:nil];
+            
+//            [self performSegueWithIdentifier:@"dashboard" sender:sender];
+        }
+        else{
+             NSLog(@"Login failed ...");
+        }
+        
+        
+    }];
+
 }
 - (IBAction)onTap:(id)sender {
     

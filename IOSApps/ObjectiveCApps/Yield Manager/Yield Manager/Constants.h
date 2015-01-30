@@ -23,11 +23,11 @@
 #define ORG_SETTINGS_URL @"https://demo2.ym.integral.net/fxi/rw/rwadmin/getOrgSettings"
 
 //Makes server request to fetch the rule settings from serve
-#define RULES_URL @"https://demo2.ym.integral.net/fxi/rw/rwadmin/getCPRiskRules";
+#define RULES_URL @"https://demo2.ym.integral.net/fxi/rw/rwadmin/getCPRiskRules"
 
-#define REF_DATA_URL @"https://demo2.ym.integral.net/fxi/fxiapi/refdata/supportedCcypairs";
+#define REF_DATA_URL @"https://demo2.ym.integral.net/fxi/fxiapi/refdata/supportedCcypairs"
 
 //Get snapshot
-#define SNAPSHOT_URL @"https://demo2.ym.integral.net/fxi/rw/warehouse/aggregate";
+#define SNAPSHOT_URL @"https://demo2.ym.integral.net/fxi/rw/warehouse/aggregate?org=YMSBAQA&ccyPairs=ALL&bookingMode=B"
 
 #endif
