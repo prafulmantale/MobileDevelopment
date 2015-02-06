@@ -40,7 +40,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
-        return 1;
+        return 10;
     }
     
 

@@ -10,6 +10,7 @@
 #import "LoginRequest.h"
 #import "Constants.h"
 #import "DashboardController.h"
+#import "PositionStatusView.h"
 
 @interface ViewController ()
 
@@ -50,6 +51,12 @@
     
     self.btnLogin.layer.cornerRadius = 5;
     
+    PositionStatusView *customView = [[PositionStatusView alloc] initWithFrame:CGRectMake(0, 600, 320, 300)];
+    
+    customView.backgroundColor = UIColor.clearColor;
+    [customView setCurrentPosition:10];
+    
+    [self.view addSubview: customView];
     
 }
 
