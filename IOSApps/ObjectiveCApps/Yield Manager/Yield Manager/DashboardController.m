@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "Summary.h"
 #import "Snapshot.h"
+#import "PositionsViewCell.h"
 
 @interface DashboardController ()
 @property (weak, nonatomic) IBOutlet UITableView *positionsTableView;
@@ -27,6 +28,10 @@
     // Do any additional setup after loading the view.
     
     self.positionsTableView.dataSource = self;
+    
+    self.positionsTableView.rowHeight = 100;
+    
+    [self.positionsTableView registerNib:[UINib nibWithNibName:@"PositionsViewCell" bundle:nil] forCellReuseIdentifier:@"PositionCell"];
   
     
     [self getRWSnapShot];
@@ -58,12 +63,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    PositionsViewCell *pCell = [tableView dequeueReusableCellWithIdentifier:@"PositionCell"];
+    
+    //UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     
     NSDictionary *snapshot = self.snapshots[indexPath.row];
-    cell.textLabel.text = snapshot[@"ccyPair"];
     
-    return cell;
+    pCell.ccyPairLabel.text = snapshot[@"ccyPair"];
+    
+    
+    pCell.rateLabel.text = [NSString stringWithFormat:@"%0.5f", [snapshot[@"midRate"] doubleValue]];
+    
+    return pCell;
 }
 
 

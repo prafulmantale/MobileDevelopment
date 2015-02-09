@@ -25,8 +25,10 @@ bool contextsInitialized = false;
 //     Drawing code
     
     if(contextsInitialized == false){
-//        [[self.shortPositions alloc] init];
-//        [self.longPositions init];
+        
+        self.shortPositions = [[PositionIndicators alloc] init];
+        self.longPositions = [[PositionIndicators alloc] init];
+
         [self.shortPositions update:34 currentPos:0 maxPos:100];
         [self.longPositions update:34 currentPos:0 maxPos:100];
         
@@ -82,7 +84,10 @@ bool contextsInitialized = false;
     
 
     
-    CGContextSetRGBStrokeColor(contextBlank, 213/255, 213/255, 213/255, 1);
+    CGContextSetStrokeColor(contextBlank, CGColorGetComponents( [[UIColor colorWithRed:213.0f/255.0f
+                                                                             green:213.0f/255.0f
+                                                                              blue:213.0f/255.0f
+                                                                             alpha:1.0f] CGColor]));
     CGContextSetLineWidth(contextBlank, strokeWidth);
     
     if(self.shortPositions.blankCount > 0){
@@ -101,7 +106,10 @@ bool contextsInitialized = false;
     
     CGContextRef contextDanger = UIGraphicsGetCurrentContext();
     
-    CGContextSetRGBStrokeColor(contextDanger, 193/255,30/255,0,1);
+    CGContextSetStrokeColor(contextDanger, CGColorGetComponents( [[UIColor colorWithRed:193.0f/255.0f
+                                                                                     green:30.0f/255.0f
+                                                                                      blue:0.0f/255.0f
+                                                                                     alpha:1.0f] CGColor]));
     
     CGContextSetLineWidth(contextDanger, strokeWidth);
     
@@ -120,7 +128,13 @@ bool contextsInitialized = false;
     }
     
     CGContextRef contextWarning = UIGraphicsGetCurrentContext();
-    CGContextSetRGBStrokeColor(contextWarning, 255/255,135/255,0,1);
+    
+    CGContextSetStrokeColor(contextWarning, CGColorGetComponents( [[UIColor colorWithRed:255.0f/255.0f
+                                                                                   green:135.0f/255.0f
+                                                                                    blue:0.0f/255.0f
+                                                                                   alpha:1.0f] CGColor]));
+    
+    
     CGContextSetLineWidth(contextWarning, strokeWidth);
     
     if(self.shortPositions.warningCount > 0 ){
@@ -137,7 +151,10 @@ bool contextsInitialized = false;
         }
     }
     
-    CGContextSetRGBStrokeColor(contextNormal, 37/255,75/255,196/255,1);
+    CGContextSetStrokeColor(contextNormal, CGColorGetComponents( [[UIColor colorWithRed:37.0f/255.0f
+                                                                                  green:75.0f/255.0f
+                                                                                   blue:196.0f/255.0f
+                                                                                  alpha:1.0f] CGColor]));
     CGContextSetLineWidth(contextNormal, strokeWidth);
     
     if(self.shortPositions.normalCount + self.longPositions.normalCount > 0 ){
@@ -154,7 +171,11 @@ bool contextsInitialized = false;
         }
     }
     
-    CGContextSetRGBStrokeColor(contextWarning, 255/255,135/255,0,1);
+    CGContextSetStrokeColor(contextWarning, CGColorGetComponents( [[UIColor colorWithRed:255.0f/255.0f
+                                                                                   green:135.0f/255.0f
+                                                                                    blue:0.0f/255.0f
+                                                                                   alpha:1.0f] CGColor]));
+    
     CGContextSetLineWidth(contextWarning, strokeWidth);
     
     if(self.longPositions.warningCount > 0 ){
@@ -171,8 +192,13 @@ bool contextsInitialized = false;
         }
     }
     
-    CGContextSetRGBStrokeColor(contextDanger, 193/255,30/255,0,1);
+    CGContextSetStrokeColor(contextDanger, CGColorGetComponents( [[UIColor colorWithRed:193.0f/255.0f
+                                                                                  green:30.0f/255.0f
+                                                                                   blue:0.0f/255.0f
+                                                                                  alpha:1.0f] CGColor]));
+    
     CGContextSetLineWidth(contextDanger, strokeWidth);
+    
     if(self.longPositions.dangerCount > 0 ){
         unsigned int i;
         unsigned int cnt = self.longPositions.dangerCount;
@@ -188,7 +214,11 @@ bool contextsInitialized = false;
     }
     
     
-    CGContextSetRGBStrokeColor(contextBlank, 213/255,213/255,213/255,1);
+    CGContextSetStrokeColor(contextBlank, CGColorGetComponents( [[UIColor colorWithRed:213.0f/255.0f
+                                                                                 green:213.0f/255.0f
+                                                                                  blue:213.0f/255.0f
+                                                                                 alpha:1.0f] CGColor]));
+    
     CGContextSetLineWidth(contextBlank, strokeWidth);
     
     if(self.longPositions.blankCount > 0){

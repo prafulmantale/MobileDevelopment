@@ -20,6 +20,9 @@
 		5187037F1A7365A700F8BD47 /* Summary.m in Sources */ = {isa = PBXBuildFile; fileRef = 5187037E1A7365A700F8BD47 /* Summary.m */; };
 		518703821A7365B600F8BD47 /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 518703811A7365B600F8BD47 /* Snapshot.m */; };
 		518703851A7365CC00F8BD47 /* RiskRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 518703841A7365CC00F8BD47 /* RiskRule.m */; };
+		5192E0171A85E3D5000533F2 /* PositionsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5192E0151A85E3D5000533F2 /* PositionsViewCell.m */; };
+		5192E0181A85E3D5000533F2 /* PositionsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5192E0161A85E3D5000533F2 /* PositionsViewCell.xib */; };
+		5192E01B1A85EA3D000533F2 /* GaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5192E01A1A85EA3D000533F2 /* GaugeView.m */; };
 		51DDF8021A82F7A6007F3664 /* PositionStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DDF8011A82F7A6007F3664 /* PositionStatusView.m */; };
 		51DDF8051A82F821007F3664 /* PositionIndicators.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DDF8041A82F821007F3664 /* PositionIndicators.m */; };
 /* End PBXBuildFile section */
@@ -60,6 +63,11 @@
 		518703811A7365B600F8BD47 /* Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snapshot.m; sourceTree = "<group>"; };
 		518703831A7365CC00F8BD47 /* RiskRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskRule.h; sourceTree = "<group>"; };
 		518703841A7365CC00F8BD47 /* RiskRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiskRule.m; sourceTree = "<group>"; };
+		5192E0141A85E3D5000533F2 /* PositionsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionsViewCell.h; sourceTree = "<group>"; };
+		5192E0151A85E3D5000533F2 /* PositionsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionsViewCell.m; sourceTree = "<group>"; };
+		5192E0161A85E3D5000533F2 /* PositionsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionsViewCell.xib; sourceTree = "<group>"; };
+		5192E0191A85EA3D000533F2 /* GaugeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GaugeView.h; sourceTree = "<group>"; };
+		5192E01A1A85EA3D000533F2 /* GaugeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GaugeView.m; sourceTree = "<group>"; };
 		51DDF8001A82F7A6007F3664 /* PositionStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionStatusView.h; sourceTree = "<group>"; };
 		51DDF8011A82F7A6007F3664 /* PositionStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionStatusView.m; sourceTree = "<group>"; };
 		51DDF8031A82F821007F3664 /* PositionIndicators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionIndicators.h; sourceTree = "<group>"; };
@@ -176,6 +184,9 @@
 				518703561A735A5800F8BD47 /* ViewController.m */,
 				5130CEB61A736FBB005F2184 /* DashboardController.h */,
 				5130CEB71A736FBB005F2184 /* DashboardController.m */,
+				5192E0141A85E3D5000533F2 /* PositionsViewCell.h */,
+				5192E0151A85E3D5000533F2 /* PositionsViewCell.m */,
+				5192E0161A85E3D5000533F2 /* PositionsViewCell.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -187,6 +198,8 @@
 				51DDF8011A82F7A6007F3664 /* PositionStatusView.m */,
 				51DDF8031A82F821007F3664 /* PositionIndicators.h */,
 				51DDF8041A82F821007F3664 /* PositionIndicators.m */,
+				5192E0191A85EA3D000533F2 /* GaugeView.h */,
+				5192E01A1A85EA3D000533F2 /* GaugeView.m */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -272,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				518703751A735B4600F8BD47 /* ym_logo.png in Resources */,
+				5192E0181A85E3D5000533F2 /* PositionsViewCell.xib in Resources */,
 				5187035A1A735A5800F8BD47 /* Main.storyboard in Resources */,
 				5187035F1A735A5800F8BD47 /* LaunchScreen.xib in Resources */,
 				5187035C1A735A5800F8BD47 /* Images.xcassets in Resources */,
@@ -294,11 +308,13 @@
 			files = (
 				51DDF8051A82F821007F3664 /* PositionIndicators.m in Sources */,
 				518703571A735A5800F8BD47 /* ViewController.m in Sources */,
+				5192E01B1A85EA3D000533F2 /* GaugeView.m in Sources */,
 				5187037F1A7365A700F8BD47 /* Summary.m in Sources */,
 				518703541A735A5800F8BD47 /* AppDelegate.m in Sources */,
 				51DDF8021A82F7A6007F3664 /* PositionStatusView.m in Sources */,
 				518703511A735A5800F8BD47 /* main.m in Sources */,
 				5130CEB81A736FBB005F2184 /* DashboardController.m in Sources */,
+				5192E0171A85E3D5000533F2 /* PositionsViewCell.m in Sources */,
 				5187037B1A7362A000F8BD47 /* LoginRequest.m in Sources */,
 				518703851A7365CC00F8BD47 /* RiskRule.m in Sources */,
 				518703821A7365B600F8BD47 /* Snapshot.m in Sources */,

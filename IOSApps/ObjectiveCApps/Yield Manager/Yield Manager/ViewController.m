@@ -51,13 +51,6 @@
     
     self.btnLogin.layer.cornerRadius = 5;
     
-    PositionStatusView *customView = [[PositionStatusView alloc] initWithFrame:CGRectMake(0, 600, 320, 300)];
-    
-    customView.backgroundColor = UIColor.clearColor;
-    [customView setCurrentPosition:10];
-    
-    [self.view addSubview: customView];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,7 +66,7 @@
     loginRequest.userName = self.userField.text;
     loginRequest.password = self.passField.text;
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:LOGIN_URL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:LOGIN_URL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:15];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody: [[loginRequest getJSON] dataUsingEncoding:NSUTF8StringEncoding]];
     
@@ -82,32 +75,37 @@
     request.HTTPShouldHandleCookies = true;
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        if(data != nil){
         
-        NSLog(@"%@", object);
         
-        NSString *status = [NSString alloc];
-        status = object[@"status"];
-        NSLog(@"Status : %@", status);
-        if([status  isEqual: @"OK"]){
-            NSLog(@"Login successful");
+            id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             
-            UIStoryboard *mainStoryBoard = self.storyboard;
-            DashboardController *dashboardController = [mainStoryBoard instantiateViewControllerWithIdentifier:@"dashboard"];
-             
-            [self.navigationController pushViewController:dashboardController animated:YES];
+            NSLog(@"%@", object);
             
+            NSString *status = [NSString alloc];
+            status = object[@"status"];
+            NSLog(@"Status : %@", status);
+            if([status  isEqual: @"OK"]){
+                NSLog(@"Login successful");
+                
+                UIStoryboard *mainStoryBoard = self.storyboard;
+                DashboardController *dashboardController = [mainStoryBoard instantiateViewControllerWithIdentifier:@"dashboard"];
+                
+                [self.navigationController pushViewController:dashboardController animated:YES];
+                
+            }
+            else{
+                NSLog(@"Login failed ...");
+            }
             
-//            [self presentViewController:dashboardController animated:true completion:nil];
-            
-//            [self performSegueWithIdentifier:@"dashboard" sender:sender];
         }
         else{
-             NSLog(@"Login failed ...");
+            NSLog(@"Login failed response is null...");
+            NSLog(connectionError.description);
         }
         
-        
     }];
+    
 
 }
 - (IBAction)onTap:(id)sender {

@@ -12,8 +12,8 @@
 @interface PositionStatusView : UIView
 
 
-@property PositionIndicators* shortPositions;
-@property PositionIndicators* longPositions;
+@property PositionIndicators *shortPositions;
+@property PositionIndicators *longPositions;
 
 -(void) setCurrentPosition: (double)currentPosition;
 
