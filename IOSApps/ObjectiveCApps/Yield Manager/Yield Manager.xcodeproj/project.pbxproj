@@ -25,6 +25,7 @@
 		5192E01B1A85EA3D000533F2 /* GaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5192E01A1A85EA3D000533F2 /* GaugeView.m */; };
 		51DDF8021A82F7A6007F3664 /* PositionStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DDF8011A82F7A6007F3664 /* PositionStatusView.m */; };
 		51DDF8051A82F821007F3664 /* PositionIndicators.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DDF8041A82F821007F3664 /* PositionIndicators.m */; };
+		51E6497B1A8DD13A00FE274A /* RiskCapacityArc.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E6497A1A8DD13A00FE274A /* RiskCapacityArc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		51DDF8011A82F7A6007F3664 /* PositionStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionStatusView.m; sourceTree = "<group>"; };
 		51DDF8031A82F821007F3664 /* PositionIndicators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionIndicators.h; sourceTree = "<group>"; };
 		51DDF8041A82F821007F3664 /* PositionIndicators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionIndicators.m; sourceTree = "<group>"; };
+		51E649791A8DD13A00FE274A /* RiskCapacityArc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskCapacityArc.h; sourceTree = "<group>"; };
+		51E6497A1A8DD13A00FE274A /* RiskCapacityArc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiskCapacityArc.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +203,8 @@
 				51DDF8041A82F821007F3664 /* PositionIndicators.m */,
 				5192E0191A85EA3D000533F2 /* GaugeView.h */,
 				5192E01A1A85EA3D000533F2 /* GaugeView.m */,
+				51E649791A8DD13A00FE274A /* RiskCapacityArc.h */,
+				51E6497A1A8DD13A00FE274A /* RiskCapacityArc.m */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 				518703511A735A5800F8BD47 /* main.m in Sources */,
 				5130CEB81A736FBB005F2184 /* DashboardController.m in Sources */,
 				5192E0171A85E3D5000533F2 /* PositionsViewCell.m in Sources */,
+				51E6497B1A8DD13A00FE274A /* RiskCapacityArc.m in Sources */,
 				5187037B1A7362A000F8BD47 /* LoginRequest.m in Sources */,
 				518703851A7365CC00F8BD47 /* RiskRule.m in Sources */,
 				518703821A7365B600F8BD47 /* Snapshot.m in Sources */,

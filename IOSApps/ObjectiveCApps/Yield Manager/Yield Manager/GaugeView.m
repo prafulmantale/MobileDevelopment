@@ -31,8 +31,8 @@
     //var endAngle : Float = -M_PI_2
     
     CGFloat strokeWidth = 10.0;
-    CGFloat radius = (self.frame.size.width - strokeWidth/2 - self.frame.size.width/8)/3;
-    CGPoint center = CGPointMake(self.frame.size.width/2, self.frame.size.height - 10);
+    CGFloat radius = (self.frame.size.width - strokeWidth/2 - self.frame.size.width/8)/3.2;
+    CGPoint center = CGPointMake(self.frame.size.width/2, self.frame.size.height - 20);
     
     //First Half
     if(self.inProfit){

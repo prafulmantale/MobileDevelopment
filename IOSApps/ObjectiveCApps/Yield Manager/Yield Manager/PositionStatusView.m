@@ -17,6 +17,8 @@ CGFloat startX = 19;
 CGFloat barHt = 14;
 
 bool contextsInitialized = false;
+PositionIndicators *shortPositions;
+PositionIndicators *longPositions;
 
 
 // Only override drawRect: if you perform custom drawing.
@@ -24,16 +26,20 @@ bool contextsInitialized = false;
 - (void)drawRect:(CGRect)rect {
 //     Drawing code
     
-    if(contextsInitialized == false){
+    skip = 1;
+    strokeWidth = 3;
+    startX = 19;
+    barHt = 14;
+    //if(contextsInitialized == false){
         
-        self.shortPositions = [[PositionIndicators alloc] init];
-        self.longPositions = [[PositionIndicators alloc] init];
+        shortPositions = [[PositionIndicators alloc] init];
+        longPositions = [[PositionIndicators alloc] init];
 
-        [self.shortPositions update:34 currentPos:0 maxPos:100];
-        [self.longPositions update:34 currentPos:0 maxPos:100];
+        [shortPositions update:34 currentPos:0 maxPos:100];
+        [longPositions update:34 currentPos:0 maxPos:100];
         
         contextsInitialized = true;
-    }
+    //}
     
     
     CGFloat fvl = startX - strokeWidth - 0.5;
@@ -90,9 +96,9 @@ bool contextsInitialized = false;
                                                                              alpha:1.0f] CGColor]));
     CGContextSetLineWidth(contextBlank, strokeWidth);
     
-    if(self.shortPositions.blankCount > 0){
+    if(shortPositions.blankCount > 0){
         unsigned int i;
-        unsigned int cnt = self.shortPositions.blankCount;
+        unsigned int cnt = shortPositions.blankCount;
         for (i = 0; i < cnt;  i++){
             CGContextBeginPath(contextBlank);
             CGContextMoveToPoint(contextBlank,  startX, 0);
@@ -113,9 +119,9 @@ bool contextsInitialized = false;
     
     CGContextSetLineWidth(contextDanger, strokeWidth);
     
-    if(self.shortPositions.dangerCount > 0) {
+    if(shortPositions.dangerCount > 0) {
         unsigned int i;
-        unsigned int cnt = self.shortPositions.dangerCount;
+        unsigned int cnt = shortPositions.dangerCount;
         for (i = 0; i < cnt;  i++){
             CGContextBeginPath(contextDanger);
             CGContextMoveToPoint(contextDanger,  startX, 0);
@@ -137,9 +143,9 @@ bool contextsInitialized = false;
     
     CGContextSetLineWidth(contextWarning, strokeWidth);
     
-    if(self.shortPositions.warningCount > 0 ){
+    if(shortPositions.warningCount > 0 ){
         unsigned int i;
-        unsigned int cnt = self.shortPositions.warningCount;
+        unsigned int cnt = shortPositions.warningCount;
         for (i = 0; i < cnt;  i++){
             CGContextBeginPath(contextWarning);
             CGContextMoveToPoint(contextWarning,  startX, 0);
@@ -157,10 +163,10 @@ bool contextsInitialized = false;
                                                                                   alpha:1.0f] CGColor]));
     CGContextSetLineWidth(contextNormal, strokeWidth);
     
-    if(self.shortPositions.normalCount + self.longPositions.normalCount > 0 ){
+    if(shortPositions.normalCount + longPositions.normalCount > 0 ){
         
         unsigned int i;
-        unsigned int cnt = self.shortPositions.normalCount + self.longPositions.normalCount;
+        unsigned int cnt = shortPositions.normalCount + longPositions.normalCount;
         for (i = 0; i < cnt;  i++){
             CGContextBeginPath(contextNormal);
             CGContextMoveToPoint(contextNormal,  startX, 0);
@@ -178,10 +184,10 @@ bool contextsInitialized = false;
     
     CGContextSetLineWidth(contextWarning, strokeWidth);
     
-    if(self.longPositions.warningCount > 0 ){
+    if(longPositions.warningCount > 0 ){
         
         unsigned int i;
-        unsigned int cnt = self.longPositions.warningCount;
+        unsigned int cnt = longPositions.warningCount;
         for (i = 0; i < cnt;  i++){
             CGContextBeginPath(contextWarning);
             CGContextMoveToPoint(contextWarning,  startX, 0);
@@ -199,9 +205,9 @@ bool contextsInitialized = false;
     
     CGContextSetLineWidth(contextDanger, strokeWidth);
     
-    if(self.longPositions.dangerCount > 0 ){
+    if(longPositions.dangerCount > 0 ){
         unsigned int i;
-        unsigned int cnt = self.longPositions.dangerCount;
+        unsigned int cnt = longPositions.dangerCount;
         
         for (i = 0; i < cnt;  i++){
             CGContextBeginPath(contextDanger);
@@ -221,9 +227,9 @@ bool contextsInitialized = false;
     
     CGContextSetLineWidth(contextBlank, strokeWidth);
     
-    if(self.longPositions.blankCount > 0){
+    if(longPositions.blankCount > 0){
         unsigned int i;
-        unsigned int cnt = self.longPositions.blankCount;
+        unsigned int cnt = longPositions.blankCount;
         
         for (i = 0; i < cnt;  i++){
             CGContextBeginPath(contextBlank);
@@ -241,13 +247,13 @@ bool contextsInitialized = false;
 -(void) setCurrentPosition: (double)currentPosition{
     
     if(currentPosition < 0){
-        [self.shortPositions update:34 currentPos:currentPosition maxPos:100];
-        [self.longPositions update:34 currentPos:0 maxPos:100];
+        [shortPositions update:34 currentPos:currentPosition maxPos:100];
+        [longPositions update:34 currentPos:0 maxPos:100];
         
     }
     else{
-        [self.shortPositions update:34 currentPos:0 maxPos:100];
-        [self.longPositions update:34 currentPos:currentPosition maxPos:100];
+        [shortPositions update:34 currentPos:0 maxPos:100];
+        [longPositions update:34 currentPos:currentPosition maxPos:100];
     }
     
     startX = 19;

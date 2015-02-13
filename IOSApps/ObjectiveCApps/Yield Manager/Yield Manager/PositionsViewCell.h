@@ -19,5 +19,12 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *rateLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *maxShortLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *maxLongLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *lossThresholdLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *profitThresholdLabel;
 
 @end

@@ -18,17 +18,19 @@
     self.rateInnerPanel.layer.cornerRadius = 5;
     
     PositionStatusView *statusView = [[PositionStatusView alloc] init];
-    statusView.frame = CGRectMake(120, 35, 300, 30);
+    statusView.frame = CGRectMake(124, 35, 300, 30);
     statusView.backgroundColor = [UIColor clearColor];
     [self addSubview:statusView];
     [self bringSubviewToFront:statusView];
     
     GaugeView *gaugeView = [[GaugeView alloc] init];
-    gaugeView.frame = CGRectMake(420, 10, 150, 70);
+    gaugeView.frame = CGRectMake(440, 10, 150, 70);
     gaugeView.backgroundColor = [UIColor clearColor];
     [self addSubview:gaugeView];
     [self bringSubviewToFront:gaugeView];
     
+//    self.layer.borderWidth = 1;
+//    self.layer.borderColor = [UIColor grayColor].CGColor;
     
 }
 
