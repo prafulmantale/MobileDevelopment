@@ -1,5 +1,6 @@
 package trenduce.com.trenduce.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,9 +19,13 @@ import trenduce.com.trenduce.R;
 import trenduce.com.trenduce.Utils.Constants;
 import trenduce.com.trenduce.adapters.StylesAdapter;
 import trenduce.com.trenduce.asynctasks.HttpGetAsyncTask;
+import trenduce.com.trenduce.asynctasks.HttpPostAsyncTask;
+import trenduce.com.trenduce.interfaces.StylesViewClickListener;
+import trenduce.com.trenduce.model.LikeRequest;
 import trenduce.com.trenduce.model.Style;
+import trenduce.com.trenduce.model.UserProfile;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements StylesViewClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -34,7 +39,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         styleList = new ArrayList<Style>();
-        adapter = new StylesAdapter(this, styleList);
+        adapter = new StylesAdapter(this, styleList, this);
         lvStyles = (ListView)findViewById(R.id.lvStyles);
         lvStyles.setAdapter(adapter);
 
@@ -99,4 +104,25 @@ public class MainActivity extends ActionBarActivity {
 
         }
     };
+
+    @Override
+    public void OnCommentsRequested(String styleId) {
+        Intent intent = new Intent(this, CommentsViewerActivity.class);
+        intent.putExtra(Constants.INTENT_KEY_STYLE_ID, styleId);
+        startActivity(intent);
+    }
+
+    @Override
+    public void OnLikeStyle(String styleId) {
+
+        LikeRequest request = new LikeRequest();
+        request.setUser(UserProfile.getInstance().getEmailId());
+
+        new HttpPostAsyncTask(request.toJSONObject(), handler, Constants.COMMENTS_API + "/" + styleId + "/like", Constants.HandlerIds.STYLE_LIKE).execute();
+    }
+
+    @Override
+    public void OnUnLikeStyle(String styleId) {
+
+    }
 }

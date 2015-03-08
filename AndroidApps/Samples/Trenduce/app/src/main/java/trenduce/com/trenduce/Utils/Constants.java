@@ -13,6 +13,11 @@ public class Constants {
     public static final String LOGIN_EMAIL_ID_KEY = "emailID";
     public static final String LOGIN_PASSWORD_KEY = "password";
 
+
+    public static final String INTENT_KEY_STYLE_ID = "styleid";
+
+
+
     public static final String BASE_API =  "http://ec2-54-69-50-109.us-west-2.compute.amazonaws.com/trenduce/";
 
     public static final String LOGIN_API = BASE_API +"login";
@@ -20,6 +25,8 @@ public class Constants {
     public static final String USERS_API = BASE_API +"users";
 
     public static final String STYLES_API = BASE_API +"styles";
+
+    public static final String COMMENTS_API = BASE_API +"styles";
 
 
 
@@ -29,5 +36,8 @@ public class Constants {
         public static final int REGISTER = 5001;
         public static final int USER_PROFILE = 5002;
         public static final int STYLES_ALL = 5003;
+        public static final int COMMENTS_STYLE = 5004;
+        public static final int STYLE_LIKE = 5005;
+        public static final int POST_COMMENT = 5006;
     }
 }

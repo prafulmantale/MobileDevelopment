@@ -15,6 +15,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.List;
 
 import trenduce.com.trenduce.R;
+import trenduce.com.trenduce.interfaces.StylesViewClickListener;
 import trenduce.com.trenduce.model.Style;
 
 /**
@@ -22,9 +23,12 @@ import trenduce.com.trenduce.model.Style;
  */
 public class StylesAdapter extends ArrayAdapter<Style> {
 
-    public StylesAdapter(Context context, List<Style> objects) {
+    public StylesAdapter(Context context, List<Style> objects, StylesViewClickListener listener) {
 
         super(context, R.layout.item_style, objects);
+
+
+        this.listener = listener;
 
     }
 
@@ -36,6 +40,7 @@ public class StylesAdapter extends ArrayAdapter<Style> {
         private TextView tvUserName;
         private TextView tvLikesCount;
         private TextView tvCommentsCount;
+        private ImageView ivLike;
 
         void init(View convertView){
             ivStyleImage = (ImageView)convertView.findViewById(R.id.ivStyleImage);
@@ -43,6 +48,7 @@ public class StylesAdapter extends ArrayAdapter<Style> {
             tvUserName = (TextView)convertView.findViewById(R.id.tvUserName);
             tvLikesCount = (TextView)convertView.findViewById(R.id.tvLikesCount);
             tvCommentsCount = (TextView)convertView.findViewById(R.id.tvCommentsCount);
+            ivLike = (ImageView)convertView.findViewById(R.id.ivLikes);
         }
 
         void populateViews(Style style){
@@ -60,11 +66,13 @@ public class StylesAdapter extends ArrayAdapter<Style> {
     private int mLastPosition;
     private DecelerateInterpolator interpolator;
 
+    private StylesViewClickListener listener;
+
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
         ViewHolder viewHolder = null;
-        final Style tweet = getItem(position);
+        final Style style = getItem(position);
 
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_style, parent, false);
@@ -79,7 +87,28 @@ public class StylesAdapter extends ArrayAdapter<Style> {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        viewHolder.populateViews(tweet);
+        viewHolder.populateViews(style);
+
+        viewHolder.tvCommentsCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(listener != null){
+                    listener.OnCommentsRequested(style.getId());
+                }
+            }
+        });
+
+        viewHolder.ivLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(listener != null){
+                    listener.OnLikeStyle(style.getId());
+                }
+
+            }
+        });
 
 //        float initialTranslation = (mLastPosition <= position ? 500f : -500f);
 //

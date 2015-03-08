@@ -5,4 +5,7 @@
     <color name="signin_btn_bg">#ff288199</color>
     <color name="signup_btn_bg">#fff</color>
     <color name="login_panel_bg">#57160107</color>
+    <color name="white">#fff</color>
+    <color name="lv_divider">#ffEAEAEA</color>
+    <color name="comment_text">#a2160803</color>
 </resources>

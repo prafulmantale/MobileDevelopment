@@ -22,5 +22,7 @@
     <string name="registration_progress_message">Signing up...</string>
     <string name="registration_general_error">Registration failed. Please try again later</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_comments_viewer">CommentsViewerActivity</string>
+    <string name="input_comment_hint">Write a comment</string>
 
 </resources>

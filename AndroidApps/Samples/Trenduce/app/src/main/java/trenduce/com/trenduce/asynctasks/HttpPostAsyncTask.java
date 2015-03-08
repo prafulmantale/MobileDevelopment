@@ -69,6 +69,8 @@ public class HttpPostAsyncTask extends AsyncTask<Void, Void, String> {
             StringEntity entity = new StringEntity(data.toString());
             post.setEntity(entity);
 
+            Log.d(TAG, "URI:" + uri + "\nRequest data: " + data.toString());
+
             HttpResponse response = client.execute(post);
 
             if (response.getEntity() != null) {

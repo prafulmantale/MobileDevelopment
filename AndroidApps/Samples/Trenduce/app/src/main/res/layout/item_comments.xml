@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="4dp"
@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ivProfilePicture_user_list"
+        android:id="@+id/ivProfileImage"
         android:src="@drawable/ic_launcher"
         android:maxHeight="40dp"
         android:scaleType="fitXY"
@@ -19,7 +19,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/ivProfilePicture_user_list"
+        android:layout_toRightOf="@id/ivProfileImage"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         >
@@ -28,51 +28,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User Name"
-            android:id="@+id/tvUserName_user_list"
+            android:id="@+id/tvUserName"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textAlignment="center"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textColor="#000000"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="userid"
-            android:id="@+id/tvUserHandle_user_list"
-            android:layout_below="@+id/tvUserName_user_list"
-            android:textAlignment="center"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="8sp"
-            android:layout_alignLeft="@+id/tvUserName_user_list"
-            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description"
-            android:id="@+id/tvDescription_user_list"
-            android:layout_below="@+id/tvUserHandle_user_list"
+            android:id="@+id/tvCommentText"
             android:textAlignment="center"
-            android:textColor="#a2160803"
-            android:textSize="9sp"
-            />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ivFollowingIndicator_user_list"
-            android:src="@drawable/ic_social_add_person"
-            android:maxHeight="30dp"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true"
-            android:layout_alignParentRight="true"
-
+            android:textColor="@color/comment_text"
+            android:layout_below="@+id/tvUserName"
+            android:textSize="12sp"
             />
 
     </RelativeLayout>
-
-
 
 </RelativeLayout>
