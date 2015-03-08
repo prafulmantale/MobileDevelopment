@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="login_footer_bg">#ffdddddd</color>
+    <color name="signin_btn_bg">#ff288199</color>
+    <color name="signup_btn_bg">#fff</color>
+    <color name="login_panel_bg">#57160107</color>
+</resources>

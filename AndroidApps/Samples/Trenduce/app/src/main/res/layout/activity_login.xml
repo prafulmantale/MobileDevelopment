@@ -1,0 +1,99 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"  tools:context=".LoginActivity"
+    android:background="@drawable/login_background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/welcome_to_trenduce"
+        android:id="@+id/tvWelcomeMessage"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:textStyle="normal"
+        android:gravity="center"
+        android:padding="1dp"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlLoginPanel"
+        android:background="@color/login_panel_bg"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_centerVertical="true">
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etEmailAddress"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:hint="@string/login_hint_email_address"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etPassword"
+            android:layout_below="@+id/etEmailAddress"
+            android:layout_marginTop="4dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:inputType="textPassword|none"
+            android:hint="@string/login_hint_password"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:imeOptions="actionDone"
+            android:singleLine="true"/>
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/btnLogin"
+            android:text="@string/label_start_trenducing"
+            android:background="@drawable/signin_button_style"
+            android:textColor="@android:color/white"
+            android:onClick="actionRequested"
+            android:layout_below="@+id/etPassword"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
+            android:textStyle="normal"
+            android:visibility="visible"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup_text"
+        android:id="@+id/tvRegister"
+        android:clickable="true"
+        android:onClick="actionRequested"
+        android:layout_below="@+id/rlLoginPanel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:padding="15dp"/>
+
+
+</RelativeLayout>
