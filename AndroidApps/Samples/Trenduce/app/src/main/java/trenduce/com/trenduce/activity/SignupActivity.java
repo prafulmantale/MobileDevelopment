@@ -1,10 +1,10 @@
 package trenduce.com.trenduce.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -16,16 +16,18 @@ import trenduce.com.trenduce.R;
 import trenduce.com.trenduce.Utils.Constants;
 import trenduce.com.trenduce.Utils.NetworkUtils;
 import trenduce.com.trenduce.asynctasks.HttpPostAsyncTask;
-import trenduce.com.trenduce.model.LoginRequest;
+import trenduce.com.trenduce.model.RegistrationRequest;
 import trenduce.com.trenduce.model.UserProfile;
 
 
-public class SignupActivity extends ActionBarActivity {
+public class SignupActivity extends Activity {
 
     private static final String TAG = SignupActivity.class.getSimpleName();
 
     private EditText etEmailId;
     private EditText etPassword;
+    private EditText etFirstName;
+    private EditText etLastName;
 
     private ProgressDialog progressDialog;
 
@@ -53,6 +55,8 @@ public class SignupActivity extends ActionBarActivity {
 
         etEmailId = (EditText)findViewById(R.id.etEmailAddress);
         etPassword = (EditText)findViewById(R.id.etPassword);
+        etFirstName = (EditText)findViewById(R.id.etFirstName);
+        etLastName = (EditText)findViewById(R.id.etLastName);
 
     }
 
@@ -62,12 +66,16 @@ public class SignupActivity extends ActionBarActivity {
 
         String emailId = etEmailId.getText().toString();
         String password = etPassword.getText().toString();
+        String firstName = etFirstName.getText().toString();
+        String lastName = etLastName.getText().toString();
 
 
-        if(emailId == null || emailId.isEmpty() ||
+        if(firstName == null || firstName.trim().isEmpty() ||
+                lastName == null || lastName.trim().isEmpty() ||
+                emailId == null || emailId.isEmpty() ||
                 password == null || password.isEmpty()){
 
-            Toast.makeText(this, getString(R.string.login_input_error), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.registration_input_error), Toast.LENGTH_LONG).show();
 
             return;
         }
@@ -83,15 +91,24 @@ public class SignupActivity extends ActionBarActivity {
         progressDialog = ProgressDialog.show(this, "", getString(R.string.registration_progress_message));
 
         try {
-            LoginRequest loginRequest = new LoginRequest(emailId, password);
 
-            new HttpPostAsyncTask(loginRequest.toJSONObject(), handler, Constants.REGISTER_API, Constants.HandlerIds.REGISTER).execute();
+            new HttpPostAsyncTask(getRegistrationObject(), handler, Constants.REGISTER_API, Constants.HandlerIds.REGISTER).execute();
         }
         catch (Exception ex){
             if(progressDialog != null){
                 progressDialog.dismiss();
             }
         }
+    }
+
+    private JSONObject getRegistrationObject(){
+        RegistrationRequest request = new RegistrationRequest();
+        request.setFirstName(etFirstName.getText().toString());
+        request.setLastName(etLastName.getText().toString());
+        request.setEmailID(etEmailId.getText().toString());
+        request.setPassword(etPassword.getText().toString());
+
+        return request.toJSONObject();
     }
 
     private Handler handler = new Handler(){
@@ -110,12 +127,7 @@ public class SignupActivity extends ActionBarActivity {
 
             if(response != null && response.equals(Constants.STATUS_FAILURE)){
 
-                if(progressDialog != null){
-                    progressDialog.dismiss();
-                }
-
                 Toast.makeText(getApplicationContext(), R.string.network_Connection_error, Toast.LENGTH_LONG).show();
-
                 return;
             }
 

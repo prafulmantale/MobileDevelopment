@@ -26,7 +26,7 @@ import trenduce.com.trenduce.Utils.Constants;
 /**
  * Created by prafulmantale on 3/7/15.
  */
-public class HttpPostAsyncTask extends AsyncTask<Void, Void, String> {
+public class HttpPostAsyncTask extends AsyncTask<Void, Void, Integer> {
 
 
     private static final String TAG = HttpPostAsyncTask.class.getSimpleName();
@@ -46,7 +46,7 @@ public class HttpPostAsyncTask extends AsyncTask<Void, Void, String> {
 
 
     @Override
-    protected String doInBackground(Void... params) {
+    protected Integer doInBackground(Void... params) {
 
         Message message = new Message();
         boolean isSuccess = false;
@@ -54,6 +54,8 @@ public class HttpPostAsyncTask extends AsyncTask<Void, Void, String> {
         String respString = null;
 
         DefaultHttpClient client = null;
+
+        int statusCode = -1;
 
         try{
 
@@ -77,23 +79,21 @@ public class HttpPostAsyncTask extends AsyncTask<Void, Void, String> {
                 respString = EntityUtils.toString(response.getEntity());
             }
 
-            int statusCode = response.getStatusLine().getStatusCode();
-
-            if(statusCode == HttpStatus.SC_OK){
-                isSuccess = true;
-            }
+            statusCode = response.getStatusLine().getStatusCode();
 
             Log.d(TAG, "Response String: " + respString + "\nStatus Code: " + statusCode + "\nIsSuccess: " + isSuccess);
 
         }
         catch (MalformedURLException mex){
 
+            Log.d(TAG, "MalformedURLException is thrown. Something is wrong");
         }
         catch (UnsupportedEncodingException uex){
-
+            Log.d(TAG, "UnsupportedEncodingException is thrown. Something is wrong");
         }
         catch (IOException ioex){
 
+            return statusCode;
         }
         finally {
 
@@ -106,10 +106,10 @@ public class HttpPostAsyncTask extends AsyncTask<Void, Void, String> {
             handler.sendMessage(message);
         }
 
-//        if(isSuccess && what == AppConstants.HandlerMessageIds.LOGIN){
-//            YMApplication.appCookies = client.getCookieStore().getCookies();
-//        }
+        if(statusCode != HttpStatus.SC_OK){
+            Log.d(TAG, "Something is wrong" + statusCode);
+        }
 
-        return isSuccess ? Constants.STATUS_SUCCESS : Constants.STATUS_FAILURE;
+        return statusCode;
     }
 }

@@ -1,13 +1,15 @@
-package trenduce.com.trenduce.activity;
+package trenduce.com.trenduce.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBarActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -17,6 +19,7 @@ import java.util.List;
 
 import trenduce.com.trenduce.R;
 import trenduce.com.trenduce.Utils.Constants;
+import trenduce.com.trenduce.activity.CommentsViewerActivity;
 import trenduce.com.trenduce.adapters.StylesAdapter;
 import trenduce.com.trenduce.asynctasks.HttpGetAsyncTask;
 import trenduce.com.trenduce.asynctasks.HttpPostAsyncTask;
@@ -25,22 +28,37 @@ import trenduce.com.trenduce.model.LikeRequest;
 import trenduce.com.trenduce.model.Style;
 import trenduce.com.trenduce.model.UserProfile;
 
-public class MainActivity extends ActionBarActivity implements StylesViewClickListener {
+/**
+ * Created by prafulmantale on 3/8/15.
+ */
+public class DashboardFragment extends Fragment implements StylesViewClickListener {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = DashboardFragment.class.getSimpleName();
 
     private StylesAdapter adapter;
     private List<Style> styleList;
     private ListView lvStyles;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        initializeViews(view);
+
+        return view;
+    }
+
+
+    private void initializeViews(View view){
         styleList = new ArrayList<Style>();
-        adapter = new StylesAdapter(this, styleList, this);
-        lvStyles = (ListView)findViewById(R.id.lvStyles);
+        adapter = new StylesAdapter(getActivity(), styleList, this);
+        lvStyles = (ListView)view.findViewById(R.id.lvStyles);
         lvStyles.setAdapter(adapter);
 
         getStyles();
@@ -51,27 +69,25 @@ public class MainActivity extends ActionBarActivity implements StylesViewClickLi
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void OnCommentsRequested(String styleId) {
+        Intent intent = new Intent(getActivity(), CommentsViewerActivity.class);
+        intent.putExtra(Constants.INTENT_KEY_STYLE_ID, styleId);
+        startActivity(intent);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void OnLikeStyle(String styleId) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        LikeRequest request = new LikeRequest();
+        request.setUser(UserProfile.getInstance().getEmailId());
 
-        return super.onOptionsItemSelected(item);
+        new HttpPostAsyncTask(request.toJSONObject(), handler, Constants.COMMENTS_API + "/" + styleId + "/like", Constants.HandlerIds.STYLE_LIKE).execute();
     }
 
+    @Override
+    public void OnUnLikeStyle(String styleId) {
+
+    }
 
     private Handler handler = new Handler(){
 
@@ -105,24 +121,5 @@ public class MainActivity extends ActionBarActivity implements StylesViewClickLi
         }
     };
 
-    @Override
-    public void OnCommentsRequested(String styleId) {
-        Intent intent = new Intent(this, CommentsViewerActivity.class);
-        intent.putExtra(Constants.INTENT_KEY_STYLE_ID, styleId);
-        startActivity(intent);
-    }
 
-    @Override
-    public void OnLikeStyle(String styleId) {
-
-        LikeRequest request = new LikeRequest();
-        request.setUser(UserProfile.getInstance().getEmailId());
-
-        new HttpPostAsyncTask(request.toJSONObject(), handler, Constants.COMMENTS_API + "/" + styleId + "/like", Constants.HandlerIds.STYLE_LIKE).execute();
-    }
-
-    @Override
-    public void OnUnLikeStyle(String styleId) {
-
-    }
 }
