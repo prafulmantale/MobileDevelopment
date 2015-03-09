@@ -5,14 +5,15 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import trenduce.com.trenduce.Utils.Constants;
-
 /**
  * Created by prafulmantale on 10/9/14.
  */
 public class LoginRequest {
 
     private static final String TAG = LoginRequest.class.getSimpleName();
+
+    private static final String EMAIL_KEY = "email";
+    private static final String PWD_KEY = "pwd";
 
     private String emailId;
     private String password;
@@ -39,30 +40,12 @@ public class LoginRequest {
         this.password = password;
     }
 
-
-    public String toJSON(){
-        JSONObject jsonObject = new JSONObject();
-
-        try {
-
-            jsonObject.put("userName", getEmailId());
-            jsonObject.put(Constants.LOGIN_PASSWORD_KEY, getPassword());
-        }
-        catch (JSONException ex){
-
-            Log.d(TAG, "Exception while converting object to JSON");
-            return "";
-        }
-
-        return jsonObject.toString();
-    }
-
     public JSONObject toJSONObject(){
         JSONObject jsonObject = new JSONObject();
 
         try {
-            jsonObject.put("userName", getEmailId());
-            jsonObject.put(Constants.LOGIN_PASSWORD_KEY, getPassword());
+            jsonObject.put(EMAIL_KEY, getEmailId());
+            jsonObject.put(PWD_KEY, getPassword());
         }
         catch (JSONException ex){
 
