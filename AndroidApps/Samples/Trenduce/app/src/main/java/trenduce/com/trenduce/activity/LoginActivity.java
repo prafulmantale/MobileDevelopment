@@ -3,9 +3,11 @@ package trenduce.com.trenduce.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +29,8 @@ import trenduce.com.trenduce.model.UserProfile;
 public class LoginActivity extends Activity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
+
+    private static final String PREF_LOGIN_EMAIL_KEY = "PREF_EMAIL";
 
     private Button btnLogin;
     private TextView tvRegister;
@@ -50,6 +54,8 @@ public class LoginActivity extends Activity {
     private void initialize(){
 
         initializeViews();
+
+        loadFromPreferences();
     }
 
     private void initializeViews() {
@@ -169,6 +175,8 @@ public class LoginActivity extends Activity {
 
                         UserProfile.getInstance().setId(userId);
 
+                        saveLoginPreferences();
+
                         getUserProfile();
 
                     } else {
@@ -210,6 +218,32 @@ public class LoginActivity extends Activity {
 
 
 
+    private void saveLoginPreferences(){
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        String email = etEmailId.getText().toString();
+
+        if(email != null && !email.trim().isEmpty()){
+           editor.putString(PREF_LOGIN_EMAIL_KEY, email);
+        }
+        else{
+            editor.putString(PREF_LOGIN_EMAIL_KEY, "");
+        }
+
+        editor.commit();
+    }
+
+    private void loadFromPreferences(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String emailID = preferences.getString(PREF_LOGIN_EMAIL_KEY, "");
+
+        if(emailID != null && emailID.trim().isEmpty() == false){
+            etEmailId.setText(emailID);
+        }
+    }
 
 
 }

@@ -19,9 +19,13 @@ public class UserProfile {
     private String emailId;
     private String password;
 
+    private String imageUrl;
+
     private String firstName;
     private String lastName;
     private int age;
+
+    private String fullName;
 
     private List<String> followers;
     private List<String> following;
@@ -49,13 +53,15 @@ public class UserProfile {
 
         try {
             id = jsonObject.getString("id");
-            emailId = jsonObject.getString("userName");
-            firstName = jsonObject.getString("firstName");
-            lastName = jsonObject.getString("lastName");
-            age = jsonObject.getInt("age");
-            trenducePoints = jsonObject.getLong("trenducePoints");
+            emailId = jsonObject.getString("email");
+            firstName = jsonObject.getString("fn");
+            lastName = jsonObject.getString("ln");
+            age = jsonObject.optInt("age");
+            trenducePoints = jsonObject.optLong("pts");
+            imageUrl = jsonObject.optString("img");
+            displayCreatedTime = jsonObject.getString("dt");
 
-
+            fullName = firstName + " " + lastName;
 
         }
         catch (JSONException ex){
@@ -101,6 +107,22 @@ public class UserProfile {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public int getAge() {

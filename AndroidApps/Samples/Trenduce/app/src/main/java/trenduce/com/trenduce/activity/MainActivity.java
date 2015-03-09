@@ -11,6 +11,7 @@ import android.widget.ListView;
 import trenduce.com.trenduce.R;
 import trenduce.com.trenduce.Utils.FragmentNavigationDrawer;
 import trenduce.com.trenduce.fragments.DashboardFragment;
+import trenduce.com.trenduce.model.UserProfile;
 
 public class MainActivity extends FragmentActivity {
 
@@ -39,7 +40,7 @@ public class MainActivity extends FragmentActivity {
                 R.layout.drawer_item_list,
                 R.id.flContainer);
 
-        drawerLayout.addNavigationItem("Prafulkumar Mantale", "Prafulkumar Mantale", null);
+        drawerLayout.addNavigationItem(UserProfile.getInstance().getFullName(), UserProfile.getInstance().getFullName(), null);
         drawerLayout.addNavigationItem("Dashboard", "Dashboard", DashboardFragment.class);
         drawerLayout.addNavigationItem("Invite Friends", "Invite Friends", null);
         drawerLayout.addNavigationItem("Settings", "Settings", null);
