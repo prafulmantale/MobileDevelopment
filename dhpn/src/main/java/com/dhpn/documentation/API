@@ -1,0 +1,146 @@
+Home Page:
+    Url: http://localhost:8080/dhnp
+    Method: GET
+
+Registration Request:
+
+    Url: http://localhost:8080/dhnp/register
+    Method: POST
+    Body:
+        {
+          "emailId":"praful_mantale1@yahoo.com",
+          "password":"pra1Ku435"
+        }
+
+    Response:
+
+        {
+            "status": "SUCCESS",
+            "errorcode": "",
+            "errormsg": ""
+        }
+
+        {
+            "status": "FAILURE",
+            "errorcode": "USER_ALREADY_EXISTS",
+            "errormsg": "User already exists."
+        }
+
+        {
+            "status": "FAILURE",
+            "errorcode": "INSUFFICIENT_OR_INCORRECT_DATA",
+            "errormsg": "Insufficient or incorrect data."
+        }
+
+
+Login Request:
+
+    Url: http://localhost:8080/dhnp/login
+    Method: POST
+    Body:
+        {
+          "emailId":"praful_mantale1@yahoo.com",
+          "password":"pra1Ku435"
+        }
+
+    Response:
+
+        {
+            "status": "SUCCESS",
+            "errorcode": "",
+            "errormsg": ""
+        }
+
+        {
+            "status": "FAILURE",
+            "errorcode": "AUTHENTICATION_FAILED",
+            "errormsg": "Incorrect user name or password."
+        }
+
+        {
+            "status": "FAILURE",
+            "errorcode": "INSUFFICIENT_OR_INCORRECT_DATA",
+            "errormsg": "Insufficient or incorrect data."
+        }
+
+Get All Users:
+
+    Url:http://localhost:8080/dhnp/users
+    Method: GET
+    Response:
+        [
+        {
+        id: "54f3fcdad4c6bcd593844b4a",
+        email: "praful_mantale@yahoo.com",
+        pass: "pra1Ku43",
+        fn: null,
+        ln: null,
+        addr: null,
+        cn: null,
+        cn2: null
+        },
+        {
+        id: "54f3feccd4c6eaa64fe2e724",
+        email: "praful_demox@yahoo.com",
+        pass: "pra1Ku43",
+        fn: "Prafulkumar",
+        ln: "Mantale",
+        addr: {
+        addr1: "TUSHAR, SHAHU NAGAR",
+        addr2: "NANDED ROAD",
+        city: "Latur",
+        state: "Maharashtra",
+        country: "India",
+        pin: "413512"
+        },
+        cn: "9886129108",
+        cn2: "9886129108"
+        }
+        ]
+
+Update User Profile
+
+        Url: http://localhost:8080/dhnp/users
+        Method: Post
+        Request Body:
+            {
+              "email":"praful_demox@yahoo.com",
+              "fn":"Prafulkumar",
+              "ln":"Mantale",
+              "cn":"9886129108",
+              "cn2":"9886129108",
+              "addr":{
+                "addr1":"TUSHAR, SHAHU NAGAR",
+                "addr2":"NANDED ROAD",
+                "city":"Latur",
+                "state":"Maharashtra",
+                "country":"India",
+                "pin":"413512"
+              }
+            }
+
+        Response:
+            200 or 400
+
+
+Get User Details
+        Url: http://localhost:8080/dhnp/users/54f3feccd4c6eaa64fe2e724
+        Method : GET
+        Response:
+            {
+                "id": "54f3feccd4c6eaa64fe2e724",
+                "email": "praful_demox@yahoo.com",
+                "pass": "pra1Ku43",
+                "fn": "Prafulkumar",
+                "ln": "Mantale",
+                "addr": {
+                    "addr1": "TUSHAR, SHAHU NAGAR",
+                    "addr2": "NANDED ROAD",
+                    "city": "Latur",
+                    "state": "Maharashtra",
+                    "country": "India",
+                    "pin": "413512"
+                },
+                "cn": "9886129108",
+                "cn2": "9886129108"
+            }
