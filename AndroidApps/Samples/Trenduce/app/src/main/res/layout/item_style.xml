@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ivLikes"
-            android:src="@drawable/ic_action_favorite"
+            android:src="@drawable/ic_action_favorite_none"
             android:layout_gravity="center_vertical" />
 
         <TextView
@@ -92,7 +92,9 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="0"
             android:id="@+id/tvCommentsCount"
+            android:drawableLeft="@drawable/ic_communication_comment"
             android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:textSize="18sp"/>
 
     </LinearLayout>

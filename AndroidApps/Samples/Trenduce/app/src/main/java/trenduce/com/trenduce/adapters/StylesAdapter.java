@@ -54,7 +54,7 @@ public class StylesAdapter extends ArrayAdapter<Style> {
             tvTitle.setText(style.getTitle());
             tvUserName.setText(style.getCreatedBy());
             tvLikesCount.setText(style.getLikesCount());
-            tvCommentsCount.setText(style.getCommentsCount() + " Comments");
+            tvCommentsCount.setText(style.getCommentsCount());
 
 
             ImageLoader.getInstance().displayImage(style.getImageUrl(), ivStyleImage);

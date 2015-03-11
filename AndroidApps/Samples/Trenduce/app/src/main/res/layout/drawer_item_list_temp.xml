@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/drawer_background"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:layout_height="60dp"
+    android:id="@+id/tvDrawerItem">
+
+    <ImageView
+        android:id="@+id/flag"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+         />
+
+    <TextView
+        android:id="@+id/itemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/flag"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_gravity="center_vertical"
+        android:maxLines="1"
+        android:paddingRight="10dp"
+        android:paddingLeft="3dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/drawer_item_text"
+        android:background="@color/drawer_background"
+         />
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:textSize="16sp"
+
+         />
+
+</RelativeLayout>
+
