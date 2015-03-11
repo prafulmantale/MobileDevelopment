@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import duggleetech.com.guardianangel.R;
+import duggleetech.com.guardianangel.utils.Constants;
 
 
 public class LoginActivity extends Activity {
@@ -66,19 +67,40 @@ public class LoginActivity extends Activity {
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), RegistrationActivity.class);
-                startActivity(intent);
-
-                overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_from_right);
+                showRegistration();
             }
         });
 
         tvForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Forgot password", Toast.LENGTH_LONG).show();
+
+                showForgotPassword();
+
             }
         });
+    }
+
+    private void showRegistration(){
+
+        Intent intent = new Intent(getBaseContext(), RegistrationActivity.class);
+        startActivity(intent);
+
+        overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_from_right);
+    }
+
+    private void showForgotPassword(){
+        Intent intent = new Intent(this, ForgotPasswdActivity.class);
+
+        String mobNumber = etMobileNumber.getText().toString();
+
+        if(mobNumber != null && mobNumber.trim().isEmpty() == false){
+            intent.putExtra(Constants.INTENT_MOB_NUM_KEY, mobNumber);
+        }
+
+        startActivity(intent);
+
+        overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_from_right);
     }
 
     private void doLogin(){
@@ -88,8 +110,18 @@ public class LoginActivity extends Activity {
             return;
         }
 
+        showMain();
     }
 
+
+    private void showMain(){
+
+        Intent intent = new Intent(this, MainActivity.class);
+
+        startActivity(intent);
+
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -110,8 +142,8 @@ public class LoginActivity extends Activity {
         String mobNumber = etMobileNumber.getText().toString();
         String pass = etPassword.getText().toString();
 
-        if(mobNumber == null || mobNumber.isEmpty() ||
-                pass == null || pass.isEmpty()){
+        if(mobNumber == null || mobNumber.trim().isEmpty() ||
+                pass == null || pass.trim().isEmpty()){
 
             Toast.makeText(this, getString(R.string.login_input_error), Toast.LENGTH_LONG).show();
 

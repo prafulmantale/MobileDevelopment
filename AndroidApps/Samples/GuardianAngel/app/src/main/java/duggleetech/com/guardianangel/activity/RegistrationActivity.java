@@ -77,10 +77,10 @@ public class RegistrationActivity extends Activity {
         String firstName = etFirstName.getText().toString();
         String lastName = etLastName.getText().toString();
 
-        if(firstName == null || firstName.isEmpty() ||
-               lastName == null || lastName.isEmpty() ||
-                mobNumber == null || mobNumber.isEmpty() ||
-                pass == null || pass.isEmpty()){
+        if(firstName == null || firstName.trim().isEmpty() ||
+               lastName == null || lastName.trim().isEmpty() ||
+                mobNumber == null || mobNumber.trim().isEmpty() ||
+                pass == null || pass.trim().isEmpty()){
 
             Toast.makeText(this, getString(R.string.registration_input_error), Toast.LENGTH_LONG).show();
 

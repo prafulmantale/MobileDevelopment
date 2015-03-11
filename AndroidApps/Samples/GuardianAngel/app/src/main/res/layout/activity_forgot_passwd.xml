@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/guardianangel"
+    tools:context="duggleetech.com.guardianangel.activity.ForgotPasswdActivity">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlLoginPanel"
+        android:background="@color/login_panel_bg"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_centerVertical="true"
+        android:padding="10dp">
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etMobileNumber"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:hint="@string/hint_mobile_number"
+            android:textSize="22sp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:inputType="phone"
+            />
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/btnResetPassword"
+            android:text="@string/reset_password_button"
+            android:background="@drawable/login_button_style"
+            android:layout_below="@id/etMobileNumber"
+            android:textColor="@android:color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
+            android:textStyle="normal"
+            android:visibility="visible"
+            android:textSize="22sp"
+            />
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

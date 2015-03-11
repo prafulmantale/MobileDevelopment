@@ -19,6 +19,37 @@
     <string name="register_button_text">Register</string>
     <string name="registration_input_error">Please enter all the requested fields</string>
     <string name="title_activity_registration">RegistrationActivity</string>
+
+    <!-- Forgot password screen -->
+    <string name="title_activity_forgot_passwd">ForgotPasswdActivity</string>
+    <string name="reset_password_button">Reset Password</string>
+    <string name="forgot_pwd_input_error">Please enter Mobile number</string>
+    <string name="title_activity_main">MainActivity</string>
     <string name="hello_world">Hello world!</string>
+    
+    
+    <!-- Navigation Drawer items
+        Add travel related - Auto, Taxi
+        Be a Samaritan
+        Find Drop Buddy
+    -->
+
+    <string-array name="drawer_items_array">
+        <item>User Name</item>
+        <item>Command Center</item>
+        <item>My Angels</item>
+        <item>Angel To</item>
+        <item>Your Story</item>
+        <item>Feedback</item>
+        <item>Invite Friends</item>
+        <item>Spread the word</item>
+        <item>Settings</item>
+    </string-array>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
 
 </resources>

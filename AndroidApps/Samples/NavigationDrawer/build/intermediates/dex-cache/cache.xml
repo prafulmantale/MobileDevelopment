@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Applications/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/prafulmantale/MobileDevelopment/AndroidApps/Samples/NavigationDrawer/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6658c117293958a7383bcbb346a57fefebf27ee4.jar" />
+    </item>
+    <item
+        jar="/Users/prafulmantale/MobileDevelopment/AndroidApps/Samples/NavigationDrawer/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/prafulmantale/MobileDevelopment/AndroidApps/Samples/NavigationDrawer/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-1fd86acd118187d71b5538ee51914ddc7a94a6cb.jar" />
+    </item>
+    <item
+        jar="/Users/prafulmantale/MobileDevelopment/AndroidApps/Samples/NavigationDrawer/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/prafulmantale/MobileDevelopment/AndroidApps/Samples/NavigationDrawer/app/build/intermediates/pre-dexed/debug/classes-30bbc8a39d1c1bc6d21d22026f16ca7fa6a4b1b6.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,4 @@
+/Users/prafulmantale/MobileDevelopment/AndroidApps/Samples/NavigationDrawer/app/build/intermediates/classes/debug
+/Users/prafulmantale/MobileDevelopment/AndroidApps/Samples/NavigationDrawer/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6658c117293958a7383bcbb346a57fefebf27ee4.jar
+/Users/prafulmantale/MobileDevelopment/AndroidApps/Samples/NavigationDrawer/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-1fd86acd118187d71b5538ee51914ddc7a94a6cb.jar
+/Users/prafulmantale/MobileDevelopment/AndroidApps/Samples/NavigationDrawer/app/build/intermediates/pre-dexed/debug/classes-30bbc8a39d1c1bc6d21d22026f16ca7fa6a4b1b6.jar
