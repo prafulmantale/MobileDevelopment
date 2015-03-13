@@ -35,7 +35,6 @@
     -->
 
     <string-array name="drawer_items_array">
-        <item>User Name</item>
         <item>Command Center</item>
         <item>My Angels</item>
         <item>Angel To</item>

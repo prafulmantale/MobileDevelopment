@@ -2,6 +2,8 @@ package trenduce.com.trenduce.model;
 
 import android.util.Log;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,12 +18,15 @@ public class Comment {
 
     private static final String TAG = Comment.class.getSimpleName();
 
+    @JsonProperty("User")
     private String user;
 
     private String userProfileImageUrl;
 
+    @JsonProperty("text")
     private String text;
 
+    @JsonProperty("createdAt")
     private long createdAt;
 
     private String displayCreatedAt;

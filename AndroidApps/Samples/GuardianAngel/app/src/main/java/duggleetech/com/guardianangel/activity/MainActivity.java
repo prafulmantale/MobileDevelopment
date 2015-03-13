@@ -1,49 +1,53 @@
-/*
- * Copyright 2013 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package duggleetech.com.guardianangel.activity;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import duggleetech.com.guardianangel.R;
+import duggleetech.com.guardianangel.adapter.NavDrawerAdapter;
+import duggleetech.com.guardianangel.application.AngelApplication;
+import duggleetech.com.guardianangel.fragment.AngelToFragment;
 import duggleetech.com.guardianangel.fragment.CommandCenterFragment;
+import duggleetech.com.guardianangel.fragment.FeedbackFragment;
+import duggleetech.com.guardianangel.fragment.InviteFriendsFragment;
+import duggleetech.com.guardianangel.fragment.MyAngelsFragment;
+import duggleetech.com.guardianangel.fragment.SettingsFragment;
+import duggleetech.com.guardianangel.fragment.SpreadWordFragment;
+import duggleetech.com.guardianangel.fragment.YourStoryFragment;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
     private DrawerLayout drawerLayout;
-    private ListView drawerListView;
     private ActionBarDrawerToggle drawerToggle;
 
-    private CharSequence drawerTitle;
-    private CharSequence activityTitle;
     private String[] drawerItemsList;
+
+    private Toolbar toolbar;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+
+    int ICONS[] = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,
+            R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
+
+    String NAME = "User Name";
+    int PROFILE = R.drawable.ic_sample_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,53 +57,88 @@ public class MainActivity extends Activity {
         initialize();
 
         if (savedInstanceState == null) {
-            selectItem(0);
+            selectItem(1);
         }
+
+
     }
 
     private void initialize(){
 
-        initializeNavDrawer();
+        toolbar = (Toolbar)findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
 
-        activityTitle = drawerTitle = getTitle();
         drawerItemsList = getResources().getStringArray(R.array.drawer_items_array);
+
+        mRecyclerView = (RecyclerView)findViewById(R.id.rvLeftDrawer);
+        mRecyclerView.setHasFixedSize(true);
+
+        mAdapter = new NavDrawerAdapter(drawerItemsList,ICONS,NAME,PROFILE);
+
+        mRecyclerView.setAdapter(mAdapter);
+
+        final GestureDetector mGestureDetector = new GestureDetector(MainActivity.this, new GestureDetector.SimpleOnGestureListener() {
+
+            @Override public boolean onSingleTapUp(MotionEvent e) {
+                return true;
+            }
+
+        });
+
+        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+                View child = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
+
+
+
+                if(child!=null && mGestureDetector.onTouchEvent(motionEvent)){
+                    drawerLayout.closeDrawers();
+
+                    int position = recyclerView.getChildPosition(child);
+
+                    if(position > 0 && position <= drawerItemsList.length) {
+                        selectItem(recyclerView.getChildPosition(child));
+                    }
+
+                    return true;
+
+                }
+
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+
+            }
+        });
+
+        mLayoutManager = new LinearLayoutManager(this);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerListView = (ListView) findViewById(R.id.left_drawer);
 
-        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        drawerListView.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, drawerItemsList));
-        drawerListView.setOnItemClickListener(new DrawerItemClickListener());
+        drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
 
-        // enable ActionBar app icon to behave as action to toggle nav drawer
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
-
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the sliding drawer and the action bar app icon
-        drawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                drawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
-        ) {
-            public void onDrawerClosed(View view) {
-                getActionBar().setTitle(activityTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
+            @Override
             public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle(drawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                super.onDrawerOpened(drawerView);
             }
-        };
-        drawerLayout.setDrawerListener(drawerToggle);
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+
+
+        }; // Drawer Toggle Object Made
+        drawerLayout.setDrawerListener(drawerToggle); // Drawer Listener set to the Drawer toggle
+        drawerToggle.syncState();
     }
 
-    private void initializeNavDrawer(){
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,20 +150,11 @@ public class MainActivity extends Activity {
     /* Called whenever we call invalidateOptionsMenu() */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content view
-//        boolean drawerOpen = drawerLayout.isDrawerOpen(drawerListView);
-//        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-         // The action bar home/up action should open or close the drawer.
-         // ActionBarDrawerToggle will take care of this.
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        // Handle action buttons
         switch(item.getItemId()) {
 
         default:
@@ -132,31 +162,72 @@ public class MainActivity extends Activity {
         }
     }
 
-    /* The click listner for ListView in the navigation drawer */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
+    private void selectItem(int position) {
+
+        FragmentManager fragmentManager = getFragmentManager();
+
+        switch (position) {
+
+            case 1:
+
+                Fragment cmdFragment = new CommandCenterFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, cmdFragment).commit();
+                break;
+
+            case 2:
+
+                Fragment maFragment = new MyAngelsFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, maFragment).commit();
+                break;
+
+            case 3:
+
+                Fragment atFragment = new AngelToFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, atFragment).commit();
+                break;
+
+            case 4:
+
+                Fragment ysFragment = new YourStoryFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, ysFragment).commit();
+                break;
+
+            case 5:
+
+                Fragment fbFragment = new FeedbackFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fbFragment).commit();
+                break;
+
+            case 6:
+
+                Fragment inviteFriendsFragment = new InviteFriendsFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, inviteFriendsFragment).commit();
+                break;
+
+
+            case 7:
+
+                Fragment spreadWordFragment = new SpreadWordFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, spreadWordFragment).commit();
+                break;
+
+
+            case 8:
+
+                Fragment settingsFragment = new SettingsFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, settingsFragment).commit();
+                break;
+
+            default:
+                break;
+
+        }
+
+        if(position > 0 && position <= drawerItemsList.length) {
+            toolbar.setTitle(drawerItemsList[position - 1]);
         }
     }
 
-    private void selectItem(int position) {
-        Fragment fragment = new CommandCenterFragment();
-
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
-        // update selected item and title, then close the drawer
-        drawerListView.setItemChecked(position, true);
-        setTitle(drawerItemsList[position]);
-        drawerLayout.closeDrawer(drawerListView);
-    }
-
-    @Override
-    public void setTitle(CharSequence title) {
-        activityTitle = title;
-        getActionBar().setTitle(activityTitle);
-    }
 
     /**
      * When using the ActionBarDrawerToggle, you must call it during
