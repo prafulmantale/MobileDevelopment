@@ -27,7 +27,7 @@ public class RegistrationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        getActionBar().hide();
+//        getActionBar().hide();
 
         initialize();
     }

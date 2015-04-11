@@ -25,7 +25,7 @@ public class ForgotPasswdActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_passwd);
 
-        getActionBar().hide();
+//        getActionBar().hide();
 
         initialize();
     }

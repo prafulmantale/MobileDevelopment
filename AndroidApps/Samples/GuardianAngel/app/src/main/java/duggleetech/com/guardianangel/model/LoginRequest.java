@@ -20,7 +20,7 @@ public class LoginRequest {
 //        Entity entity = mapper.readValue(jsonString, Entity.class);
 //        System.out.println(entity);
 //        String json = mapper.writeValueAsString(this);
-        
+
     }
 
     public String getLoginId() {

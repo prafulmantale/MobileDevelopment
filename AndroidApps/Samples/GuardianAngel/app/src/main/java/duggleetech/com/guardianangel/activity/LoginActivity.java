@@ -30,7 +30,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        getActionBar().hide();
+//        getActionBar().hide();
 
         initialize();
     }

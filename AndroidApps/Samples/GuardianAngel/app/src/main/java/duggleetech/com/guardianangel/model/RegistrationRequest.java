@@ -10,7 +10,6 @@ public class RegistrationRequest {
     @JsonProperty("fn")
     private String firstName;
 
-
     @JsonProperty("ln")
     private String lastName;
 
