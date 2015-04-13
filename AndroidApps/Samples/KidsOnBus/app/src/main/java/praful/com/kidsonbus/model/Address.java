@@ -16,14 +16,19 @@ public class Address {
     private LocationDetails mLocationDetails;
     private String mDisplayAddress;;
 
-    public Address(String houseNumber, String street, String city) {
+    public Address(String houseNumber, String street, String city, String state) {
         mHouseNumber = houseNumber;
         mStreet = street;
         mCity = city;
         mCountry = "";
-        mState = "";
+        mState = state;
         mPinCode = "";
         mDisplayAddress = "";
+    }
+
+    public Address(String houseNumber, String street, String city, String state, String pinCode) {
+        this(houseNumber, street, city, state);
+        mPinCode = pinCode;
     }
 
     public String getCountry() {
@@ -77,13 +82,45 @@ public class Address {
                 sb.append(mHouseNumber);
             }
             if(!TextUtils.isEmpty(mStreet)){
-                sb.append(",").append("\n").append(mStreet);
+                sb.append(" ").append(" ").append(mStreet);
             }
             if(!TextUtils.isEmpty(mCity)){
-                sb.append(",").append("\n").append(mCity);
+                sb.append("\n").append(mCity);
+            }
+            if(!TextUtils.isEmpty(mState)){
+                sb.append(", ").append(mState);
             }
             if(!TextUtils.isEmpty(mPinCode)){
-                sb.append("\t").append(mPinCode);
+                sb.append(" ").append(mPinCode);
+            }
+            mDisplayAddress = sb.toString();
+            if(TextUtils.isEmpty(mDisplayAddress)){
+                mDisplayAddress = "";
+            }
+
+            mDisplayAddress = mDisplayAddress.toUpperCase();
+        }
+
+        return mDisplayAddress;
+    }
+
+    public String getQueryAddress(){
+        if(TextUtils.isEmpty(mDisplayAddress)){
+            StringBuilder sb = new StringBuilder();
+            if(!TextUtils.isEmpty(mHouseNumber)){
+                sb.append(mHouseNumber);
+            }
+            if(!TextUtils.isEmpty(mStreet)){
+                sb.append(" ").append(" ").append(mStreet);
+            }
+            if(!TextUtils.isEmpty(mCity)){
+                sb.append(" ").append(mCity);
+            }
+            if(!TextUtils.isEmpty(mState)){
+                sb.append(" ").append(mCity);
+            }
+            if(!TextUtils.isEmpty(mPinCode)){
+                sb.append(" ").append(mPinCode);
             }
             mDisplayAddress = sb.toString();
             if(TextUtils.isEmpty(mDisplayAddress)){

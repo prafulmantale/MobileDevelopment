@@ -1,32 +1,39 @@
 package praful.com.kidsonbus.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by prafulmantale on 4/11/15.
  */
 public class LocationDetails {
 
-    private float mLatitude;
+    @JsonProperty("lat")
+    private double mLatitude;
 
-    private float mLongitude;
+    @JsonProperty("lng")
+    private double mLongitude;
 
-    public LocationDetails(float latitude, float longitude) {
+    public LocationDetails() {
+    }
+
+    public LocationDetails(double latitude, double longitude) {
         mLatitude = latitude;
         mLongitude = longitude;
     }
 
-    public float getLatitude(){
+    public double getLatitude(){
         return mLatitude;
     }
 
-    public void setLatitude(float latitude){
+    public void setLatitude(double latitude){
         mLatitude = latitude;
     }
 
-    public float getLongitude(){
+    public double getLongitude(){
         return mLongitude;
     }
 
-    public void setLongitude(float longitude){
+    public void setLongitude(double longitude){
         mLongitude = longitude;
     }
 

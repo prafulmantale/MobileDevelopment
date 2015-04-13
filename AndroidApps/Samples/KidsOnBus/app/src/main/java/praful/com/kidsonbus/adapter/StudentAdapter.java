@@ -67,6 +67,9 @@ public class StudentAdapter extends ArrayAdapter<Student> {
             if(student.getAvatarId() != 0){
                 Picasso.with(getContext()).load(student.getAvatarId()).into(avatar);
             }
+            else{
+                Picasso.with(getContext()).load(android.R.color.transparent).into(avatar);
+            }
         }
     }
 }

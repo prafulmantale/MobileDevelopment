@@ -1,53 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingBottom="@dimen/students_list_padding_bottom"
-    android:layout_gravity="center_vertical">
+    android:paddingBottom="@dimen/students_list_padding_bottom">
 
     <ImageView
         android:id="@+id/student_avatar"
         android:layout_width="@dimen/avatar_dimen"
         android:layout_height="@dimen/avatar_dimen"
-        android:layout_margin="@dimen/avatar_layout_margin" />
+        android:layout_margin="@dimen/avatar_layout_margin"
+        android:maxHeight="60dp"
+        android:maxWidth="60dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/student_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
-        android:orientation="vertical">
+        android:layout_toRightOf="@id/student_avatar"
+        android:paddingLeft="@dimen/narrow_space" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#78A"
-            android:background="@android:color/white"
-            android:orientation="horizontal">
+    <TextView
+        android:id="@+id/student_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/narrow_space"
+        android:textStyle="italic" />
 
-            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:padding="@dimen/narrow_space"
-                android:gravity="bottom"
-                android:id="@+id/student_name" />
+    <TextView
+        android:id="@+id/student_address"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/student_distance"
+        android:layout_toRightOf="@id/student_avatar"
+        android:paddingBottom="@dimen/students_list_padding_bottom"
+        android:paddingLeft="@dimen/narrow_space" />
 
-            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textStyle="italic"
-                android:padding="@dimen/narrow_space"
-                android:id="@+id/student_distance" />
-        </RelativeLayout>
-
-        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/narrow_space"
-            android:background="@android:color/white"
-            android:id="@+id/student_address" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

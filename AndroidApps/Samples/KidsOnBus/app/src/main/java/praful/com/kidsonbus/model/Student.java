@@ -2,6 +2,8 @@ package praful.com.kidsonbus.model;
 
 import android.text.TextUtils;
 
+import java.util.Comparator;
+
 /**
  * Created by prafulmantale on 4/11/15.
  */
@@ -87,4 +89,16 @@ public class Student {
                 ", mAddress=" + mAddress +
                 '}';
     }
+
+
+    public static Comparator<Student> NameComparator = new Comparator<Student>() {
+        @Override
+        public int compare(Student lhs, Student rhs) {
+             if(lhs.mFirstName.compareTo(rhs.mFirstName) == 0){
+                return lhs.mLastName.compareTo(rhs.mLastName);
+             }
+
+            return lhs.mFirstName.compareTo(rhs.mFirstName);
+        }
+    };
 }
