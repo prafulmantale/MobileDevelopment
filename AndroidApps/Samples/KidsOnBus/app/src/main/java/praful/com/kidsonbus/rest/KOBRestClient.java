@@ -9,6 +9,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import praful.com.kidsonbus.caches.ApplicationData;
 import praful.com.kidsonbus.model.Address;
 import praful.com.kidsonbus.model.DirectionsResult;
@@ -45,7 +48,15 @@ public class KOBRestClient {
 
     public void getDirections(final GoogleMap googleMap) {
 
-        RestClient.get("/directions/json?origin=600 rainbow dr mountain view CA&destination=3400 hillsview ave palo alto CA&waypoints=optimize:true|450 N Mathilda Ave Sunnyvale CA &key=AIzaSyBq7iqgireVUrb20YUCnefFhfJt1WLutrA", null, new JsonHttpResponseHandler() {
+        String params = "optimize:true|";
+        try {
+            params = URLEncoder.encode(params, "UTF-8");
+        } catch (UnsupportedEncodingException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        RestClient.get("/directions/json?origin=600 rainbow dr mountain view CA&destination=3400 hillsview ave palo alto CA&waypoints=" + params +"450 N Mathilda Ave Sunnyvale CA &key=AIzaSyBq7iqgireVUrb20YUCnefFhfJt1WLutrA", null, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

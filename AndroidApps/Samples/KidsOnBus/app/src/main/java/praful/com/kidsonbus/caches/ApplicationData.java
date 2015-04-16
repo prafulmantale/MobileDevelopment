@@ -12,6 +12,7 @@ import praful.com.kidsonbus.model.DirectionsResult;
 import praful.com.kidsonbus.model.LocationDetails;
 import praful.com.kidsonbus.model.School;
 import praful.com.kidsonbus.model.Student;
+import praful.com.kidsonbus.rest.KOBRestClient;
 
 /**
  * Created by prafulmantale on 4/11/15.
@@ -60,27 +61,27 @@ public final class ApplicationData {
 
 
     private void populateStudents(){
-        Student student1 = new Student("Reyansh", "Mantale", R.drawable.reyansh, new Address("600", "Rainbow Drive", "Mountain View", "CA"));
-        student1.getAddress().setLocationDetails(new LocationDetails(37.379016, -122.065538));
+        Student student1 = new Student("Tom", "Cruise", R.drawable.one, new Address("101", "Green Street", "San Francisco", "CA"));
         students.add(student1);
 
-        Student student2 = new Student("Praful", "Mantale", R.drawable.praful, new Address("870", "East El Camino Real", "Mountain View", "CA"));
-        student2.getAddress().setLocationDetails(new LocationDetails(37.3767882, -122.060383));
+        Student student2 = new Student("Julia", "Cary", R.drawable.two, new Address("850", "Cherry Avenue", "San Bruno", "CA"));
         students.add(student2);
 
-        Student student3 = new Student("Ritu", "Raj", R.drawable.ritu, new Address("450", "North Mathilda Avenue", "Sunnyvale", "CA"));
-        student3.getAddress().setLocationDetails(new LocationDetails(37.3869826, -122.0300896));
+        Student student3 = new Student("Hrithik", "Roshan", R.drawable.three, new Address("450", "North Mathilda Avenue", "Sunnyvale", "CA"));
         students.add(student3);
 
-        Student student4 = new Student("Harpal", "Sandhu", R.drawable.ritu, new Address("3400", "HillsView Ave", "Palo Alto", "CA"));
-        student4.getAddress().setLocationDetails(new LocationDetails(37.4041546, -122.1481243));
+        Student student4 = new Student("Kate", "Williams", R.drawable.four, new Address("3400", "HillsView Ave", "Palo Alto", "CA"));
         students.add(student4);
 
-        Student student5 = new Student("Nav", "Sandhu", R.drawable.ritu, new Address("23445", "Camino Hermoso Dr", "Los Altos", "CA"));
-        student5.getAddress().setLocationDetails(new LocationDetails(37.341106, -122.111097));
+        Student student5 = new Student("Jenny", "Smith", R.drawable.five, new Address("23445", "Camino Hermoso Dr", "Los Altos", "CA"));
         students.add(student5);
 
+        Student student6 = new Student("Leonardo", "deCaprio", R.drawable.six, new Address("600", "W California Ave", "Sunnyvale", "CA"));
+        students.add(student6);
+
         Collections.sort(students, Student.NameComparator);
+
+        updateLatLang();
     }
 
     private void populateSchoolDetails(){
@@ -88,10 +89,10 @@ public final class ApplicationData {
         mSchool.getAddress().setLocationDetails(new LocationDetails(37.337203, -122.0497469));
     }
 
-//    private void updateLatLang(){
-//
-//        for (Student student : students){
-//            new KOBRestClient().getLatLang(student.getAddress());
-//        }
-//    }
+    private void updateLatLang(){
+
+        for (Student student : students){
+            new KOBRestClient().getLatLang(student.getAddress());
+        }
+    }
 }

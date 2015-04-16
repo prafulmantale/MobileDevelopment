@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Kids On Wheels</string>
+    <string name="action_settings">Settings</string>
+    <string name="picked_text">Picked</string>
+    <string name="show_text">No Show</string>
+    <string name="on_the_way_text">On the way</string>
+    <string name="title_activity_directions">DirectionsActivity</string>
+    <string name="no_student_addresses_specified">No addresses to get Directions for</string>
+    <string name="home_screen_wait_message">Please wait. Finding best route</string>
+    <string name="next_pickup">Next Pickup</string>
+    <string name="list_steps">List Steps</string>
+    <string name="title_activity_travel_steps">Travel Steps</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>

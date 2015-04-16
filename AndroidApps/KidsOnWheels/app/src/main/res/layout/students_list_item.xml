@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/student_card_background"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/student_avatar"
+                android:layout_width="@dimen/avatar_dimen"
+                android:layout_height="@dimen/avatar_dimen"
+                android:layout_margin="@dimen/avatar_layout_margin"
+                android:maxHeight="60dp"
+                android:maxWidth="60dp"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/student_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/student_avatar"
+                android:paddingLeft="@dimen/narrow_space"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                tools:text="Student Name" />
+
+            <TextView
+                android:id="@+id/student_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/student_name"
+                android:padding="@dimen/narrow_space"
+                android:textColor="#0ff"
+                android:textStyle="italic"
+                tools:text="0.9mi" />
+
+            <TextView
+                android:id="@+id/student_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/student_distance"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@id/student_avatar"
+                android:paddingBottom="@dimen/students_list_padding_bottom"
+                android:paddingLeft="@dimen/narrow_space"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                tools:text="Address 1" />
+
+            <View
+                android:id="@+id/end_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/student_address"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/horizontal_divider"
+                android:layerType="software"
+                android:text=""
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/student_pickup_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/end_divider"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical|left"
+                android:paddingBottom="@dimen/students_list_padding_bottom"
+                android:paddingLeft="@dimen/narrow_space"
+                android:text="On the way"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:text="On the way" />
+
+            <LinearLayout
+                android:id="@+id/action_buttons_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/end_divider"
+                android:divider="@android:color/white"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:showDividers="middle"
+                android:visibility="gone">
+
+
+                <Button
+                    android:id="@+id/student_no_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/end_divider"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@id/student_pickup_state"
+                    android:background="@drawable/start_pickup_button_style"
+                    android:gravity="center_vertical|center"
+                    android:paddingBottom="@dimen/students_list_padding_bottom"
+                    android:paddingLeft="@dimen/narrow_space"
+                    android:text="No Show"
+                    android:textColor="@android:color/holo_blue_light"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    tools:text="No Show" />
+
+                <View
+                    android:id="@+id/button_divider"
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/student_address"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/horizontal_divider"
+                    android:layerType="software"
+                    android:text=""
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/pickup_done"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/end_divider"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@id/student_no_show"
+                    android:background="@drawable/start_pickup_button_style"
+                    android:gravity="center_vertical|right"
+                    android:paddingBottom="@dimen/students_list_padding_bottom"
+                    android:paddingLeft="@dimen/narrow_space"
+                    android:text="Picked up"
+                    android:textColor="@android:color/holo_blue_light"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    tools:text="Picked up" />
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

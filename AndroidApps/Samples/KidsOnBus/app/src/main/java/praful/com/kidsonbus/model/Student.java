@@ -15,8 +15,6 @@ public class Student {
 
     private int mAvatarId;
 
-    private String mContactNumber;
-
     private Address mAddress;
 
     private String mDisplayName;
@@ -40,14 +38,6 @@ public class Student {
 
     public int getAvatarId(){
         return mAvatarId;
-    }
-
-    public String getContactNumber() {
-        return mContactNumber;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        mContactNumber = contactNumber;
     }
 
     public Address getAddress(){
@@ -85,7 +75,6 @@ public class Student {
                 "mFirstName='" + mFirstName + '\'' +
                 ", mLastName='" + mLastName + '\'' +
                 ", mAvatarId=" + mAvatarId +
-                ", mContactNumber='" + mContactNumber + '\'' +
                 ", mAddress=" + mAddress +
                 '}';
     }
