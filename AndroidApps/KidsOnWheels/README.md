@@ -1,9 +1,9 @@
 App flow:
 
-- Has seed data of 6 Students with random address across bay area
-- Has seed data for a School. This is used as the "Destination"
+- App has seed data of 6 Students with random address across bay area
+- App has seed data for a School. This is used as the "Destination"
 - User's current location is used as "Origin"
-- Collectied Lat Lang info for above address using geocode Apis. (This info was helpful for drawing Markers on the Map)
+- Collected Lat Lang info for above address using geocode Apis. (This info was helpful for drawing Markers on the Map)
 - When App is launched,User is shown the Progress bar saying best possible route is being looked for
 - Students list is displayed in alphabetical order
 - App collects the best possible route using Google Directions API.
@@ -31,6 +31,7 @@ Progress Bar handling
 Different orientations and screen sizes
 Logging
 Exception Handling
+Scope for performance improvemet
 
 
 ![Alt text](https://github.com/prafulmantale/MobileDevelopment/blob/master/AndroidApps/KidsOnWheels/KidsOnWheels.gif)
