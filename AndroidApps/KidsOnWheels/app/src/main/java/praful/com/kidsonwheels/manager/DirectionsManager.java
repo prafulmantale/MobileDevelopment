@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -25,14 +26,15 @@ import praful.com.kidsonwheels.utils.Constants;
  * Created by prafulmantale on 4/14/15.
  */
 public class DirectionsManager implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
     private static final String TAG = DirectionsManager.class.getSimpleName();
     private static DirectionsManager INSTANCE = new DirectionsManager();
 
     private GoogleApiClient mGoogleApiClient;
     private DirectionsResult mDirectionsResult;
-    private LatLng mLastLocation;
+    private LatLng mLastLocation;// = new LatLng(37.379016, -122.065538);
+    private LocationRequest mLocationRequest;
 
     private DirectionsManager() {
     }
@@ -53,6 +55,21 @@ public class DirectionsManager implements GoogleApiClient.ConnectionCallbacks,
                 .build();
 
         mGoogleApiClient.connect();
+    }
+
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    private void startLocationUpdates() {
+//        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+    }
+
+    private void stopLocationUpdates() {
+//        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
     }
 
     public LatLng getLastLocation() {
@@ -108,5 +125,12 @@ public class DirectionsManager implements GoogleApiClient.ConnectionCallbacks,
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         Log.i(TAG, "GoogleApiClient Connection failed: ConnectionResult.getErrorCode() = " + connectionResult.getErrorCode());
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+//        if (location != null) {
+//            Toast.makeText(KOWApplication.getContext(), "Lat:" + String.valueOf(location.getLatitude()) + "   Long: " + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
+//        }
     }
 }

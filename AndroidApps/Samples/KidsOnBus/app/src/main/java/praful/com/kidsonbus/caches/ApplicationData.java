@@ -59,7 +59,6 @@ public final class ApplicationData {
     public void setLastLocation(Location location){
     }
 
-
     private void populateStudents(){
         Student student1 = new Student("Tom", "Cruise", R.drawable.one, new Address("101", "Green Street", "San Francisco", "CA"));
         students.add(student1);

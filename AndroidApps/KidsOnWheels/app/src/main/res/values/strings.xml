@@ -6,7 +6,7 @@
     <string name="picked_text">Picked</string>
     <string name="show_text">No Show</string>
     <string name="on_the_way_text">On the way</string>
-    <string name="title_activity_directions">DirectionsActivity</string>
+    <string name="title_activity_directions">Directions</string>
     <string name="no_student_addresses_specified">No addresses to get Directions for</string>
     <string name="home_screen_wait_message">Please wait. Finding best route</string>
     <string name="next_pickup">Next Pickup</string>
