@@ -37,6 +37,14 @@ public class DirectionsManager implements GoogleApiClient.ConnectionCallbacks,
     private LocationRequest mLocationRequest;
 
     private DirectionsManager() {
+
+//        String locationProvider = LocationManager.NETWORK_PROVIDER;
+//// Or use LocationManager.GPS_PROVIDER
+//        LocationManager locationManager = (LocationManager) KOWApplication.getContext().getSystemService(Context.LOCATION_SERVICE);
+//        Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
+//        if(lastKnownLocation != null){
+//            mLastLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+//        }
     }
 
     public static DirectionsManager getInstance() {

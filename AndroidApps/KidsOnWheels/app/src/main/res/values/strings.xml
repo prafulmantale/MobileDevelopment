@@ -13,5 +13,9 @@
     <string name="list_steps">List Steps</string>
     <string name="title_activity_travel_steps">Travel Steps</string>
     <string name="hello_world">Hello world!</string>
+    <string name="alert_location">This app requires phone\'s data and positioning services are enabled.\n\nPlease got to system settings and turn them on.</string>
+    <string name="alert_location_open_location_settings_button">Turn on location</string>
+    <string name="alert_location_back_button">Cancel</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
 
 </resources>
