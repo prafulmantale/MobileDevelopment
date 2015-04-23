@@ -22,4 +22,11 @@
         android:layout_weight="0.85"
         android:background="@android:color/white"
         tools:context=".HomeActivity"></FrameLayout>
+
+    <ViewStub
+        android:id="@+id/error_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/error_view"
+        />
 </LinearLayout>

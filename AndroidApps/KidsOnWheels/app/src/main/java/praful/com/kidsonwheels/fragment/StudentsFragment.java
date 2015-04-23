@@ -14,11 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.otto.Produce;
+
 import java.util.Collections;
 import java.util.List;
 
 import praful.com.kidsonwheels.R;
 import praful.com.kidsonwheels.adapter.StudentsViewAdapter;
+import praful.com.kidsonwheels.application.KOWApplication;
 import praful.com.kidsonwheels.manager.DataManager;
 import praful.com.kidsonwheels.manager.DirectionsManager;
 import praful.com.kidsonwheels.model.Student;
@@ -53,6 +56,8 @@ public class StudentsFragment extends Fragment {
         if(DirectionsManager.getInstance().getDirectionsResult() == null) {
             progressDialog = ProgressDialog.show(getActivity(), "", getString(R.string.home_screen_wait_message));
         }
+
+       KOWApplication.bus.register(this);
         return view;
     }
 
@@ -85,5 +90,10 @@ public class StudentsFragment extends Fragment {
         if(mRouteInfoReceiver != null) {
             getActivity().unregisterReceiver(mRouteInfoReceiver);
         }
+    }
+
+    @Produce
+    public String produceEvent() {
+        return "Starting up";
     }
 }

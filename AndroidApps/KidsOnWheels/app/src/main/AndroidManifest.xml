@@ -55,6 +55,13 @@
             android:label="@string/title_activity_travel_steps"
             android:parentActivityName=".activity.DirectionsActivity"
             android:screenOrientation="portrait"></activity>
+
+        <receiver android:name=".receivers.NetworkStateReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"></action>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
