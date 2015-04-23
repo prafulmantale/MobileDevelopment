@@ -105,7 +105,7 @@ public class DirectionsManager implements GoogleApiClient.ConnectionCallbacks,
         KOWApplication.getContext().sendBroadcast(intent);
     }
 
-    private void startIntentService() {
+    public void startIntentService() {
         Intent intent = new Intent(KOWApplication.getContext(), FetchDirectionsService.class);
         KOWApplication.getContext().startService(intent);
     }
