@@ -21,7 +21,6 @@ import java.util.List;
 
 import praful.com.kidsonwheels.R;
 import praful.com.kidsonwheels.adapter.StudentsViewAdapter;
-import praful.com.kidsonwheels.application.KOWApplication;
 import praful.com.kidsonwheels.manager.DataManager;
 import praful.com.kidsonwheels.manager.DirectionsManager;
 import praful.com.kidsonwheels.model.Student;
@@ -57,7 +56,7 @@ public class StudentsFragment extends Fragment {
             progressDialog = ProgressDialog.show(getActivity(), "", getString(R.string.home_screen_wait_message));
         }
 
-       KOWApplication.bus.register(this);
+//       KOWApplication.bus.register(this);
         return view;
     }
 

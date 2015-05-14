@@ -3,9 +3,6 @@ package praful.com.kidsonwheels.application;
 import android.app.Application;
 import android.content.Context;
 
-import com.squareup.otto.Bus;
-import com.squareup.otto.ThreadEnforcer;
-
 import praful.com.kidsonwheels.manager.DirectionsManager;
 
 /**
@@ -16,7 +13,7 @@ public class KOWApplication extends Application {
     private static final String TAG = KOWApplication.class.getSimpleName();
 
     private static Context mContext;
-    public static Bus bus = new Bus(ThreadEnforcer.MAIN);
+//    public static Bus bus = new Bus(ThreadEnforcer.MAIN);
 
     @Override
     public void onCreate() {

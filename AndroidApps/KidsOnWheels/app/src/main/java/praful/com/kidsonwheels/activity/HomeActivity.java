@@ -45,7 +45,7 @@ public class HomeActivity extends ActionBarActivity {
             showEmptyView();
         }
 
-        KOWApplication.bus.register(this);
+//        KOWApplication.bus.register(this);
     }
 
     private void showFragment(){
