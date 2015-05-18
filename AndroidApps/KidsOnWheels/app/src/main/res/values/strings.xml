@@ -17,5 +17,26 @@
     <string name="alert_location_open_location_settings_button">Turn on location</string>
     <string name="alert_location_back_button">Cancel</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="error_location_service_unavailable">This app requires Google\'s location services. Please enable location services in your settings.</string>
+    <string name="button_enable_location_services">ENABLE LOCATION SERVICES</string>
+
+    <string name="error_network_service_unavailable">This app requires network connection. Please check you network connection and retry.</string>
+    <string name="button_retry">RETRY</string>
+    <string name="title_activity_create_student">CreateStudentActivity</string>
+
+    <string name="hint_tap_to_change_image">Tap to change image</string>
+
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_house_number">House Number</string>
+    <string name="hint_street">Street</string>
+    <string name="hint_city">City</string>
+    <string name="hint_state">State</string>
+    <string name="hint_country">Country</string>
+    <string name="enter_student_details">Please enter student details.</string>
+    <string name="save">Save</string>
+    <string name="empty_students_list">You do not have any students for pickup. Please add Student details.</string>
+    <string name="title_activity_student_details">Student Details</string>
 
 </resources>

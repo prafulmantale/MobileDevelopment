@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                tools:context=".WelcomeActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        />
+
+    <LinearLayout
+        android:id="@+id/location_service_error_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/location_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_device_location_disabled"/>
+
+        <TextView
+            android:id="@+id/location_service_error_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/progressBar"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:text="@string/error_location_service_unavailable"
+            android:textSize="20sp"
+            />
+
+        <Button
+            android:id="@+id/enable_location_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_location_enable"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/button_enable_location_services"
+            android:textColor="@color/white"
+            android:visibility="visible"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/network_connection_error_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/network_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/location_service_error_text"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_device_network_off"/>
+
+        <TextView
+            android:id="@+id/network_connection_error_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:text="@string/error_network_service_unavailable"
+            android:textSize="20sp"
+            />
+
+        <Button
+            android:id="@+id/retry_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_location_enable"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/button_retry"
+            android:textColor="@color/white"
+            android:visibility="visible"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

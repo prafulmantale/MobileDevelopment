@@ -16,7 +16,6 @@ import java.io.IOException;
 public final class JSONUtils {
 
     private static final String TAG = JSONUtils.class.getSimpleName();
-
     private static ObjectMapper mapper = new ObjectMapper();
 
     static {

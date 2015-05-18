@@ -20,9 +20,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.HomeActivity"
+            android:name=".activity.WelcomeActivity"
             android:configChanges="orientation"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_welcome"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +30,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.HomeActivity"
+            android:configChanges="orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -43,7 +48,13 @@
             android:configChanges="orientation"
             android:label="@string/title_activity_directions"
             android:parentActivityName=".activity.HomeActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CreateStudentActivity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_student_details"
+            android:parentActivityName=".activity.HomeActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".service.FetchDirectionsService"
@@ -54,7 +65,7 @@
             android:configChanges="orientation"
             android:label="@string/title_activity_travel_steps"
             android:parentActivityName=".activity.DirectionsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <receiver android:name=".receivers.NetworkStateReceiver">
             <intent-filter>

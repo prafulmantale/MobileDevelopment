@@ -1,4 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,26 +8,29 @@
     android:weightSum="1"
     tools:context=".HomeActivity">
 
-    <include
-        android:id="@+id/header_view"
-        layout="@layout/header_list_item"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.15" />
-
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_home_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.85"
-        android:background="@android:color/white"
-        tools:context=".HomeActivity"></FrameLayout>
-
-    <ViewStub
-        android:id="@+id/error_view"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/students_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/error_view"
-        />
-</LinearLayout>
+        android:background="@color/white" />
+
+    <ViewStub
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/empty_view"
+        android:visibility="gone"/>
+
+    <com.getbase.floatingactionbutton.AddFloatingActionButton
+        android:id="@+id/add_student_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        fab:fab_colorNormal="@color/fab_add_default"
+        fab:fab_colorPressed="@color/fab_add_selected"
+        fab:fab_plusIconColor="@color/white" />
+
+</RelativeLayout>
