@@ -41,14 +41,11 @@ public class KOWDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_ADDRESS_TABLE =
                 "CREATE TABLE " + AddressEntry.TABLE_NAME + " (" +
                         AddressEntry._ID + " INTEGER PRIMARY KEY," +
-                        AddressEntry.COLUMN_HOUSE_NUMBER + " TEXT NOT NULL, " +
-                        AddressEntry.COLUMN_STREET + " TEXT NOT NULL, " +
-                        AddressEntry.COLUMN_CITY + " TEXT NOT NULL, " +
-                        AddressEntry.COLUMN_STATE + " TEXT NOT NULL, " +
-                        AddressEntry.COLUMN_COUNTRY + " TEXT NOT NULL, " +
-                        AddressEntry.COLUMN_PIN_CODE + " TEXT NOT NULL, " +
+                        AddressEntry.COLUMN_PLACE_ID + " TEXT NOT NULL, " +
+                        AddressEntry.COLUMN_ADDRESS_STRING + " TEXT NOT NULL, " +
                         AddressEntry.COLUMN_LAT + " REAL NOT NULL, " +
                         AddressEntry.COLUMN_LANG + " REAL NOT NULL " +
+                        " UNIQUE " + AddressEntry.COLUMN_PLACE_ID + " ON CONFLICT REPLACE " +
                         " );";
     }
 

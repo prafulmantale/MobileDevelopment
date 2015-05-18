@@ -41,8 +41,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:hint="@string/hint_first_name"
-        android:singleLine="true"
         android:imeOptions="actionNext"
+        android:singleLine="true"
         android:textColor="@android:color/black" />
 
     <EditText
@@ -56,65 +56,30 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:hint="@string/hint_last_name"
-        android:singleLine="true"
         android:imeOptions="actionNext"
+        android:singleLine="true"
         android:textColor="@android:color/black" />
 
-    <EditText
-        android:id="@+id/house_number"
+    <AutoCompleteTextView
+        android:id="@+id/address_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/last_name_text"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
-        android:hint="@string/hint_house_number"
-        android:singleLine="true"
-        android:imeOptions="actionNext"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:id="@+id/street_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/house_number"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/hint_street"
-        android:singleLine="true"
-        android:imeOptions="actionNext"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:id="@+id/city_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/street_name"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/hint_city"
-        android:singleLine="true"
-        android:imeOptions="actionNext"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:id="@+id/state_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/city_name"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/hint_state"
-        android:singleLine="true"
+        android:hint="@string/hint_address"
         android:imeOptions="actionDone"
+        android:maxLines="3"
+        android:singleLine="false"
         android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/save_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/state_name"
+        android:layout_alignLeft="@+id/address_text"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/state_name"
+        android:layout_alignStart="@+id/address_text"
         android:background="@color/fab_add_default"
         android:text="@string/save"
         android:textColor="@color/white"
