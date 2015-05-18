@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/fab_add_default"
     android:padding="4dp">
 
     <android.support.v7.widget.CardView
@@ -15,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/student_card_background"
+            android:background="@color/white"
             android:padding="4dp">
 
             <ImageView
@@ -33,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/student_avatar"
                 android:paddingLeft="@dimen/narrow_space"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="18sp"
                 tools:text="Student Name" />
 
