@@ -34,11 +34,11 @@
             android:id="@+id/location_service_error_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/progressBar"
             android:layout_margin="16dp"
             android:gravity="center"
             android:text="@string/error_location_service_unavailable"
             android:textSize="20sp"
+            android:textColor="@color/abc_secondary_text_material_light"
             />
 
         <Button
@@ -84,6 +84,7 @@
             android:gravity="center"
             android:text="@string/error_network_service_unavailable"
             android:textSize="20sp"
+            android:textColor="@color/abc_secondary_text_material_light"
             />
 
         <Button

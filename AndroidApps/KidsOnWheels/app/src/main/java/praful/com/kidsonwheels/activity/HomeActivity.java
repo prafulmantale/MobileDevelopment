@@ -2,7 +2,6 @@ package praful.com.kidsonwheels.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.view.ViewStub;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import praful.com.kidsonwheels.R;
@@ -19,7 +17,7 @@ import praful.com.kidsonwheels.manager.DataManager;
 import praful.com.kidsonwheels.model.Student;
 
 
-public class HomeActivity extends ActionBarActivity {
+public class HomeActivity extends BaseActivity {
 
     private View mEmptyView;
 
@@ -30,12 +28,15 @@ public class HomeActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        ButterKnife.inject(this);
-        setupViews();
     }
 
-    private void setupViews() {
+    @Override
+    int getLayoutId() {
+        return R.layout.activity_home;
+    }
+
+    @Override
+    void initializeViews() {
         mStudents = DataManager.getInstance().getToBePickedStudents();
         LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(llm);

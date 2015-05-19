@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,13 +26,12 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import praful.com.kidsonwheels.R;
 import praful.com.kidsonwheels.adapter.AddressAutoCompleteAdapter;
 
-public class CreateStudentActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class CreateStudentActivity extends BaseActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = CreateStudentActivity.class.getSimpleName();
 
@@ -61,8 +59,6 @@ public class CreateStudentActivity extends ActionBarActivity implements GoogleAp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_student);
-        ButterKnife.inject(this);
 
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
@@ -79,6 +75,16 @@ public class CreateStudentActivity extends ActionBarActivity implements GoogleAp
         mAdapter = new AddressAutoCompleteAdapter(this, android.R.layout.simple_list_item_1,
                 mGoogleApiClient, LAT_LANG_BOUNDS, null);
         mAddressView.setAdapter(mAdapter);
+    }
+
+    @Override
+    int getLayoutId() {
+        return R.layout.activity_create_student;
+    }
+
+    @Override
+    void initializeViews() {
+
     }
 
     private AdapterView.OnItemClickListener mAutocompleteClickListener
