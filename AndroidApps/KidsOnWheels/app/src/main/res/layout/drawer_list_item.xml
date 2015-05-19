@@ -11,21 +11,21 @@
         android:layout_height="wrap_content"
         android:id="@+id/ivDrawerItemIcon"
         android:layout_marginLeft="5dp"
-        android:src="@drawable/ic_launcher"
+        android:src="@drawable/ic_action_settings"
         android:layout_alignParentLeft="true"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp"
         android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:text="Item Text"
+        android:text="Settings"
         android:id="@+id/tvDrawerItemText"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/ivDrawerItemIcon"
         android:textColor="@color/white"
+        android:gravity="center"
         />
 
     <TextView

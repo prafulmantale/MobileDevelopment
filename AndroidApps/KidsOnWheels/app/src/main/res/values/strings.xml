@@ -40,8 +40,8 @@
     <string name="title_activity_student_details">Student Details</string>
 
     <string-array name="drawer_items_array">
+        <item>Add Student</item>
         <item>Settings</item>
-        <item>Add User</item>
         <item>Feedback</item>
         <item>Help</item>
     </string-array>

@@ -40,9 +40,9 @@ public class HomeActivity extends BaseActivity {
     private List<Student> mStudents;
     private StudentsViewAdapter mAdapter;
 
-    private int []mIcons = {R.drawable.ic_launcher, R.drawable.ic_location_large, R.drawable.ic_launcher, R.drawable.ic_device_network_off};
+    private int []mIcons = {R.drawable.ic_action_add_student, R.drawable.ic_action_settings, R.drawable.ic_action_thumbs_up_down, R.drawable.ic_action_help};
     private String mUserName = "Praful Mantale";
-    private int mProfileImageId = R.drawable.ic_launcher;
+    private int mProfileImageId = R.drawable.one;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

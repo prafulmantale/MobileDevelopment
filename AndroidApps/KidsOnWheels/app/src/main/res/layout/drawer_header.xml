@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="178dp"
-    android:background="@color/fab_add_default"
-    android:orientation="vertical"
-    android:weightSum="1">
+                android:layout_width="match_parent"
+                android:layout_height="178dp"
+                android:background="@color/drawer_Header_background"
+                android:orientation="vertical"
+                android:weightSum="1">
 
     <ImageView
         android:id="@+id/cvProfileImage"
@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/one"/>
 
     <TextView
         android:id="@+id/tvUserName"
@@ -28,6 +28,6 @@
         android:text="User Name"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
 </RelativeLayout>
