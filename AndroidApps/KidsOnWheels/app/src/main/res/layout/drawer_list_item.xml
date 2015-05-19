@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivDrawerItemIcon"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_launcher"
+        android:layout_alignParentLeft="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:text="Item Text"
+        android:id="@+id/tvDrawerItemText"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/ivDrawerItemIcon"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:paddingTop="4dp"
+        android:gravity="right"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:id="@+id/tvDrawerItemCount"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/white"
+        />
+
+</RelativeLayout>
