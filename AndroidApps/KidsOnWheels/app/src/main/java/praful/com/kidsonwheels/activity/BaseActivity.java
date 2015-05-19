@@ -18,14 +18,18 @@ public abstract class BaseActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView();
         ButterKnife.inject(this);
-        initializeToolbar();
-        initializeViews();
+        initialize();
     }
 
     abstract int getLayoutId();
 
     protected void setContentView(){
         setContentView(getLayoutId());
+    }
+
+    protected void initialize(){
+        initializeToolbar();
+        initializeViews();
     }
 
     protected void initializeToolbar(){
