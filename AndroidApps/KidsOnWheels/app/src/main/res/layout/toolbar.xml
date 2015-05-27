@@ -6,4 +6,9 @@
     android:elevation="4dp"
     android:paddingTop="@dimen/abc_action_bar_subtitle_top_margin_material"
     >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_start"
+        android:id="@+id/start_pickup"/>
 </android.support.v7.widget.Toolbar>

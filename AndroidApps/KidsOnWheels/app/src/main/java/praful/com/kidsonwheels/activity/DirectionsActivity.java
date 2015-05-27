@@ -61,6 +61,6 @@ public class DirectionsActivity extends ActionBarActivity implements DirectionsF
     public void ShowTravelSteps() {
         Intent intent = new Intent(this, TravelStepsActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_from_right, R.anim.stay);
+        overridePendingTransition(R.anim.slide_in_from_left, R.anim.stay);
     }
 }

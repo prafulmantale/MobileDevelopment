@@ -80,6 +80,6 @@ public class TravelStepsActivity extends ActionBarActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.stay, R.anim.slide_out_from_right);
+        overridePendingTransition(R.anim.stay, R.anim.slide_out_from_left);
     }
 }

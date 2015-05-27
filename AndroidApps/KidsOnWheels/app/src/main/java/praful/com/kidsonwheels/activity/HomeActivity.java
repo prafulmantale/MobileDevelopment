@@ -126,6 +126,13 @@ public class HomeActivity extends BaseActivity {
         mAdapter = new StudentsViewAdapter(mStudents);
         mRecyclerView.setAdapter(mAdapter);
         updateEmptyViewState();
+
+        mStartPickup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, DirectionsActivity.class));
+            }
+        });
     }
 
     private void updateEmptyViewState() {

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -37,7 +38,7 @@ import praful.com.kidsonwheels.utils.Constants;
 /**
  * Created by prafulmantale on 4/11/15.
  */
-public class DirectionsFragment extends Fragment {
+public class DirectionsFragment extends Fragment{
 
     private static final String TAG = DirectionsFragment.class.getSimpleName();
     private GoogleMap googleMap;
@@ -75,6 +76,7 @@ public class DirectionsFragment extends Fragment {
         populateData(mStudent);
         updateLocationData();
         updateRouteData();
+
         return view;
     }
 
@@ -87,13 +89,13 @@ public class DirectionsFragment extends Fragment {
         }
     }
 
+
     private void setupViews(View view) {
         mAvatar = (ImageView) view.findViewById(R.id.student_avatar);
         mName = (TextView) view.findViewById(R.id.student_name);
         mDistance = (TextView) view.findViewById(R.id.student_distance);
         mAddress = (TextView) view.findViewById(R.id.student_address);
         mPickupState = (TextView)view.findViewById(R.id.student_pickup_state);
-//        mPickupState.setVisibility(View.VISIBLE);
         View divider = view.findViewById(R.id.end_divider);
         divider.setVisibility(View.VISIBLE);
         mPickupButton = (Button)view.findViewById(R.id.pickup_done);
